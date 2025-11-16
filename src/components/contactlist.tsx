@@ -71,7 +71,9 @@ export default function ContactList() {
     <div className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] space-y-6 md:space-y-10">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0">
         <div>
-          <h3 className="text-[32px] md:text-[40px] lg:text-[49px] font-[600]">Lets Talk!</h3>
+          <h3 className="text-[32px] md:text-[40px] lg:text-[49px] font-semibold">
+            Lets Talk!
+          </h3>
           <p className="max-w-full md:max-w-[70%] lg:max-w-[50%] text-sm md:text-base">
             Get In Touch with us using the enquiry form of contact details below
           </p>
@@ -98,7 +100,9 @@ export default function ContactList() {
         </div>
       </div>
       <div className="text-center space-y-4 md:space-y-5 py-[5%]">
-        <h3 className="font-[600] text-[32px] md:text-[40px] lg:text-[49px]">Follow Us</h3>
+        <h3 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px]">
+          Follow Us
+        </h3>
         <div className="flex items-center justify-center gap-4 md:gap-8 flex-wrap">
           {socmed?.map((each: SocmedProps, index: number) => (
             <Link key={index} href={each.url}>

@@ -18,6 +18,24 @@ interface CompProps {
 
 export default function ScheduleList({ data = [] }: CompProps) {
   const router = useRouter();
+
+  function updateScheduleStatus(schedules: ScheduleProps[]): ScheduleProps[] {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    return schedules.map((schedule) => {
+      const scheduleDate = new Date(schedule.schedule_date);
+      scheduleDate.setHours(0, 0, 0, 0);
+
+      const dayDiff = scheduleDate.getTime() - today.getTime();
+      const days = dayDiff / (1000 * 3600 * 24);
+
+      if (days < 0) return { ...schedule, status: "ENDED" };
+      if (days === 0) return { ...schedule, status: "ON_GOING" };
+      return schedule;
+    });
+  }
+
   return (
     <div
       className="w-full text-white flex flex-col items-center justify-center text-center py-[5%] space-y-5 px-[5%] md:px-0"
@@ -27,11 +45,15 @@ export default function ScheduleList({ data = [] }: CompProps) {
         backgroundPosition: "center",
       }}
     >
-      <h2 className="font-[600] text-[32px] md:text-[40px] lg:text-[49px] mb-6 md:mb-10">Running Schedule</h2>
+      <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px] mb-6 md:mb-10">
+        Running Schedule
+      </h2>
       <div className="flex flex-col w-full px-0 md:px-[7%] lg:px-[10%] gap-4 md:gap-5 mb-6 md:mb-8">
-        {data.map((each: ScheduleProps, index: number) => (
-          <ScheduleCard key={index} data={each} />
-        ))}
+        {updateScheduleStatus(data)?.map(
+          (each: ScheduleProps, index: number) => (
+            <ScheduleCard key={index} data={each} />
+          )
+        )}
       </div>
       <Button
         label="Load More"

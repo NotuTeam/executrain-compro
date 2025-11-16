@@ -71,7 +71,10 @@ export default function ServiceDetail({ initialService }: ServiceDetailProps) {
   }, [initialService]);
 
   return (
-    <div id="service-detail" className="pt-[5%] px-[5%] md:px-[7%] lg:px-[10%] w-full">
+    <div
+      id="service-detail"
+      className="pt-[5%] px-[5%] md:px-[7%] lg:px-[10%] w-full"
+    >
       <div className="space-x-3 md:space-x-6 lg:space-x-8 border-b-2 border-slate-300 pb-3 flex overflow-x-auto">
         {data.map((each: ServiceProps) => (
           <div
@@ -79,7 +82,7 @@ export default function ServiceDetail({ initialService }: ServiceDetailProps) {
               setSelected(each);
             }}
             key={each.key}
-            className={`font-[600] text-[16px] md:text-[20px] lg:text-[24px] cursor-pointer duration-150 flex gap-2 md:gap-3 items-center transition-colors whitespace-nowrap ${
+            className={`font-semibold text-[16px] md:text-[20px] lg:text-[24px] cursor-pointer duration-150 flex gap-2 md:gap-3 items-center transition-colors whitespace-nowrap ${
               selected.key === each.key ? "text-[#00AEEF]" : "text-slate-300"
             } hover:text-[#00AEEF]/70`}
           >
@@ -101,13 +104,15 @@ export default function ServiceDetail({ initialService }: ServiceDetailProps) {
         ))}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 md:mt-8">
-        <div className="flex flex-col justify-center">
-          <h3 className="font-[600] text-[28px] md:text-[40px] lg:text-[49px] mb-3 md:mb-5">{selected.name}</h3>
+        <div className="flex flex-col justify-center order-2 md:order-1">
+          <h3 className="font-semibold text-[28px] md:text-[40px] lg:text-[49px] mb-3 md:mb-5">
+            {selected.name}
+          </h3>
           <p className="text-[14px] md:text-[16px] text-justify leading-relaxed">
             {selected.description}
           </p>
         </div>
-        <div className="p-[5%] md:p-[10%]">
+        <div className="p-[5%] md:p-[10%] order-1 md:order-2">
           <Image
             src={ServiceBG}
             alt="service pict"

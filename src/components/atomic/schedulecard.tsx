@@ -20,11 +20,13 @@ export default function ScheduleCard({ data }: CompProps) {
   return (
     <div className="w-full space-y-2 p-[3%] md:p-[2%] rounded-xl bg-white/50 backdrop-blur-md border border-white/20 shadow-xl">
       <div className="flex gap-3 items-center justify-between flex-wrap md:flex-nowrap">
-        <Tag label={data?.status?.replace("_", " ") || "Unset"} />
-        <span className="text-[10px] md:text-[12px]">{data?.location || "-"}</span>
+        <Tag label={data?.status?.replace("_", " ") || "UNSET"} />
+        <span className="text-[10px] md:text-[12px]">
+          {data?.location || "-"}
+        </span>
       </div>
       <div className="max-w-full md:max-w-[60%] lg:max-w-[40%] text-left">
-        <h3 className="text-[18px] md:text-[20px] lg:text-[24px] font-[600] leading-6 md:leading-7">
+        <h3 className="text-[18px] md:text-[20px] lg:text-[24px] font-semibold leading-6 md:leading-7">
           {data.schedule_name}
         </h3>
       </div>

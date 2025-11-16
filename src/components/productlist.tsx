@@ -33,9 +33,13 @@ export default function ProductList({
   if (size === "md") {
     return (
       <div className="w-full text-center py-[5%] flex flex-col items-center px-[5%] md:px-0">
-        <h2 className="font-[600] text-[32px] md:text-[40px] lg:text-[49px]">{title}</h2>
+        <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px]">
+          {title}
+        </h2>
         {title === "Product" && (
-          <h3 className="text-[16px] md:text-[20px] font-[600]">Top-Rated Picks</h3>
+          <h3 className="text-[16px] md:text-[20px] font-semibold">
+            Top-Rated Picks
+          </h3>
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-5 md:mt-8 px-0 md:px-[10%] gap-4 md:gap-5 mb-6 md:mb-8 w-full">
           {data.map((each: ProductProps, index: number) => (

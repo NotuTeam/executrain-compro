@@ -1,4 +1,7 @@
 /** @format */
+"use client";
+
+import React from "react";
 import Image from "next/image";
 
 import CountUp from "./atomic/countup";
@@ -10,13 +13,34 @@ interface CompProps {
 }
 
 export default function PartnerList({ data = [] }: CompProps) {
+  const duplicatedData = React.useMemo(() => {
+    const minItems = 12;
+
+    if (data.length === 0) {
+      return [];
+    }
+
+    if (data.length < minItems) {
+      const timesToDuplicate = Math.ceil(minItems / data.length);
+      return Array.from({ length: timesToDuplicate }, () => data).flat();
+    }
+
+    return data;
+  }, [data]);
+
+  if (data.length === 0) {
+    return null;
+  }
+
   return (
-    <div className="w-full text-center py-[5%] px-[5%] md:px-0">
-      <h2 className="font-[600] text-[32px] md:text-[40px] lg:text-[49px]">Partners</h2>
-      <h3 className="text-[14px] md:text-[18px] lg:text-[20px] font-[600]">
+    <div className="w-full text-center py-[5%] px-[5%] md:px-0 overflow-hidden">
+      <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px]">
+        Partners
+      </h2>
+      <h3 className="text-[14px] md:text-[18px] lg:text-[20px] font-semibold">
         Over{" "}
         <CountUp
-          from={0}
+          from={15000}
           to={17200}
           separator=","
           direction="up"
@@ -24,20 +48,31 @@ export default function PartnerList({ data = [] }: CompProps) {
         />{" "}
         companies grow their teams with ExceLEARN
       </h3>
-      <div className="flex w-full items-center justify-center gap-3 md:gap-5 mt-5 md:mt-8 flex-wrap">
-        {data?.map((each: PartnerProps, index: number) => (
-          <span
-            key={index}
-            className="flex items-center justify-center w-[60px] h-[60px] md:w-[80px] md:h-[80px] lg:w-[100px] lg:h-[100px] rounded-md"
-          >
-            <Image
-              src={each.logo.url}
-              alt={each.partner_name}
-              width={100}
-              height={100}
-            />
-          </span>
-        ))}
+
+      <div className="relative mt-5 md:mt-8 w-full">
+        <div className="overflow-hidden">
+          <div className="flex gap-3 md:gap-5 animate-infinite-scroll hover:pause-animation">
+            {[...duplicatedData, ...duplicatedData, ...duplicatedData].map(
+              (each: PartnerProps, index: number) => (
+                <div
+                  key={`${each.partner_name}-${index}`}
+                  className="flex-shrink-0 flex items-center justify-center w-[60px] h-[60px] md:w-[80px] md:h-[80px] lg:w-[100px] lg:h-[100px]"
+                >
+                  <Image
+                    src={each.logo.url}
+                    alt={each.partner_name}
+                    width={100}
+                    height={100}
+                    className="object-contain w-[80%] h-[80%]"
+                  />
+                </div>
+              )
+            )}
+          </div>
+        </div>
+
+        <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
+        <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
       </div>
     </div>
   );

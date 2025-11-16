@@ -39,7 +39,7 @@ function ScheduleCard({ data }: { data: ScheduleProps }) {
 
   return (
     <div
-      className={`bg-white p-4 md:p-6 border-l-4 flex flex-col md:flex-row items-start md:items-center justify-between border-l gap-3 md:gap-0 ${borderColor[status]}`}
+      className={`bg-white p-4 md:p-6 border-l-4 flex items-start md:items-center justify-between border-l gap-3 md:gap-0 ${borderColor[status]}`}
     >
       <div className="flex-1">
         <h4 className="text-lg md:text-xl font-semibold mb-2 md:mb-3">
@@ -50,7 +50,7 @@ function ScheduleCard({ data }: { data: ScheduleProps }) {
           <span>{data?.quota || "-"}</span>
         </div>
       </div>
-      <div className="flex flex-col md:items-end gap-2 md:gap-3 w-full md:w-auto">
+      <div className="flex flex-col md:items-end gap-2 md:gap-3 w-auto">
         <div className="flex items-center gap-2 text-xs md:text-sm text-gray-600">
           <Clock className="w-4 h-4 md:w-4 md:h-4 text-[#00AEEF]" />
           <span>
@@ -119,7 +119,7 @@ export default function SelectedSchedule({
               <div key={each} className="mb-6 md:mb-8">
                 <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
                   <Calendar className="w-5 h-5 md:w-6 md:h-6 text-[#00AEEF]" />
-                  <h3 className="text-lg md:text-2xl font-[600]">
+                  <h3 className="text-lg md:text-2xl font-semibold">
                     {dayjs(`${each}`, "YYYY-MM-DD").format("DD MMMM YYYY")}
                   </h3>
                 </div>
@@ -142,7 +142,7 @@ export default function SelectedSchedule({
         <>
           <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
             <Calendar className="w-5 h-5 md:w-6 md:h-6 text-[#00AEEF]" />
-            <h3 className="text-lg md:text-2xl font-[600]">
+            <h3 className="text-lg md:text-2xl font-semibold">
               {selectedDate
                 ? dayjs(selectedDate).format("dddd, DD MMMM YYYY")
                 : dayjs(selectedMonth).format("MMMM YYYY")}
@@ -155,7 +155,11 @@ export default function SelectedSchedule({
               ))
             ) : (
               <div className="bg-slate-50 flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
-                <CalendarOff color="gray" size={36} className="md:w-[48px] md:h-[48px]" />
+                <CalendarOff
+                  color="gray"
+                  size={36}
+                  className="md:w-[48px] md:h-[48px]"
+                />
                 <span className="font-[400] text-slate-500">
                   No Schedule Found
                 </span>

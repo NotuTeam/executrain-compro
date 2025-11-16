@@ -32,7 +32,9 @@ export default function Button({
   return (
     <button
       onClick={() => onClick()}
-      className={`${textColor[type]} ${bgColor[type]} px-5 py-2 font-[600]  ${
+      className={`${textColor[type]} ${
+        bgColor[type]
+      } px-5 py-2 font-semibold  ${
         rounded ? "rounded-full" : "rounded-md"
       } flex items-center gap-2 ${
         type === "disable" ? "cursor-not-allowed" : "cursor-pointer"

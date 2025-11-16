@@ -1,5 +1,8 @@
 /** @format */
 
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import Promo from "./promo";
@@ -10,21 +13,67 @@ import ARROW_RIGHT from "@/assets/icons/arrow-right.svg";
 
 import { usePromo } from "@/services/promo/hook";
 
+import { useTestimonial } from "@/services/testimoni/hook";
+
 export default function TestimoniList() {
   const { data: promo, isLoading: promoLoading } = usePromo();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const { data: testimonial = [], isLoading: testimonialLoading } =
+    useTestimonial();
+
+  const handlePrevious = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? testimonial.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === testimonial.length - 1 ? 0 : prevIndex + 1
+    );
+  };
 
   return (
     <div className="text-black w-full px-[5%] md:px-[7%] lg:px-[10%]">
       <div className="p-[5%] bg-white rounded-t-4xl">
-        <h2 className="font-[600] text-[28px] md:text-[40px] lg:text-[49px] mb-6 md:mb-10">What They Say About Us</h2>
+        <h2 className="font-semibold text-[28px] md:text-[40px] lg:text-[49px] mb-6 md:mb-10">
+          What They Say About Us
+        </h2>
         <div className="flex items-center justify-center pt-3 md:pt-5 pb-5 md:pb-8">
-          <TestimoniCard />
+          <TestimoniCard data={testimonial[currentIndex]} />
         </div>
         <div className="flex items-center justify-center gap-3">
-          <button className="border-[#00AEEF] text-[#00AEEF] border-2 text-[18px] md:text-[24px] w-[35px] h-[35px] md:w-[45px] md:h-[45px] flex items-center justify-center rounded-full">
+          <button
+            onClick={handlePrevious}
+            className="border-[#00AEEF] text-[#00AEEF] border-2 text-[18px] md:text-[24px] w-[35px] h-[35px] md:w-[45px] md:h-[45px] flex items-center justify-center rounded-full cursor-pointer"
+            aria-label="Previous testimonial"
+          >
             <Image src={ARROW_LEFT} alt="arrow left" />
           </button>
-          <button className="border-[#00AEEF] text-[#00AEEF] border-2 text-[18px] md:text-[24px] w-[35px] h-[35px] md:w-[45px] md:h-[45px] flex items-center justify-center rounded-full">
+
+          {/* Indicator dots */}
+          <div className="flex gap-2 mx-4">
+            {testimonial.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setCurrentIndex(index);
+                }}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex
+                    ? "bg-[#00AEEF] w-6"
+                    : "bg-gray-300 hover:bg-gray-400"
+                }`}
+                aria-label={`Go to testimonial ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={handleNext}
+            className="border-[#00AEEF] text-[#00AEEF] border-2 text-[18px] md:text-[24px] w-[35px] h-[35px] md:w-[45px] md:h-[45px] flex items-center justify-center rounded-full cursor-pointer"
+            aria-label="Next testimonial"
+          >
             <Image src={ARROW_RIGHT} alt="arrow right" />
           </button>
         </div>

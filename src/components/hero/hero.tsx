@@ -7,7 +7,7 @@ import { ArrowRightFromLine } from "lucide-react";
 export default function Hero() {
   return (
     <div
-      className="min-w-[99dvw] min-h-[100dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
+      className="min-w-[99dvw] min-h-[105dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./hero.webp')`,
         backgroundSize: "cover",
@@ -15,7 +15,9 @@ export default function Hero() {
       }}
     >
       <div className="flex flex-col gap-3 md:gap-5 items-start max-w-full md:max-w-[80%] lg:max-w-[50%]">
-        <h1 className="text-[32px] md:text-[45px] lg:text-[61px] font-[600]">Headline</h1>
+        <h1 className="text-[32px] md:text-[45px] lg:text-[61px] font-semibold">
+          Headline
+        </h1>
         <p className="text-sm md:text-base">
           Lorem ipsum dolor sit amet consectetur. Volutpat faucibus facilisis
           sed at pellentesque orci lectus. Ac nisl placerat sed rhoncus libero

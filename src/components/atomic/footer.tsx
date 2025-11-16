@@ -63,10 +63,12 @@ const socmed = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#00AEEF] min-w-[99dvw] text-white grid grid-cols-1 md:grid-cols-2 px-[5%] md:px-[7%] lg:px-[10%] py-[5%] gap-8 md:gap-0">
-      <div className="flex flex-col gap-3 md:gap-5 items-start">
-        <h2 className="font-[600] text-[32px] md:text-[40px] lg:text-[49px]">Need Help Deciding?</h2>
-        <p className="text-[16px] md:text-[20px]">
+    <footer className="bg-[#00AEEF] min-w-[99dvw] text-white grid grid-cols-1 md:grid-cols-2 px-[7%] lg:px-[10%] py-[5%] gap-8 md:gap-0">
+      <div className="flex flex-col gap-5 items-center md:items-start">
+        <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px]">
+          Need Help Deciding?
+        </h2>
+        <p className="text-[20px] text-center md:text-left">
           Chat with us and make decisions with confidence.
         </p>
         <Button
@@ -74,7 +76,7 @@ export default function Footer() {
           rounded
           icon={<ArrowRightFromLine size={18} />}
         />
-        <div className="flex gap-3 md:gap-5 mt-3 md:mt-5">
+        <div className="flex gap-8 md:gap-3 md:gap-5 mt-3 md:mt-5">
           {contact.map((each: SocmedProps, index: number) => (
             <Link key={index} href={each.url}>
               <Image src={each.icon} alt={`socmed ${index}`} />
@@ -82,16 +84,18 @@ export default function Footer() {
           ))}
         </div>
       </div>
-      <div className="flex flex-col gap-5 md:gap-8">
-        <h5 className="font-[700] text-[20px] md:text-[25px]">Follow Us</h5>
-        <div className="flex gap-4 md:gap-8 items-center flex-wrap">
+      <div className="flex flex-col gap-5 md:gap-8 items-center md:items-start w-full">
+        <h5 className="font-[700] text-[20px] md:text-[25px] mt-5 md:mt-0">
+          Follow Us
+        </h5>
+        <div className="flex gap-4 md:gap-8 items-center justify-between flex-wrap w-full mb-5 md:mb-0">
           {socmed?.map((each: SocmedProps, index: number) => (
             <Link key={index} href={each.url}>
               <Image src={each.icon} alt={`socmed ${index}`} />
             </Link>
           ))}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-0">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-0">
           <div className="md:col-span-2 space-y-2 md:space-y-3 text-sm md:text-base">
             <h5 className="font-[700] text-[20px] md:text-[25px]">Excelearn</h5>
             <span className="block">PT. Bina Kinerja Nusantara</span>

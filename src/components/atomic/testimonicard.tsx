@@ -2,25 +2,26 @@
 
 import Image from "next/image";
 
-import TestimoniPict from "@/assets/testimoni.jpg";
+import { TestimoniProps } from "@/types/testimoni";
 
-export default function TestimoniCard() {
+interface CompProps {
+  data: TestimoniProps;
+}
+
+export default function TestimoniCard({ data }: CompProps) {
   return (
-    <div className="bg-white max-w-[60%] flex items-center shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] rounded-xl p-5 gap-3">
+    <div className="bg-white max-w-[90%] md:max-w-[60%] flex flex-col md:flex-row items-center shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] rounded-xl p-5 gap-3">
       <Image
-        src={TestimoniPict}
+        src={data?.photo?.url || ""}
         alt="testimoni pict"
         height={150}
         width={150}
-        className="rounded-lg"
+        className="rounded-lg aspect-square"
       />
       <div className="space-y-3 p-5">
-        <p className="text-justify">
-          “This class gave me hands-on experience that I couldn’t get just from
-          theory. It’s definitely worth the investment.”
-        </p>
+        <p className="text-justify">{data?.testimonial}</p>
         <span className="w-full block text-left text-[12px] italic">
-          <strong>John</strong> - Marketing Director
+          <strong>{data?.person_name}</strong> - {data?.person_title}
         </span>
       </div>
     </div>
