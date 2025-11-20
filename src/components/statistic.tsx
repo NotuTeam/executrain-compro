@@ -13,7 +13,7 @@ export default function Statistic() {
     <div
       className="w-full py-[5%] px-[5%] md:px-[7%] lg:px-[10%] text-white flex items-center justify-evenly gap-5 md:gap-0"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./hero4.webp')`,
+        backgroundImage: `linear-gradient(90deg,rgba(0, 39, 82, 0.7) 25%, rgba(102, 201, 255, 0.5) 80%, rgba(255, 255, 255, 0) 100%),  url('./hero4.webp')`,
         backgroundSize: "cover",
         backgroundPosition: "40% 40%",
       }}

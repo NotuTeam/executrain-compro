@@ -14,7 +14,15 @@ export default function AboutSection() {
   const router = useRouter();
 
   return (
-    <div className="px-[5%] md:px-[7%] lg:px-[10%] py-[5%] grid grid-cols-1 md:grid-cols-2 w-full gap-6 md:gap-10">
+    <div
+      className="px-[5%] md:px-[7%] lg:px-[10%] py-[5%] grid grid-cols-1 md:grid-cols-2 w-full gap-6 md:gap-10 mt-[5%]"
+      style={{
+        backgroundImage: `url('./body.png')`,
+        backgroundSize: "contain",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className="flex items-center justify-center">
         <Image
           src={AboutPict}

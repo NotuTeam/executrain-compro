@@ -80,7 +80,7 @@ export default function Promo({ size = "md", data }: CompProps) {
             {data?.promo_name} with{" "}
             <span className="font-[700]">{data?.percentage}% OFF!</span>
           </span>
-          <p className="hidden md:block text-[12px] md:text-[18px] font-[200]">
+          <p className="hidden md:block text-[12px] md:text-[14px] font-[200]">
             {data?.promo_description}
           </p>
         </div>
@@ -144,11 +144,11 @@ export default function Promo({ size = "md", data }: CompProps) {
   return (
     <div className="bg-red-500 flex justify-between text-white items-center z-100 rounded-2xl text-left gap-3 py-[3%] px-[5%] md:py-[2%] md:px-[3%]">
       <div className="space-y-2 max-w-[65%]">
-        <h1 className="text-[28px] md:text-[32px] font-semibold">
+        <h1 className="text-[20px] md:text-[24px] font-semibold">
           {data?.promo_name}{" "}
           <span className="font-[700]">{data?.percentage}% OFF!</span>
         </h1>
-        <p className="hidden md:block text-[12px] md:text-[18px] font-[200]">
+        <p className="hidden md:block text-[12px] md:text-[14px] font-[200]">
           {data?.promo_description}
         </p>
       </div>

@@ -63,7 +63,15 @@ const socmed = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#00AEEF] min-w-[99dvw] text-white grid grid-cols-1 md:grid-cols-2 px-[7%] lg:px-[10%] py-[5%] gap-8 md:gap-0">
+    <footer
+      className="bg-[#00AEEF] min-w-[99dvw] text-white grid grid-cols-1 md:grid-cols-2 px-[7%] lg:px-[10%] py-[5%] gap-10"
+      style={{
+        backgroundImage: `url('./footer.png')`,
+        backgroundSize: "contain",
+        backgroundPosition: "left",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className="flex flex-col gap-5 items-center md:items-start">
         <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px]">
           Need Help Deciding?
@@ -95,7 +103,7 @@ export default function Footer() {
             </Link>
           ))}
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-0">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-10">
           <div className="md:col-span-2 space-y-2 md:space-y-3 text-sm md:text-base">
             <h5 className="font-[700] text-[20px] md:text-[25px]">Excelearn</h5>
             <span className="block">PT. Bina Kinerja Nusantara</span>

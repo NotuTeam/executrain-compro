@@ -84,13 +84,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
       {/* Desktop View */}
       <div className="hidden md:flex items-center gap-4 px-6 py-4">
         <div className="flex items-center flex-1">
-          <Search className="text-gray-400" />
+          <Search className="text-white" />
           <input
             type="text"
             placeholder="Search..."
             value={searchValue}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full px-4 py-2 text-gray-700 placeholder-gray-400 bg-transparent border-none outline-none focus:ring-0"
+            className="w-full px-4 py-2 text-white placeholder-white  bg-transparent border-none outline-none focus:ring-0"
           />
         </div>
 
@@ -178,13 +178,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
         <div className="flex items-center gap-2">
           {/* Search Input */}
           <div className="flex items-center flex-1 bg-white rounded-full px-4 py-2 shadow-sm">
-            <Search className="text-gray-400 w-5 h-5" />
+            <Search className="text-white w-5 h-5" />
             <input
               type="text"
               placeholder="Search..."
               value={searchValue}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="w-full px-3 py-1 text-gray-700 placeholder-gray-400 bg-transparent border-none outline-none focus:ring-0 text-sm"
+              className="w-full px-3 py-1 text-white placeholder-white  bg-transparent border-none outline-none focus:ring-0 text-sm"
             />
           </div>
 

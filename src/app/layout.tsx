@@ -1,6 +1,8 @@
 /** @format */
 
 import type { Metadata } from "next";
+import { Montserrat } from "next/font/google";
+
 import { Suspense } from "react";
 
 import { TanstackProvider } from "../lib/tanstack";
@@ -16,13 +18,17 @@ export const metadata: Metadata = {
   description: "Company Profile",
 };
 
+const Mont = Montserrat({
+  subsets: ["latin"],
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={Mont.className}>
       <body>
         <Suspense fallback={<LoadingPage />}>
           <TanstackProvider>

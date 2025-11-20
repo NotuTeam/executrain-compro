@@ -80,7 +80,7 @@ export default function Calendar({
   };
 
   return (
-    <div className="bg-white rounded-3xl shadow-lg p-5 md:p-8 w-full md:w-[85%] lg:w-[70%] mx-auto space-y-6 md:space-y-10">
+    <div className="bg-white rounded-4xl p-5 md:p-8 w-full md:w-[85%] lg:w-[70%] mx-auto space-y-6 md:space-y-10 bg-white/30 backdrop-blur-md border border-white/20 shadow-xl">
       <div className="flex items-center justify-center gap-4 md:gap-10 flex-wrap">
         <div className="flex items-center gap-2 text-xs md:text-sm">
           <span className="w-3 h-3 rounded-full bg-green-500"></span>

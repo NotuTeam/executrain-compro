@@ -33,7 +33,15 @@ export default function Schedule() {
         <SearchBar searchValue={searchValue} onSearchChange={setSearchValue} />
       </HeroSchedule>
       {searchValue === "" && (
-        <div className="w-full px-[10%] mt-[-5%]">
+        <div
+          className="w-full px-[10%] mt-[-2.5%]"
+          style={{
+            backgroundImage: `url('./body.png'), url('./body.png')`,
+            backgroundSize: "30%",
+            backgroundPosition: "10% 50%, 90% 30%",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
           <Calendar
             selectedDate={selectedDate}
             onDateSelect={(date) => setSelectedDate(date)}

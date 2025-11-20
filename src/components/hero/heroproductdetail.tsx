@@ -21,7 +21,7 @@ export default function HeroProductDetail({ data }: { data?: ProductProps }) {
     <div
       className="min-w-[99dvw] min-h-[80dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(255,255,255)), url('./hero.webp')`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5) 50%, rgba(255,255,255)), url('./bannerplain.png'), url('./hero.webp')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

@@ -26,7 +26,15 @@ export default function WhyChoose({ type = "dark" }: { type?: string }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="px-[5%] md:px-[7%] lg:px-[10%] min-w-[99dvw] py-[5%] flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-20 duration-300 min-h-[40dvh] md:min-h-[50dvh] ">
+    <div
+      className="px-[5%] md:px-[7%] lg:px-[10%] min-w-[99dvw] py-[5%] flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-20 duration-300 min-h-[40dvh] md:min-h-[90dvh] "
+      style={{
+        backgroundImage: `url('./body.png')`,
+        backgroundSize: "contain",
+        backgroundPosition: "right",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className="hidden md:block w-full md:w-auto text-center md:text-left">
         <h2
           className={`text-[40px] md:text-[50px] lg:text-[61px] font-semibold leading-[1] ${

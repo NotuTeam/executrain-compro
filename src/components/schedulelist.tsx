@@ -38,9 +38,9 @@ export default function ScheduleList({ data = [] }: CompProps) {
 
   return (
     <div
-      className="w-full text-white flex flex-col items-center justify-center text-center py-[5%] space-y-5 px-[5%] md:px-0"
+      className="w-full text-white flex flex-col items-center justify-center text-center py-[5%] space-y-5 px-[5%] md:px-0 border-white border-b-5 box-border"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 58, 79, 0.8) 20%, rgba(255,255,255) 85%), url('./hero4.webp')`,
+        backgroundImage: `linear-gradient(rgba(0, 58, 79, 0.8) 20%, rgba(255,255,255) 80%), url('./hero4.webp')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

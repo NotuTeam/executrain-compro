@@ -68,7 +68,15 @@ const socmed = [
 
 export default function ContactList() {
   return (
-    <div className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] space-y-6 md:space-y-10">
+    <div
+      className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] space-y-6 md:space-y-10"
+      style={{
+        backgroundImage: `url('./body.png'), url('./body.png')`,
+        backgroundSize: "30%",
+        backgroundPosition: "-20% 80%, 120% 40%",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0">
         <div>
           <h3 className="text-[32px] md:text-[40px] lg:text-[49px] font-semibold">
@@ -90,13 +98,15 @@ export default function ContactList() {
           </div>
         </div>
         <div className="flex items-center justify-center md:justify-end">
-          <Image
-            src={ContactBG}
-            alt="contact bg"
-            height={250}
-            width={250}
-            className="rounded-lg md:h-[300px] md:w-[300px] lg:h-[350px] lg:w-[350px]"
-          />
+          <div
+            className="h-[400px] w-[350px] rounded-3xl"
+            style={{
+              backgroundImage: `url('./hero3.webp')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          ></div>
         </div>
       </div>
       <div className="text-center space-y-4 md:space-y-5 py-[5%]">
