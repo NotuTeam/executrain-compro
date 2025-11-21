@@ -13,7 +13,7 @@ import ARROW_RIGHT from "@/assets/icons/arrow-right.svg";
 
 import { usePromo } from "@/services/promo/hook";
 
-import { useTestimonial } from "@/services/promo copy/hook";
+import { useTestimonial } from "@/services/testimoni/hook";
 
 export default function TestimoniList() {
   const { data: promo, isLoading: promoLoading } = usePromo();

@@ -38,10 +38,10 @@ export default function ProductDetail() {
           <h4 className="text-[49px] text-center text-white font-semibold">
             {"What You'll Learn"}
           </h4>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
+          <div className="flex items-center justify-center flex-wrap gap-5">
             {data?.benefits?.map((each: string, index: number) => (
               <div
-                className="bg-white/50 backdrop-blur-md border border-white/20 shadow-xl p-5 rounded-3xl text-[24px] flex flex-col items-center gap-5"
+                className="w-[100%] md:w-[23%] bg-white/50 backdrop-blur-md border border-white/20 shadow-xl p-5 rounded-3xl text-[24px] flex flex-col items-center gap-5"
                 key={index}
               >
                 <span>{each}</span>

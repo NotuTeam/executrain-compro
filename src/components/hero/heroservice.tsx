@@ -7,14 +7,14 @@ import { ChevronRight } from "lucide-react";
 export default function HeroService() {
   return (
     <div
-      className="min-w-[99dvw] min-h-[100dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
+      className="min-w-[99dvw] min-h-[90dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
       style={{
         backgroundImage: `url('./bannerplain.png'), url('./hero.webp')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="flex flex-col gap-5 md:gap-8 items-start max-w-full">
+      <div className="flex flex-col gap-5 md:gap-8 items-start max-w-full pt-[10%]">
         <div className="font-[500] flex gap-3">
           <Link href="/">Home</Link>
           <ChevronRight />

@@ -96,7 +96,7 @@ export default function Footer() {
         <h5 className="font-[700] text-[20px] md:text-[25px] mt-5 md:mt-0">
           Follow Us
         </h5>
-        <div className="flex gap-4 md:gap-8 items-center justify-between flex-wrap w-full mb-5 md:mb-0">
+        <div className="flex gap-4 items-center justify-between flex-wrap mb-5 md:mb-0 w-[80%]">
           {socmed?.map((each: SocmedProps, index: number) => (
             <Link key={index} href={each.url}>
               <Image src={each.icon} alt={`socmed ${index}`} />

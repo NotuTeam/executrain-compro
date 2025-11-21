@@ -23,17 +23,28 @@ export default function ScheduleList({ data = [] }: CompProps) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    return schedules.map((schedule) => {
-      const scheduleDate = new Date(schedule.schedule_date);
-      scheduleDate.setHours(0, 0, 0, 0);
+    return schedules
+      .filter((schedule) => {
+        const scheduleDate = new Date(schedule.schedule_date);
+        scheduleDate.setHours(0, 0, 0, 0);
 
-      const dayDiff = scheduleDate.getTime() - today.getTime();
-      const days = dayDiff / (1000 * 3600 * 24);
+        const dayDiff = scheduleDate.getTime() - today.getTime();
+        const days = dayDiff / (1000 * 3600 * 24);
 
-      if (days < 0) return { ...schedule, status: "ENDED" };
-      if (days === 0) return { ...schedule, status: "ON_GOING" };
-      return schedule;
-    });
+        if (days > 0) return schedule;
+      })
+      ?.map((schedule) => {
+        const scheduleDate = new Date(schedule.schedule_date);
+        scheduleDate.setHours(0, 0, 0, 0);
+
+        const dayDiff = scheduleDate.getTime() - today.getTime();
+
+        const days = dayDiff / (1000 * 3600 * 24);
+
+        if (days < 0) return { ...schedule, status: "ENDED" };
+        if (days === 0) return { ...schedule, status: "ON_GOING" };
+        return schedule;
+      });
   }
 
   return (

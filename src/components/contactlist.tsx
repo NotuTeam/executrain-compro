@@ -99,7 +99,7 @@ export default function ContactList() {
         </div>
         <div className="flex items-center justify-center md:justify-end">
           <div
-            className="h-[400px] w-[350px] rounded-3xl"
+            className="h-[350px] w-[350px] rounded-3xl"
             style={{
               backgroundImage: `url('./hero3.webp')`,
               backgroundSize: "cover",

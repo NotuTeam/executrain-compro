@@ -44,15 +44,6 @@ export default function ScheduleDetail() {
               <div className="w-[50%] border" />
             </div>
           ))}
-          {data?.benefits?.map((each: string, index: number) => (
-            <div
-              className="w-[23%] bg-white/50 backdrop-blur-md border border-white/20 shadow-xl p-5 rounded-3xl text-[24px] flex flex-col items-center gap-5"
-              key={index}
-            >
-              <span>{each}</span>
-              <div className="w-[50%] border" />
-            </div>
-          ))}
         </div>
       </div>
       <WhyChoose />
