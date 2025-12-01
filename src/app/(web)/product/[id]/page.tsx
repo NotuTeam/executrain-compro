@@ -9,6 +9,7 @@ import HeroProductDetail from "@/components/hero/heroproductdetail";
 import ProductList from "@/components/productlist";
 
 import { useProduct, useProductDetail } from "@/services/product/hook";
+import CTA from "@/components/cta";
 
 export default function ProductDetail() {
   const params = useParams();
@@ -51,6 +52,7 @@ export default function ProductDetail() {
           </div>
         </div>
       </div>
+      <CTA />
       <ProductList data={product} title="Related Product" />
     </Container>
   );

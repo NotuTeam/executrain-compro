@@ -9,9 +9,18 @@ export interface ProductProps {
   product_description: string;
   benefits: string[];
   instructors: number;
+  instructor_list: Instructor[];
   language: string;
   duration: number;
   banner: {
+    public_id: string;
+    url: string;
+  };
+}
+
+export interface Instructor {
+  name: string;
+  photo: {
     public_id: string;
     url: string;
   };

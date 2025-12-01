@@ -31,14 +31,14 @@ const contact = [
   {
     icon: LOCATION_ICON,
     label: "Equity Tower 26th Floor",
-    url: "/contact",
+    url: "https://share.google/hUqLqgMNGxAXSDIDw",
   },
 ];
 
 const socmed = [
   {
     icon: INSTAGRAM_ICON,
-    url: "/contact",
+    url: "https://www.instagram.com/excelearn_id/",
   },
   {
     icon: FACEBOOK_ICON,
@@ -58,7 +58,7 @@ const socmed = [
   },
   {
     icon: LINKEDIN_ICON,
-    url: "/contact",
+    url: "https://www.linkedin.com/company/excelearnid/",
   },
   {
     icon: TWITTER_ICON,

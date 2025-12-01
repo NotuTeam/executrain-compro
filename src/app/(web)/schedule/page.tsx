@@ -26,7 +26,7 @@ export default function Schedule() {
   const { data: schedule = [], isLoading: scheduleLoading } =
     useScheduleFiltered({
       search: debouncedSearchValue || undefined,
-      date: selectedMonth,
+      // Tidak mengirim date filter, sehingga backend return semua data
     });
 
   return (
@@ -59,6 +59,7 @@ export default function Schedule() {
           data={schedule}
           selectedDate={selectedDate}
           selectedMonth={selectedMonth}
+          onClearDate={() => setSelectedDate(null)}
         />
       </div>
     </Container>

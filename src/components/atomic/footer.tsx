@@ -36,7 +36,7 @@ const contact = [
 const socmed = [
   {
     icon: INSTAGRAM_ICON,
-    url: "/contact",
+    url: "https://www.instagram.com/excelearn_id/",
   },
   {
     icon: FACEBOOK_ICON,
@@ -56,7 +56,7 @@ const socmed = [
   },
   {
     icon: LINKEDIN_ICON,
-    url: "/contact",
+    url: "https://www.linkedin.com/company/excelearnid/",
   },
   {
     icon: TWITTER_ICON,
@@ -84,7 +84,7 @@ export default function Footer() {
           Chat with us and make decisions with confidence.
         </p>
         <Button
-          onClick={() => router.push("https://wa.me/62895805254925")}
+          onClick={() => router.push("/contact")}
           label="Start Consultation"
           rounded
           icon={<ArrowRightFromLine size={18} />}
