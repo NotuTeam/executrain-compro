@@ -36,7 +36,7 @@ export default function AboutSection() {
         <h2 className="text-[32px] md:text-[40px] lg:text-[49px] font-semibold">
           About <span className="text-[#00AEEF]">ExceLEARN</span>
         </h2>
-        <p className="text-sm md:text-base text-center md:text-justify">
+        <p className="text-sm md:text-base text-justify">
           ExceLEARN adalah pusat pengembangan SDM, teknologi, dan solusi bisnis
           yang berdedikasi untuk membantu organisasi meningkatkan produktivitas
           dan beradaptasi di era transformasi digital. Kami menghadirkan
