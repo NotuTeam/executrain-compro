@@ -52,8 +52,8 @@ export default function ProductCard({ data, size = "md" }: CompProps) {
           </div>
           <div className="flex justify-between pt-2 md:pt-3">
             <div className="flex items-center gap-2">
-              {/* <span className="w-[25px] h-[25px] rounded-full bg-slate-200 block"></span>
-              <span className="text-[12px]">Lara</span> */}
+              <span className="w-[25px] h-[25px] rounded-full bg-slate-200 block"></span>
+              <span className="text-[12px]">Lara</span>
             </div>
             <div className="flex gap-3 items-center">
               <div className="flex items-center gap-1">
@@ -97,8 +97,8 @@ export default function ProductCard({ data, size = "md" }: CompProps) {
             <div className="flex justify-between w-full mt-5 md:mt-8 items-end md:items-center gap-3 md:gap-0">
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
-                  {/* <span className="w-[25px] h-[25px] rounded-full bg-slate-200 block"></span>
-                  <span className="text-[12px]">Lara</span> */}
+                  <span className="w-[25px] h-[25px] rounded-full bg-slate-200 block"></span>
+                  <span className="text-[12px]">Lara</span>
                 </div>
                 <div className="flex gap-5 items-center">
                   <div className="flex items-center gap-1">
