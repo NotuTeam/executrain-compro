@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { useRouter } from "next/router";
+
 import { SocmedProps } from "@/types/socmed";
 
 import ContactBG from "@/assets/testimoni.jpg";
@@ -67,6 +69,7 @@ const socmed = [
 ];
 
 export default function ContactList() {
+  const router = useRouter();
   return (
     <div
       className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] space-y-6 md:space-y-10"
@@ -87,13 +90,15 @@ export default function ContactList() {
           </p>
           <div className="flex flex-col items-start gap-3 mt-5 md:mt-8">
             {contact.map((each: SocmedProps, index: number) => (
-              <div
+              <button
+                type="button"
+                onClick={() => router.push(each.url)}
                 className="bg-linear-to-r from-[#141A2E] to-[#76dbff] text-white p-4 md:p-5 rounded-full w-full md:min-w-[45%] md:w-[50%] flex items-center gap-3 text-sm md:text-base"
                 key={index}
               >
                 <Image src={each.icon} alt={`socmed ${index}`} />
                 {each.label}
-              </div>
+              </button>
             ))}
           </div>
         </div>
