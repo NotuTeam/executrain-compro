@@ -6,7 +6,7 @@ import { ChevronRight } from "lucide-react";
 export default function HeroContact() {
   return (
     <div
-      className="min-w-[99dvw] min-h-[60dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
+      className="min-w-[99dvw] min-h-[70dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
       style={{
         backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
         backgroundSize: "cover",
