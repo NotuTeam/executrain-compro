@@ -10,19 +10,25 @@ interface CompProps {
 
 export default function TestimoniCard({ data }: CompProps) {
   return (
-    <div className="bg-white max-w-[90%] md:max-w-[60%] flex flex-col md:flex-row items-center shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] rounded-xl p-5 gap-3">
-      <Image
-        src={data?.photo?.url || ""}
-        alt="testimoni pict"
-        height={150}
-        width={150}
-        className="rounded-lg aspect-square"
-      />
-      <div className="space-y-3 p-5">
+    <div className="bg-white  flex flex-col items-start md:flex-row p-5">
+      <div
+        className="w-[500px] aspect-square flex items-end  rounded-t-xl rounded-br-xl"
+        style={{
+          backgroundImage: `url(${data?.photo?.url || ""})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="flex-col px-2 py-1 rounded-tr-full text-left text-[12px] bg-[#ffffff80] flex w-[80%]">
+          <span className="font-[400]">
+            <strong>{data?.person_name}</strong>
+          </span>
+          <span>{data?.person_title}</span>
+        </div>
+      </div>
+
+      <div className="space-y-3 p-3 bg-[#00AEEF]/30 backdrop-blur-md border border-[#00AEEF]/20 rounded-t-xl rounded-br-xl ml-[-5%] text-[14px] mt-[5%]">
         <p className="text-justify">{data?.testimonial}</p>
-        <span className="w-full block text-left text-[12px] italic">
-          <strong>{data?.person_name}</strong> - {data?.person_title}
-        </span>
       </div>
     </div>
   );

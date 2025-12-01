@@ -3,6 +3,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import Button from "../atomic/button";
 import {
   CornerRightUp,
@@ -19,11 +20,12 @@ import dayjs from "dayjs";
 import { ScheduleProps } from "@/types/schedule";
 
 export default function HeroScheduleDetail({ data }: { data?: ScheduleProps }) {
+  const router = useRouter();
   return (
     <div
       className="min-w-[99dvw] min-h-[80dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5) 50%, rgba(255,255,255)), url('./bannerplain.png'), url('./hero.webp')`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5) 50%, rgba(255,255,255)), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -33,7 +35,12 @@ export default function HeroScheduleDetail({ data }: { data?: ScheduleProps }) {
           <h1 className="text-[28px] md:text-[40px] lg:text-[49px] font-semibold">
             {data?.schedule_name}
           </h1>
-          <Button label="Register Now" rounded type="primary" />
+          <Button
+            onClick={() => router.push("https://wa.me/62895805254925")}
+            label="Register Now"
+            rounded
+            type="primary"
+          />
         </div>
         <div
           className="hidden md:grid rounded-2xl w-full min-h-[250px] md:min-h-[450px] grid-cols-1 md:grid-cols-3 p-5 md:p-10"

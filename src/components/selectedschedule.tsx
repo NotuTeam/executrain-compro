@@ -19,6 +19,7 @@ interface CompProps {
 
 const borderColor = {
   FULL_BOOKED: "border-red-500",
+  CLOSE_REGISTRATION: "border-red-500",
   OPEN_SEAT: "border-yellow-300",
   ON_GOING: "border-green-500",
   ENDED: "border-gray-500",
@@ -27,11 +28,14 @@ const borderColor = {
 function ScheduleCard({ data }: { data: ScheduleProps }) {
   const router = useRouter();
   const eachDateStr = dayjs(data.schedule_date).format("YYYY-MM-DD");
+
   const today = dayjs().format("YYYY-MM-DD");
 
   let status = data.status;
 
-  if (dayjs(data.schedule_date).isBefore(dayjs(), "day")) {
+  if (dayjs(data.schedule_close_registration_date).isBefore(dayjs(), "day")) {
+    status = "CLOSE_REGISTRATION";
+  } else if (dayjs(data.schedule_date).isBefore(dayjs(), "day")) {
     status = "ENDED";
   } else if (eachDateStr === today) {
     status = "ON_GOING";
@@ -97,7 +101,7 @@ export default function SelectedSchedule({
   }
 
   return (
-    <div className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%]">
+    <div className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] order-2 lg:order-1">
       {is_search && showDate.length > 0 ? (
         <>
           <div className="flex items-center justify-center gap-4 md:gap-10 mb-6 md:mb-10 flex-wrap">

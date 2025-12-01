@@ -7,7 +7,6 @@ import { useParams } from "next/navigation";
 import Container from "@/components/atomic/container";
 import HeroProductDetail from "@/components/hero/heroproductdetail";
 import ProductList from "@/components/productlist";
-import WhyChoose from "@/components/whychoose";
 
 import { useProduct, useProductDetail } from "@/services/product/hook";
 
@@ -28,8 +27,9 @@ export default function ProductDetail() {
         <p>{data?.product_description}</p>
       </div>
       <div
+        className="w-full"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./hero.webp')`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -50,7 +50,6 @@ export default function ProductDetail() {
             ))}
           </div>
         </div>
-        <WhyChoose type="light" />
       </div>
       <ProductList data={product} title="Related Product" />
     </Container>

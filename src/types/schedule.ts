@@ -6,7 +6,13 @@ export interface ScheduleProps {
   _id: string;
   schedule_name: string;
   schedule_date: string;
-  status: "OPEN_SEAT" | "FULL_BOOKED" | "ON_GOING" | "ENDED";
+  schedule_close_registration_date: string;
+  status:
+    | "OPEN_SEAT"
+    | "FULL_BOOKED"
+    | "ON_GOING"
+    | "CLOSE_REGISTRATION"
+    | "ENDED";
   schedule_start: string;
   schedule_end: string;
   location: string;

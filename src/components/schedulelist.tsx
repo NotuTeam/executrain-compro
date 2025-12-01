@@ -36,13 +36,21 @@ export default function ScheduleList({ data = [] }: CompProps) {
       ?.map((schedule) => {
         const scheduleDate = new Date(schedule.schedule_date);
         scheduleDate.setHours(0, 0, 0, 0);
+        const scheduleCloseRegistrationDate = new Date(
+          schedule.schedule_close_registration_date
+        );
+        scheduleCloseRegistrationDate.setHours(0, 0, 0, 0);
 
         const dayDiff = scheduleDate.getTime() - today.getTime();
+        const dayCloseRegistrationDiff =
+          scheduleCloseRegistrationDate.getTime() - today.getTime();
 
         const days = dayDiff / (1000 * 3600 * 24);
 
         if (days < 0) return { ...schedule, status: "ENDED" };
         if (days === 0) return { ...schedule, status: "ON_GOING" };
+        if (dayCloseRegistrationDiff === 0)
+          return { ...schedule, status: "CLOSE_REGISTRATION" };
         return schedule;
       });
   }

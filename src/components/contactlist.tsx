@@ -21,48 +21,48 @@ const contact = [
   {
     icon: GMAIL_ICON,
     label: "Excelearn@gmail.com",
-    url: "/",
+    url: "mailto:excelearn@gmail.com",
   },
   {
     icon: WHATSAPP_ICON,
     label: "+62984201810",
-    url: "/",
+    url: "https://wa.me/62895805254925",
   },
   {
     icon: LOCATION_ICON,
     label: "Equity Tower 26th Floor",
-    url: "/",
+    url: "/contact",
   },
 ];
 
 const socmed = [
   {
     icon: INSTAGRAM_ICON,
-    url: "/",
+    url: "/contact",
   },
   {
     icon: FACEBOOK_ICON,
-    url: "/",
+    url: "/contact",
   },
   {
     icon: DISCORD_ICON,
-    url: "/",
+    url: "/contact",
   },
   {
     icon: TIKTOK_ICON,
-    url: "/",
+    url: "/contact",
   },
   {
     icon: YOUTUBE_ICON,
-    url: "/",
+    url: "/contact",
   },
   {
     icon: LINKEDIN_ICON,
-    url: "/",
+    url: "/contact",
   },
   {
     icon: TWITTER_ICON,
-    url: "/",
+    url: "/contact",
   },
 ];
 
@@ -79,16 +79,16 @@ export default function ContactList() {
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0">
         <div>
-          <h3 className="text-[32px] md:text-[40px] lg:text-[49px] font-semibold">
+          <h3 className="text-[32px] text-center md:text-left  md:text-[40px] lg:text-[49px] font-semibold">
             Lets Talk!
           </h3>
-          <p className="max-w-full md:max-w-[70%] lg:max-w-[50%] text-sm md:text-base">
+          <p className="max-w-full text-center md:text-left lg:max-w-[70%] text-sm md:text-base">
             Get In Touch with us using the enquiry form of contact details below
           </p>
           <div className="flex flex-col items-start gap-3 mt-5 md:mt-8">
             {contact.map((each: SocmedProps, index: number) => (
               <div
-                className="bg-gradient-to-r from-[#141A2E] to-[#76dbff] text-white p-4 md:p-5 rounded-full w-full md:min-w-[45%] md:w-auto flex items-center gap-3 text-sm md:text-base"
+                className="bg-linear-to-r from-[#141A2E] to-[#76dbff] text-white p-4 md:p-5 rounded-full w-full md:min-w-[45%] md:w-[50%] flex items-center gap-3 text-sm md:text-base"
                 key={index}
               >
                 <Image src={each.icon} alt={`socmed ${index}`} />
@@ -101,7 +101,7 @@ export default function ContactList() {
           <div
             className="h-[350px] w-[350px] rounded-3xl"
             style={{
-              backgroundImage: `url('./hero3.webp')`,
+              backgroundImage: `url('./contact-us.png')`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",

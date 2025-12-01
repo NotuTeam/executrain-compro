@@ -133,3 +133,10 @@ export const isTextComponent = (
 ): component is TextComponent => {
   return component.type === "text";
 };
+
+export interface PageListProps {
+  _id: string;
+  name: string;
+  path: string;
+  status: "PUBLISHED" | "DRAFT";
+}

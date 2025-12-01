@@ -52,6 +52,8 @@ export async function ScheduleListFilteredService(
       params,
     });
 
+    console.log(response);
+
     const { status, message, data } = response;
 
     if (status !== 200) throw new Error(message);

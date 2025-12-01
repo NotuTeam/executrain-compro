@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown, Menu, X } from "lucide-react";
@@ -12,6 +13,7 @@ import Button from "./button";
 import Logo from "@/assets/logo.png";
 
 import { usePromo } from "@/services/promo/hook";
+import { usePages } from "@/services/pages/hook";
 
 const servicesList = [
   { name: "IT Training", slug: "it-training" },
@@ -20,11 +22,17 @@ const servicesList = [
 ];
 
 export default function Navbar() {
+  const path = usePathname();
   const { data: promo, isLoading: promoLoading } = usePromo();
-
+  const { data: pages = [], isLoading: pagesLoading } = usePages();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isServiceOpen, setIsServiceOpen] = useState(false);
+  const [isOtherOpen, setIsOtherOpen] = useState(false);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Check if current page is a service page
+  const isServicePage = path?.startsWith("/service");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,12 +97,23 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-3 md:space-x-6 lg:space-x-10 py-3 md:py-4 lg:py-5 items-center text-xs md:text-sm lg:text-base">
-            <Link href="/" className="hover:text-gray-200 transition-colors">
+            <Link
+              href="/"
+              className={`hover:text-gray-200 transition-colors relative pb-1 ${
+                path === "/"
+                  ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
+                  : ""
+              }`}
+            >
               Home
             </Link>
             <Link
               href="/about"
-              className="hover:text-gray-200 transition-colors"
+              className={`hover:text-gray-200 transition-colors relative pb-1 ${
+                path === "/about"
+                  ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
+                  : ""
+              }`}
             >
               About Us
             </Link>
@@ -105,7 +124,13 @@ export default function Navbar() {
               onMouseEnter={() => setIsServiceOpen(true)}
               onMouseLeave={() => setIsServiceOpen(false)}
             >
-              <button className="flex items-center gap-1 hover:text-gray-200 transition-colors">
+              <button
+                className={`flex items-center gap-1 hover:text-gray-200 transition-colors relative pb-1 ${
+                  isServicePage
+                    ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
+                    : ""
+                }`}
+              >
                 Services
                 <ChevronDown
                   className={`w-4 h-4 transition-transform duration-300 ${
@@ -137,16 +162,66 @@ export default function Navbar() {
 
             <Link
               href="/product"
-              className="hover:text-gray-200 transition-colors"
+              className={`hover:text-gray-200 transition-colors relative pb-1 ${
+                path === "/product"
+                  ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
+                  : ""
+              }`}
             >
               Product
             </Link>
             <Link
               href="/schedule"
-              className="hover:text-gray-200 transition-colors"
+              className={`hover:text-gray-200 transition-colors relative pb-1 ${
+                path === "/schedule"
+                  ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
+                  : ""
+              }`}
             >
               Schedule
             </Link>
+            <div
+              className="relative"
+              onMouseEnter={() => setIsOtherOpen(true)}
+              onMouseLeave={() => setIsOtherOpen(false)}
+            >
+              <button
+                className={`flex items-center gap-1 hover:text-gray-200 transition-colors relative pb-1 ${
+                  isServicePage
+                    ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
+                    : ""
+                }`}
+              >
+                Other
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-300 ${
+                    isOtherOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {/* Dropdown Dynamic Menu */}
+              {Array.isArray(pages) && pages?.length > 0 && (
+                <div
+                  className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 min-w-[200px] ${
+                    isOtherOpen
+                      ? "opacity-100 visible translate-y-0"
+                      : "opacity-0 invisible -translate-y-2"
+                  }`}
+                >
+                  {pages?.map((page) => (
+                    <Link
+                      key={page?._id}
+                      href={`/${page?.path}`}
+                      className="block px-6 py-3 text-gray-800 hover:bg-[#00AEEF] hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                      onClick={() => setIsOtherOpen(false)}
+                    >
+                      {page.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
             <Link href="/contact">
               <Button label="Contact Us" />
             </Link>
@@ -200,14 +275,22 @@ export default function Navbar() {
           <nav className="flex-1 overflow-y-auto py-5">
             <Link
               href="/"
-              className="block px-6 py-3 text-gray-800 hover:bg-gray-100 transition-colors"
+              className={`block px-6 py-3 transition-colors ${
+                path === "/"
+                  ? "text-[#00AEEF] bg-blue-50 border-l-4 border-[#00AEEF] font-semibold"
+                  : "text-gray-800 hover:bg-gray-100"
+              }`}
               onClick={closeSidebar}
             >
               Home
             </Link>
             <Link
               href="/about"
-              className="block px-6 py-3 text-gray-800 hover:bg-gray-100 transition-colors"
+              className={`block px-6 py-3 transition-colors ${
+                path === "/about"
+                  ? "text-[#00AEEF] bg-blue-50 border-l-4 border-[#00AEEF] font-semibold"
+                  : "text-gray-800 hover:bg-gray-100"
+              }`}
               onClick={closeSidebar}
             >
               About Us
@@ -216,7 +299,11 @@ export default function Navbar() {
             {/* Services Accordion */}
             <div>
               <button
-                className="w-full flex items-center justify-between px-6 py-3 text-gray-800 hover:bg-gray-100 transition-colors"
+                className={`w-full flex items-center justify-between px-6 py-3 transition-colors ${
+                  isServicePage
+                    ? "text-[#00AEEF] bg-blue-50 border-l-4 border-[#00AEEF] font-semibold"
+                    : "text-gray-800 hover:bg-gray-100"
+                }`}
                 onClick={() => setIsServiceOpen(!isServiceOpen)}
               >
                 <span>Services</span>
@@ -248,14 +335,22 @@ export default function Navbar() {
 
             <Link
               href="/product"
-              className="block px-6 py-3 text-gray-800 hover:bg-gray-100 transition-colors"
+              className={`block px-6 py-3 transition-colors ${
+                path === "/product"
+                  ? "text-[#00AEEF] bg-blue-50 border-l-4 border-[#00AEEF] font-semibold"
+                  : "text-gray-800 hover:bg-gray-100"
+              }`}
               onClick={closeSidebar}
             >
               Product
             </Link>
             <Link
               href="/schedule"
-              className="block px-6 py-3 text-gray-800 hover:bg-gray-100 transition-colors"
+              className={`block px-6 py-3 transition-colors ${
+                path === "/schedule"
+                  ? "text-[#00AEEF] bg-blue-50 border-l-4 border-[#00AEEF] font-semibold"
+                  : "text-gray-800 hover:bg-gray-100"
+              }`}
               onClick={closeSidebar}
             >
               Schedule

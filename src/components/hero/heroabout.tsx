@@ -1,5 +1,6 @@
 /** @format */
 
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../atomic/button";
@@ -9,16 +10,24 @@ import AboutPict from "@/assets/about.png";
 import { ArrowRightFromLine, ChevronRight } from "lucide-react";
 
 export default function HeroAbout() {
+  const router = useRouter();
   return (
     <div
       className="min-w-[99dvw] min-h-[105dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
       style={{
-        backgroundImage: `url('./bannerplain.png'), url('./hero.webp')`,
+        backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="relative z-10 px-[5%] py-[5%] md:py-[2.5%] rounded-lg space-y-5 bg-white/50 backdrop-blur-md border border-white/20 shadow-xl">
+      <div
+        className="relative z-10 px-[5%] py-[5%] md:py-[2.5%] rounded-lg space-y-5 bg-white/50 backdrop-blur-md border border-white/20 shadow-xl"
+        style={{
+          backgroundImage: `url('./body.png')`,
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <div className="font-[500] flex gap-3 text-black">
           <Link href="/">Home</Link>
           <ChevronRight />
@@ -46,12 +55,13 @@ export default function HeroAbout() {
               solusi teknologi terintegrasi yang dirancang khusus sesuai
               kebutuhan klien.
             </p>
-            <Button
+            {/* <Button
+              onClick={() => router.push("/contact")}
               label="Get to Know Us"
               rounded
               type="primary"
               icon={<ArrowRightFromLine size={18} />}
-            />
+            /> */}
           </div>
         </div>
       </div>

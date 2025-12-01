@@ -1,10 +1,11 @@
 /** @format */
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-import ServiceBG from "@/assets/hero.webp";
+import ServiceBG from "@/assets/hero2.webp";
 import IT_TRAINING_ICON from "@/assets/icons/it_training.svg";
 import IT_CONSULTANT_LOGO from "@/assets/icons/it_consultant.svg";
 import IT_SUPPORT_LOGO from "@/assets/icons/it_support.svg";
@@ -45,8 +46,10 @@ interface ServiceDetailProps {
   initialService?: string | null;
 }
 
-export default function ServiceDetail({ initialService }: ServiceDetailProps) {
-  const initialSelectedService = useMemo(() => {
+function ServiceDetailContent({ initialService }: ServiceDetailProps) {
+  const router = useRouter();
+  // Tentukan initial selected berdasarkan initialService
+  const getInitialService = () => {
     if (initialService) {
       const foundService = data.find(
         (service) => service.key === initialService
@@ -54,19 +57,20 @@ export default function ServiceDetail({ initialService }: ServiceDetailProps) {
       return foundService || data[0];
     }
     return data[0];
-  }, [initialService]);
+  };
 
-  const [selected, setSelected] = useState<ServiceProps>(
-    initialSelectedService
-  );
+  const [selected, setSelected] = useState<ServiceProps>(getInitialService());
 
+  // Scroll ke section saat initialService ada
   useEffect(() => {
     if (initialService) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         document
           .getElementById("service-detail")
           ?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 100);
+
+      return () => clearTimeout(timer);
     }
   }, [initialService]);
 
@@ -80,6 +84,7 @@ export default function ServiceDetail({ initialService }: ServiceDetailProps) {
           <div
             onClick={() => {
               setSelected(each);
+              router.push(`/service?type=${each?.key}`);
             }}
             key={each.key}
             className={`font-semibold text-[16px] md:text-[20px] lg:text-[24px] cursor-pointer duration-150 flex gap-2 md:gap-3 items-center transition-colors whitespace-nowrap ${
@@ -118,10 +123,20 @@ export default function ServiceDetail({ initialService }: ServiceDetailProps) {
             alt="service pict"
             height={0}
             width={0}
-            className="rounded-lg shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] w-full h-auto"
+            className="rounded-2xl shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] w-full h-auto"
           />
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ServiceDetail({ initialService }: ServiceDetailProps) {
+  // Gunakan key prop untuk force re-mount component saat initialService berubah
+  return (
+    <ServiceDetailContent
+      key={initialService}
+      initialService={initialService}
+    />
   );
 }

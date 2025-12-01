@@ -1,20 +1,67 @@
 /** @format */
 
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import Button from "../atomic/button";
-
 import { ArrowRightFromLine } from "lucide-react";
 
 export default function Hero() {
+  const router = useRouter();
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
   return (
-    <div
-      className="min-w-[99dvw] min-h-[105dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
-      style={{
-        backgroundImage: `url('./banner.png'), url('./hero.webp')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <div className="flex flex-col gap-3 md:gap-5 items-start max-w-full md:max-w-[80%] lg:max-w-[50%]">
+    <div className="relative min-w-[99dvw] min-h-[105dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%] overflow-hidden">
+      {/* Fallback Background Image - ditampilkan saat video loading */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-500 ${
+          isVideoLoaded ? "opacity-0" : "opacity-100"
+        }`}
+        style={{
+          backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559364/banner_tczrw5.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
+
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+          isVideoLoaded ? "opacity-100" : "opacity-0"
+        }`}
+        onLoadedData={() => setIsVideoLoaded(true)}
+        poster="https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp"
+      >
+        <source
+          src="https://res.cloudinary.com/dgd3iusxa/video/upload/v1764557991/hero-vid_d2rydq.mp4"
+          type="video/mp4"
+        />
+        {/* <source src="hero-vid.mp4" type="video/mp4" /> */}
+        Your browser does not support the video tag.
+      </video>
+
+      {/* Banner.png Overlay - Layer di atas video */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-500 ${
+          isVideoLoaded ? "opacity-100" : "opacity-0"
+        }`}
+        style={{
+          backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559364/banner_tczrw5.png')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          pointerEvents: "none", // Agar tidak menghalangi interaksi dengan content
+        }}
+      />
+
+      {/* Optional: Overlay gelap tambahan untuk meningkatkan readability text */}
+      <div className="absolute inset-0 bg-black/20" />
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col gap-3 md:gap-5 items-start max-w-full md:max-w-[80%] lg:max-w-[50%]">
         <h1 className="text-[32px] md:text-[45px] lg:text-[61px] font-semibold">
           ExceLEARN
         </h1>
@@ -26,6 +73,7 @@ export default function Hero() {
           teknis dan produktivitas karyawannya.
         </p>
         <Button
+          onClick={() => router.push("/contact")}
           label="Start Consultation"
           rounded
           icon={<ArrowRightFromLine size={18} />}

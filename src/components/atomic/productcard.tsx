@@ -41,9 +41,9 @@ export default function ProductCard({ data, size = "md" }: CompProps) {
         </div>
 
         <div className="p-[5%]">
-          <div className="flex justify-between items-center pb-5 md:pb-8 border-b-2 border-[#00AEEF]">
+          <div className="flex justify-between items-start pb-5 md:pb-8 border-b-2 border-[#00AEEF]">
             <Tooltip placement="top" title={data?.product_name || "-"}>
-              <h3 className="text-[16px] md:text-[20px] lg:text-[24px] font-semibold truncate max-w-[65%]">
+              <h3 className="text-[16px] md:text-[20px] lg:text-[24px] font-semibold text-left max-w-[65%]">
                 {data?.product_name || "-"}
               </h3>
             </Tooltip>
@@ -52,8 +52,8 @@ export default function ProductCard({ data, size = "md" }: CompProps) {
           </div>
           <div className="flex justify-between pt-2 md:pt-3">
             <div className="flex items-center gap-2">
-              <span className="w-[25px] h-[25px] rounded-full bg-slate-200 block"></span>
-              <span className="text-[12px]">Lara</span>
+              {/* <span className="w-[25px] h-[25px] rounded-full bg-slate-200 block"></span>
+              <span className="text-[12px]">Lara</span> */}
             </div>
             <div className="flex gap-3 items-center">
               <div className="flex items-center gap-1">
@@ -77,7 +77,10 @@ export default function ProductCard({ data, size = "md" }: CompProps) {
         <div
           className="h-48 md:h-auto"
           style={{
-            backgroundImage: `url(${data?.banner?.url || "./hero.webp"})`,
+            backgroundImage: `url(${
+              data?.banner?.url ||
+              "https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp"
+            })`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -91,11 +94,11 @@ export default function ProductCard({ data, size = "md" }: CompProps) {
             <p className="text-left text-sm md:text-base">
               {data?.product_description || "-"}
             </p>
-            <div className="flex justify-between w-full mt-5 md:mt-8 items-end md:items-start md:items-center gap-3 md:gap-0">
+            <div className="flex justify-between w-full mt-5 md:mt-8 items-end md:items-center gap-3 md:gap-0">
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <span className="w-[25px] h-[25px] rounded-full bg-slate-200 block"></span>
-                  <span className="text-[12px]">Lara</span>
+                  {/* <span className="w-[25px] h-[25px] rounded-full bg-slate-200 block"></span>
+                  <span className="text-[12px]">Lara</span> */}
                 </div>
                 <div className="flex gap-5 items-center">
                   <div className="flex items-center gap-1">

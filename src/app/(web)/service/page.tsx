@@ -12,9 +12,13 @@ import Step from "@/components/step";
 import { useProduct } from "@/services/product/hook";
 
 export default function Service() {
-  const { data: product = [], isLoading: productLoading } = useProduct();
   const searchParams = useSearchParams();
   const serviceType = searchParams.get("type");
+
+  const { data: product = [], isLoading: productLoading } = useProduct({
+    product_category:
+      serviceType?.replace("-", "_")?.toUpperCase() || undefined,
+  });
 
   return (
     <Container>

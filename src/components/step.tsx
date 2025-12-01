@@ -6,7 +6,7 @@ export default function Step() {
       <div
         className="text-white rounded-4xl"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./hero.webp')`,
+          backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('./hero4.webp')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

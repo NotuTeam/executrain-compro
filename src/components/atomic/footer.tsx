@@ -1,5 +1,8 @@
 /** @format */
 
+"use client";
+
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -22,46 +25,47 @@ import GMAIL_ICON from "@/assets/icons/gmail.svg";
 const contact = [
   {
     icon: WHATSAPP_ICON,
-    url: "/",
+    url: "https://wa.me/62895805254925",
   },
   {
     icon: GMAIL_ICON,
-    url: "/",
+    url: "mailto:excelearn@gmail.com",
   },
 ];
 
 const socmed = [
   {
     icon: INSTAGRAM_ICON,
-    url: "/",
+    url: "/contact",
   },
   {
     icon: FACEBOOK_ICON,
-    url: "/",
+    url: "/contact",
   },
   {
     icon: DISCORD_ICON,
-    url: "/",
+    url: "/contact",
   },
   {
     icon: TIKTOK_ICON,
-    url: "/",
+    url: "/contact",
   },
   {
     icon: YOUTUBE_ICON,
-    url: "/",
+    url: "/contact",
   },
   {
     icon: LINKEDIN_ICON,
-    url: "/",
+    url: "/contact",
   },
   {
     icon: TWITTER_ICON,
-    url: "/",
+    url: "/contact",
   },
 ];
 
 export default function Footer() {
+  const router = useRouter();
   return (
     <footer
       className="bg-[#00AEEF] min-w-[99dvw] text-white grid grid-cols-1 md:grid-cols-2 px-[7%] lg:px-[10%] py-[5%] gap-10"
@@ -80,6 +84,7 @@ export default function Footer() {
           Chat with us and make decisions with confidence.
         </p>
         <Button
+          onClick={() => router.push("https://wa.me/62895805254925")}
           label="Start Consultation"
           rounded
           icon={<ArrowRightFromLine size={18} />}
@@ -96,7 +101,7 @@ export default function Footer() {
         <h5 className="font-[700] text-[20px] md:text-[25px] mt-5 md:mt-0">
           Follow Us
         </h5>
-        <div className="flex gap-4 items-center justify-between flex-wrap mb-5 md:mb-0 w-[80%]">
+        <div className="flex items-center justify-between flex-wrap mb-5 md:mb-0 w-[90%]">
           {socmed?.map((each: SocmedProps, index: number) => (
             <Link key={index} href={each.url}>
               <Image src={each.icon} alt={`socmed ${index}`} />
@@ -129,7 +134,13 @@ export default function Footer() {
               {["IT Training", "IT Consultant", "IT Support"].map(
                 (each: string) => (
                   <span key={each}>
-                    <Link href="/service">{each}</Link>
+                    <Link
+                      href={`/service?type=${each
+                        ?.toLowerCase()
+                        ?.replace(" ", "-")}`}
+                    >
+                      {each}
+                    </Link>
                   </span>
                 )
               )}

@@ -39,43 +39,24 @@ export default function TestimoniList() {
         <h2 className="font-semibold text-[28px] md:text-[40px] lg:text-[49px] mb-6 md:mb-10">
           What They Say About Us
         </h2>
-        <div className="flex items-center justify-center pt-3 md:pt-5 pb-5 md:pb-8">
+        <div className="flex items-center justify-center pt-3 md:pt-5 pb-5 md:pb-8 relative mx-auto w-fit max-w-[90%] md:max-w-[60%]">
           <TestimoniCard data={testimonial[currentIndex]} />
-        </div>
-        <div className="flex items-center justify-center gap-3">
-          <button
-            onClick={handlePrevious}
-            className="border-[#00AEEF] text-[#00AEEF] border-2 text-[18px] md:text-[24px] w-[35px] h-[35px] md:w-[45px] md:h-[45px] flex items-center justify-center rounded-full cursor-pointer"
-            aria-label="Previous testimonial"
-          >
-            <Image src={ARROW_LEFT} alt="arrow left" />
-          </button>
-
-          {/* Indicator dots */}
-          <div className="flex gap-2 mx-4">
-            {testimonial.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setCurrentIndex(index);
-                }}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? "bg-[#00AEEF] w-6"
-                    : "bg-gray-300 hover:bg-gray-400"
-                }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
+          <div className="flex items-center justify-center gap-3 absolute bottom-0 right-0">
+            <button
+              onClick={handlePrevious}
+              className="border-[#00AEEF] text-[#00AEEF] border-2 text-[18px] md:text-[24px] w-[35px] h-[35px] md:w-[45px] md:h-[45px] flex items-center justify-center rounded-full cursor-pointer"
+              aria-label="Previous testimonial"
+            >
+              <Image src={ARROW_LEFT} alt="arrow left" />
+            </button>
+            <button
+              onClick={handleNext}
+              className="border-[#00AEEF] text-[#00AEEF] border-2 text-[18px] md:text-[24px] w-[35px] h-[35px] md:w-[45px] md:h-[45px] flex items-center justify-center rounded-full cursor-pointer"
+              aria-label="Next testimonial"
+            >
+              <Image src={ARROW_RIGHT} alt="arrow right" />
+            </button>
           </div>
-
-          <button
-            onClick={handleNext}
-            className="border-[#00AEEF] text-[#00AEEF] border-2 text-[18px] md:text-[24px] w-[35px] h-[35px] md:w-[45px] md:h-[45px] flex items-center justify-center rounded-full cursor-pointer"
-            aria-label="Next testimonial"
-          >
-            <Image src={ARROW_RIGHT} alt="arrow right" />
-          </button>
         </div>
       </div>
       {promo && <Promo size="lg" data={promo} />}

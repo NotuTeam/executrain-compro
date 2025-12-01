@@ -7,8 +7,6 @@ import { useStats } from "@/services/statistic/hook";
 export default function Statistic() {
   const { data: stats, isLoading: statsLoading } = useStats();
 
-  console.log(stats);
-
   return (
     <div
       className="w-full py-[5%] px-[5%] md:px-[7%] lg:px-[10%] text-white flex items-center justify-evenly gap-5 md:gap-0"
@@ -37,12 +35,12 @@ export default function Statistic() {
         <span className="text-[28px] md:text-[40px] lg:text-[49px] font-[700]">
           <CountUp
             from={0}
-            to={stats?.total_participant || 0}
+            to={getShortValue(stats?.total_participant || 0) || 0}
             separator=","
             direction="up"
             duration={2}
           />
-          K+
+          {getShortUnit(stats?.total_participant || 0)}+
         </span>
         <span className="text-[12px] md:text-[14px] lg:text-[16px]">
           Participants
@@ -67,12 +65,12 @@ export default function Statistic() {
         <span className="text-[28px] md:text-[40px] lg:text-[49px] font-[700]">
           <CountUp
             from={0}
-            to={stats?.total_training_completed || 0}
+            to={getShortValue(stats?.total_training_completed || 0) || 0}
             separator=","
             direction="up"
             duration={2}
           />
-          K+
+          {getShortUnit(stats?.total_training_completed || 0)}+
         </span>
         <span className="text-[12px] md:text-[14px] lg:text-[16px]">
           Training Completed
@@ -80,4 +78,26 @@ export default function Statistic() {
       </div>
     </div>
   );
+}
+
+function getShortValue(number: number) {
+  if (number >= 1000000000) {
+    return parseFloat((number / 1000000000).toFixed(1).replace(/\.0$/, ""));
+  } else if (number >= 1000000) {
+    return parseFloat((number / 1000000).toFixed(1).replace(/\.0$/, ""));
+  } else if (number >= 1000) {
+    return parseFloat((number / 1000).toFixed(1).replace(/\.0$/, ""));
+  }
+  return parseFloat(number.toString());
+}
+
+function getShortUnit(number: number) {
+  if (number >= 1000000000) {
+    return "B";
+  } else if (number >= 1000000) {
+    return "M";
+  } else if (number >= 1000) {
+    return "K";
+  }
+  return "";
 }

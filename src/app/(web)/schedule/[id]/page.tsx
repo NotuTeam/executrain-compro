@@ -6,7 +6,6 @@ import { useParams } from "next/navigation";
 
 import Container from "@/components/atomic/container";
 import HeroScheduleDetail from "@/components/hero/heroscheduledetail";
-import WhyChoose from "@/components/whychoose";
 
 import { useScheduleDetail } from "@/services/schedule/hook";
 
@@ -20,7 +19,7 @@ export default function ScheduleDetail() {
     <Container>
       <HeroScheduleDetail data={data} />
       <div
-        className="px-[10%] py-[5%] space-y-5 min-h-[60dvh]"
+        className="px-[10%] py-[5%] space-y-5 min-h-[60dvh] w-full"
         style={{
           backgroundImage: `url('./body.png'), url('./body.png')`,
           backgroundSize: "20%",
@@ -30,7 +29,7 @@ export default function ScheduleDetail() {
       >
         <p>{data?.schedule_description}</p>
       </div>
-      <div className="pb-[5%] px-[5%] md:px-[15%] space-y-10">
+      <div className="pb-[5%] px-[5%] md:px-[15%] space-y-10 w-full">
         <h4 className="text-[49px] text-center font-semibold">
           {"What You'll Learn"}
         </h4>
@@ -46,7 +45,6 @@ export default function ScheduleDetail() {
           ))}
         </div>
       </div>
-      <WhyChoose />
     </Container>
   );
 }

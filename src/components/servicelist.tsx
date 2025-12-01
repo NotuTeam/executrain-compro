@@ -45,7 +45,9 @@ export default function ServiceList() {
         {services.map((each: ServiceProps, index: number) => (
           <Link
             key={index}
-            href="/service"
+            href={`/service?type=${each.name
+              ?.toLowerCase()
+              ?.replace(" ", "-")}`}
             className="flex flex-col items-center justify-start gap-5 text-center flex-1 group relative overflow-hidden"
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}

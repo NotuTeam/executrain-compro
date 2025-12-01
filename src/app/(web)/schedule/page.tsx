@@ -16,7 +16,9 @@ import { useDebounce } from "@/lib/useDebounce";
 
 export default function Schedule() {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
-  const [selectedMonth, setSelectedMonth] = useState<Dayjs>(dayjs());
+  const [selectedMonth, setSelectedMonth] = useState<Dayjs>(
+    dayjs().add(1, "day")
+  );
   const [searchValue, setSearchValue] = useState("");
 
   const debouncedSearchValue = useDebounce(searchValue, 500);
@@ -32,13 +34,14 @@ export default function Schedule() {
       <HeroSchedule>
         <SearchBar searchValue={searchValue} onSearchChange={setSearchValue} />
       </HeroSchedule>
-      {searchValue === "" && (
+      <div className="grid grid-cols-1 lg:grid-cols-2 w-full mt-10">
+        {/* Calendar - tampil di atas pada mobile */}
         <div
-          className="w-full px-[10%] mt-[-2.5%]"
+          className="w-[80%] md:w-full py-[5%] order-1 lg:order-2 mx-auto"
           style={{
-            backgroundImage: `url('./body.png'), url('./body.png')`,
-            backgroundSize: "30%",
-            backgroundPosition: "10% 50%, 90% 30%",
+            backgroundImage: `url('./body.png')`,
+            backgroundSize: "80%",
+            backgroundPosition: "0% 0%",
             backgroundRepeat: "no-repeat",
           }}
         >
@@ -49,14 +52,15 @@ export default function Schedule() {
             data={schedule}
           />
         </div>
-      )}
 
-      <SelectedSchedule
-        is_search={searchValue !== ""}
-        data={schedule}
-        selectedDate={selectedDate}
-        selectedMonth={selectedMonth}
-      />
+        {/* Selected Schedule - tampil di bawah pada mobile */}
+        <SelectedSchedule
+          is_search={searchValue !== ""}
+          data={schedule}
+          selectedDate={selectedDate}
+          selectedMonth={selectedMonth}
+        />
+      </div>
     </Container>
   );
 }

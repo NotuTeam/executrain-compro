@@ -43,12 +43,14 @@ export default function Calendar({
 
   const handlePrevMonth = () => {
     setCurrentMonth(currentMonth.subtract(1, "month"));
-    if (onMonthSelect) onMonthSelect(currentMonth.subtract(1, "month"));
+    if (onMonthSelect)
+      onMonthSelect(currentMonth.subtract(1, "month").add(1, "day"));
   };
 
   const handleNextMonth = () => {
     setCurrentMonth(currentMonth.add(1, "month"));
-    if (onMonthSelect) onMonthSelect(currentMonth.add(1, "month"));
+    if (onMonthSelect)
+      onMonthSelect(currentMonth.add(1, "month").add(1, "day"));
   };
 
   const handleDateClick = (date: Dayjs) => {
@@ -80,23 +82,23 @@ export default function Calendar({
   };
 
   return (
-    <div className="bg-white rounded-4xl p-5 md:p-8 w-full md:w-[85%] lg:w-[70%] mx-auto space-y-6 md:space-y-10 bg-white/30 backdrop-blur-md border border-white/20 shadow-xl">
-      <div className="flex items-center justify-center gap-4 md:gap-10 flex-wrap">
+    <div className="rounded-4xl p-5 md:p-8 w-full md:w-[85%] lg:w-[80%] mx-auto space-y-6 md:space-y-6 bg-white/30 backdrop-blur-md border border-white/20 shadow-xl">
+      <div className="flex items-center justify-center gap-2 md:gap-10 flex-wrap">
         <div className="flex items-center gap-2 text-xs md:text-sm">
           <span className="w-3 h-3 rounded-full bg-green-500"></span>
-          <span>On Going</span>
+          <span className="text-[12px]">On Going</span>
         </div>
         <div className="flex items-center gap-2 text-xs md:text-sm">
           <span className="w-3 h-3 rounded-full bg-yellow-300"></span>
-          <span>Open Seat</span>
+          <span className="text-[12px]">Open Seat</span>
         </div>
         <div className="flex items-center gap-2 text-xs md:text-sm">
           <span className="w-3 h-3 rounded-full bg-red-500"></span>
-          <span>Full Booked</span>
+          <span className="text-[12px]">Full Booked</span>
         </div>
         <div className="flex items-center gap-2 text-xs md:text-sm">
           <span className="w-3 h-3 rounded-full bg-gray-400"></span>
-          <span>Ended</span>
+          <span className="text-[12px]">Ended</span>
         </div>
       </div>
 
@@ -147,7 +149,7 @@ export default function Calendar({
                   className={`
                   text-xs md:text-sm transition-all p-2 md:p-3 rounded-full aspect-square cursor-pointer
                   ${!isCurrentMonth ? "text-gray-300" : "text-gray-900"}
-                  ${isToday ? "font-bold bg-slate-50" : ""}
+                  ${isToday ? "font-bold bg-[#00AEEF] text-white" : ""}
                   ${isSelected ? "bg-[#ade9ff]" : ""}
                   ${isCurrentMonth ? "hover:bg-gray-100" : ""}
                 `}
@@ -163,6 +165,7 @@ export default function Calendar({
                             | "OPEN_SEAT"
                             | "FULL_BOOKED"
                             | "ENDED"
+                            | "CLOSE_REGISTRATION"
                             | "ON_GOING",
                           index: number
                         ) => (
@@ -173,6 +176,7 @@ export default function Calendar({
                       ${each === "ON_GOING" ? "bg-green-500" : ""}
                       ${each === "OPEN_SEAT" ? "bg-yellow-300" : ""}
                       ${each === "FULL_BOOKED" ? "bg-red-500" : ""}
+                      ${each === "CLOSE_REGISTRATION" ? "bg-red-500" : ""}
                       ${each === "ENDED" ? "bg-gray-400" : ""}
                     `}
                           ></span>

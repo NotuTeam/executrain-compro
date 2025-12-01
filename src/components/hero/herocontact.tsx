@@ -8,7 +8,7 @@ export default function HeroContact() {
     <div
       className="min-w-[99dvw] min-h-[60dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
       style={{
-        backgroundImage: `url('./bannerplain.png'), url('./hero.webp')`,
+        backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -22,6 +22,13 @@ export default function HeroContact() {
         <h1 className="text-[32px] md:text-[45px] lg:text-[61px] font-semibold">
           Contact Us
         </h1>
+        <p className="text-sm md:text-base">
+          ExceLEARN adalah penyedia layanan pelatihan bisnis dan IT terkemuka di
+          bawah naungan PT. Bina Kinerja Nusantara. Kami berkomitmen untuk
+          menghasilkan profesional TI berkualitas tinggi. Sejak tahun 2017, kami
+          berkomitmen membantu berbagai perusahaan meningkatkan keterampilan
+          teknis dan produktivitas karyawannya.
+        </p>
       </div>
     </div>
   );

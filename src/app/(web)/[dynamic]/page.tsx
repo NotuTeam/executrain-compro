@@ -34,7 +34,7 @@ export default function Dynamic() {
         <div
           className="min-h-[110dvh] w-full text-white flex items-center justify-center flex-col"
           style={{
-            backgroundImage: `url('./bannerplain.png'), url('./hero.webp')`,
+            backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

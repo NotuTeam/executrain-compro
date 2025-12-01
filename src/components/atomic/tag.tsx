@@ -23,7 +23,7 @@ export default function Tag({ label }: { label: string }) {
     <span
       className={`${getTagStyles(
         label
-      )} px-3 py-1 rounded-full text-[12px] font-medium`}
+      )} px-3 py-1 rounded-full text-[10px] font-medium`}
     >
       {label}
     </span>
