@@ -126,7 +126,13 @@ export default function Promo({ size = "md", data }: CompProps) {
           <Button
             label="Grab the Deal"
             rounded
-            onClick={() => router.push("/")}
+            onClick={() => {
+              if (data?.link && data.link.trim() !== "") {
+                window.open(data.link, "_blank", "noopener,noreferrer");
+              } else {
+                router.push("/");
+              }
+            }}
           />
 
           <button
@@ -182,7 +188,13 @@ export default function Promo({ size = "md", data }: CompProps) {
         <Button
           label="Grab The Deal"
           rounded
-          onClick={() => router.push("/")}
+          onClick={() => {
+            if (data?.link && data.link.trim() !== "") {
+              window.open(data.link, "_blank", "noopener,noreferrer");
+            } else {
+              router.push("/");
+            }
+          }}
         />
       </div>
     </div>

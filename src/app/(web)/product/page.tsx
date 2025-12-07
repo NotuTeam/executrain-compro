@@ -44,7 +44,8 @@ export default function Product() {
         data={allProducts}
         fetchNext={fetchNextPage}
         hasNext={hasNextPage}
-        isFetching={isFetchingNextPage || isLoading}
+        isFetching={isFetchingNextPage}
+        isLoading={isLoading}
       />
     </Container>
   );

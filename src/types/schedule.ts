@@ -23,6 +23,7 @@ export interface ScheduleProps {
   skill_level: string;
   language: string;
   is_assestment: boolean;
+  link?: string;
   banner: {
     public_id: string;
     url: string;

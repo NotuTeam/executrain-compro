@@ -7,40 +7,11 @@ import { useRouter } from "next/navigation";
 
 import ServiceBG from "@/assets/hero2.webp";
 import IT_TRAINING_ICON from "@/assets/icons/it_training.svg";
-import IT_CONSULTANT_LOGO from "@/assets/icons/it_consultant.svg";
-import IT_SUPPORT_LOGO from "@/assets/icons/it_support.svg";
 import IT_TRAINING_DISABLE_ICON from "@/assets/icons/it_training_disable.svg";
-import IT_CONSULTANT_DISABLE_LOGO from "@/assets/icons/it_consultant_disable.svg";
-import IT_SUPPORT_DISABLE_LOGO from "@/assets/icons/it_support_disable.svg";
 
-import { ServiceProps } from "@/types/service";
-
-const data = [
-  {
-    key: "it-training",
-    name: "IT Training",
-    description:
-      "ExceLEARN menyediakan pelatihan teknis terkini dalam berbagai bidang IT, dipimpin oleh instruktur ahli dengan pengalaman praktis. Kami juga menawarkan konsultasi karier dan layanan khusus perusahaan untuk memenuhi kebutuhan unik dari setiap peserta kursus dan klien kami.",
-    icon: IT_TRAINING_ICON,
-    icon_disable: IT_TRAINING_DISABLE_ICON,
-  },
-  {
-    key: "it-consultant",
-    name: "IT Consultant",
-    description:
-      "ExceLEARN menyediakan pelatihan teknis terkini dalam berbagai bidang IT, dipimpin oleh instruktur ahli dengan pengalaman praktis. Kami juga menawarkan konsultasi karier dan layanan khusus perusahaan untuk memenuhi kebutuhan unik dari setiap peserta kursus dan klien kami.",
-    icon: IT_CONSULTANT_LOGO,
-    icon_disable: IT_CONSULTANT_DISABLE_LOGO,
-  },
-  {
-    key: "it-support",
-    name: "IT Support",
-    description:
-      "ExceLEARN menyediakan pelatihan teknis terkini dalam berbagai bidang IT, dipimpin oleh instruktur ahli dengan pengalaman praktis. Kami juga menawarkan konsultasi karier dan layanan khusus perusahaan untuk memenuhi kebutuhan unik dari setiap peserta kursus dan klien kami.",
-    icon: IT_SUPPORT_LOGO,
-    icon_disable: IT_SUPPORT_DISABLE_LOGO,
-  },
-];
+import { useServices } from "@/services/service/hook";
+import { serviceToSlug, findServiceBySlug } from "@/lib/utils";
+import { ServiceDetailSkeleton } from "@/components/skeleton";
 
 interface ServiceDetailProps {
   initialService?: string | null;
@@ -48,18 +19,28 @@ interface ServiceDetailProps {
 
 function ServiceDetailContent({ initialService }: ServiceDetailProps) {
   const router = useRouter();
+  const { data: services = [], isLoading } = useServices();
+
   // Tentukan initial selected berdasarkan initialService
   const getInitialService = () => {
-    if (initialService) {
-      const foundService = data.find(
-        (service) => service.key === initialService
-      );
-      return foundService || data[0];
+    if (initialService && services.length > 0) {
+      const foundService = findServiceBySlug(services, initialService);
+      return foundService || services[0];
     }
-    return data[0];
+    return services[0];
   };
 
-  const [selected, setSelected] = useState<ServiceProps>(getInitialService());
+  const [selected, setSelected] = useState<any>(getInitialService());
+
+  // Update selected saat services atau initialService berubah
+  useEffect(() => {
+    if (services.length > 0) {
+      const newService = getInitialService();
+      if (newService) {
+        setSelected(newService);
+      }
+    }
+  }, [services, initialService]);
 
   // Scroll ke section saat initialService ada
   useEffect(() => {
@@ -74,47 +55,64 @@ function ServiceDetailContent({ initialService }: ServiceDetailProps) {
     }
   }, [initialService]);
 
+  if (isLoading || !services.length) {
+    return <ServiceDetailSkeleton />;
+  }
+
   return (
     <div
       id="service-detail"
       className="pt-[5%] px-[5%] md:px-[7%] lg:px-[10%] w-full"
     >
       <div className="space-x-3 md:space-x-6 lg:space-x-8 border-b-2 border-slate-300 pb-3 flex overflow-x-auto">
-        {data.map((each: ServiceProps) => (
-          <div
-            onClick={() => {
-              setSelected(each);
-              router.push(`/service?type=${each?.key}`);
-            }}
-            key={each.key}
-            className={`font-semibold text-[16px] md:text-[20px] lg:text-[24px] cursor-pointer duration-150 flex gap-2 md:gap-3 items-center transition-colors whitespace-nowrap ${
-              selected.key === each.key ? "text-[#00AEEF]" : "text-slate-300"
-            } hover:text-[#00AEEF]/70`}
-          >
-            <Image
-              src={
-                selected.key === each.key
-                  ? each.icon
-                  : each?.icon_disable
-                  ? each?.icon_disable
-                  : ""
-              }
-              alt={each.name}
-              height={16}
-              width={16}
-              className="md:h-[18px] md:w-[18px] lg:h-[20px] lg:w-[20px]"
-            />
-            {each.name}
-          </div>
-        ))}
+        {services.map((each: any) => {
+          const slug = serviceToSlug(each.service_name);
+          const isSelected = selected?._id === each._id;
+
+          return (
+            <div
+              onClick={() => {
+                setSelected(each);
+                router.push(`/service?type=${slug}`);
+              }}
+              key={each._id}
+              className={`font-semibold text-[16px] md:text-[20px] lg:text-[24px] cursor-pointer duration-150 flex gap-2 md:gap-3 items-center transition-colors whitespace-nowrap ${
+                isSelected ? "text-[#00AEEF]" : "text-slate-300"
+              } hover:text-[#00AEEF]/70`}
+            >
+              {each.logo?.url ? (
+                <Image
+                  src={each.logo.url}
+                  alt={each.service_name}
+                  height={20}
+                  width={20}
+                  className={`md:h-[18px] md:w-[18px] lg:h-[20px] lg:w-[20px] object-contain ${
+                    isSelected ? "opacity-100" : "opacity-50"
+                  }`}
+                />
+              ) : (
+                <Image
+                  src={
+                    isSelected ? IT_TRAINING_ICON : IT_TRAINING_DISABLE_ICON
+                  }
+                  alt={each.service_name}
+                  height={16}
+                  width={16}
+                  className="md:h-[18px] md:w-[18px] lg:h-[20px] lg:w-[20px]"
+                />
+              )}
+              {each.service_name}
+            </div>
+          );
+        })}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 md:mt-8">
         <div className="flex flex-col justify-center order-2 md:order-1">
           <h3 className="font-semibold text-[28px] md:text-[40px] lg:text-[49px] mb-3 md:mb-5">
-            {selected.name}
+            {selected?.service_name}
           </h3>
           <p className="text-[14px] md:text-[16px] text-justify leading-relaxed">
-            {selected.description}
+            {selected?.service_description}
           </p>
         </div>
         <div className="p-[5%] md:p-[10%] order-1 md:order-2">

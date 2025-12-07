@@ -36,8 +36,14 @@ export default function HeroScheduleDetail({ data }: { data?: ScheduleProps }) {
             {data?.schedule_name}
           </h1>
           <Button
-            onClick={() => router.push("https://wa.me/62895805254925")}
-            label="Register Now"
+            onClick={() => {
+              if (data?.link && data.link.trim() !== "") {
+                window.open(data.link, "_blank", "noopener,noreferrer");
+              } else {
+                router.push("https://wa.me/62895805254925");
+              }
+            }}
+            label={data?.link && data.link.trim() !== "" ? "Register Now →" : "Contact Us"}
             rounded
             type="primary"
           />

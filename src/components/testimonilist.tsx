@@ -7,6 +7,7 @@ import Image from "next/image";
 
 import Promo from "./promo";
 import TestimoniCard from "./atomic/testimonicard";
+import { TestimonialCardSkeleton } from "@/components/skeleton";
 
 import ARROW_LEFT from "@/assets/icons/arrow-left.svg";
 import ARROW_RIGHT from "@/assets/icons/arrow-right.svg";
@@ -40,7 +41,11 @@ export default function TestimoniList() {
           What They Say About Us
         </h2>
         <div className="flex items-center justify-center pt-3 md:pt-5 pb-5 md:pb-8 relative mx-auto w-fit max-w-[90%] md:max-w-[60%]">
-          <TestimoniCard data={testimonial[currentIndex]} />
+          {testimonialLoading ? (
+            <TestimonialCardSkeleton />
+          ) : (
+            <TestimoniCard data={testimonial[currentIndex]} />
+          )}
           <div className="flex items-center justify-center gap-3 absolute bottom-0 right-0">
             <button
               onClick={handlePrevious}

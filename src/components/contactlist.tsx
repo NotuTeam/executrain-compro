@@ -7,7 +7,8 @@ import Link from "next/link";
 
 import { useRouter } from "next/navigation";
 
-import { SocmedProps } from "@/types/socmed";
+import { SocmedProps, SocmedDataProps } from "@/types/socmed";
+import { useSocmed } from "@/services/socmed/hook";
 
 import ContactBG from "@/assets/testimoni.jpg";
 import INSTAGRAM_ICON from "@/assets/icons/instagram-blue.svg";
@@ -39,39 +40,31 @@ const contact = [
   },
 ];
 
-const socmed = [
-  {
-    icon: INSTAGRAM_ICON,
-    url: "https://www.instagram.com/excelearn_id/",
-  },
-  {
-    icon: FACEBOOK_ICON,
-    url: "/contact",
-  },
-  {
-    icon: DISCORD_ICON,
-    url: "/contact",
-  },
-  {
-    icon: TIKTOK_ICON,
-    url: "/contact",
-  },
-  {
-    icon: YOUTUBE_ICON,
-    url: "/contact",
-  },
-  {
-    icon: LINKEDIN_ICON,
-    url: "https://www.linkedin.com/company/excelearnid/",
-  },
-  {
-    icon: TWITTER_ICON,
-    url: "/contact",
-  },
-];
+const socmedIcons: Record<string, any> = {
+  instagram: INSTAGRAM_ICON,
+  facebook: FACEBOOK_ICON,
+  discord: DISCORD_ICON,
+  tiktok: TIKTOK_ICON,
+  youtube: YOUTUBE_ICON,
+  linkedin: LINKEDIN_ICON,
+  twitter: TWITTER_ICON,
+};
 
 export default function ContactList() {
   const router = useRouter();
+  const { data: socmedData = [], isLoading } = useSocmed();
+
+  const socmedList = socmedData
+    .filter((item: SocmedDataProps) => item.socmed_link)
+    .map((item: SocmedDataProps) => {
+      const iconKey = item.socmed_name.toLowerCase();
+      return {
+        icon: socmedIcons[iconKey] || INSTAGRAM_ICON,
+        url: item.socmed_link,
+        name: item.socmed_name,
+      };
+    });
+
   return (
     <div
       className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] space-y-6 md:space-y-10"
@@ -120,13 +113,33 @@ export default function ContactList() {
         <h3 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px]">
           Follow Us
         </h3>
-        <div className="flex items-center justify-center gap-4 md:gap-8 flex-wrap">
-          {socmed?.map((each: SocmedProps, index: number) => (
-            <Link key={index} href={each.url}>
-              <Image src={each.icon} alt={`socmed ${index}`} />
-            </Link>
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="flex items-center justify-center gap-4 md:gap-8 flex-wrap">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div
+                key={i}
+                className="w-12 h-12 bg-slate-200 rounded-full animate-pulse"
+              ></div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex items-center justify-center gap-4 md:gap-8 flex-wrap">
+            {socmedList.length > 0 ? (
+              socmedList.map((each: any, index: number) => (
+                <Link
+                  key={index}
+                  href={each.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image src={each.icon} alt={each.name || `socmed ${index}`} />
+                </Link>
+              ))
+            ) : (
+              <p className="text-slate-500">No social media available</p>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

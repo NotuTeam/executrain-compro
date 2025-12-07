@@ -7,6 +7,7 @@ export interface PromoProps {
   percentage: number;
   end_date: string;
   is_active: boolean;
+  link?: string;
   banner: {
     public_id: string;
     url: string;

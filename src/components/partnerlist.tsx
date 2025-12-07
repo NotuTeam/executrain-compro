@@ -5,14 +5,19 @@ import React from "react";
 import Image from "next/image";
 
 import CountUp from "./atomic/countup";
+import { PartnerLogoSkeleton } from "@/components/skeleton";
 
 import { PartnerProps } from "@/types/partner";
 
 interface CompProps {
   data?: PartnerProps[];
+  isLoading?: boolean;
 }
 
-export default function PartnerList({ data = [] }: CompProps) {
+export default function PartnerList({
+  data = [],
+  isLoading = false,
+}: CompProps) {
   const duplicatedData = React.useMemo(() => {
     const minItems = 12;
 
@@ -51,24 +56,32 @@ export default function PartnerList({ data = [] }: CompProps) {
 
       <div className="relative mt-5 md:mt-8 w-full">
         <div className="overflow-hidden">
-          <div className="flex gap-3 md:gap-5 animate-infinite-scroll hover:pause-animation">
-            {[...duplicatedData, ...duplicatedData, ...duplicatedData].map(
-              (each: PartnerProps, index: number) => (
-                <div
-                  key={`${each.partner_name}-${index}`}
-                  className="flex-shrink-0 flex items-center justify-center w-[60px] h-[60px] md:w-[80px] md:h-[80px] lg:w-[100px] lg:h-[100px]"
-                >
-                  <Image
-                    src={each.logo.url}
-                    alt={each.partner_name}
-                    width={100}
-                    height={100}
-                    className="object-contain w-[80%] h-[80%]"
-                  />
-                </div>
-              )
-            )}
-          </div>
+          {isLoading ? (
+            <div className="flex gap-3 md:gap-5 justify-center">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <PartnerLogoSkeleton key={i} />
+              ))}
+            </div>
+          ) : (
+            <div className="flex gap-3 md:gap-5 animate-infinite-scroll hover:pause-animation">
+              {[...duplicatedData, ...duplicatedData, ...duplicatedData].map(
+                (each: PartnerProps, index: number) => (
+                  <div
+                    key={`${each.partner_name}-${index}`}
+                    className="flex-shrink-0 flex items-center justify-center w-[60px] h-[60px] md:w-[80px] md:h-[80px] lg:w-[100px] lg:h-[100px]"
+                  >
+                    <Image
+                      src={each.logo.url}
+                      alt={each.partner_name}
+                      width={100}
+                      height={100}
+                      className="object-contain w-[80%] h-[80%]"
+                    />
+                  </div>
+                )
+              )}
+            </div>
+          )}
         </div>
 
         <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />

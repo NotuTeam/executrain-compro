@@ -10,14 +10,14 @@ import ServiceDetail from "@/components/servicedetail";
 import Step from "@/components/step";
 
 import { useProduct } from "@/services/product/hook";
+import { slugToCategory } from "@/lib/utils";
 
 export default function Service() {
   const searchParams = useSearchParams();
   const serviceType = searchParams.get("type");
 
   const { data: product = [], isLoading: productLoading } = useProduct({
-    product_category:
-      serviceType?.replace("-", "_")?.toUpperCase() || undefined,
+    product_category: serviceType ? slugToCategory(serviceType) : undefined,
   });
 
   return (
@@ -25,7 +25,7 @@ export default function Service() {
       <HeroService />
       <ServiceDetail initialService={serviceType} />
       <Step />
-      <ProductList data={product} />
+      <ProductList data={product} isLoading={productLoading} />
       <CTA />
     </Container>
   );

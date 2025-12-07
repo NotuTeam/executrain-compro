@@ -35,8 +35,14 @@ export default function HeroProductDetail({ data }: { data?: ProductProps }) {
             {data?.product_name || "-"}
           </h1>
           <Button
-            onClick={() => router.push("https://wa.me/62895805254925")}
-            label="Request Proposal"
+            onClick={() => {
+              if (data?.link && data.link.trim() !== "") {
+                window.open(data.link, "_blank", "noopener,noreferrer");
+              } else {
+                router.push("https://wa.me/62895805254925");
+              }
+            }}
+            label={data?.link && data.link.trim() !== "" ? "Learn More →" : "Request Proposal"}
             rounded
             type="primary"
           />

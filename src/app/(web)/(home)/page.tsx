@@ -25,11 +25,11 @@ export default function Home() {
     <Container>
       <Hero />
       <AboutSection />
-      <PartnerList data={partner} />
+      <PartnerList data={partner} isLoading={partnerLoading} />
       <Statistic />
       <ServiceList />
-      <ProductList data={product} />
-      <ScheduleList data={schedule} />
+      <ProductList data={product} isLoading={productLoading} />
+      <ScheduleList data={schedule} isLoading={scheduleLoading} />
       <WhyChoose />
     </Container>
   );

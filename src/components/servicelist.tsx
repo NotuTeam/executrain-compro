@@ -6,35 +6,31 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
-import { ServiceProps } from "@/types/service";
+import { useServices } from "@/services/service/hook";
+import { serviceToSlug } from "@/lib/utils";
+import { ServiceCardSkeleton } from "@/components/skeleton";
 
+// Default icons for fallback
 import IT_TRAINING_ICON from "@/assets/icons/it_training.svg";
-import IT_CONSULTANT_LOGO from "@/assets/icons/it_consultant.svg";
-import IT_SUPPORT_LOGO from "@/assets/icons/it_support.svg";
-
-const services = [
-  {
-    name: "IT Training",
-    icon: IT_TRAINING_ICON,
-    description:
-      "Pelatihan IT terkini oleh instruktur berpengalaman, lengkap dengan layanan konsultasi dan program khusus sesuai kebutuhan peserta maupun perusahaan.",
-  },
-  {
-    name: "IT Consultant",
-    icon: IT_CONSULTANT_LOGO,
-    description:
-      "Panduan strategis dan dukungan ahli untuk menyelaraskan strategi IT dengan tujuan bisnis Anda.",
-  },
-  {
-    name: "IT Support",
-    icon: IT_SUPPORT_LOGO,
-    description:
-      "Layanan dukungan IT responsif dan profesional untuk menjaga kelancaran operasional bisnis Anda.",
-  },
-];
 
 export default function ServiceList() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const { data: services = [], isLoading } = useServices();
+
+  if (isLoading) {
+    return (
+      <div className="px-[5%] md:px-[7%] lg:px-[10%] py-[5%] text-center w-full space-y-6 md:space-y-10 min-h-[30dvh] md:min-h-[50dvh]">
+        <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px]">
+          Services
+        </h2>
+        <div className="flex justify-evenly gap-4 md:gap-6">
+          {[1, 2, 3].map((i) => (
+            <ServiceCardSkeleton key={i} />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="px-[5%] md:px-[7%] lg:px-[10%] py-[5%] text-center w-full space-y-6 md:space-y-10 min-h-[30dvh] md:min-h-[50dvh]">
@@ -42,12 +38,10 @@ export default function ServiceList() {
         Services
       </h2>
       <div className="flex justify-evenly gap-4 md:gap-6">
-        {services.map((each: ServiceProps, index: number) => (
+        {services.map((each: any, index: number) => (
           <Link
-            key={index}
-            href={`/service?type=${each.name
-              ?.toLowerCase()
-              ?.replace(" ", "-")}`}
+            key={each._id || index}
+            href={`/service?type=${serviceToSlug(each.service_name)}`}
             className="flex flex-col items-center justify-start gap-5 text-center flex-1 group relative overflow-hidden"
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
@@ -66,15 +60,27 @@ export default function ServiceList() {
                     : "bg-transparent"
                 }`}
               >
-                <Image
-                  src={each.icon}
-                  alt={`${each.name} logo`}
-                  width={60}
-                  height={60}
-                  className={`md:w-[80px] md:h-[80px] transition-all duration-500 ${
-                    hoveredIndex === index ? "brightness-0 invert" : ""
-                  }`}
-                />
+                {each.logo?.url ? (
+                  <Image
+                    src={each.logo.url}
+                    alt={`${each.service_name} logo`}
+                    width={80}
+                    height={80}
+                    className={`md:w-[80px] md:h-[80px] object-contain transition-all duration-500 ${
+                      hoveredIndex === index ? "brightness-0 invert" : ""
+                    }`}
+                  />
+                ) : (
+                  <Image
+                    src={IT_TRAINING_ICON}
+                    alt={`${each.service_name} logo`}
+                    width={60}
+                    height={60}
+                    className={`md:w-[80px] md:h-[80px] transition-all duration-500 ${
+                      hoveredIndex === index ? "brightness-0 invert" : ""
+                    }`}
+                  />
+                )}
               </div>
 
               <h3
@@ -82,7 +88,7 @@ export default function ServiceList() {
                   hoveredIndex === index ? "text-white" : "text-black"
                 }`}
               >
-                {each.name}
+                {each.service_name}
               </h3>
 
               <p
@@ -92,7 +98,7 @@ export default function ServiceList() {
                     : "text-transparent opacity-0 max-h-0"
                 }`}
               >
-                {each.description}
+                {each.service_description}
               </p>
             </div>
           </Link>

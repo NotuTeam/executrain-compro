@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown, Search, SlidersHorizontal } from "lucide-react";
+import { useServices } from "@/services/service/hook";
+import { serviceToCategoryFormat } from "@/lib/utils";
 
 interface SearchBarProps {
   onSearchChange: (value: string) => void;
@@ -28,11 +30,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const sortDropdownRef = useRef<HTMLDivElement>(null);
   const filterDropdownRef = useRef<HTMLDivElement>(null);
 
-  const categories = [
-    { label: "IT Training", value: "IT_TRAINING" },
-    { label: "IT Consultant", value: "IT_CONSULTANT" },
-    { label: "IT Support", value: "IT_SUPPORT" },
-  ];
+  // Fetch services untuk categories
+  const { data: services = [], isLoading: servicesLoading } = useServices();
+
+  // Transform services to categories
+  const categories = services.map((service: any) => ({
+    label: service.service_name,
+    value: serviceToCategoryFormat(service.service_name),
+  }));
 
   const handleCategoryClick = (value: string) => {
     if (selectedCategory === value) {

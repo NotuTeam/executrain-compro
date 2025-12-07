@@ -14,22 +14,32 @@ import Logo from "@/assets/logo.png";
 
 import { usePromo } from "@/services/promo/hook";
 import { usePages } from "@/services/pages/hook";
-
-const servicesList = [
-  { name: "IT Training", slug: "it-training" },
-  { name: "IT Consultant", slug: "it-consultant" },
-  { name: "IT Support", slug: "it-support" },
-];
+import { useServices } from "@/services/service/hook";
+import { servicesToNavFormat } from "@/lib/utils";
 
 export default function Navbar() {
   const path = usePathname();
   const { data: promo, isLoading: promoLoading } = usePromo();
   const { data: pages = [], isLoading: pagesLoading } = usePages();
+  const { data: services = [], isLoading: servicesLoading } = useServices();
+  
   const [isScrolled, setIsScrolled] = useState(false);
   const [isServiceOpen, setIsServiceOpen] = useState(false);
   const [isOtherOpen, setIsOtherOpen] = useState(false);
+  const [isScheduleOpen, setIsScheduleOpen] = useState(false);
+  const [isProductOpen, setIsProductOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Transform services to nav format
+  const servicesList = servicesToNavFormat(services);
+
+  // Group pages by type
+  const schedulePages = pages.filter((page: any) => page.type === "Schedule");
+  const productPages = pages.filter((page: any) => page.type === "Product");
+  const aboutPages = pages.filter((page: any) => page.type === "About Us");
+  const otherPages = pages.filter((page: any) => page.type === "Other");
 
   // Check if current page is a service page
   const isServicePage = path?.startsWith("/service");
@@ -107,16 +117,59 @@ export default function Navbar() {
             >
               Home
             </Link>
-            <Link
-              href="/about"
-              className={`hover:text-gray-200 transition-colors relative pb-1 ${
-                path === "/about"
-                  ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
-                  : ""
-              }`}
-            >
-              About Us
-            </Link>
+
+            {/* About Us - Dynamic */}
+            {aboutPages.length > 0 ? (
+              <div
+                className="relative"
+                onMouseEnter={() => setIsAboutOpen(true)}
+                onMouseLeave={() => setIsAboutOpen(false)}
+              >
+                <button
+                  className={`flex items-center gap-1 hover:text-gray-200 transition-colors relative pb-1 ${
+                    path === "/about"
+                      ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
+                      : ""
+                  }`}
+                >
+                  About Us
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-300 ${
+                      isAboutOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <div
+                  className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 min-w-[200px] ${
+                    isAboutOpen
+                      ? "opacity-100 visible translate-y-0"
+                      : "opacity-0 invisible -translate-y-2"
+                  }`}
+                >
+                  {aboutPages.map((page: any) => (
+                    <Link
+                      key={page._id}
+                      href={`/${page.path}`}
+                      className="block px-6 py-3 text-gray-800 hover:bg-[#00AEEF] hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                      onClick={() => setIsAboutOpen(false)}
+                    >
+                      {page.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <Link
+                href="/about"
+                className={`hover:text-gray-200 transition-colors relative pb-1 ${
+                  path === "/about"
+                    ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
+                    : ""
+                }`}
+              >
+                About Us
+              </Link>
+            )}
 
             {/* Services Dropdown */}
             <div
@@ -160,48 +213,130 @@ export default function Navbar() {
               </div>
             </div>
 
-            <Link
-              href="/product"
-              className={`hover:text-gray-200 transition-colors relative pb-1 ${
-                path === "/product"
-                  ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
-                  : ""
-              }`}
-            >
-              Product
-            </Link>
-            <Link
-              href="/schedule"
-              className={`hover:text-gray-200 transition-colors relative pb-1 ${
-                path === "/schedule"
-                  ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
-                  : ""
-              }`}
-            >
-              Schedule
-            </Link>
-            <div
-              className="relative"
-              onMouseEnter={() => setIsOtherOpen(true)}
-              onMouseLeave={() => setIsOtherOpen(false)}
-            >
-              <button
-                className={`flex items-center gap-1 hover:text-gray-200 transition-colors relative pb-1 ${
-                  isServicePage
+            {/* Product - Dynamic */}
+            {productPages.length > 0 ? (
+              <div
+                className="relative"
+                onMouseEnter={() => setIsProductOpen(true)}
+                onMouseLeave={() => setIsProductOpen(false)}
+              >
+                <button
+                  className={`flex items-center gap-1 hover:text-gray-200 transition-colors relative pb-1 ${
+                    path === "/product"
+                      ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
+                      : ""
+                  }`}
+                >
+                  Product
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-300 ${
+                      isProductOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <div
+                  className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 min-w-[200px] ${
+                    isProductOpen
+                      ? "opacity-100 visible translate-y-0"
+                      : "opacity-0 invisible -translate-y-2"
+                  }`}
+                >
+                  {productPages.map((page: any) => (
+                    <Link
+                      key={page._id}
+                      href={`/${page.path}`}
+                      className="block px-6 py-3 text-gray-800 hover:bg-[#00AEEF] hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                      onClick={() => setIsProductOpen(false)}
+                    >
+                      {page.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <Link
+                href="/product"
+                className={`hover:text-gray-200 transition-colors relative pb-1 ${
+                  path === "/product"
                     ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
                     : ""
                 }`}
               >
-                Other
-                <ChevronDown
-                  className={`w-4 h-4 transition-transform duration-300 ${
-                    isOtherOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
+                Product
+              </Link>
+            )}
 
-              {/* Dropdown Dynamic Menu */}
-              {Array.isArray(pages) && pages?.length > 0 && (
+            {/* Schedule - Dynamic */}
+            {schedulePages.length > 0 ? (
+              <div
+                className="relative"
+                onMouseEnter={() => setIsScheduleOpen(true)}
+                onMouseLeave={() => setIsScheduleOpen(false)}
+              >
+                <button
+                  className={`flex items-center gap-1 hover:text-gray-200 transition-colors relative pb-1 ${
+                    path === "/schedule"
+                      ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
+                      : ""
+                  }`}
+                >
+                  Schedule
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-300 ${
+                      isScheduleOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <div
+                  className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 min-w-[200px] ${
+                    isScheduleOpen
+                      ? "opacity-100 visible translate-y-0"
+                      : "opacity-0 invisible -translate-y-2"
+                  }`}
+                >
+                  {schedulePages.map((page: any) => (
+                    <Link
+                      key={page._id}
+                      href={`/${page.path}`}
+                      className="block px-6 py-3 text-gray-800 hover:bg-[#00AEEF] hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                      onClick={() => setIsScheduleOpen(false)}
+                    >
+                      {page.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <Link
+                href="/schedule"
+                className={`hover:text-gray-200 transition-colors relative pb-1 ${
+                  path === "/schedule"
+                    ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
+                    : ""
+                }`}
+              >
+                Schedule
+              </Link>
+            )}
+            {/* Other - Only show if otherPages exist */}
+            {otherPages.length > 0 && (
+              <div
+                className="relative"
+                onMouseEnter={() => setIsOtherOpen(true)}
+                onMouseLeave={() => setIsOtherOpen(false)}
+              >
+                <button
+                  className={`flex items-center gap-1 hover:text-gray-200 transition-colors relative pb-1`}
+                >
+                  Other
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-300 ${
+                      isOtherOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {/* Dropdown Dynamic Menu */}
                 <div
                   className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 min-w-[200px] ${
                     isOtherOpen
@@ -209,10 +344,10 @@ export default function Navbar() {
                       : "opacity-0 invisible -translate-y-2"
                   }`}
                 >
-                  {pages?.map((page) => (
+                  {otherPages.map((page: any) => (
                     <Link
-                      key={page?._id}
-                      href={`/${page?.path}`}
+                      key={page._id}
+                      href={`/${page.path}`}
                       className="block px-6 py-3 text-gray-800 hover:bg-[#00AEEF] hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
                       onClick={() => setIsOtherOpen(false)}
                     >
@@ -220,8 +355,8 @@ export default function Navbar() {
                     </Link>
                   ))}
                 </div>
-              )}
-            </div>
+              </div>
+            )}
             <Link href="/contact">
               <Button label="Contact Us" />
             </Link>

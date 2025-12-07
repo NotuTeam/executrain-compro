@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Button from "./atomic/button";
 import ScheduleCard from "./atomic/schedulecard";
 import TestimoniList from "./testimonilist";
+import { ScheduleCardSkeleton } from "@/components/skeleton";
 
 import { ArrowRightFromLine } from "lucide-react";
 
@@ -14,9 +15,13 @@ import { ScheduleProps } from "@/types/schedule";
 
 interface CompProps {
   data?: ScheduleProps[];
+  isLoading?: boolean;
 }
 
-export default function ScheduleList({ data = [] }: CompProps) {
+export default function ScheduleList({
+  data = [],
+  isLoading = false,
+}: CompProps) {
   const router = useRouter();
 
   function updateScheduleStatus(schedules: ScheduleProps[]): ScheduleProps[] {
@@ -68,11 +73,13 @@ export default function ScheduleList({ data = [] }: CompProps) {
         Running Schedule
       </h2>
       <div className="flex flex-col w-full px-0 md:px-[7%] lg:px-[10%] gap-4 md:gap-5 mb-6 md:mb-8">
-        {updateScheduleStatus(data)?.map(
-          (each: ScheduleProps, index: number) => (
-            <ScheduleCard key={index} data={each} />
-          )
-        )}
+        {isLoading
+          ? [1, 2, 3].map((i) => <ScheduleCardSkeleton key={i} />)
+          : updateScheduleStatus(data)?.map(
+              (each: ScheduleProps, index: number) => (
+                <ScheduleCard key={index} data={each} />
+              )
+            )}
       </div>
       <Button
         label="Load More"

@@ -12,6 +12,7 @@ export interface ProductProps {
   instructor_list: Instructor[];
   language: string;
   duration: number;
+  link?: string;
   banner: {
     public_id: string;
     url: string;
