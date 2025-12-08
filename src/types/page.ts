@@ -68,8 +68,48 @@ interface TextComponent extends BaseComponent {
     fontSize: number;
     fontWeight: "normal" | "medium" | "bold" | "semibold";
     color: string;
-    textAlign: "left" | "center" | "right" | "justify";
+    backgroundColor: string;
     padding: number;
+    textAlign: "left" | "center" | "right" | "justify";
+    backgroundImage: {
+      url: string;
+      public_id: string;
+    } | null;
+  };
+}
+
+// Container Component
+interface ContainerComponent extends BaseComponent {
+  type: "container";
+  props: {
+    backgroundColor: string;
+    backgroundImage: {
+      url: string;
+      public_id: string;
+    } | null;
+    padding: number;
+    borderRadius: number;
+    border: string;
+    gridColumns: number;
+    gridGap: number;
+    children: ComponentTemplate[];
+  };
+}
+
+// List Component
+interface ListComponent extends BaseComponent {
+  type: "list";
+  props: {
+    items: string[];
+    listStyle: "disc" | "circle" | "square" | "decimal" | "none";
+    fontSize: number;
+    color: string;
+    padding: number;
+    textAlign: "left" | "center" | "right" | "justify";
+    backgroundImage: {
+      url: string;
+      public_id: string;
+    } | null;
   };
 }
 
@@ -78,7 +118,9 @@ export type ComponentTemplate =
   | HeadingComponent
   | ImageComponent
   | ButtonComponent
-  | TextComponent;
+  | TextComponent
+  | ContainerComponent
+  | ListComponent;
 
 // Metadata interface
 export interface Metadata {
@@ -132,6 +174,18 @@ export const isTextComponent = (
   component: ComponentTemplate
 ): component is TextComponent => {
   return component.type === "text";
+};
+
+export const isContainerComponent = (
+  component: ComponentTemplate
+): component is ContainerComponent => {
+  return component.type === "container";
+};
+
+export const isListComponent = (
+  component: ComponentTemplate
+): component is ListComponent => {
+  return component.type === "list";
 };
 
 export interface PageListProps {

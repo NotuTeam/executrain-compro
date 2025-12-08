@@ -55,8 +55,20 @@ function ServiceDetailContent({ initialService }: ServiceDetailProps) {
     }
   }, [initialService]);
 
-  if (isLoading || !services.length) {
+  if (isLoading) {
     return <ServiceDetailSkeleton />;
+  }
+
+  if (!services.length) {
+    return (
+      <div className="pt-[5%] px-[5%] md:px-[7%] lg:px-[10%] w-full">
+        <div className="bg-slate-50 flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
+          <span className="font-[400] text-slate-500 text-[16px] md:text-[18px]">
+            No Service Found
+          </span>
+        </div>
+      </div>
+    );
   }
 
   return (

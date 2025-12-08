@@ -8,6 +8,8 @@ import {
   isImageComponent,
   isButtonComponent,
   isTextComponent,
+  isContainerComponent,
+  isListComponent,
 } from "@/types/page";
 
 /**
@@ -29,11 +31,17 @@ const generateTextStyle = (
   if (!isTextComponent(component)) return {};
 
   const { props } = component;
+  const bgImage = parseBackgroundImage(props.backgroundImage);
 
   return {
     fontSize: `${props.fontSize}px`,
     fontWeight: props.fontWeight,
     color: props.color,
+    backgroundColor: bgImage ? "transparent" : props.backgroundColor,
+    backgroundImage: bgImage ? `url(${bgImage})` : "none",
+    backgroundSize: bgImage ? "cover" : undefined,
+    backgroundPosition: bgImage ? "center" : undefined,
+    backgroundRepeat: bgImage ? "no-repeat" : undefined,
     textAlign: props.textAlign,
     padding: `${props.padding}px`,
   };
@@ -181,6 +189,102 @@ const renderButtonComponent = (
 };
 
 /**
+ * Generate style object untuk Container Component
+ */
+const generateContainerStyle = (
+  component: ComponentTemplate
+): React.CSSProperties => {
+  if (!isContainerComponent(component)) return {};
+
+  const { props } = component;
+  const bgImage = parseBackgroundImage(props.backgroundImage);
+
+  return {
+    backgroundColor: bgImage ? "transparent" : props.backgroundColor,
+    backgroundImage: bgImage ? `url(${bgImage})` : "none",
+    backgroundSize: bgImage ? "cover" : undefined,
+    backgroundPosition: bgImage ? "center" : undefined,
+    backgroundRepeat: bgImage ? "no-repeat" : undefined,
+    padding: `${props.padding}px`,
+    borderRadius: `${props.borderRadius}px`,
+    border: props.border,
+    display: "grid",
+    gridTemplateColumns: `repeat(${props.gridColumns || 1}, 1fr)`,
+    gap: `${props.gridGap || 16}px`,
+    minHeight: props.children?.length === 0 ? "100px" : "auto",
+  };
+};
+
+/**
+ * Render Container Component
+ */
+const renderContainerComponent = (
+  component: ComponentTemplate
+): React.ReactNode => {
+  if (!isContainerComponent(component)) return null;
+
+  const style = generateContainerStyle(component);
+
+  return (
+    <div key={component.id} style={style}>
+      {component.props.children && component.props.children.length > 0 ? (
+        component.props.children.map((child) => (
+          <div key={child.id}>{renderComponent(child)}</div>
+        ))
+      ) : (
+        <div className="col-span-full flex items-center justify-center text-slate-400 text-sm py-8">
+          Empty container
+        </div>
+      )}
+    </div>
+  );
+};
+
+/**
+ * Generate style object untuk List Component
+ */
+const generateListStyle = (
+  component: ComponentTemplate
+): React.CSSProperties => {
+  if (!isListComponent(component)) return {};
+
+  const { props } = component;
+  const bgImage = parseBackgroundImage(props.backgroundImage);
+
+  return {
+    fontSize: `${props.fontSize}px`,
+    color: props.color,
+    backgroundColor: bgImage ? "transparent" : "transparent",
+    backgroundImage: bgImage ? `url(${bgImage})` : "none",
+    backgroundSize: bgImage ? "cover" : undefined,
+    backgroundPosition: bgImage ? "center" : undefined,
+    backgroundRepeat: bgImage ? "no-repeat" : undefined,
+    padding: `${props.padding}px`,
+    textAlign: props.textAlign,
+    listStyleType: props.listStyle,
+  };
+};
+
+/**
+ * Render List Component
+ */
+const renderListComponent = (
+  component: ComponentTemplate
+): React.ReactNode => {
+  if (!isListComponent(component)) return null;
+
+  const style = generateListStyle(component);
+
+  return (
+    <ul key={component.id} style={style}>
+      {component.props.items.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  );
+};
+
+/**
  * Render individual component berdasarkan type
  */
 export const renderComponent = (
@@ -202,10 +306,18 @@ export const renderComponent = (
     return renderButtonComponent(component);
   }
 
+  if (isContainerComponent(component)) {
+    return renderContainerComponent(component);
+  }
+
+  if (isListComponent(component)) {
+    return renderListComponent(component);
+  }
+
   // Fallback untuk component type yang tidak dikenali
   return (
     <div className="p-4 bg-red-50 text-red-600 rounded">
-      Unknown component type
+      Unknown component type: {(component as any).type}
     </div>
   );
 };
@@ -285,5 +397,7 @@ export {
   generateHeadingStyle,
   generateImageStyle,
   generateButtonStyle,
+  generateContainerStyle,
+  generateListStyle,
   parseBackgroundImage,
 };

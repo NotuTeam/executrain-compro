@@ -125,7 +125,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
               e.stopPropagation();
               setIsSortDropdownOpen(!isSortDropdownOpen);
             }}
-            className="flex items-center gap-2 px-6 py-2 bg-white text-gray-600 rounded-full border border-gray-300 hover:border-[#00AEEF] hover:text-[#00AEEF] transition-colors duration-200 whitespace-nowrap"
+            className="flex items-center gap-2 px-6 py-2 bg-[#00AEEF] text-white rounded-full border border-[#00AEEF] hover:text-[#00AEEF] hover:bg-white transition-colors duration-200 whitespace-nowrap"
           >
             <span className="text-sm font-medium">{getSortLabel()}</span>
             <ChevronDown

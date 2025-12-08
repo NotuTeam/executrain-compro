@@ -25,6 +25,25 @@ export default function Statistic() {
     );
   }
 
+  if (!stats) {
+    return (
+      <div
+        className="w-full py-[5%] px-[5%] md:px-[7%] lg:px-[10%] text-white flex items-center justify-center gap-5 md:gap-0"
+        style={{
+          backgroundImage: `linear-gradient(90deg,rgba(0, 39, 82, 0.7) 25%, rgba(102, 201, 255, 0.5) 80%, rgba(255, 255, 255, 0) 100%),  url('./hero4.webp')`,
+          backgroundSize: "cover",
+          backgroundPosition: "40% 40%",
+        }}
+      >
+        <div className="bg-white/10 backdrop-blur-sm flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
+          <span className="font-[400] text-white text-[16px] md:text-[18px]">
+            No Statistics Available
+          </span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className="w-full py-[5%] px-[5%] md:px-[7%] lg:px-[10%] text-white flex items-center justify-evenly gap-5 md:gap-0"

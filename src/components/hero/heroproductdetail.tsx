@@ -17,18 +17,30 @@ import {
 import { ProductProps } from "@/types/product";
 import Image from "next/image";
 
-export default function HeroProductDetail({ data }: { data?: ProductProps }) {
+export default function HeroProductDetail({ 
+  data, 
+  isLoading = false 
+}: { 
+  data?: ProductProps; 
+  isLoading?: boolean;
+}) {
   const router = useRouter();
+
+  // Don't render if no data and not loading
+  if (!data && !isLoading) {
+    return null;
+  }
+
   return (
     <div
       className="min-w-[99dvw] min-h-[80dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
       style={{
-        backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
+        backgroundImage: `   url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="flex flex-col gap-5 md:gap-8 items-start bg-white/50 backdrop-blur-md border border-white/20 text-black rounded-lg w-full p-[5%] md:p-[5%] mt-[10%]">
+      <div className="flex flex-col gap-5 md:gap-8 items-start bg-white/50 backdrop-blur-md border border-white/20 text-black rounded-lg w-full p-[5%] md:p-[5%] mt-[10%] md:mb-[-10%]">
         <Tag label={data?.product_category.replace("_", " ") || "UNSET"} />
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full gap-3 md:gap-0">
           <h1 className="text-[28px] md:text-[40px] lg:text-[49px] font-semibold">
@@ -42,7 +54,11 @@ export default function HeroProductDetail({ data }: { data?: ProductProps }) {
                 router.push("https://wa.me/62895805254925");
               }
             }}
-            label={data?.link && data.link.trim() !== "" ? "Learn More →" : "Request Proposal"}
+            label={
+              data?.link && data.link.trim() !== ""
+                ? "Learn More →"
+                : "Request Proposal"
+            }
             rounded
             type="primary"
           />
@@ -50,19 +66,19 @@ export default function HeroProductDetail({ data }: { data?: ProductProps }) {
         <div
           className="hidden md:grid rounded-2xl w-full min-h-[100px] grid-cols-1 md:grid-cols-3 p-5 md:p-10"
           style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${data?.banner?.url}')`,
+            backgroundImage: `url('${data?.banner?.url}')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
           <div className="md:col-span-2"></div>
-          <div>
-            <div className="bg-white/80 backdrop-blur-md border border-white/20 shadow-xl p-5 md:p-8 rounded-3xl space-y-3">
+          <div className="min-h-[50dvh] flex items-center">
+            <div className="bg-white/80 backdrop-blur-md border border-white/20 shadow-xl p-5 md:p-8 rounded-3xl space-y-3 h-fit ">
               <h5 className="font-[500] text-[18px] md:text-[24px]">
                 Course Feature
               </h5>
-              <div className="grid grid-cols-2 border-t border-[#00AEEF] pt-3">
-                <div className="flex flex-col gap-2 font-[300] text-xs md:text-sm">
+              <div className="grid grid-cols-2 border-t border-[#00AEEF] pt-3 gap-4">
+                <div className="flex flex-col gap-4 font-[300] text-xs md:text-sm">
                   <span className="flex items-center gap-2">
                     <CornerRightUp size={14} color="#00AEEF" />
                     Skill Level
@@ -70,10 +86,6 @@ export default function HeroProductDetail({ data }: { data?: ProductProps }) {
                   <span className="flex items-center gap-2">
                     <Users size={14} color="#00AEEF" />
                     Students
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <UserRound size={14} color="#00AEEF" />
-                    Lecturers
                   </span>
                   <span className="flex items-center gap-2">
                     <BookOpenCheck size={14} color="#00AEEF" />
@@ -84,12 +96,11 @@ export default function HeroProductDetail({ data }: { data?: ProductProps }) {
                     Duration
                   </span>
                 </div>
-                <div className="flex flex-col gap-2 font-[400] text-xs md:text-sm">
+                <div className="flex flex-col gap-4 font-[400] text-xs md:text-sm">
                   <span className="capitalize">
                     {data?.skill_level?.toLowerCase().replace("_", " ") || "-"}
                   </span>
                   <span>{data?.max_participant || "-"}</span>
-                  <span>{data?.instructors || "-"}</span>
                   <span className="capitalize">
                     {data?.language?.toLowerCase() || "-"}
                   </span>

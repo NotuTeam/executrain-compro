@@ -37,8 +37,15 @@ export default function ServiceList() {
       <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px]">
         Services
       </h2>
-      <div className="flex justify-evenly gap-4 md:gap-6">
-        {services.map((each: any, index: number) => (
+      {services.length === 0 ? (
+        <div className="bg-slate-50 flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
+          <span className="font-[400] text-slate-500 text-[16px] md:text-[18px]">
+            No Service Found
+          </span>
+        </div>
+      ) : (
+        <div className="flex justify-evenly gap-4 md:gap-6">
+          {services.map((each: any, index: number) => (
           <Link
             key={each._id || index}
             href={`/service?type=${serviceToSlug(each.service_name)}`}
@@ -102,8 +109,9 @@ export default function ServiceList() {
               </p>
             </div>
           </Link>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

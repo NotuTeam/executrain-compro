@@ -45,32 +45,50 @@ export default function ProductList({
           </h3>
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-5 md:mt-8 px-0 md:px-[10%] gap-4 md:gap-5 mb-6 md:mb-8 w-full">
-          {isLoading
-            ? [1, 2, 3].map((i) => <ProductCardSkeleton key={i} />)
-            : data.map((each: ProductProps, index: number) => (
-                <ProductCard key={index} data={each} />
-              ))}
+          {isLoading ? (
+            [1, 2, 3].map((i) => <ProductCardSkeleton key={i} />)
+          ) : data.length === 0 ? (
+            <div className="col-span-full bg-slate-50 flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
+              <span className="font-[400] text-slate-500 text-[16px] md:text-[18px]">
+                No Product Found
+              </span>
+            </div>
+          ) : (
+            data.map((each: ProductProps, index: number) => (
+              <ProductCard key={index} data={each} />
+            ))
+          )}
         </div>
-        <Button
-          label="Load More"
-          rounded
-          type="primary"
-          icon={<ArrowRightFromLine size={18} />}
-          onClick={() => router.push("/product")}
-        />
+        {!isLoading && data.length > 0 && (
+          <Button
+            label="Load More"
+            rounded
+            type="primary"
+            icon={<ArrowRightFromLine size={18} />}
+            onClick={() => router.push("/product")}
+          />
+        )}
       </div>
     );
   } else if (size === "lg") {
     return (
       <div className="w-full text-center py-[5%] flex flex-col items-center">
         <div className="flex flex-col mt-5 md:mt-8 px-[5%] md:px-[7%] lg:px-[10%] gap-4 md:gap-5 mb-6 md:mb-8 w-full">
-          {isLoading
-            ? [1, 2, 3].map((i) => <ProductCardSkeleton key={i} />)
-            : data.map((each: ProductProps, index: number) => (
-                <ProductCard key={index} data={each} size="lg" />
-              ))}
+          {isLoading ? (
+            [1, 2, 3].map((i) => <ProductCardSkeleton key={i} />)
+          ) : data.length === 0 ? (
+            <div className="bg-slate-50 flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
+              <span className="font-[400] text-slate-500 text-[16px] md:text-[18px]">
+                No Product Found
+              </span>
+            </div>
+          ) : (
+            data.map((each: ProductProps, index: number) => (
+              <ProductCard key={index} data={each} size="lg" />
+            ))
+          )}
         </div>
-        {hasNext && (
+        {!isLoading && data.length > 0 && hasNext && (
           <Button
             label={isFetching ? "Loading..." : "Load More"}
             rounded

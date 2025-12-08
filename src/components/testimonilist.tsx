@@ -40,29 +40,37 @@ export default function TestimoniList() {
         <h2 className="font-semibold text-[28px] md:text-[40px] lg:text-[49px] mb-6 md:mb-10">
           What They Say About Us
         </h2>
-        <div className="flex items-center justify-center pt-3 md:pt-5 pb-5 md:pb-8 relative mx-auto w-fit max-w-[90%] md:max-w-[60%]">
-          {testimonialLoading ? (
+        {testimonialLoading ? (
+          <div className="flex items-center justify-center pt-3 md:pt-5 pb-5 md:pb-8 relative mx-auto w-fit max-w-[90%] md:max-w-[60%]">
             <TestimonialCardSkeleton />
-          ) : (
-            <TestimoniCard data={testimonial[currentIndex]} />
-          )}
-          <div className="flex items-center justify-center gap-3 absolute bottom-0 right-0">
-            <button
-              onClick={handlePrevious}
-              className="border-[#00AEEF] text-[#00AEEF] border-2 text-[18px] md:text-[24px] w-[35px] h-[35px] md:w-[45px] md:h-[45px] flex items-center justify-center rounded-full cursor-pointer"
-              aria-label="Previous testimonial"
-            >
-              <Image src={ARROW_LEFT} alt="arrow left" />
-            </button>
-            <button
-              onClick={handleNext}
-              className="border-[#00AEEF] text-[#00AEEF] border-2 text-[18px] md:text-[24px] w-[35px] h-[35px] md:w-[45px] md:h-[45px] flex items-center justify-center rounded-full cursor-pointer"
-              aria-label="Next testimonial"
-            >
-              <Image src={ARROW_RIGHT} alt="arrow right" />
-            </button>
           </div>
-        </div>
+        ) : testimonial.length === 0 ? (
+          <div className="bg-slate-50 flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
+            <span className="font-[400] text-slate-500 text-[16px] md:text-[18px]">
+              No Testimonial Found
+            </span>
+          </div>
+        ) : (
+          <div className="flex items-center justify-center pt-3 md:pt-5 pb-5 md:pb-8 relative mx-auto w-fit max-w-[90%] md:max-w-[60%]">
+            <TestimoniCard data={testimonial[currentIndex]} />
+            <div className="flex items-center justify-center gap-3 absolute bottom-0 right-0">
+              <button
+                onClick={handlePrevious}
+                className="border-[#00AEEF] text-[#00AEEF] border-2 text-[18px] md:text-[24px] w-[35px] h-[35px] md:w-[45px] md:h-[45px] flex items-center justify-center rounded-full cursor-pointer"
+                aria-label="Previous testimonial"
+              >
+                <Image src={ARROW_LEFT} alt="arrow left" />
+              </button>
+              <button
+                onClick={handleNext}
+                className="border-[#00AEEF] text-[#00AEEF] border-2 text-[18px] md:text-[24px] w-[35px] h-[35px] md:w-[45px] md:h-[45px] flex items-center justify-center rounded-full cursor-pointer"
+                aria-label="Next testimonial"
+              >
+                <Image src={ARROW_RIGHT} alt="arrow right" />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
       {promo && <Promo size="lg" data={promo} />}
     </div>

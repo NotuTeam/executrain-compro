@@ -19,8 +19,20 @@ import dayjs from "dayjs";
 
 import { ScheduleProps } from "@/types/schedule";
 
-export default function HeroScheduleDetail({ data }: { data?: ScheduleProps }) {
+export default function HeroScheduleDetail({ 
+  data, 
+  isLoading = false 
+}: { 
+  data?: ScheduleProps; 
+  isLoading?: boolean;
+}) {
   const router = useRouter();
+
+  // Don't render if no data and not loading
+  if (!data && !isLoading) {
+    return null;
+  }
+
   return (
     <div
       className="min-w-[99dvw] min-h-[80dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
@@ -30,7 +42,7 @@ export default function HeroScheduleDetail({ data }: { data?: ScheduleProps }) {
         backgroundPosition: "center",
       }}
     >
-      <div className="flex flex-col gap-5 md:gap-8 items-start bg-white/50 backdrop-blur-md border border-white/20 text-black rounded-lg w-full p-[5%] md:p-[5%] mt-[10%]">
+      <div className="flex flex-col gap-5 md:gap-8 items-start bg-white/50 backdrop-blur-md border border-white/20 text-black rounded-lg w-full p-[5%] md:p-[5%] mt-[10%] md:mb-[-10%]">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full gap-3 md:gap-0">
           <h1 className="text-[28px] md:text-[40px] lg:text-[49px] font-semibold">
             {data?.schedule_name}
@@ -43,7 +55,11 @@ export default function HeroScheduleDetail({ data }: { data?: ScheduleProps }) {
                 router.push("https://wa.me/62895805254925");
               }
             }}
-            label={data?.link && data.link.trim() !== "" ? "Register Now →" : "Contact Us"}
+            label={
+              data?.link && data.link.trim() !== ""
+                ? "Register Now →"
+                : "Contact Us"
+            }
             rounded
             type="primary"
           />
@@ -51,7 +67,7 @@ export default function HeroScheduleDetail({ data }: { data?: ScheduleProps }) {
         <div
           className="hidden md:grid rounded-2xl w-full min-h-[250px] md:min-h-[450px] grid-cols-1 md:grid-cols-3 p-5 md:p-10"
           style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${data?.banner?.url}')`,
+            backgroundImage: `url('${data?.banner?.url}')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

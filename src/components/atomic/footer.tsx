@@ -25,25 +25,27 @@ import TWITTER_ICON from "@/assets/icons/twitter.svg";
 import WHATSAPP_ICON from "@/assets/icons/whatsapp.svg";
 import GMAIL_ICON from "@/assets/icons/gmail.svg";
 
-const contact = [
-  {
-    icon: WHATSAPP_ICON,
-    url: "https://wa.me/62895805254925",
-  },
-  {
+const contactIcons: Record<string, any> = {
+  GMAIL: {
     icon: GMAIL_ICON,
-    url: "mailto:excelearn@gmail.com",
+    label: "",
+    link: "",
   },
-];
+  WHATSAPP: {
+    icon: WHATSAPP_ICON,
+    label: "",
+    link: "",
+  },
+};
 
 const socmedIcons: Record<string, any> = {
-  instagram: INSTAGRAM_ICON,
-  facebook: FACEBOOK_ICON,
-  discord: DISCORD_ICON,
-  tiktok: TIKTOK_ICON,
-  youtube: YOUTUBE_ICON,
-  linkedin: LINKEDIN_ICON,
-  twitter: TWITTER_ICON,
+  INSTAGRAM: INSTAGRAM_ICON,
+  FACEBOOK: FACEBOOK_ICON,
+  DISCORD: DISCORD_ICON,
+  TKTOK: TIKTOK_ICON,
+  YOUTUBE: YOUTUBE_ICON,
+  LINKEDIN: LINKEDIN_ICON,
+  X: TWITTER_ICON,
 };
 
 export default function Footer() {
@@ -52,16 +54,40 @@ export default function Footer() {
   const { data: socmedData = [], isLoading: socmedLoading } = useSocmed();
 
   const socmedList = socmedData
-    .filter((item: SocmedDataProps) => item.socmed_link)
+    .filter(
+      (item: SocmedDataProps) =>
+        item.socmed_link &&
+        !["GMAIL", "WHATSAPP", "GMAPS"].includes(item.socmed_name)
+    )
     .map((item: SocmedDataProps) => {
-      const iconKey = item.socmed_name.toLowerCase();
+      const iconKey = item.socmed_name;
+
       return {
         icon: socmedIcons[iconKey] || INSTAGRAM_ICON,
         url: item.socmed_link,
         name: item.socmed_name,
       };
     });
-  
+
+  const contactList = socmedData
+    .filter(
+      (item: SocmedDataProps) =>
+        item.socmed_link && ["GMAIL", "WHATSAPP"].includes(item.socmed_name)
+    )
+    .map((item: SocmedDataProps) => {
+      const iconKey = item.socmed_name;
+      if (iconKey === "WHATSAPP")
+        return {
+          icon: contactIcons[iconKey]?.icon || INSTAGRAM_ICON,
+          url: `https://wa.me/${item.socmed_link}`,
+          name: `+${item.socmed_link}`,
+        };
+      return {
+        icon: contactIcons[iconKey]?.icon || GMAIL_ICON,
+        url: item.socmed_link,
+        name: item.socmed_link,
+      };
+    });
   return (
     <footer
       className="bg-[#00AEEF] min-w-[99dvw] text-white grid grid-cols-1 md:grid-cols-2 px-[7%] lg:px-[10%] py-[5%] gap-10"
@@ -86,7 +112,7 @@ export default function Footer() {
           icon={<ArrowRightFromLine size={18} />}
         />
         <div className="flex gap-8 md:gap-3 md:gap-5 mt-3 md:mt-5">
-          {contact.map((each: SocmedProps, index: number) => (
+          {contactList.map((each: SocmedProps, index: number) => (
             <Link key={index} href={each.url}>
               <Image src={each.icon} alt={`socmed ${index}`} />
             </Link>
@@ -107,7 +133,7 @@ export default function Footer() {
             ))}
           </div>
         ) : (
-          <div className="flex items-center justify-between flex-wrap mb-5 md:mb-0 w-[90%]">
+          <div className="flex items-center justify-start gap-7 flex-wrap mb-5 md:mb-0 w-[90%]">
             {socmedList.length > 0 ? (
               socmedList.map((each: any, index: number) => (
                 <Link
@@ -137,7 +163,10 @@ export default function Footer() {
             </span>
             <div className="flex flex-col">
               <span className="font-[500]">Email :</span>
-              <span>excelearn@gmail.com</span>
+              <span>
+                {socmedData?.find((each: any) => each.socmed_name === "GMAIL")
+                  ?.socmed_link || "excelearan@gmail.com"}
+              </span>
             </div>
             <div className="flex flex-col">
               <span className="font-[500]">Website :</span>
@@ -146,7 +175,7 @@ export default function Footer() {
           </div>
           <div className="space-y-2 md:space-y-3 text-sm md:text-base">
             <h5 className="font-[700] text-[20px] md:text-[25px]">Services</h5>
-            <div className="flex flex-col gap-2 md:gap-3">
+            <div className="flex flex-col gap-3 md:gap-3">
               {services.length > 0 ? (
                 services.map((service: any) => (
                   <span key={service._id}>

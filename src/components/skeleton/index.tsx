@@ -103,20 +103,15 @@ export const ScheduleCardSkeleton = () => {
 // Testimonial Card Skeleton
 export const TestimonialCardSkeleton = () => {
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 space-y-4">
-      <div className="flex items-center gap-4">
-        <Skeleton className="w-16 h-16" rounded />
-        <div className="flex-1 space-y-2">
-          <Skeleton className="h-5 w-1/2" />
-          <Skeleton className="h-4 w-1/3" />
+    <div className="bg-white flex flex-col items-start md:flex-row p-5">
+      <Skeleton className="w-full md:w-[300px] md:min-w-[300px] lg:w-[350px] lg:min-w-[350px] aspect-square flex-shrink-0" />
+      <div className="space-y-3 p-3 md:p-5 bg-[#00AEEF]/10 rounded-t-xl rounded-br-xl md:ml-[-5%] mt-[5%] md:mt-[5%] min-h-[150px] flex items-center w-full">
+        <div className="space-y-2 w-full">
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-3/4" />
         </div>
       </div>
-      <div className="space-y-2">
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-3/4" />
-      </div>
-      <Skeleton className="h-4 w-20" />
     </div>
   );
 };
@@ -163,6 +158,60 @@ export const ListItemSkeleton = () => {
         <Skeleton className="h-4 w-1/2" />
       </div>
       <Skeleton className="w-20 h-8" />
+    </div>
+  );
+};
+
+// Hero Product Detail Skeleton
+export const HeroProductDetailSkeleton = () => {
+  return (
+    <div
+      className="min-w-[99dvw] min-h-[80dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
+      style={{
+        backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="flex flex-col gap-5 md:gap-8 items-start bg-white/50 backdrop-blur-md border border-white/20 text-black rounded-lg w-full p-[5%] md:p-[5%] mt-[10%] md:mb-[-10%]">
+        <Skeleton className="h-8 w-32" />
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full gap-3 md:gap-0">
+          <Skeleton className="h-12 md:h-16 w-3/4" />
+          <Skeleton className="h-10 w-40" />
+        </div>
+        <div className="rounded-2xl w-full min-h-[100px] p-5 md:p-10">
+          <Skeleton className="w-full h-[300px] md:h-[400px]" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Hero Schedule Detail Skeleton
+export const HeroScheduleDetailSkeleton = () => {
+  return (
+    <div
+      className="min-w-[99dvw] min-h-[80dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
+      style={{
+        backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="flex flex-col gap-5 md:gap-8 items-start bg-white/50 backdrop-blur-md border border-white/20 text-black rounded-lg w-full p-[5%] md:p-[5%] mt-[10%] md:mb-[-10%]">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full gap-3 md:gap-0">
+          <Skeleton className="h-12 md:h-16 w-3/4" />
+          <Skeleton className="h-10 w-40" />
+        </div>
+        <div className="rounded-2xl w-full min-h-[250px] md:min-h-[450px] p-5 md:p-10">
+          <Skeleton className="w-full h-[300px] md:h-[400px]" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5 w-full px-[3%]">
+          <Skeleton className="h-20" />
+          <Skeleton className="h-20" />
+          <Skeleton className="h-20" />
+        </div>
+      </div>
     </div>
   );
 };

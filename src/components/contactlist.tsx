@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import { SocmedProps, SocmedDataProps } from "@/types/socmed";
 import { useSocmed } from "@/services/socmed/hook";
 
-import ContactBG from "@/assets/testimoni.jpg";
 import INSTAGRAM_ICON from "@/assets/icons/instagram-blue.svg";
 import FACEBOOK_ICON from "@/assets/icons/facebook-blue.svg";
 import DISCORD_ICON from "@/assets/icons/discord-blue.svg";
@@ -22,32 +21,32 @@ import WHATSAPP_ICON from "@/assets/icons/whatsapp-white.svg";
 import GMAIL_ICON from "@/assets/icons/gmail-white.svg";
 import LOCATION_ICON from "@/assets/icons/location-white.svg";
 
-const contact = [
-  {
+const contactIcons: Record<string, any> = {
+  GMAIL: {
     icon: GMAIL_ICON,
-    label: "Excelearn@gmail.com",
-    url: "mailto:excelearn@gmail.com",
+    label: "",
+    link: "",
   },
-  {
+  WHATSAPP: {
     icon: WHATSAPP_ICON,
-    label: "+62984201810",
-    url: "https://wa.me/62895805254925",
+    label: "",
+    link: "",
   },
-  {
+  GMAPS: {
     icon: LOCATION_ICON,
     label: "Equity Tower 26th Floor",
-    url: "https://share.google/hUqLqgMNGxAXSDIDw",
+    link: "",
   },
-];
+};
 
 const socmedIcons: Record<string, any> = {
-  instagram: INSTAGRAM_ICON,
-  facebook: FACEBOOK_ICON,
-  discord: DISCORD_ICON,
-  tiktok: TIKTOK_ICON,
-  youtube: YOUTUBE_ICON,
-  linkedin: LINKEDIN_ICON,
-  twitter: TWITTER_ICON,
+  INSTAGRAM: INSTAGRAM_ICON,
+  FACEBOOK: FACEBOOK_ICON,
+  DISCORD: DISCORD_ICON,
+  TKTOK: TIKTOK_ICON,
+  YOUTUBE: YOUTUBE_ICON,
+  LINKEDIN: LINKEDIN_ICON,
+  X: TWITTER_ICON,
 };
 
 export default function ContactList() {
@@ -55,13 +54,45 @@ export default function ContactList() {
   const { data: socmedData = [], isLoading } = useSocmed();
 
   const socmedList = socmedData
-    .filter((item: SocmedDataProps) => item.socmed_link)
+    .filter(
+      (item: SocmedDataProps) =>
+        item.socmed_link &&
+        !["GMAIL", "WHATSAPP", "GMAPS"].includes(item.socmed_name)
+    )
     .map((item: SocmedDataProps) => {
-      const iconKey = item.socmed_name.toLowerCase();
+      const iconKey = item.socmed_name;
+
       return {
         icon: socmedIcons[iconKey] || INSTAGRAM_ICON,
         url: item.socmed_link,
         name: item.socmed_name,
+      };
+    });
+
+  const contactList = socmedData
+    .filter(
+      (item: SocmedDataProps) =>
+        item.socmed_link &&
+        ["GMAIL", "WHATSAPP", "GMAPS", "PHONE"].includes(item.socmed_name)
+    )
+    .map((item: SocmedDataProps) => {
+      const iconKey = item.socmed_name;
+      if (iconKey === "GMAPS")
+        return {
+          icon: contactIcons[iconKey]?.icon || INSTAGRAM_ICON,
+          url: item.socmed_link,
+          name: "Equity Tower 26th Floor",
+        };
+      if (iconKey === "WHATSAPP")
+        return {
+          icon: contactIcons[iconKey]?.icon || INSTAGRAM_ICON,
+          url: `https://wa.me/${item.socmed_link}`,
+          name: `+${item.socmed_link}`,
+        };
+      return {
+        icon: contactIcons[iconKey]?.icon || GMAIL_ICON,
+        url: item.socmed_link,
+        name: item.socmed_link,
       };
     });
 
@@ -84,15 +115,15 @@ export default function ContactList() {
             Get In Touch with us using the enquiry form of contact details below
           </p>
           <div className="flex flex-col items-start gap-3 mt-5 md:mt-8">
-            {contact.map((each: SocmedProps, index: number) => (
+            {contactList.map((each: any, index: number) => (
               <button
                 type="button"
                 onClick={() => router.push(each.url)}
-                className="bg-linear-to-r from-[#141A2E] to-[#76dbff] text-white p-4 md:p-5 rounded-full w-full md:min-w-[45%] md:w-[50%] flex items-center gap-3 text-sm md:text-base"
+                className="cursor-pointer bg-linear-to-r from-[#141A2E] h-[100px] to-[#76dbff] text-white p-4 md:p-5 rounded-full w-full md:min-w-[45%] md:w-[50%] flex items-center gap-3 text-sm md:text-base"
                 key={index}
               >
                 <Image src={each.icon} alt={`socmed ${index}`} />
-                {each.label}
+                {each.name}
               </button>
             ))}
           </div>

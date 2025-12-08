@@ -73,21 +73,29 @@ export default function ScheduleList({
         Running Schedule
       </h2>
       <div className="flex flex-col w-full px-0 md:px-[7%] lg:px-[10%] gap-4 md:gap-5 mb-6 md:mb-8">
-        {isLoading
-          ? [1, 2, 3].map((i) => <ScheduleCardSkeleton key={i} />)
-          : updateScheduleStatus(data)?.map(
-              (each: ScheduleProps, index: number) => (
-                <ScheduleCard key={index} data={each} />
-              )
-            )}
+        {isLoading ? (
+          [1, 2, 3].map((i) => <ScheduleCardSkeleton key={i} />)
+        ) : updateScheduleStatus(data)?.length === 0 ? (
+          <div className="bg-slate-50 flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
+            <span className="font-[400] text-slate-500 text-[16px] md:text-[18px]">
+              No Schedule Found
+            </span>
+          </div>
+        ) : (
+          updateScheduleStatus(data)?.map((each: ScheduleProps, index: number) => (
+            <ScheduleCard key={index} data={each} />
+          ))
+        )}
       </div>
-      <Button
-        label="Load More"
-        rounded
-        type="primary"
-        icon={<ArrowRightFromLine size={18} />}
-        onClick={() => router.push("/schedule")}
-      />
+      {!isLoading && updateScheduleStatus(data)?.length > 0 && (
+        <Button
+          label="Load More"
+          rounded
+          type="primary"
+          icon={<ArrowRightFromLine size={18} />}
+          onClick={() => router.push("/schedule")}
+        />
+      )}
       <TestimoniList />
     </div>
   );

@@ -10,9 +10,9 @@ interface CompProps {
 
 export default function TestimoniCard({ data }: CompProps) {
   return (
-    <div className="bg-white  flex flex-col items-start md:flex-row p-5">
+    <div className="bg-white flex flex-col items-start md:flex-row p-5">
       <div
-        className="w-[500px] aspect-square flex items-end  rounded-t-xl rounded-br-xl"
+        className="w-full md:w-[100px] md:min-w-[100px] lg:w-[150px] lg:min-w-[150px] aspect-square flex items-end rounded-t-xl rounded-br-xl flex-shrink-0"
         style={{
           backgroundImage: `url(${data?.photo?.url || ""})`,
           backgroundSize: "cover",
@@ -27,7 +27,7 @@ export default function TestimoniCard({ data }: CompProps) {
         </div>
       </div>
 
-      <div className="space-y-3 p-3 bg-[#00AEEF]/30 backdrop-blur-md border border-[#00AEEF]/20 rounded-t-xl rounded-br-xl ml-[-5%] text-[14px] mt-[5%]">
+      <div className="space-y-3 p-3 md:p-5 bg-[#00AEEF]/30 backdrop-blur-md border border-[#00AEEF]/20 rounded-t-xl rounded-br-xl md:ml-[-5%] text-[14px] flex items-center">
         <p className="text-justify">{data?.testimonial}</p>
       </div>
     </div>
