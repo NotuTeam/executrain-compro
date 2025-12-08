@@ -76,7 +76,7 @@ function ServiceDetailContent({ initialService }: ServiceDetailProps) {
       id="service-detail"
       className="pt-[5%] px-[5%] md:px-[7%] lg:px-[10%] w-full"
     >
-      <div className="space-x-3 md:space-x-6 lg:space-x-8 border-b-2 border-slate-300 pb-3 flex overflow-x-auto">
+      <div className="space-x-3 md:space-x-6 lg:space-x-8 border-b-2 border-slate-300 flex overflow-x-auto">
         {services.map((each: any) => {
           const slug = serviceToSlug(each.service_name);
           const isSelected = selected?._id === each._id;
@@ -88,8 +88,10 @@ function ServiceDetailContent({ initialService }: ServiceDetailProps) {
                 router.push(`/service?type=${slug}`);
               }}
               key={each._id}
-              className={`font-semibold text-[16px] md:text-[20px] lg:text-[24px] cursor-pointer duration-150 flex gap-2 md:gap-3 items-center transition-colors whitespace-nowrap ${
-                isSelected ? "text-[#00AEEF]" : "text-slate-300"
+              className={`pb-3 font-semibold text-[16px] md:text-[20px] lg:text-[24px] cursor-pointer duration-150 flex gap-2 md:gap-3 items-center transition-colors whitespace-nowrap ${
+                isSelected
+                  ? "text-[#00AEEF] border-b-3 border-b-[#00AEEF]"
+                  : "text-slate-300"
               } hover:text-[#00AEEF]/70`}
             >
               {each.logo?.url ? (
@@ -104,9 +106,7 @@ function ServiceDetailContent({ initialService }: ServiceDetailProps) {
                 />
               ) : (
                 <Image
-                  src={
-                    isSelected ? IT_TRAINING_ICON : IT_TRAINING_DISABLE_ICON
-                  }
+                  src={isSelected ? IT_TRAINING_ICON : IT_TRAINING_DISABLE_ICON}
                   alt={each.service_name}
                   height={16}
                   width={16}
