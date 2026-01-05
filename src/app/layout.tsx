@@ -13,9 +13,21 @@ import LoadingPage from "@/components/atomic/loading";
 
 import "@/styles/globals.css";
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://compro.example.com';
+
 export const metadata: Metadata = {
   title: "Excelearn",
   description: "Company Profile",
+  metadataBase: new URL(BASE_URL),
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'id_ID',
+    url: BASE_URL,
+  },
 };
 
 const Mont = Montserrat({
