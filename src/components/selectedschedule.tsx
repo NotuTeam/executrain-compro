@@ -51,9 +51,12 @@ function ScheduleCard({ data }: { data: ScheduleProps }) {
 
   return (
     <div
-      className={`bg-white p-4 md:p-6 border-l-4 flex items-start md:items-center justify-between border-l gap-3 md:gap-0 ${borderColor[status]}`}
+      className={`bg-white p-4 md:p-6 border-l-4 flex items-start md:items-center justify-between gap-3 md:gap-0 ${borderColor[status]}`}
     >
       <div className="flex-1">
+        <span className="text-[12px] mb-3 block">
+          {dayjs(data.schedule_date).format("dddd, DD MMMM YYYY")}
+        </span>
         <h4 className="text-lg md:text-xl font-semibold mb-2 md:mb-3">
           {data?.schedule_name || "-"}
         </h4>
@@ -128,7 +131,7 @@ export default function SelectedSchedule({
         <div className="flex items-center gap-2 mb-6 text-sm md:text-base">
           <button
             onClick={onClearDate}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors font-[600]`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors font-[600] cursor-pointer`}
           >
             <span>All Schedule</span>
           </button>

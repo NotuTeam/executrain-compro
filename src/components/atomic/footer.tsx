@@ -25,16 +25,16 @@ import TWITTER_ICON from "@/assets/icons/twitter.svg";
 import WHATSAPP_ICON from "@/assets/icons/whatsapp.svg";
 import GMAIL_ICON from "@/assets/icons/gmail.svg";
 
-const contactIcons: Record<string, any> = {
+const contactIcons: Record<string, SocmedProps> = {
   GMAIL: {
     icon: GMAIL_ICON,
     label: "",
-    link: "",
+    url: "",
   },
   WHATSAPP: {
     icon: WHATSAPP_ICON,
     label: "",
-    link: "",
+    url: "",
   },
 };
 
@@ -82,6 +82,13 @@ export default function Footer() {
           url: `https://wa.me/${item.socmed_link}`,
           name: `+${item.socmed_link}`,
         };
+      if (iconKey === "GMAIL")
+        return {
+          icon: contactIcons[iconKey]?.icon || INSTAGRAM_ICON,
+          url: `mailto:${item.socmed_link}`,
+          name: `+${item.socmed_link}`,
+        };
+      retur;
       return {
         icon: contactIcons[iconKey]?.icon || GMAIL_ICON,
         url: item.socmed_link,

@@ -21,21 +21,21 @@ import WHATSAPP_ICON from "@/assets/icons/whatsapp-white.svg";
 import GMAIL_ICON from "@/assets/icons/gmail-white.svg";
 import LOCATION_ICON from "@/assets/icons/location-white.svg";
 
-const contactIcons: Record<string, any> = {
+const contactIcons: Record<string, SocmedProps> = {
   GMAIL: {
     icon: GMAIL_ICON,
     label: "",
-    link: "",
+    url: "",
   },
   WHATSAPP: {
     icon: WHATSAPP_ICON,
     label: "",
-    link: "",
+    url: "",
   },
   GMAPS: {
     icon: LOCATION_ICON,
     label: "Equity Tower 26th Floor",
-    link: "",
+    url: "",
   },
 };
 
@@ -87,6 +87,12 @@ export default function ContactList() {
         return {
           icon: contactIcons[iconKey]?.icon || INSTAGRAM_ICON,
           url: `https://wa.me/${item.socmed_link}`,
+          name: `+${item.socmed_link}`,
+        };
+      if (iconKey === "GMAIL")
+        return {
+          icon: contactIcons[iconKey]?.icon || INSTAGRAM_ICON,
+          url: `mailto:${item.socmed_link}`,
           name: `+${item.socmed_link}`,
         };
       return {
