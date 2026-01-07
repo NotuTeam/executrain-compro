@@ -88,7 +88,6 @@ export default function Footer() {
           url: `mailto:${item.socmed_link}`,
           name: `+${item.socmed_link}`,
         };
-      retur;
       return {
         icon: contactIcons[iconKey]?.icon || GMAIL_ICON,
         url: item.socmed_link,
