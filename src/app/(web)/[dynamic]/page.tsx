@@ -21,7 +21,7 @@ export default function Dynamic() {
     return (
       <Container>
         <div className="min-h-screen flex items-center justify-center">
-          <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
+          <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
         </div>
       </Container>
     );
