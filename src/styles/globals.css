@@ -2,6 +2,10 @@
 
 @import "tailwindcss";
 
+body {
+  overflow-x: hidden;
+}
+
 @keyframes infinite-scroll {
   0% {
     transform: translateX(0);

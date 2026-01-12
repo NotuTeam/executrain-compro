@@ -13,7 +13,8 @@ import LoadingPage from "@/components/atomic/loading";
 
 import "@/styles/globals.css";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://compro.example.com';
+const BASE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL || "https://compro.example.com";
 
 export const metadata: Metadata = {
   title: "Excelearn",
@@ -24,8 +25,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    type: 'website',
-    locale: 'id_ID',
+    type: "website",
+    locale: "id_ID",
     url: BASE_URL,
   },
 };

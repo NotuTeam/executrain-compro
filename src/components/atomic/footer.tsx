@@ -96,7 +96,7 @@ export default function Footer() {
     });
   return (
     <footer
-      className="bg-[#00AEEF] min-w-[99dvw] text-white grid grid-cols-1 md:grid-cols-2 px-[7%] lg:px-[10%] py-[5%] gap-10"
+      className="bg-[#00AEEF] min-w-[98dvw] max-w-[99dvw] text-white grid grid-cols-1 md:grid-cols-2 px-[7%] lg:px-[10%] py-[5%] gap-10"
       style={{
         backgroundImage: `url('./footer.png')`,
         backgroundSize: "contain",
@@ -169,14 +169,19 @@ export default function Footer() {
             </span>
             <div className="flex flex-col">
               <span className="font-[500]">Email :</span>
-              <span>
+              <Link
+                href={`mailto:${
+                  socmedData?.find((each: any) => each.socmed_name === "GMAIL")
+                    ?.socmed_link || "sales@excelearn.co.id"
+                }`}
+              >
                 {socmedData?.find((each: any) => each.socmed_name === "GMAIL")
-                  ?.socmed_link || "excelearan@gmail.com"}
-              </span>
+                  ?.socmed_link || "sales@excelearn.co.id"}
+              </Link>
             </div>
             <div className="flex flex-col">
               <span className="font-[500]">Website :</span>
-              <span>Excelearn.ac.id</span>
+              <Link href="https://excelearn.co.id">Excelearn.co.id</Link>
             </div>
           </div>
           <div className="space-y-2 md:space-y-3 text-sm md:text-base">
