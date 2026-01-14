@@ -24,42 +24,6 @@ export default function ScheduleList({
 }: CompProps) {
   const router = useRouter();
 
-  function updateScheduleStatus(schedules: ScheduleProps[]): ScheduleProps[] {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    return schedules
-      .filter((schedule) => {
-        const scheduleDate = new Date(schedule.schedule_date);
-        scheduleDate.setHours(0, 0, 0, 0);
-
-        const dayDiff = scheduleDate.getTime() - today.getTime();
-        const days = dayDiff / (1000 * 3600 * 24);
-
-        if (days > 0) return schedule;
-      })
-      ?.map((schedule) => {
-        const scheduleDate = new Date(schedule.schedule_date);
-        scheduleDate.setHours(0, 0, 0, 0);
-        const scheduleCloseRegistrationDate = new Date(
-          schedule.schedule_close_registration_date
-        );
-        scheduleCloseRegistrationDate.setHours(0, 0, 0, 0);
-
-        const dayDiff = scheduleDate.getTime() - today.getTime();
-        const dayCloseRegistrationDiff =
-          scheduleCloseRegistrationDate.getTime() - today.getTime();
-
-        const days = dayDiff / (1000 * 3600 * 24);
-
-        if (days < 0) return { ...schedule, status: "ENDED" };
-        if (days === 0) return { ...schedule, status: "ON_GOING" };
-        if (dayCloseRegistrationDiff === 0)
-          return { ...schedule, status: "CLOSE_REGISTRATION" };
-        return schedule;
-      });
-  }
-
   return (
     <div
       className="w-full text-white flex flex-col items-center justify-center text-center py-[5%] space-y-5 px-[5%] md:px-0 border-white border-b-5 box-border"
@@ -75,19 +39,19 @@ export default function ScheduleList({
       <div className="flex flex-col w-full px-0 md:px-[7%] lg:px-[10%] gap-4 md:gap-5 mb-6 md:mb-8">
         {isLoading ? (
           [1, 2, 3].map((i) => <ScheduleCardSkeleton key={i} />)
-        ) : updateScheduleStatus(data)?.length === 0 ? (
+        ) : data?.length === 0 ? (
           <div className="bg-slate-50 flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
             <span className="font-[400] text-slate-500 text-[16px] md:text-[18px]">
               No Schedule Found
             </span>
           </div>
         ) : (
-          updateScheduleStatus(data)?.map((each: ScheduleProps, index: number) => (
+          data?.map((each: ScheduleProps, index: number) => (
             <ScheduleCard key={index} data={each} />
           ))
         )}
       </div>
-      {!isLoading && updateScheduleStatus(data)?.length > 0 && (
+      {!isLoading && data?.length > 0 && (
         <Button
           label="Load More"
           rounded

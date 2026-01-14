@@ -33,4 +33,25 @@ export interface ScheduleProps {
 export interface ScheduleFilterParams {
   search?: string;
   date?: string | Date | Dayjs;
+  page?: number;
+  limit?: number;
+}
+
+export interface ScheduleListResponse {
+  status: number;
+  message: string;
+  data: ScheduleProps[];
+  pagination: {
+    current_page: number;
+    total_pages: number;
+    total_schedules: number;
+    per_page: number;
+    has_next: boolean;
+    has_prev: boolean;
+  };
+}
+
+export interface ScheduleCalendarParams {
+  year: number;
+  month: number;
 }

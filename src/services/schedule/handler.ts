@@ -1,9 +1,12 @@
 /** @format */
 
 import AxiosClient from "@/lib/axios";
-import { ScheduleProps, ScheduleFilterParams } from "@/types/schedule";
-
-import dayjs from "dayjs";
+import {
+  ScheduleProps,
+  ScheduleFilterParams,
+  ScheduleListResponse,
+  ScheduleCalendarParams,
+} from "@/types/schedule";
 
 export async function ScheduleListService(): Promise<{
   status: number;
@@ -11,7 +14,7 @@ export async function ScheduleListService(): Promise<{
   data: ScheduleProps[];
 }> {
   try {
-    const { data: response } = await AxiosClient.get("/schedule/public/list");
+    const { data: response } = await AxiosClient.get("/schedule/public/home");
 
     const { status, message, data } = response;
 
@@ -29,30 +32,60 @@ export async function ScheduleListService(): Promise<{
 }
 
 export async function ScheduleListFilteredService(
-  filters?: ScheduleFilterParams
-): Promise<{
-  status: number;
-  message: string;
-  data: ScheduleProps[];
-}> {
+  filters?: ScheduleFilterParams & { page?: number }
+): Promise<ScheduleListResponse> {
   try {
-    // Build query params
-    const params: Record<string, string> = {};
+    const params: Record<string, string | number> = {};
 
     if (filters?.search) {
       params.search = filters.search;
     }
 
-    if (filters?.date) {
-      // Convert to ISO string jika date adalah Dayjs object
-      params.date = dayjs(filters.date).toISOString();
+    if (filters?.page) {
+      params.page = filters.page;
+    }
+
+    if (filters?.limit) {
+      params.limit = filters.limit;
     }
 
     const { data: response } = await AxiosClient.get("/schedule/public/list", {
       params,
     });
 
-    console.log(response);
+    const { status, message, data, pagination } = response;
+
+    if (status !== 200) throw new Error(message);
+
+    return {
+      status,
+      message,
+      data,
+      pagination,
+    };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function ScheduleCalendarService(
+  params: ScheduleCalendarParams
+): Promise<{
+  status: number;
+  message: string;
+  data: ScheduleProps[];
+}> {
+  try {
+    const { data: response } = await AxiosClient.get(
+      "/schedule/public/calendar",
+      {
+        params: {
+          year: params.year,
+          month: params.month,
+        },
+      }
+    );
 
     const { status, message, data } = response;
 

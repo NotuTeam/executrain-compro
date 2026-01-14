@@ -11,7 +11,10 @@ import HeroSchedule from "@/components/hero/heroschedule";
 import SelectedSchedule from "@/components/selectedschedule";
 import SearchBar from "@/components/atomic/schedulesearchbar";
 
-import { useScheduleFiltered } from "@/services/schedule/hook";
+import {
+  useScheduleFiltered,
+  useScheduleCalendar,
+} from "@/services/schedule/hook";
 import { useDebounce } from "@/lib/useDebounce";
 
 export default function Schedule() {
@@ -23,11 +26,17 @@ export default function Schedule() {
 
   const debouncedSearchValue = useDebounce(searchValue, 500);
 
-  const { data: schedule = [], isLoading: scheduleLoading } =
+  const { data: calendarData = [] } = useScheduleCalendar({
+      year: selectedMonth.year(),
+      month: selectedMonth.month() + 1,
+    });
+
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useScheduleFiltered({
       search: debouncedSearchValue || undefined,
-      // Tidak mengirim date filter, sehingga backend return semua data
     });
+
+  const allSchedules = data?.pages.flatMap((page) => page.data) || [];
 
   return (
     <Container>
@@ -49,17 +58,21 @@ export default function Schedule() {
             selectedDate={selectedDate}
             onDateSelect={(date) => setSelectedDate(date)}
             onMonthSelect={(date) => setSelectedMonth(date)}
-            data={schedule}
+            data={calendarData}
           />
         </div>
 
         {/* Selected Schedule - tampil di bawah pada mobile */}
         <SelectedSchedule
           is_search={searchValue !== ""}
-          data={schedule}
+          data={allSchedules}
           selectedDate={selectedDate}
           selectedMonth={selectedMonth}
           onClearDate={() => setSelectedDate(null)}
+          fetchNext={fetchNextPage}
+          hasNext={hasNextPage}
+          isFetching={isFetchingNextPage}
+          isLoading={isLoading}
         />
       </div>
     </Container>

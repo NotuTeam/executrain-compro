@@ -11,7 +11,7 @@ import {
   Calendar,
   CalendarOff,
   ChevronRight,
-  Home,
+  ArrowRightFromLine,
 } from "lucide-react";
 import dayjs, { Dayjs } from "dayjs";
 
@@ -23,6 +23,10 @@ interface CompProps {
   selectedMonth: Dayjs;
   is_search?: boolean;
   onClearDate?: () => void;
+  fetchNext?: () => void;
+  hasNext?: boolean;
+  isFetching?: boolean;
+  isLoading?: boolean;
 }
 
 const borderColor = {
@@ -90,9 +94,12 @@ function ScheduleCard({ data }: { data: ScheduleProps }) {
 export default function SelectedSchedule({
   data = [],
   selectedDate,
-  selectedMonth,
   is_search = false,
   onClearDate,
+  fetchNext,
+  hasNext,
+  isFetching,
+  isLoading = false,
 }: CompProps) {
   let showData: ScheduleProps[] = data;
   const showDate: string[] = [];
@@ -162,7 +169,11 @@ export default function SelectedSchedule({
 
       {/* Jika ada pencarian atau tidak ada tanggal yang dipilih (default view) */}
       <div className="space-y-3 md:space-y-4">
-        {showData.length > 0 ? (
+        {isLoading ? (
+          <div className="bg-slate-50 flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
+            <span className="font-[400] text-slate-500">Loading...</span>
+          </div>
+        ) : showData.length > 0 ? (
           showData.map((each: ScheduleProps, index: number) => (
             <ScheduleCard key={index} data={each} />
           ))
@@ -177,6 +188,19 @@ export default function SelectedSchedule({
           </div>
         )}
       </div>
+
+      {/* Load More Button */}
+      {!isLoading && showData.length > 0 && hasNext && !selectedDate && (
+        <div className="flex justify-center mt-6">
+          <Button
+            label={isFetching ? "Loading..." : "Load More"}
+            rounded
+            type={isFetching ? "disable" : "primary"}
+            icon={<ArrowRightFromLine size={18} />}
+            onClick={() => fetchNext && fetchNext()}
+          />
+        </div>
+      )}
     </div>
   );
 }
