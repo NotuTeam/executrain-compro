@@ -2,7 +2,7 @@
 
 export default function Tag({ label }: { label: string }) {
   const getTagStyles = (label: string): string => {
-    const normalizedLabel = label.toUpperCase().replace(/\s+/g, "_");
+    const normalizedLabel = label.toUpperCase().replaceAll(/\s+/g, "_");
 
     const styles: Record<string, string> = {
       IT_TRAINING: "bg-[#00AEEF] text-white",
@@ -16,16 +16,16 @@ export default function Tag({ label }: { label: string }) {
       ENDED: "bg-gray-500 text-white",
     };
 
-    return styles[normalizedLabel] || "bg-gray-300 text-gray-700";
+    return styles[normalizedLabel] || "bg-[#10B981] text-white";
   };
 
   return (
     <span
       className={`${getTagStyles(
-        label
+        label,
       )} px-3 py-1 rounded-full text-[10px] font-medium`}
     >
-      {label}
+      {label?.replaceAll("_", " ")}
     </span>
   );
 }

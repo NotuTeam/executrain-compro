@@ -26,12 +26,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
     categoryValue
   );
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
+  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const sortDropdownRef = useRef<HTMLDivElement>(null);
+  const categoryDropdownRef = useRef<HTMLDivElement>(null);
   const filterDropdownRef = useRef<HTMLDivElement>(null);
 
   // Fetch services untuk categories
-  const { data: services = [], isLoading: servicesLoading } = useServices();
+  const { data: services = [] } = useServices();
 
   // Transform services to categories
   const categories = services.map((service: any) => ({
@@ -56,6 +58,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
         !sortDropdownRef.current.contains(event.target as Node)
       ) {
         setIsSortDropdownOpen(false);
+      }
+      if (
+        categoryDropdownRef.current &&
+        !categoryDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsCategoryDropdownOpen(false);
       }
       if (
         filterDropdownRef.current &&
@@ -99,21 +107,71 @@ const SearchBar: React.FC<SearchBarProps> = ({
           />
         </div>
 
-        {/* Category Pills */}
-        <div className="flex items-center gap-2">
-          {categories.map((category) => (
-            <button
-              key={category.value}
-              onClick={() => handleCategoryClick(category.value)}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer ${
-                selectedCategory === category.value
-                  ? "bg-[#00AEEF] text-white shadow-md"
-                  : "bg-white text-gray-600 border border-gray-300 hover:border-[#00AEEF] hover:text-[#00AEEF]"
+        {/* Category Dropdown */}
+        <div className="relative z-50" ref={categoryDropdownRef}>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
+            }}
+            className="flex items-center gap-2 px-6 py-2 bg-white text-gray-600 rounded-full border border-gray-300 hover:border-[#00AEEF] hover:text-[#00AEEF] transition-colors duration-200 whitespace-nowrap"
+          >
+            <span className="text-sm font-medium">{getCategoryLabel(selectedCategory)}</span>
+            <ChevronDown
+              className={`w-4 h-4 transition-transform duration-200 ${
+                isCategoryDropdownOpen ? "rotate-180" : ""
               }`}
-            >
-              {category.label}
-            </button>
-          ))}
+            />
+          </button>
+
+          {isCategoryDropdownOpen && (
+            <div className="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden max-h-64 overflow-y-auto">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setSelectedCategory(undefined);
+                  onCategoryChange(undefined);
+                  setIsCategoryDropdownOpen(false);
+                }}
+                className={`w-full px-4 py-3 text-left text-sm transition-colors flex items-center justify-between cursor-pointer ${
+                  !selectedCategory
+                    ? "text-[#00AEEF] font-medium bg-[#00AEEF]/10"
+                    : "text-gray-700 hover:bg-gray-50"
+                }`}
+              >
+                <span>All Categories</span>
+                {!selectedCategory && (
+                  <span className="text-[#00AEEF]">✓</span>
+                )}
+              </button>
+              {categories.map((category) => (
+                <button
+                  key={category.value}
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleCategoryClick(category.value);
+                    setIsCategoryDropdownOpen(false);
+                  }}
+                  className={`w-full px-4 py-3 text-left text-sm transition-colors flex items-center justify-between cursor-pointer ${
+                    selectedCategory === category.value
+                      ? "text-[#00AEEF] font-medium bg-[#00AEEF]/10"
+                      : "text-gray-700 hover:bg-gray-50"
+                  }`}
+                >
+                  <span>{category.label}</span>
+                  {selectedCategory === category.value && (
+                    <span className="text-[#00AEEF]">✓</span>
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Sort Dropdown */}
