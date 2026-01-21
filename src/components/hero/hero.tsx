@@ -1,13 +1,21 @@
 /** @format */
 
+"use client";
+
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Button from "../atomic/button";
 import { ArrowRightFromLine } from "lucide-react";
+import { useAssetContext } from "@/components/AssetProvider";
 
 export default function Hero() {
   const router = useRouter();
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const { getAssetUrl, getStaticAsset } = useAssetContext();
+
+  const heroBackground = getAssetUrl("hero_background");
+  const heroVideo = getAssetUrl("hero_video");
+  const bannerOverlay = getStaticAsset("banner_overlay");
 
   return (
     <div className="relative min-w-[99dvw] min-h-[105dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%] overflow-hidden">
@@ -17,7 +25,7 @@ export default function Hero() {
           isVideoLoaded ? "opacity-0" : "opacity-100"
         }`}
         style={{
-          backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559364/banner_tczrw5.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
+          backgroundImage: `url('${bannerOverlay}'), url('${heroBackground}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -34,13 +42,12 @@ export default function Hero() {
           isVideoLoaded ? "opacity-100" : "opacity-0"
         }`}
         onLoadedData={() => setIsVideoLoaded(true)}
-        poster="https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp"
+        poster={heroBackground}
       >
         <source
-          src="https://res.cloudinary.com/dgd3iusxa/video/upload/v1764557991/hero-vid_d2rydq.mp4"
+          src={heroVideo}
           type="video/mp4"
         />
-        {/* <source src="hero-vid.mp4" type="video/mp4" /> */}
         Your browser does not support the video tag.
       </video>
 
@@ -50,10 +57,10 @@ export default function Hero() {
           isVideoLoaded ? "opacity-100" : "opacity-0"
         }`}
         style={{
-          backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559364/banner_tczrw5.png')`,
+          backgroundImage: `url('${bannerOverlay}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          pointerEvents: "none", // Agar tidak menghalangi interaksi dengan content
+          pointerEvents: "none",
         }}
       />
 

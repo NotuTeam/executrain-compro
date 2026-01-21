@@ -1,8 +1,11 @@
 /** @format */
 
+"use client";
+
 import { useRouter } from "next/navigation";
 
 import Button from "./atomic/button";
+import { useAssetContext } from "@/components/AssetProvider";
 
 import { ArrowRightFromLine } from "lucide-react";
 
@@ -12,6 +15,10 @@ import { useSocmed } from "@/services/socmed/hook";
 export default function Step() {
   const router = useRouter();
   const { data: socmedData = [], isLoading: socmedLoading } = useSocmed();
+  const { getAssetUrl, getStaticAsset } = useAssetContext();
+
+  const bannerPlain = getStaticAsset("banner_plain");
+  const stepsBackground = getAssetUrl("steps_background");
 
   const contactList = socmedData.find(
     (item: SocmedDataProps) =>
@@ -22,7 +29,7 @@ export default function Step() {
       <div
         className="text-white rounded-4xl"
         style={{
-          backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('./hero4.webp')`,
+          backgroundImage: `url('${bannerPlain}'), url('${stepsBackground}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

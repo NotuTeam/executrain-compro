@@ -10,6 +10,7 @@ import Button from "./button";
 import { useServices } from "@/services/service/hook";
 import { useSocmed } from "@/services/socmed/hook";
 import { serviceToSlug } from "@/lib/utils";
+import { useAssetContext } from "@/components/AssetProvider";
 
 import { ArrowRightFromLine } from "lucide-react";
 
@@ -52,6 +53,9 @@ export default function Footer() {
   const router = useRouter();
   const { data: services = [] } = useServices();
   const { data: socmedData = [], isLoading: socmedLoading } = useSocmed();
+  const { getStaticAsset } = useAssetContext();
+
+  const footerBackground = getStaticAsset("footer_background");
 
   const socmedList = socmedData
     .filter(
@@ -98,7 +102,7 @@ export default function Footer() {
     <footer
       className="bg-[#00AEEF] min-w-[98dvw] max-w-[99dvw] text-white grid grid-cols-1 md:grid-cols-2 px-[7%] lg:px-[10%] py-[5%] gap-10"
       style={{
-        backgroundImage: `url('./footer.png')`,
+        backgroundImage: `url('${footerBackground}')`,
         backgroundSize: "contain",
         backgroundPosition: "left",
         backgroundRepeat: "no-repeat",

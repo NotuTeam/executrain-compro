@@ -2,34 +2,35 @@
 
 "use client";
 
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import AboutPict from "@/assets/about.png";
 import Button from "./atomic/button";
+import { useAssetContext } from "@/components/AssetProvider";
 
 import { ArrowRightFromLine } from "lucide-react";
 
 export default function AboutSection() {
   const router = useRouter();
+  const { getAssetUrl, getStaticAsset } = useAssetContext();
+
+  const bodyPattern = getStaticAsset("body_pattern");
+  const aboutImage = getAssetUrl("about_image");
 
   return (
     <div
       className="px-[5%] md:px-[7%] lg:px-[10%] py-[5%] grid grid-cols-1 md:grid-cols-2 w-full gap-6 md:gap-10 mt-[5%]"
       style={{
-        backgroundImage: `url('./body.png')`,
+        backgroundImage: `url('${bodyPattern}')`,
         backgroundSize: "contain",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
     >
       <div className="flex items-center justify-center">
-        <Image
-          src={AboutPict}
-          alt="testimoni pict"
-          height={300}
-          width={300}
-          className="md:h-[350px] md:w-[350px] lg:h-[400px] lg:w-[400px]"
+        <img
+          src={aboutImage}
+          alt="about pict"
+          className="h-[300px] w-[300px] md:h-[350px] md:w-[350px] lg:h-[400px] lg:w-[400px] object-contain"
         />
       </div>
       <div className="space-y-3 md:space-y-5 flex flex-col justify-center items-center">

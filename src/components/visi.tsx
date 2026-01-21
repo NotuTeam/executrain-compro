@@ -1,11 +1,19 @@
 /** @format */
 
+"use client";
+
+import { useAssetContext } from "@/components/AssetProvider";
+
 export default function Visi() {
+  const { getStaticAsset } = useAssetContext();
+
+  const bodyPattern = getStaticAsset("body_pattern");
+
   return (
     <div
       className="w-full text-center py-[5%] px-[5%] md:px-[7%] lg:px-[10%] space-y-6 md:space-y-10"
       style={{
-        backgroundImage: `url('./body.png'), url('./body.png')`,
+        backgroundImage: `url('${bodyPattern}'), url('${bodyPattern}')`,
         backgroundSize: "30%",
         backgroundPosition: "-20% 150%, 125% 50%",
         backgroundRepeat: "no-repeat",

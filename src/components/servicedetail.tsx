@@ -5,13 +5,13 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import ServiceBG from "@/assets/hero2.webp";
 import IT_TRAINING_ICON from "@/assets/icons/it_training.svg";
 import IT_TRAINING_DISABLE_ICON from "@/assets/icons/it_training_disable.svg";
 
 import { useServices } from "@/services/service/hook";
 import { serviceToSlug, findServiceBySlug } from "@/lib/utils";
 import { ServiceDetailSkeleton } from "@/components/skeleton";
+import { useAssetContext } from "@/components/AssetProvider";
 
 interface ServiceDetailProps {
   initialService?: string | null;
@@ -20,6 +20,9 @@ interface ServiceDetailProps {
 function ServiceDetailContent({ initialService }: ServiceDetailProps) {
   const router = useRouter();
   const { data: services = [], isLoading } = useServices();
+  const { getAssetUrl } = useAssetContext();
+
+  const servicesImage = getAssetUrl("services_image");
 
   // Tentukan initial selected berdasarkan initialService
   const getInitialService = () => {
@@ -76,7 +79,8 @@ function ServiceDetailContent({ initialService }: ServiceDetailProps) {
       id="service-detail"
       className="pt-[5%] px-[5%] md:px-[7%] lg:px-[10%] w-full"
     >
-      <div className="space-x-3 md:space-x-6 lg:space-x-8 border-b-2 border-slate-300 flex overflow-x-auto">
+      {/* Tab container with wrap */}
+      <div className="flex flex-wrap gap-3 md:gap-6 lg:gap-8 border-b-2 border-slate-300 pb-3">
         {services.map((each: any) => {
           const slug = serviceToSlug(each.service_name);
           const isSelected = selected?._id === each._id;
@@ -88,9 +92,9 @@ function ServiceDetailContent({ initialService }: ServiceDetailProps) {
                 router.push(`/service?type=${slug}`);
               }}
               key={each._id}
-              className={`pb-3 font-semibold text-[16px] md:text-[20px] lg:text-[24px] cursor-pointer duration-150 flex gap-2 md:gap-3 items-center transition-colors whitespace-nowrap ${
+              className={`font-semibold text-[16px] md:text-[20px] lg:text-[24px] cursor-pointer duration-150 flex gap-2 md:gap-3 items-center transition-colors ${
                 isSelected
-                  ? "text-[#00AEEF] border-b-3 border-b-[#00AEEF]"
+                  ? "text-[#00AEEF]"
                   : "text-slate-300"
               } hover:text-[#00AEEF]/70`}
             >
@@ -128,11 +132,9 @@ function ServiceDetailContent({ initialService }: ServiceDetailProps) {
           </p>
         </div>
         <div className="p-[5%] md:p-[10%] order-1 md:order-2">
-          <Image
-            src={ServiceBG}
+          <img
+            src={servicesImage}
             alt="service pict"
-            height={0}
-            width={0}
             className="rounded-2xl shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] w-full h-auto"
           />
         </div>

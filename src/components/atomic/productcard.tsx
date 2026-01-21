@@ -108,7 +108,7 @@ export default function ProductCard({ data, size = "md" }: CompProps) {
             <h3 className="text-[18px] md:text-[20px] lg:text-[24px] font-semibold">
               {data?.product_name || "-"}
             </h3>
-            <p className="text-left text-sm md:text-base">
+            <p className="text-left text-sm md:text-base line-clamp-3">
               {data?.product_description || "-"}
             </p>
             <div className="flex justify-between w-full mt-5 md:mt-8 items-end md:items-center gap-3 md:gap-0">

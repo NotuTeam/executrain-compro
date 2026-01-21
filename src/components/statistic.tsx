@@ -1,19 +1,25 @@
 /** @format */
 
+"use client";
+
 import CountUp from "./atomic/countup";
 import { StatisticCardSkeleton } from "@/components/skeleton";
+import { useAssetContext } from "@/components/AssetProvider";
 
 import { useStats } from "@/services/statistic/hook";
 
 export default function Statistic() {
   const { data: stats, isLoading: statsLoading } = useStats();
+  const { getAssetUrl } = useAssetContext();
+
+  const statisticBackground = getAssetUrl("statistic_background");
 
   if (statsLoading) {
     return (
       <div
         className="w-full py-[5%] px-[5%] md:px-[7%] lg:px-[10%] text-white flex items-center justify-evenly gap-5 md:gap-0"
         style={{
-          backgroundImage: `linear-gradient(90deg,rgba(0, 39, 82, 0.7) 25%, rgba(102, 201, 255, 0.5) 80%, rgba(255, 255, 255, 0) 100%),  url('./hero4.webp')`,
+          backgroundImage: `linear-gradient(90deg,rgba(0, 39, 82, 0.7) 25%, rgba(102, 201, 255, 0.5) 80%, rgba(255, 255, 255, 0) 100%),  url('${statisticBackground}')`,
           backgroundSize: "cover",
           backgroundPosition: "40% 40%",
         }}
@@ -30,7 +36,7 @@ export default function Statistic() {
       <div
         className="w-full py-[5%] px-[5%] md:px-[7%] lg:px-[10%] text-white flex items-center justify-center gap-5 md:gap-0"
         style={{
-          backgroundImage: `linear-gradient(90deg,rgba(0, 39, 82, 0.7) 25%, rgba(102, 201, 255, 0.5) 80%, rgba(255, 255, 255, 0) 100%),  url('./hero4.webp')`,
+          backgroundImage: `linear-gradient(90deg,rgba(0, 39, 82, 0.7) 25%, rgba(102, 201, 255, 0.5) 80%, rgba(255, 255, 255, 0) 100%),  url('${statisticBackground}')`,
           backgroundSize: "cover",
           backgroundPosition: "40% 40%",
         }}
@@ -48,7 +54,7 @@ export default function Statistic() {
     <div
       className="w-full py-[5%] px-[5%] md:px-[7%] lg:px-[10%] text-white flex items-center justify-evenly gap-5 md:gap-0"
       style={{
-        backgroundImage: `linear-gradient(90deg,rgba(0, 39, 82, 0.7) 25%, rgba(102, 201, 255, 0.5) 80%, rgba(255, 255, 255, 0) 100%),  url('./hero4.webp')`,
+        backgroundImage: `linear-gradient(90deg,rgba(0, 39, 82, 0.7) 25%, rgba(102, 201, 255, 0.5) 80%, rgba(255, 255, 255, 0) 100%),  url('${statisticBackground}')`,
         backgroundSize: "cover",
         backgroundPosition: "40% 40%",
       }}

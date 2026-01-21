@@ -86,7 +86,8 @@ export default function ProductDetail() {
         <h3 className="text-[49px] font-semibold">Product Overview</h3>
         <p>{data?.product_description}</p>
       </div>
-      <div
+            {Array.isArray(data?.benefits) && data?.benefits[0] !== '-' && (
+                <div
         className="w-full mb-20"
         style={{
           backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
@@ -101,22 +102,23 @@ export default function ProductDetail() {
           <div className="flex items-center justify-center flex-wrap gap-5">
             {data?.benefits?.map((each: string, index: number) => (
               <div
-                className="w-[100%] md:w-[23%] bg-white/50 backdrop-blur-md border border-white/20 shadow-xl p-5 rounded-3xl text-[24px] flex flex-col items-center gap-5"
+                className="text-[14px] min-h-[30dvh] justify-between w-[100%] md:w-[23%] bg-white/50 backdrop-blur-md border border-white/20 shadow-xl p-5 rounded-3xl flex flex-col items-center gap-5"
                 key={index}
               >
-                <span>{each}</span>
+                <p className="text-center">{each}</p>
                 <div className="w-[50%] border" />
               </div>
             ))}
           </div>
         </div>
       </div>
-      <CTA />
+            )}
       <ProductList 
         data={product} 
         title="Related Product" 
         isLoading={productLoading}
       />
+            <CTA />
     </Container>
   );
 }

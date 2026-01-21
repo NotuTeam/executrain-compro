@@ -3,6 +3,7 @@
 "use client";
 
 import { useState } from "react";
+import { useAssetContext } from "@/components/AssetProvider";
 
 const whyChooseData = [
   {
@@ -24,6 +25,9 @@ const whyChooseData = [
 
 export default function WhyChoose({ type = "dark" }: { type?: string }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const { getStaticAsset } = useAssetContext();
+
+  const bodyPattern = getStaticAsset("body_pattern");
 
   return (
     <div
@@ -31,7 +35,7 @@ export default function WhyChoose({ type = "dark" }: { type?: string }) {
       style={
         type === "dark"
           ? {
-              backgroundImage: `url('./body.png')`,
+              backgroundImage: `url('${bodyPattern}')`,
               backgroundSize: "contain",
               backgroundPosition: "right",
               backgroundRepeat: "no-repeat",

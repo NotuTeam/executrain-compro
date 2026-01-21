@@ -10,6 +10,7 @@ import { TanstackProvider } from "../lib/tanstack";
 import Navbar from "@/components/atomic/navbar";
 import Footer from "@/components/atomic/footer";
 import LoadingPage from "@/components/atomic/loading";
+import { AssetProvider } from "@/components/AssetProvider";
 
 import "@/styles/globals.css";
 
@@ -20,6 +21,9 @@ export const metadata: Metadata = {
   title: "Excelearn",
   description: "Company Profile",
   metadataBase: new URL(BASE_URL),
+  icons: {
+    icon: "/logo.png",
+  },
   robots: {
     index: true,
     follow: true,
@@ -45,9 +49,11 @@ export default function RootLayout({
       <body>
         <Suspense fallback={<LoadingPage />}>
           <TanstackProvider>
-            <Navbar />
-            {children}
-            <Footer />
+            <AssetProvider>
+              <Navbar />
+              {children}
+              <Footer />
+            </AssetProvider>
           </TanstackProvider>
         </Suspense>
       </body>

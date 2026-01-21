@@ -1,21 +1,28 @@
 /** @format */
 
+"use client";
+
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import Button from "../atomic/button";
-
-import AboutPict from "@/assets/about.png";
+import { useAssetContext } from "@/components/AssetProvider";
 
 import { ArrowRightFromLine, ChevronRight } from "lucide-react";
 
 export default function HeroAbout() {
   const router = useRouter();
+  const { getAssetUrl, getStaticAsset } = useAssetContext();
+
+  const bannerPlain = getStaticAsset("banner_plain");
+  const heroBackground = getAssetUrl("hero_background");
+  const bodyPattern = getStaticAsset("body_pattern");
+  const aboutImage = getAssetUrl("about_image");
+
   return (
     <div
       className="min-w-[99dvw] min-h-[105dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
       style={{
-        backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
+        backgroundImage: `url('${bannerPlain}'), url('${heroBackground}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -23,7 +30,7 @@ export default function HeroAbout() {
       <div
         className="relative z-10 px-[5%] py-[5%] md:py-[2.5%] rounded-lg space-y-5 bg-white/50 backdrop-blur-md border border-white/20 shadow-xl"
         style={{
-          backgroundImage: `url('./body.png')`,
+          backgroundImage: `url('${bodyPattern}')`,
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
@@ -35,12 +42,10 @@ export default function HeroAbout() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-6 md:gap-10">
           <div className="items-start justify-start hidden md:flex">
-            <Image
-              src={AboutPict}
-              alt="testimoni pict"
-              height={300}
-              width={300}
-              className="md:h-[350px] md:w-[350px] lg:h-[400px] lg:w-[400px]"
+            <img
+              src={aboutImage}
+              alt="about pict"
+              className="h-[300px] w-[300px] md:h-[350px] md:w-[350px] lg:h-[400px] lg:w-[400px] object-contain"
             />
           </div>
           <div className="space-y-5 text-black flex flex-col items-center md:items-start justify-center">

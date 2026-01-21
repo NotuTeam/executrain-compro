@@ -8,6 +8,7 @@ import Button from "./atomic/button";
 import ScheduleCard from "./atomic/schedulecard";
 import TestimoniList from "./testimonilist";
 import { ScheduleCardSkeleton } from "@/components/skeleton";
+import { useAssetContext } from "@/components/AssetProvider";
 
 import { ArrowRightFromLine } from "lucide-react";
 
@@ -23,12 +24,15 @@ export default function ScheduleList({
   isLoading = false,
 }: CompProps) {
   const router = useRouter();
+  const { getAssetUrl } = useAssetContext();
+
+  const stepsBackground = getAssetUrl("steps_background");
 
   return (
     <div
       className="w-full text-white flex flex-col items-center justify-center text-center py-[5%] space-y-5 px-[5%] md:px-0 border-white border-b-5 box-border"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 58, 79, 0.8) 20%, rgba(255,255,255) 80%), url('./hero4.webp')`,
+        backgroundImage: `linear-gradient(rgba(0, 58, 79, 0.8) 20%, rgba(255,255,255) 80%), url('${stepsBackground}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

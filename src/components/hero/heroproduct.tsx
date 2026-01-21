@@ -5,13 +5,19 @@
 import { ReactNode } from "react";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { useAssetContext } from "@/components/AssetProvider";
 
 export default function HeroProduct({ children }: { children: ReactNode }) {
+  const { getAssetUrl, getStaticAsset } = useAssetContext();
+
+  const bannerPlain = getStaticAsset("banner_plain");
+  const heroBackground = getAssetUrl("hero_background");
+
   return (
     <div
       className="min-w-[99dvw] min-h-[90dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
       style={{
-        backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
+        backgroundImage: `url('${bannerPlain}'), url('${heroBackground}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

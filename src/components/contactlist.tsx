@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 
 import { SocmedProps, SocmedDataProps } from "@/types/socmed";
 import { useSocmed } from "@/services/socmed/hook";
+import { useAssetContext } from "@/components/AssetProvider";
 
 import INSTAGRAM_ICON from "@/assets/icons/instagram-blue.svg";
 import FACEBOOK_ICON from "@/assets/icons/facebook-blue.svg";
@@ -52,6 +53,10 @@ const socmedIcons: Record<string, any> = {
 export default function ContactList() {
   const router = useRouter();
   const { data: socmedData = [], isLoading } = useSocmed();
+  const { getAssetUrl, getStaticAsset } = useAssetContext();
+
+  const bodyPattern = getStaticAsset("body_pattern");
+  const contactImage = getAssetUrl("contact_image");
 
   const socmedList = socmedData
     .filter(
@@ -93,7 +98,7 @@ export default function ContactList() {
         return {
           icon: contactIcons[iconKey]?.icon || INSTAGRAM_ICON,
           url: `mailto:${item.socmed_link}`,
-          name: `+${item.socmed_link}`,
+          name: `${item.socmed_link}`,
         };
       return {
         icon: contactIcons[iconKey]?.icon || GMAIL_ICON,
@@ -106,7 +111,7 @@ export default function ContactList() {
     <div
       className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] space-y-6 md:space-y-10"
       style={{
-        backgroundImage: `url('./body.png'), url('./body.png')`,
+        backgroundImage: `url('${bodyPattern}'), url('${bodyPattern}')`,
         backgroundSize: "30%",
         backgroundPosition: "-20% 80%, 120% 40%",
         backgroundRepeat: "no-repeat",
@@ -138,7 +143,7 @@ export default function ContactList() {
           <div
             className="h-[350px] w-[350px] rounded-3xl"
             style={{
-              backgroundImage: `url('./contact-us.png')`,
+              backgroundImage: `url('${contactImage}')`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
