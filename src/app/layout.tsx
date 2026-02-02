@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   description: "Company Profile",
   metadataBase: new URL(BASE_URL),
   icons: {
-    icon: "/logo.png",
+    icon: "/logo-simple.png",
   },
   robots: {
     index: true,
