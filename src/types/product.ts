@@ -17,6 +17,11 @@ export interface ProductProps {
     public_id: string;
     url: string;
   };
+  learning_path_banner?: {
+    public_id: string;
+    url: string;
+  };
+  learning_path_redirect_url?:string
 }
 
 export interface Instructor {

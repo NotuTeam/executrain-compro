@@ -51,10 +51,10 @@ const DEFAULT_ASSETS: AssetMap = {
 
 // Static assets - tidak diambil dari API
 export const STATIC_ASSETS = {
-  banner_plain: "https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png",
-  banner_overlay: "https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559364/banner_tczrw5.png",
-  footer_background: "/footer.png",
-  body_pattern: "/body.png",
+  banner_plain: "https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233518/Subtract_hwkrrr.png",
+  banner_overlay: "https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233519/Subtract_2x_jy4hvi.png",
+  footer_background: "https://res.cloudinary.com/dyn73qnjx/image/upload/v1768026760/Logo_1_y8uzeh.png",
+  body_pattern: "https://res.cloudinary.com/dyn73qnjx/image/upload/v1768026761/Logo_objudb.png",
 };
 
 export const useAssets = (): UseQueryResult<AssetMap> => {

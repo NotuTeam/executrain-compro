@@ -74,7 +74,7 @@ export default function Promo({ size = "md", data }: CompProps) {
 
   if (size === "sm" || size === "md") {
     return (
-      <div className="bg-red-500 flex justify-between text-white items-center px-[5%] py-5 relative">
+      <div className="bg-white flex justify-between text-primary-500 items-center px-[5%] py-5 relative">
         <div className="flex gap-2 flex-col max-w-[65%]">
           <span className="text-[20px] md:text-[24px] font-semibold">
             {data?.promo_name} with{" "}
@@ -124,6 +124,7 @@ export default function Promo({ size = "md", data }: CompProps) {
           </div>
 
           <Button
+            type="primary"
             label="Grab the Deal"
             rounded
             onClick={() => {
@@ -148,7 +149,7 @@ export default function Promo({ size = "md", data }: CompProps) {
   }
 
   return (
-    <div className="bg-red-500 flex justify-between text-white items-center z-100 rounded-2xl text-left gap-3 py-[3%] px-[5%] md:py-[2%] md:px-[3%]">
+    <div className="bg-primary-500 flex justify-between text-white items-center z-100 rounded-2xl text-left gap-3 py-[3%] px-[5%] md:py-[2%] md:px-[3%]">
       <div className="space-y-2 max-w-[65%]">
         <h1 className="text-[20px] md:text-[24px] font-semibold">
           {data?.promo_name}{" "}

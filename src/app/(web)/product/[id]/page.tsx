@@ -3,15 +3,19 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
+import Image from "next/image";
 
 import Container from "@/components/atomic/container";
 import HeroProductDetail from "@/components/hero/heroproductdetail";
 import ProductList from "@/components/productlist";
 import Button from "@/components/atomic/button";
 import { Skeleton, HeroProductDetailSkeleton } from "@/components/skeleton";
+import CTA from "@/components/cta";
+import Benefit from "@/components/benefit";
+import RelatedScheduleList from "@/components/relatedschedule";
 
 import { useProduct, useProductDetail } from "@/services/product/hook";
-import CTA from "@/components/cta";
+import { useScheduleByProduct } from "@/services/schedule/hook";
 import { Home } from "lucide-react";
 
 export default function ProductDetail() {
@@ -23,6 +27,11 @@ export default function ProductDetail() {
   const { data: product = [], isLoading: productLoading } = useProduct({
     product_category: data?.product_category,
   });
+  const { data: relatedSchedule = [], isLoading: scheduleLoading } =
+    useScheduleByProduct({
+      product_id: id as string,
+      limit: 3,
+    });
 
   // Loading State
   if (isLoading) {
@@ -54,7 +63,7 @@ export default function ProductDetail() {
         <div
           className="min-w-[99dvw] min-h-[80dvh] flex items-center justify-center px-[5%] md:px-[7%] lg:px-[10%]"
           style={{
-            backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
+            backgroundImage: `url('https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233518/Subtract_hwkrrr.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -64,7 +73,8 @@ export default function ProductDetail() {
               Product Not Found
             </h2>
             <p className="text-[16px] md:text-[18px] text-gray-600">
-              The product you are looking for does not exist or has been removed.
+              The product you are looking for does not exist or has been
+              removed.
             </p>
             <Button
               label="Back to Home"
@@ -86,39 +96,46 @@ export default function ProductDetail() {
         <h3 className="text-[49px] font-semibold">Product Overview</h3>
         <p>{data?.product_description}</p>
       </div>
-            {Array.isArray(data?.benefits) && data?.benefits[0] !== '-' && (
-                <div
-        className="w-full mb-20"
-        style={{
-          backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="py-[5%] px-[5%] md:px-[15%] space-y-10 border">
-          <h4 className="text-[49px] text-center text-white font-semibold">
-            {"What You'll Learn"}
-          </h4>
-          <div className="flex items-center justify-center flex-wrap gap-5">
-            {data?.benefits?.map((each: string, index: number) => (
-              <div
-                className="text-[14px] min-h-[30dvh] justify-between w-[100%] md:w-[23%] bg-white/50 backdrop-blur-md border border-white/20 shadow-xl p-5 rounded-3xl flex flex-col items-center gap-5"
-                key={index}
-              >
-                <p className="text-center">{each}</p>
-                <div className="w-[50%] border" />
-              </div>
-            ))}
-          </div>
+      {Array.isArray(data?.benefits) && data?.benefits[0] !== "-" ? (
+        <Benefit data={data?.benefits || []} />
+      ) : null}
+      {data?.learning_path_banner?.url && (
+        <div className="flex flex-col items-center justify-center text-center pt-[8%] space-y-5 px-[5%] md:px-[7%] lg:px-[10%] w-full border-white border-b-5 box-border">
+          <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px] mb-6 md:mb-10">
+            Learning Path
+          </h2>
+          <Image
+            alt="learning-path"
+            src={data?.learning_path_banner?.url || ""}
+            width={100}
+            height={100}
+            className="w-full h-auto"
+          />
+          {data?.learning_path_redirect_url && (
+            <Button
+              onClick={() => {
+                window.open(
+                  data?.learning_path_redirect_url,
+                  "_blank",
+                  "noopener,noreferrer",
+                );
+              }}
+              label={"Explore More →"}
+              rounded
+              type="primary"
+            />
+          )}
         </div>
+      )}
+      <RelatedScheduleList data={relatedSchedule} isLoading={scheduleLoading} />
+      <div className="px-[5%] md:px-[7%] lg:px-[10%] w-full">
+        <ProductList
+          data={product}
+          title="Related Product"
+          isLoading={productLoading}
+        />
       </div>
-            )}
-      <ProductList 
-        data={product} 
-        title="Related Product" 
-        isLoading={productLoading}
-      />
-            <CTA />
+      <CTA />
     </Container>
   );
 }

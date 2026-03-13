@@ -19,7 +19,7 @@ export default function Statistic() {
       <div
         className="w-full py-[5%] px-[5%] md:px-[7%] lg:px-[10%] text-white flex items-center justify-evenly gap-5 md:gap-0"
         style={{
-          backgroundImage: `linear-gradient(90deg,rgba(0, 39, 82, 0.7) 25%, rgba(102, 201, 255, 0.5) 80%, rgba(255, 255, 255, 0) 100%),  url('${statisticBackground}')`,
+          backgroundImage: `url('https://res.cloudinary.com/dyn73qnjx/image/upload/v1768026762/Rectangle_4_yptyli.png'), url('${statisticBackground}')`,
           backgroundSize: "cover",
           backgroundPosition: "40% 40%",
         }}
@@ -36,7 +36,7 @@ export default function Statistic() {
       <div
         className="w-full py-[5%] px-[5%] md:px-[7%] lg:px-[10%] text-white flex items-center justify-center gap-5 md:gap-0"
         style={{
-          backgroundImage: `linear-gradient(90deg,rgba(0, 39, 82, 0.7) 25%, rgba(102, 201, 255, 0.5) 80%, rgba(255, 255, 255, 0) 100%),  url('${statisticBackground}')`,
+          backgroundImage: `url('https://res.cloudinary.com/dyn73qnjx/image/upload/v1768026762/Rectangle_4_yptyli.png'), url('${statisticBackground}')`,
           backgroundSize: "cover",
           backgroundPosition: "40% 40%",
         }}
@@ -54,7 +54,7 @@ export default function Statistic() {
     <div
       className="w-full py-[5%] px-[5%] md:px-[7%] lg:px-[10%] text-white flex items-center justify-evenly gap-5 md:gap-0"
       style={{
-        backgroundImage: `linear-gradient(90deg,rgba(0, 39, 82, 0.7) 25%, rgba(102, 201, 255, 0.5) 80%, rgba(255, 255, 255, 0) 100%),  url('${statisticBackground}')`,
+        backgroundImage: `url('https://res.cloudinary.com/dyn73qnjx/image/upload/v1768026762/Rectangle_4_yptyli.png'), url('${statisticBackground}')`,
         backgroundSize: "cover",
         backgroundPosition: "40% 40%",
       }}

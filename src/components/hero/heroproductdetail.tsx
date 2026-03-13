@@ -17,11 +17,11 @@ import {
 import { ProductProps } from "@/types/product";
 import Image from "next/image";
 
-export default function HeroProductDetail({ 
-  data, 
-  isLoading = false 
-}: { 
-  data?: ProductProps; 
+export default function HeroProductDetail({
+  data,
+  isLoading = false,
+}: {
+  data?: ProductProps;
   isLoading?: boolean;
 }) {
   const router = useRouter();
@@ -35,7 +35,7 @@ export default function HeroProductDetail({
     <div
       className="min-w-[99dvw] min-h-[80dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
       style={{
-        backgroundImage: `   url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
+        backgroundImage: `   url('https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233518/Subtract_hwkrrr.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -77,22 +77,22 @@ export default function HeroProductDetail({
               <h5 className="font-[500] text-[18px] md:text-[24px]">
                 Course Feature
               </h5>
-              <div className="grid grid-cols-2 border-t border-[#00AEEF] pt-3 gap-4">
+              <div className="grid grid-cols-2 border-t border-[#bf1f40] pt-3 gap-4">
                 <div className="flex flex-col gap-4 font-[300] text-xs md:text-sm">
                   <span className="flex items-center gap-2">
-                    <CornerRightUp size={14} color="#00AEEF" />
+                    <CornerRightUp size={14} color="#bf1f40" />
                     Skill Level
                   </span>
                   <span className="flex items-center gap-2">
-                    <Users size={14} color="#00AEEF" />
+                    <Users size={14} color="#bf1f40" />
                     Students
                   </span>
                   <span className="flex items-center gap-2">
-                    <BookOpenCheck size={14} color="#00AEEF" />
+                    <BookOpenCheck size={14} color="#bf1f40" />
                     Language
                   </span>
                   <span className="flex items-center gap-2">
-                    <Clock size={14} color="#00AEEF" />
+                    <Clock size={14} color="#bf1f40" />
                     Duration
                   </span>
                 </div>
@@ -125,26 +125,26 @@ export default function HeroProductDetail({
               <h5 className="font-[500] text-[18px] md:text-[24px]">
                 Course Feature
               </h5>
-              <div className="grid grid-cols-2 border-t border-[#00AEEF] pt-3">
+              <div className="grid grid-cols-2 border-t border-[#bf1f40] pt-3">
                 <div className="flex flex-col gap-2 font-[300] text-xs md:text-sm">
                   <span className="flex items-center gap-2">
-                    <CornerRightUp size={14} color="#00AEEF" />
+                    <CornerRightUp size={14} color="#bf1f40" />
                     Skill Level
                   </span>
                   <span className="flex items-center gap-2">
-                    <Users size={14} color="#00AEEF" />
+                    <Users size={14} color="#bf1f40" />
                     Students
                   </span>
                   <span className="flex items-center gap-2">
-                    <UserRound size={14} color="#00AEEF" />
+                    <UserRound size={14} color="#bf1f40" />
                     Lecturers
                   </span>
                   <span className="flex items-center gap-2">
-                    <BookOpenCheck size={14} color="#00AEEF" />
+                    <BookOpenCheck size={14} color="#bf1f40" />
                     Language
                   </span>
                   <span className="flex items-center gap-2">
-                    <Clock size={14} color="#00AEEF" />
+                    <Clock size={14} color="#bf1f40" />
                     Duration
                   </span>
                 </div>

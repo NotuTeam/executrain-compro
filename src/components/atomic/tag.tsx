@@ -5,7 +5,7 @@ export default function Tag({ label }: { label: string }) {
     const normalizedLabel = label.toUpperCase().replaceAll(/\s+/g, "_");
 
     const styles: Record<string, string> = {
-      IT_TRAINING: "bg-[#00AEEF] text-white",
+      IT_TRAINING: "bg-primary-500 text-white",
       IT_SUPPORT: "bg-[#7C3AED] text-white",
       IT_CONSULTANT: "bg-[#F59E0B] text-white",
       UNSET: "bg-gray-400 text-white",
@@ -25,7 +25,7 @@ export default function Tag({ label }: { label: string }) {
         label,
       )} px-3 py-1 rounded-full text-[10px] font-medium`}
     >
-      {label?.replaceAll("_", " ")}
+      {label?.replaceAll("_", " ")?.toUpperCase()}
     </span>
   );
 }

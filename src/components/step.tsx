@@ -22,7 +22,7 @@ export default function Step() {
 
   const contactList = socmedData.find(
     (item: SocmedDataProps) =>
-      item.socmed_link && ["WHATSAPP"].includes(item.socmed_name)
+      item.socmed_link && ["WHATSAPP"].includes(item.socmed_name),
   )?.socmed_link;
   return (
     <div className="w-full px-[5%] md:px-[7%] lg:px-[10%] pt-[5%]">
@@ -56,7 +56,7 @@ export default function Step() {
             />
           )}
         </div>
-        <div className="bg-white text-black border-x border-b border-[#00AEEF] rounded-b-4xl flex flex-col md:flex-row justify-between py-[5%] gap-5 md:gap-0">
+        <div className="bg-white text-black border-x border-b border-primary-500 rounded-b-4xl flex flex-col md:flex-row justify-between py-[5%] gap-5 md:gap-0">
           {[
             {
               title: "Contact Sales",
@@ -83,10 +83,10 @@ export default function Step() {
               <div
                 className={`flex md:flex-col items-start gap-5 px-[5%] ${
                   index > 0 ? "md:border-l border-t md:border-t-0" : ""
-                } border-[#00AEEF] pt-5 md:pt-0`}
+                } border-primary-500 pt-5 md:pt-0`}
                 key={index + 1}
               >
-                <span className="min-w-fit text-[28px] md:text-[35px] font-semibold text-[#00AEEF] border rounded-full w-[40px] h-[40px] md:w-[50px] md:h-[50px] flex items-center justify-center">
+                <span className="min-w-fit text-[28px] md:text-[35px] font-semibold text-primary-500 border rounded-full w-[40px] h-[40px] md:w-[50px] md:h-[50px] flex items-center justify-center">
                   {index + 1}
                 </span>
                 <div className="space-y-3">
@@ -94,7 +94,7 @@ export default function Step() {
                   <p className="text-sm md:text-base">{each.description}</p>
                 </div>
               </div>
-            )
+            ),
           )}
         </div>
       </div>

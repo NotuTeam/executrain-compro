@@ -44,7 +44,7 @@ export default function ProductList({
             Top-Rated Picks
           </h3>
         )}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-5 md:mt-8 px-0 md:px-[10%] gap-4 md:gap-5 mb-6 md:mb-8 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-5 md:mt-8 gap-4 md:gap-5 mb-6 md:mb-8 w-full">
           {isLoading ? (
             [1, 2, 3].map((i) => <ProductCardSkeleton key={i} />)
           ) : data.length === 0 ? (

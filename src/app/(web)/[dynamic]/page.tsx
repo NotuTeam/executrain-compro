@@ -34,7 +34,7 @@ export default function Dynamic() {
         <div
           className="min-h-[110dvh] w-full text-white flex items-center justify-center flex-col"
           style={{
-            backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
+            backgroundImage: `url('https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233518/Subtract_hwkrrr.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -65,7 +65,7 @@ export default function Dynamic() {
       <div
         className="py-8 md:py-12 w-full"
         style={{
-          backgroundImage: `url('./body.png'), url('./body.png')`,
+          backgroundImage: `url('.https://res.cloudinary.com/dyn73qnjx/image/upload/v1768026761/Logo_objudb.png'), url('.https://res.cloudinary.com/dyn73qnjx/image/upload/v1768026761/Logo_objudb.png')`,
           backgroundSize: "30%",
           backgroundPosition: "-20% 80%, 120% 40%",
           backgroundRepeat: "no-repeat",

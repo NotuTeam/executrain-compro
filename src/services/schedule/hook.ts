@@ -12,14 +12,14 @@ import {
   ScheduleProps,
   ScheduleFilterParams,
   ScheduleListResponse,
-  ScheduleCalendarParams,
 } from "@/types/schedule";
 
 import {
   ScheduleListService,
   ScheduleListFilteredService,
-  ScheduleCalendarService,
   ScheduleDetailService,
+  ScheduleByProductService,
+  ScheduleCategoriesService,
 } from "./handler";
 
 export const useSchedule = (): UseQueryResult<ScheduleProps[]> => {
@@ -58,20 +58,6 @@ export const useScheduleFiltered = (
   });
 };
 
-export const useScheduleCalendar = (
-  params: ScheduleCalendarParams
-): UseQueryResult<ScheduleProps[]> => {
-  return useQuery({
-    queryKey: ["schedule-calendar", params],
-    queryFn: async () => {
-      const { data } = await ScheduleCalendarService(params);
-      return data;
-    },
-    enabled: !!params.year && !!params.month,
-    refetchOnWindowFocus: false,
-  });
-};
-
 export const useScheduleDetail = (params: {
   id: string;
 }): UseQueryResult<ScheduleProps> => {
@@ -82,6 +68,35 @@ export const useScheduleDetail = (params: {
       return data;
     },
     enabled: !!params,
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useScheduleByProduct = (params?: {
+  product_id: string;
+  limit?: number;
+}): UseQueryResult<ScheduleProps[]> => {
+  return useQuery({
+    queryKey: ["schedule-by-product", params],
+    queryFn: async () => {
+      const { data } = await ScheduleByProductService({
+        product_id: params?.product_id || "",
+        limit: params?.limit || 3,
+      });
+      return data;
+    },
+    enabled: !!params?.product_id,
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useScheduleCategories = (): UseQueryResult<string[]> => {
+  return useQuery({
+    queryKey: ["schedule-categories"],
+    queryFn: async () => {
+      const { data } = await ScheduleCategoriesService();
+      return data;
+    },
     refetchOnWindowFocus: false,
   });
 };

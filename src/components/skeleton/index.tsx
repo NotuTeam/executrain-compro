@@ -105,7 +105,7 @@ export const TestimonialCardSkeleton = () => {
   return (
     <div className="bg-white flex flex-col items-start md:flex-row p-5">
       <Skeleton className="w-full md:w-[300px] md:min-w-[300px] lg:w-[350px] lg:min-w-[350px] aspect-square flex-shrink-0" />
-      <div className="space-y-3 p-3 md:p-5 bg-[#00AEEF]/10 rounded-t-xl rounded-br-xl md:ml-[-5%] mt-[5%] md:mt-[5%] min-h-[150px] flex items-center w-full">
+      <div className="space-y-3 p-3 md:p-5 bg-[#bf1f40]/10 rounded-t-xl rounded-br-xl md:ml-[-5%] mt-[5%] md:mt-[5%] min-h-[150px] flex items-center w-full">
         <div className="space-y-2 w-full">
           <Skeleton className="h-4 w-full" />
           <Skeleton className="h-4 w-full" />
@@ -168,7 +168,7 @@ export const HeroProductDetailSkeleton = () => {
     <div
       className="min-w-[99dvw] min-h-[80dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
       style={{
-        backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
+        backgroundImage: `url('https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233518/Subtract_hwkrrr.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -193,7 +193,7 @@ export const HeroScheduleDetailSkeleton = () => {
     <div
       className="min-w-[99dvw] min-h-[80dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
       style={{
-        backgroundImage: `url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764559418/bannerplain_dojpcb.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
+        backgroundImage: `url('https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233518/Subtract_hwkrrr.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

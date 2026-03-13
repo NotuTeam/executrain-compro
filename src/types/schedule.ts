@@ -5,6 +5,7 @@ import { Dayjs } from "dayjs";
 export interface ScheduleProps {
   _id: string;
   schedule_name: string;
+  schedule_category?: string;
   schedule_date: string;
   schedule_close_registration_date: string;
   status:
@@ -24,10 +25,12 @@ export interface ScheduleProps {
   language: string;
   is_assestment: boolean;
   link?: string;
-  banner: {
+  product_banner: {
     public_id: string;
     url: string;
   };
+  product_name?: string;
+  product_category?: string;
 }
 
 export interface ScheduleFilterParams {
@@ -35,6 +38,8 @@ export interface ScheduleFilterParams {
   date?: string | Date | Dayjs;
   page?: number;
   limit?: number;
+  schedule_category?: string | string[];
+  product_category?: string;
 }
 
 export interface ScheduleListResponse {
@@ -49,9 +54,4 @@ export interface ScheduleListResponse {
     has_next: boolean;
     has_prev: boolean;
   };
-}
-
-export interface ScheduleCalendarParams {
-  year: number;
-  month: number;
 }

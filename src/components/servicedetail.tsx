@@ -93,10 +93,8 @@ function ServiceDetailContent({ initialService }: ServiceDetailProps) {
               }}
               key={each._id}
               className={`font-semibold text-[16px] md:text-[20px] lg:text-[24px] cursor-pointer duration-150 flex gap-2 md:gap-3 items-center transition-colors ${
-                isSelected
-                  ? "text-[#00AEEF]"
-                  : "text-slate-300"
-              } hover:text-[#00AEEF]/70`}
+                isSelected ? "text-primary-500" : "text-slate-300"
+              } hover:text-primary-500/70`}
             >
               {each.logo?.url ? (
                 <Image

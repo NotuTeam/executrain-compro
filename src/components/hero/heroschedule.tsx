@@ -32,8 +32,8 @@ export default function HeroSchedule({ children }: { children: ReactNode }) {
           Schedule
         </h1>
         <p className="text-sm md:text-base">
-          ExceLEARN adalah penyedia layanan pelatihan bisnis dan IT terkemuka di
-          bawah naungan PT. Bina Kinerja Nusantara. Kami berkomitmen untuk
+          Excecutrain adalah penyedia layanan pelatihan bisnis dan IT terkemuka
+          di bawah naungan PT. Bina Kinerja Nusantara. Kami berkomitmen untuk
           menghasilkan profesional TI berkualitas tinggi. Sejak tahun 2017, kami
           berkomitmen membantu berbagai perusahaan meningkatkan keterampilan
           teknis dan produktivitas karyawannya.

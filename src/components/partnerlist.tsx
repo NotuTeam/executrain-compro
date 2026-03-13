@@ -51,7 +51,7 @@ export default function PartnerList({
           direction="up"
           duration={2}
         />{" "}
-        companies grow their teams with ExceLEARN
+        companies grow their teams with Excecutrain
       </h3>
 
       <div className="relative mt-5 md:mt-8 w-full">
@@ -78,7 +78,7 @@ export default function PartnerList({
                       className="object-contain w-[80%] h-[80%]"
                     />
                   </div>
-                )
+                ),
               )}
             </div>
           )}

@@ -24,13 +24,13 @@ export default function TestimoniList() {
 
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? testimonial.length - 1 : prevIndex - 1
+      prevIndex === 0 ? testimonial.length - 1 : prevIndex - 1,
     );
   };
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === testimonial.length - 1 ? 0 : prevIndex + 1
+      prevIndex === testimonial.length - 1 ? 0 : prevIndex + 1,
     );
   };
 
@@ -56,14 +56,14 @@ export default function TestimoniList() {
             <div className="flex items-center justify-center gap-3 absolute bottom-0 right-0">
               <button
                 onClick={handlePrevious}
-                className="border-[#00AEEF] text-[#00AEEF] border-2 text-[18px] md:text-[24px] w-[35px] h-[35px] md:w-[45px] md:h-[45px] flex items-center justify-center rounded-full cursor-pointer"
+                className="border-primary-500 text-primary-500 border-2 text-[18px] md:text-[24px] w-[35px] h-[35px] md:w-[45px] md:h-[45px] flex items-center justify-center rounded-full cursor-pointer"
                 aria-label="Previous testimonial"
               >
                 <Image src={ARROW_LEFT} alt="arrow left" />
               </button>
               <button
                 onClick={handleNext}
-                className="border-[#00AEEF] text-[#00AEEF] border-2 text-[18px] md:text-[24px] w-[35px] h-[35px] md:w-[45px] md:h-[45px] flex items-center justify-center rounded-full cursor-pointer"
+                className="border-primary-500 text-primary-500 border-2 text-[18px] md:text-[24px] w-[35px] h-[35px] md:w-[45px] md:h-[45px] flex items-center justify-center rounded-full cursor-pointer"
                 aria-label="Next testimonial"
               >
                 <Image src={ARROW_RIGHT} alt="arrow right" />

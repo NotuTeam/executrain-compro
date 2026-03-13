@@ -3,78 +3,85 @@
 
 import { useState } from "react";
 
-import dayjs, { Dayjs } from "dayjs";
-
-import Calendar from "@/components/atomic/calendar";
 import Container from "@/components/atomic/container";
 import HeroSchedule from "@/components/hero/heroschedule";
 import SelectedSchedule from "@/components/selectedschedule";
 import SearchBar from "@/components/atomic/schedulesearchbar";
 
 import {
+  useScheduleCategories,
   useScheduleFiltered,
-  useScheduleCalendar,
 } from "@/services/schedule/hook";
 import { useDebounce } from "@/lib/useDebounce";
 
 export default function Schedule() {
-  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
-  const [selectedMonth, setSelectedMonth] = useState<Dayjs>(
-    dayjs().add(1, "day")
-  );
   const [searchValue, setSearchValue] = useState("");
+  const [scheduleCategories, setScheduleCategories] = useState<string[]>([]);
+  const [productCategory, setProductCategory] = useState<string | undefined>(
+    undefined,
+  );
 
   const debouncedSearchValue = useDebounce(searchValue, 500);
-
-  const { data: calendarData = [] } = useScheduleCalendar({
-      year: selectedMonth.year(),
-      month: selectedMonth.month() + 1,
-    });
 
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useScheduleFiltered({
       search: debouncedSearchValue || undefined,
+      schedule_category:
+        scheduleCategories.length > 0 ? scheduleCategories : undefined,
+      product_category: productCategory,
     });
+
+  const { data: categories = [] } = useScheduleCategories();
 
   const allSchedules = data?.pages.flatMap((page) => page.data) || [];
 
   return (
     <Container>
       <HeroSchedule>
-        <SearchBar searchValue={searchValue} onSearchChange={setSearchValue} />
-      </HeroSchedule>
-      <div className="grid grid-cols-1 lg:grid-cols-2 w-full mt-10">
-        {/* Calendar - tampil di atas pada mobile */}
-        <div
-          className="w-[80%] md:w-full py-[5%] order-1 lg:order-2 mx-auto"
-          style={{
-            backgroundImage: `url('./body.png')`,
-            backgroundSize: "80%",
-            backgroundPosition: "0% 0%",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          <Calendar
-            selectedDate={selectedDate}
-            onDateSelect={(date) => setSelectedDate(date)}
-            onMonthSelect={(date) => setSelectedMonth(date)}
-            data={calendarData}
-          />
-        </div>
-
-        {/* Selected Schedule - tampil di bawah pada mobile */}
-        <SelectedSchedule
-          is_search={searchValue !== ""}
-          data={allSchedules}
-          selectedDate={selectedDate}
-          selectedMonth={selectedMonth}
-          onClearDate={() => setSelectedDate(null)}
-          fetchNext={fetchNextPage}
-          hasNext={hasNextPage}
-          isFetching={isFetchingNextPage}
-          isLoading={isLoading}
+        <SearchBar
+          searchValue={searchValue}
+          scheduleCategoryValue={scheduleCategories}
+          productCategoryValue={productCategory}
+          onSearchChange={setSearchValue}
+          onScheduleCategoryChange={setScheduleCategories}
+          onProductCategoryChange={setProductCategory}
+          scheduleCategoryList={categories}
         />
+      </HeroSchedule>
+      <div className=" w-full px-[5%] md:px-[7%] lg:px-[10%] pt-[5%] flex flex-wrap gap-3">
+        {categories?.map((each: string) => (
+          <button
+            onClick={() => {
+              if (scheduleCategories.includes(each)) {
+                setScheduleCategories(
+                  scheduleCategories.filter((each2) => each2 !== each),
+                );
+              } else {
+                setScheduleCategories(
+                  Array.from(new Set([...scheduleCategories, each])),
+                );
+              }
+            }}
+            type="button"
+            className={`border-2 border-primary-600 px-4 py-1 rounded-full text-primary-600 cursor-pointer ${scheduleCategories.includes(each) ? "bg-primary-50" : ""}`}
+            key={each}
+          >
+            {each}
+          </button>
+        ))}
       </div>
+      <SelectedSchedule
+        is_search={
+          searchValue !== "" ||
+          scheduleCategories.length > 0 ||
+          productCategory !== undefined
+        }
+        data={allSchedules}
+        fetchNext={fetchNextPage}
+        hasNext={hasNextPage}
+        isFetching={isFetchingNextPage}
+        isLoading={isLoading}
+      />
     </Container>
   );
 }

@@ -44,10 +44,7 @@ export default function Hero() {
         onLoadedData={() => setIsVideoLoaded(true)}
         poster={heroBackground}
       >
-        <source
-          src={heroVideo}
-          type="video/mp4"
-        />
+        <source src={heroVideo} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
@@ -70,11 +67,11 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 flex flex-col gap-3 md:gap-5 items-start max-w-full md:max-w-[80%] lg:max-w-[50%]">
         <h1 className="text-[32px] md:text-[45px] lg:text-[61px] font-semibold">
-          ExceLEARN
+          Excecutrain
         </h1>
         <p className="text-sm md:text-base">
-          ExceLEARN adalah penyedia layanan pelatihan bisnis dan IT terkemuka di
-          bawah naungan PT. Bina Kinerja Nusantara. Kami berkomitmen untuk
+          Excecutrain adalah penyedia layanan pelatihan bisnis dan IT terkemuka
+          di bawah naungan PT. Bina Kinerja Nusantara. Kami berkomitmen untuk
           menghasilkan profesional TI berkualitas tinggi. Sejak tahun 2017, kami
           berkomitmen membantu berbagai perusahaan meningkatkan keterampilan
           teknis dan produktivitas karyawannya.

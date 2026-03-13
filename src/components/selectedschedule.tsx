@@ -19,10 +19,7 @@ import { ScheduleProps } from "@/types/schedule";
 
 interface CompProps {
   data?: ScheduleProps[];
-  selectedDate?: Dayjs | null;
-  selectedMonth: Dayjs;
   is_search?: boolean;
-  onClearDate?: () => void;
   fetchNext?: () => void;
   hasNext?: boolean;
   isFetching?: boolean;
@@ -65,13 +62,13 @@ function ScheduleCard({ data }: { data: ScheduleProps }) {
           {data?.schedule_name || "-"}
         </h4>
         <div className="flex items-center gap-2 text-xs md:text-sm text-gray-600">
-          <Users className="w-4 h-4 md:w-4 md:h-4 text-[#00AEEF]" />
+          <Users className="w-4 h-4 md:w-4 md:h-4 text-primary-500" />
           <span>{data?.quota || "-"}</span>
         </div>
       </div>
       <div className="flex flex-col md:items-end gap-2 md:gap-3 w-auto">
         <div className="flex items-center gap-2 text-xs md:text-sm text-gray-600">
-          <Clock className="w-4 h-4 md:w-4 md:h-4 text-[#00AEEF]" />
+          <Clock className="w-4 h-4 md:w-4 md:h-4 text-primary-500" />
           <span>
             {data?.schedule_start} - {data?.schedule_end} WIB
           </span>
@@ -93,88 +90,27 @@ function ScheduleCard({ data }: { data: ScheduleProps }) {
 
 export default function SelectedSchedule({
   data = [],
-  selectedDate,
-  is_search = false,
-  onClearDate,
   fetchNext,
   hasNext,
   isFetching,
   isLoading = false,
-}: CompProps) {
-  let showData: ScheduleProps[] = data;
-  const showDate: string[] = [];
-
-  // Jika ada pencarian, group by date
-  if (is_search) {
-    data.forEach((each: ScheduleProps) => {
-      const eachDateStr: string = dayjs(each.schedule_date).format(
-        "YYYY-MM-DD"
-      );
-      if (!showDate.includes(eachDateStr)) return showDate.push(eachDateStr);
-    });
-  }
-  // Jika ada tanggal yang dipilih, filter by specific date
-  else if (selectedDate) {
-    showData = data.filter((each: ScheduleProps) => {
-      const selectedDateStr = dayjs(selectedDate).format("YYYY-MM-DD");
-      const eachDateStr = dayjs(each.schedule_date).format("YYYY-MM-DD");
-      return selectedDateStr === eachDateStr;
-    });
-  }
-  // Default: tampilkan semua data yang digroup by date
-  else {
-    data.forEach((each: ScheduleProps) => {
-      const eachDateStr: string = dayjs(each.schedule_date).format(
-        "YYYY-MM-DD"
-      );
-      if (!showDate.includes(eachDateStr)) return showDate.push(eachDateStr);
-    });
-  }
-
-  return (
-    <div className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] order-2 lg:order-1">
-      {/* Breadcrumb */}
-      {!is_search && (
-        <div className="flex items-center gap-2 mb-6 text-sm md:text-base">
-          <button
-            onClick={onClearDate}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors font-[600] cursor-pointer`}
-          >
-            <span>All Schedule</span>
-          </button>
-
-          {selectedDate && (
-            <>
-              <ChevronRight className="w-4 h-4 text-gray-400" />
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold">
-                <span>{dayjs(selectedDate).format("dddd, DD MMMM YYYY")}</span>
-              </div>
-            </>
-          )}
-        </div>
-      )}
-
-      {selectedDate && (
-        <>
-          <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
-            <Calendar className="w-5 h-5 md:w-6 md:h-6 text-[#00AEEF]" />
-            <h3 className="text-lg md:text-2xl font-semibold">
-              {dayjs(`${selectedDate}`, "YYYY-MM-DD").format(
-                "dddd, DD MMMM YYYY"
-              )}
-            </h3>
-          </div>
-        </>
-      )}
-
-      {/* Jika ada pencarian atau tidak ada tanggal yang dipilih (default view) */}
-      <div className="space-y-3 md:space-y-4">
-        {isLoading ? (
+}: Readonly<CompProps>) {
+  if (isLoading) {
+    return (
+      <div className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] order-2 lg:order-1">
+        <div className="space-y-3 md:space-y-4">
           <div className="bg-slate-50 flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
             <span className="font-[400] text-slate-500">Loading...</span>
           </div>
-        ) : showData.length > 0 ? (
-          showData.map((each: ScheduleProps, index: number) => (
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] order-2 lg:order-1">
+      <div className="space-y-3 md:space-y-4">
+        {data.length > 0 ? (
+          data.map((each: ScheduleProps, index: number) => (
             <ScheduleCard key={index} data={each} />
           ))
         ) : (
@@ -189,8 +125,7 @@ export default function SelectedSchedule({
         )}
       </div>
 
-      {/* Load More Button */}
-      {!isLoading && showData.length > 0 && hasNext && !selectedDate && (
+      {hasNext && (
         <div className="flex justify-center mt-6">
           <Button
             label={isFetching ? "Loading..." : "Load More"}

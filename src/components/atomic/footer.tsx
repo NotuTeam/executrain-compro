@@ -61,7 +61,7 @@ export default function Footer() {
     .filter(
       (item: SocmedDataProps) =>
         item.socmed_link &&
-        !["GMAIL", "WHATSAPP", "GMAPS"].includes(item.socmed_name)
+        !["GMAIL", "WHATSAPP", "GMAPS"].includes(item.socmed_name),
     )
     .map((item: SocmedDataProps) => {
       const iconKey = item.socmed_name;
@@ -76,7 +76,7 @@ export default function Footer() {
   const contactList = socmedData
     .filter(
       (item: SocmedDataProps) =>
-        item.socmed_link && ["GMAIL", "WHATSAPP"].includes(item.socmed_name)
+        item.socmed_link && ["GMAIL", "WHATSAPP"].includes(item.socmed_name),
     )
     .map((item: SocmedDataProps) => {
       const iconKey = item.socmed_name;
@@ -100,7 +100,7 @@ export default function Footer() {
     });
   return (
     <footer
-      className="bg-[#00AEEF] min-w-[98dvw] max-w-[99dvw] text-white grid grid-cols-1 md:grid-cols-2 px-[7%] lg:px-[10%] py-[5%] gap-10"
+      className="bg-[#bf1f40] min-w-[98dvw] max-w-[99dvw] text-white grid grid-cols-1 md:grid-cols-2 px-[7%] lg:px-[10%] py-[5%] gap-10"
       style={{
         backgroundImage: `url('${footerBackground}')`,
         backgroundSize: "contain",
@@ -162,7 +162,9 @@ export default function Footer() {
         )}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10">
           <div className="md:col-span-2 space-y-2 md:space-y-3 text-sm md:text-base">
-            <h5 className="font-[700] text-[20px] md:text-[25px]">Excelearn</h5>
+            <h5 className="font-[700] text-[20px] md:text-[25px]">
+              Excecutrain
+            </h5>
             <span className="block">PT. Bina Kinerja Nusantara</span>
             <span className="block">
               Equity Tower, 26th Floor, Unit H<br />
@@ -185,7 +187,7 @@ export default function Footer() {
             </div>
             <div className="flex flex-col">
               <span className="font-[500]">Website :</span>
-              <Link href="https://excelearn.co.id">Excelearn.co.id</Link>
+              <Link href="https://excelearn.co.id">Excecutrain.co.id</Link>
             </div>
           </div>
           <div className="space-y-2 md:space-y-3 text-sm md:text-base">
@@ -196,7 +198,7 @@ export default function Footer() {
                   <span key={service._id}>
                     <Link
                       href={`/service?type=${serviceToSlug(
-                        service.service_name
+                        service.service_name,
                       )}`}
                     >
                       {service.service_name}

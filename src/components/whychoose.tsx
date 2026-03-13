@@ -53,7 +53,7 @@ export default function WhyChoose({ type = "dark" }: { type?: string }) {
           <br />
           Choose
           <br />
-          <span className="text-[#00AEEF]">ExceLEARN?</span>
+          <span className="text-primary-500">Excecutrain?</span>
         </h2>
       </div>
       <div className="block md:hidden w-full md:w-auto text-center md:text-left">
@@ -62,7 +62,7 @@ export default function WhyChoose({ type = "dark" }: { type?: string }) {
             type === "light" ? "text-white" : "text-black"
           }`}
         >
-          Why Choose <span className="text-[#00AEEF]">ExceLEARN?</span>
+          Why Choose <span className="text-primary-500">Excecutrain?</span>
         </h2>
       </div>
       <div className="flex flex-col gap-3 flex-1">
@@ -80,7 +80,7 @@ export default function WhyChoose({ type = "dark" }: { type?: string }) {
                 className={`flex items-center justify-center text-[18px] md:text-[24px] font-semibold border-2 rounded-full flex-shrink-0 ${
                   type === "light"
                     ? "border-black text-black"
-                    : "border-[#00AEEF] text-[#00AEEF]"
+                    : "border-primary-500 text-primary-500"
                 } h-[40px] md:h-[50px] aspect-square`}
               >
                 {index + 1}

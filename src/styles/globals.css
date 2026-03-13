@@ -2,6 +2,19 @@
 
 @import "tailwindcss";
 
+@theme {
+  --color-primary-50: rgb(252 222 227 / 1);
+  --color-primary-100: rgb(250 205 212 / 1);
+  --color-primary-200: rgb(245 170 183 / 1);
+  --color-primary-300: rgb(240 136 155 / 1);
+  --color-primary-400: rgb(232 102 126 / 1);
+  --color-primary-500: #bf1f40;
+  --color-primary-600: rgb(171 28 58 / 1);
+  --color-primary-700: rgb(152 25 51 / 1);
+  --color-primary-800: rgb(133 22 45 / 1);
+  --color-primary-900: rgb(114 19 38 / 1);
+}
+
 body {
   overflow-x: hidden;
 }

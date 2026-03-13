@@ -5,7 +5,7 @@
 import { ReactNode } from "react";
 
 const bgColor = {
-  primary: "bg-[#00AEEF]",
+  primary: "bg-primary-500",
   default: "bg-white",
   disable: "bg-slate-300",
 };

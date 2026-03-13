@@ -2,27 +2,43 @@
 
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useServices } from "@/services/service/hook";
-import { serviceToSlug } from "@/lib/utils";
+import { useProduct } from "@/services/product/hook";
 import { ServiceCardSkeleton } from "@/components/skeleton";
+import ProductList from "./productlist";
 
-// Default icons for fallback
 import IT_TRAINING_ICON from "@/assets/icons/it_training.svg";
+import IT_TRAINING_DISABLE_ICON from "@/assets/icons/it_training_disable.svg";
 
 export default function ServiceList() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [selected, setSelected] = useState<any>();
   const { data: services = [], isLoading } = useServices();
+
+  const { data: product = [], isLoading: productLoading } = useProduct({
+    product_category: selected?.slug ? selected?.slug : undefined,
+  });
+
+  useEffect(() => {
+    if (services.length > 0) {
+      const newService = services[0];
+      if (newService) {
+        setSelected(newService);
+      }
+    }
+  }, [services]);
 
   if (isLoading) {
     return (
-      <div className="px-[5%] md:px-[7%] lg:px-[10%] py-[5%] text-center w-full space-y-6 md:space-y-10 min-h-[30dvh] md:min-h-[50dvh]">
+      <div className="px-[5%] md:px-[7%] lg:px-[10%] py-[5%] text-center w-full space-y-6 md:space-y-6 min-h-[30dvh] md:min-h-[50dvh]">
         <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px]">
-          Services
+          Our Business Solutions
         </h2>
+        <h3 className="text-[14px] md:text-[18px] lg:text-[20px] font-semibold">
+          Delivering reliable technology solutions for modern business needs.
+        </h3>
         <div className="flex justify-evenly gap-4 md:gap-6">
           {[1, 2, 3].map((i) => (
             <ServiceCardSkeleton key={i} />
@@ -33,10 +49,13 @@ export default function ServiceList() {
   }
 
   return (
-    <div className="px-[5%] md:px-[7%] lg:px-[10%] py-[5%] text-center w-full space-y-6 md:space-y-10 min-h-[30dvh] md:min-h-[50dvh]">
+    <div className="py-[5%] text-center w-full space-y-6 md:space-y-6 min-h-[30dvh] md:min-h-[50dvh]">
       <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px]">
-        Services
+        Our Business Solutions
       </h2>
+      <h3 className="text-[14px] md:text-[18px] lg:text-[20px] font-semibold">
+        Delivering reliable technology solutions for modern business needs.
+      </h3>
       {services.length === 0 ? (
         <div className="bg-slate-50 flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
           <span className="font-[400] text-slate-500 text-[16px] md:text-[18px]">
@@ -44,72 +63,53 @@ export default function ServiceList() {
           </span>
         </div>
       ) : (
-        <div className="flex justify-evenly gap-4 md:gap-6">
-          {services.map((each: any, index: number) => (
-          <Link
-            key={each._id || index}
-            href={`/service?type=${serviceToSlug(each.service_name)}`}
-            className="flex flex-col items-center justify-start gap-5 text-center flex-1 group relative overflow-hidden"
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            <div
-              className={`w-full rounded-3xl p-5 md:p-8 flex flex-col items-center justify-center gap-3 md:gap-5 min-h-[250px] md:min-h-[350px] transition-all duration-500 relative ${
-                hoveredIndex === index
-                  ? "bg-gradient-to-br from-[#1a3a52] via-[#0d4d6b] to-[#00AEEF]"
-                  : "bg-white border-gray-200"
-              }`}
-            >
-              <div
-                className={`w-[80px] h-[80px] md:w-[120px] md:h-[120px] rounded-2xl flex items-center justify-center transition-all duration-500 ${
-                  hoveredIndex === index
-                    ? "bg-white/10 backdrop-blur-sm"
-                    : "bg-transparent"
-                }`}
-              >
-                {each.logo?.url ? (
-                  <Image
-                    src={each.logo.url}
-                    alt={`${each.service_name} logo`}
-                    width={80}
-                    height={80}
-                    className={`md:w-[80px] md:h-[80px] object-contain transition-all duration-500 ${
-                      hoveredIndex === index ? "brightness-0 invert" : ""
-                    }`}
-                  />
-                ) : (
-                  <Image
-                    src={IT_TRAINING_ICON}
-                    alt={`${each.service_name} logo`}
-                    width={60}
-                    height={60}
-                    className={`md:w-[80px] md:h-[80px] transition-all duration-500 ${
-                      hoveredIndex === index ? "brightness-0 invert" : ""
-                    }`}
-                  />
-                )}
-              </div>
+        <div
+          id="service-detail"
+          className="pt-[5%] px-[5%] md:px-[7%] lg:px-[10%] w-full"
+        >
+          {/* Tab container with wrap */}
+          <div className="flex flex-wrap gap-3 md:gap-6 lg:gap-8 border-b-2 border-slate-300 pb-3">
+            {services.map((each: any) => {
+              const slug = each.slug;
+              const isSelected = selected?._id === each._id;
 
-              <h3
-                className={`text-[18px] md:text-[24px] font-semibold transition-all duration-500 ${
-                  hoveredIndex === index ? "text-white" : "text-black"
-                }`}
-              >
-                {each.service_name}
-              </h3>
-
-              <p
-                className={`text-[12px] md:text-[14px] font-[400] leading-relaxed transition-all duration-500 ${
-                  hoveredIndex === index
-                    ? "text-white opacity-100 max-h-[200px]"
-                    : "text-transparent opacity-0 max-h-0"
-                }`}
-              >
-                {each.service_description}
-              </p>
-            </div>
-          </Link>
-          ))}
+              return (
+                <div
+                  onClick={() => {
+                    setSelected(each);
+                  }}
+                  key={each._id}
+                  className={`font-semibold text-[16px] md:text-[20px] lg:text-[24px] cursor-pointer duration-150 flex gap-2 md:gap-3 items-center transition-colors ${
+                    isSelected ? "text-primary-500" : "text-slate-300"
+                  } hover:text-primary-500/70`}
+                >
+                  {each.logo?.url ? (
+                    <Image
+                      src={each.logo.url}
+                      alt={each.service_name}
+                      height={20}
+                      width={20}
+                      className={`md:h-[18px] md:w-[18px] lg:h-[20px] lg:w-[20px] object-contain ${
+                        isSelected ? "opacity-100" : "opacity-50"
+                      }`}
+                    />
+                  ) : (
+                    <Image
+                      src={
+                        isSelected ? IT_TRAINING_ICON : IT_TRAINING_DISABLE_ICON
+                      }
+                      alt={each.service_name}
+                      height={16}
+                      width={16}
+                      className="md:h-[18px] md:w-[18px] lg:h-[20px] lg:w-[20px]"
+                    />
+                  )}
+                  {each.service_name}
+                </div>
+              );
+            })}
+          </div>
+          <ProductList data={product} isLoading={productLoading} />
         </div>
       )}
     </div>

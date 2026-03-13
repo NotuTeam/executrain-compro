@@ -41,7 +41,7 @@ export default function ProductCard({ data, size = "md" }: CompProps) {
         </div>
 
         <div className="p-[5%]">
-          <div className="flex justify-between items-start pb-5 md:pb-8 border-b-2 border-[#00AEEF]">
+          <div className="flex justify-between items-start pb-5 md:pb-8 border-b-2 border-[#bf1f40]">
             <Tooltip placement="top" title={data?.product_name || "-"}>
               <h3 className="text-[16px] md:text-[20px] lg:text-[24px] font-semibold text-left max-w-[65%]">
                 {data?.product_name || "-"}
@@ -74,13 +74,13 @@ export default function ProductCard({ data, size = "md" }: CompProps) {
             </div>
             <div className="flex gap-3 items-center">
               <div className="flex items-center gap-1">
-                <CornerRightUp size={12} color="#00AEEF" />
+                <CornerRightUp size={12} color="#bf1f40" />
                 <span className="text-[12px] capitalize">
                   {data?.skill_level?.replace("_", " ").toLowerCase() || "-"}
                 </span>
               </div>
               <div className="flex items-center gap-1">
-                <Users size={12} color="#00AEEF" />
+                <Users size={12} color="#bf1f40" />
                 <span className="text-[12px]">{data?.max_participant}</span>
               </div>
             </div>
@@ -134,14 +134,14 @@ export default function ProductCard({ data, size = "md" }: CompProps) {
                 </div>
                 <div className="flex gap-5 items-center">
                   <div className="flex items-center gap-1">
-                    <CornerRightUp size={12} color="#00AEEF" />
+                    <CornerRightUp size={12} color="#bf1f40" />
                     <span className="text-[12px] capitalize">
                       {data?.skill_level?.replace("_", " ").toLowerCase() ||
                         "-"}
                     </span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Users size={12} color="#00AEEF" />
+                    <Users size={12} color="#bf1f40" />
                     <span className="text-[12px]">{data?.max_participant}</span>
                   </div>
                 </div>

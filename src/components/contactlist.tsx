@@ -62,7 +62,7 @@ export default function ContactList() {
     .filter(
       (item: SocmedDataProps) =>
         item.socmed_link &&
-        !["GMAIL", "WHATSAPP", "GMAPS"].includes(item.socmed_name)
+        !["GMAIL", "WHATSAPP", "GMAPS"].includes(item.socmed_name),
     )
     .map((item: SocmedDataProps) => {
       const iconKey = item.socmed_name;
@@ -78,7 +78,7 @@ export default function ContactList() {
     .filter(
       (item: SocmedDataProps) =>
         item.socmed_link &&
-        ["GMAIL", "WHATSAPP", "GMAPS", "PHONE"].includes(item.socmed_name)
+        ["GMAIL", "WHATSAPP", "GMAPS", "PHONE"].includes(item.socmed_name),
     )
     .map((item: SocmedDataProps) => {
       const iconKey = item.socmed_name;
@@ -130,7 +130,7 @@ export default function ContactList() {
               <button
                 type="button"
                 onClick={() => router.push(each.url)}
-                className="cursor-pointer bg-linear-to-r from-[#141A2E] h-[100px] to-[#76dbff] text-white p-4 md:p-5 rounded-full w-full md:min-w-[45%] md:w-[50%] flex items-center gap-3 text-sm md:text-base"
+                className="cursor-pointer bg-linear-to-r from-primary-600 h-[100px] to-primary-400 text-white p-4 md:p-5 rounded-full w-full md:min-w-[45%] md:w-[60%] flex items-center gap-3 text-sm md:text-base"
                 key={index}
               >
                 <Image src={each.icon} alt={`socmed ${index}`} />

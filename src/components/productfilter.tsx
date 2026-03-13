@@ -18,8 +18,8 @@ export default function ProductFilter() {
           }
           className={`px-5 py-2 rounded-full border-2 border-white transition-colors ${
             selectedFilter === filter
-              ? "bg-white text-[#00AEEF]"
-              : "bg-transparent text-white hover:bg-white hover:text-[#00AEEF]"
+              ? "bg-white text-primary-500"
+              : "bg-transparent text-white hover:bg-white hover:text-primary-500"
           }`}
         >
           {filter}

@@ -10,8 +10,6 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import Promo from "../promo";
 import Button from "./button";
 
-import Logo from "@/assets/logo.png";
-
 import { usePromo } from "@/services/promo/hook";
 import { usePages } from "@/services/pages/hook";
 import { useServices } from "@/services/service/hook";
@@ -22,13 +20,12 @@ export default function Navbar() {
   const { data: promo, isLoading: promoLoading } = usePromo();
   const { data: pages = [], isLoading: pagesLoading } = usePages();
   const { data: services = [], isLoading: servicesLoading } = useServices();
-  
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isServiceOpen, setIsServiceOpen] = useState(false);
   const [isOtherOpen, setIsOtherOpen] = useState(false);
   const [isScheduleOpen, setIsScheduleOpen] = useState(false);
   const [isProductOpen, setIsProductOpen] = useState(false);
-  const [isAboutOpen, setIsAboutOpen] = useState(false);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -38,7 +35,6 @@ export default function Navbar() {
   // Group pages by type
   const schedulePages = pages.filter((page: any) => page.type === "Schedule");
   const productPages = pages.filter((page: any) => page.type === "Product");
-  const aboutPages = pages.filter((page: any) => page.type === "About Us");
   const otherPages = pages.filter((page: any) => page.type === "Other");
 
   // Check if current page is a service page
@@ -91,13 +87,13 @@ export default function Navbar() {
         <div
           className={`flex justify-between text-white items-center px-[5%] md:px-[7%] lg:px-[10%] transition-all duration-300 ${
             isScrolled
-              ? "bg-[#00AEEF] shadow-lg backdrop-blur-md"
-              : "bg-[#00AEEF] md:bg-transparent"
+              ? "bg-primary-500 shadow-lg backdrop-blur-md"
+              : "bg-primary-500 md:bg-transparent"
           }`}
         >
           <Link href="/" onClick={closeSidebar}>
             <Image
-              src={Logo}
+              src="/logo.png"
               alt="logo"
               width={100}
               height={33}
@@ -117,59 +113,6 @@ export default function Navbar() {
             >
               Home
             </Link>
-
-            {/* About Us - Dynamic */}
-            {aboutPages.length > 0 ? (
-              <div
-                className="relative"
-                onMouseEnter={() => setIsAboutOpen(true)}
-                onMouseLeave={() => setIsAboutOpen(false)}
-              >
-                <button
-                  className={`flex items-center gap-1 hover:text-gray-200 transition-colors relative pb-1 ${
-                    path === "/about"
-                      ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
-                      : ""
-                  }`}
-                >
-                  About Us
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-300 ${
-                      isAboutOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-                <div
-                  className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 min-w-[200px] ${
-                    isAboutOpen
-                      ? "opacity-100 visible translate-y-0"
-                      : "opacity-0 invisible -translate-y-2"
-                  }`}
-                >
-                  {aboutPages.map((page: any) => (
-                    <Link
-                      key={page._id}
-                      href={`/${page.path}`}
-                      className="block px-6 py-3 text-gray-800 hover:bg-[#00AEEF] hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
-                      onClick={() => setIsAboutOpen(false)}
-                    >
-                      {page.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <Link
-                href="/about"
-                className={`hover:text-gray-200 transition-colors relative pb-1 ${
-                  path === "/about"
-                    ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
-                    : ""
-                }`}
-              >
-                About Us
-              </Link>
-            )}
 
             {/* Services Dropdown */}
             <div
@@ -204,7 +147,7 @@ export default function Navbar() {
                   <Link
                     key={index}
                     href={`/service?type=${service.slug}`}
-                    className="block px-6 py-3 text-gray-800 hover:bg-[#00AEEF] hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                    className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
                     onClick={() => setIsServiceOpen(false)}
                   >
                     {service.name}
@@ -245,7 +188,7 @@ export default function Navbar() {
                     <Link
                       key={page._id}
                       href={`/${page.path}`}
-                      className="block px-6 py-3 text-gray-800 hover:bg-[#00AEEF] hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                      className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
                       onClick={() => setIsProductOpen(false)}
                     >
                       {page.name}
@@ -298,7 +241,7 @@ export default function Navbar() {
                     <Link
                       key={page._id}
                       href={`/${page.path}`}
-                      className="block px-6 py-3 text-gray-800 hover:bg-[#00AEEF] hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                      className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
                       onClick={() => setIsScheduleOpen(false)}
                     >
                       {page.name}
@@ -348,7 +291,7 @@ export default function Navbar() {
                     <Link
                       key={page._id}
                       href={`/${page.path}`}
-                      className="block px-6 py-3 text-gray-800 hover:bg-[#00AEEF] hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                      className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
                       onClick={() => setIsOtherOpen(false)}
                     >
                       {page.name}
@@ -357,6 +300,30 @@ export default function Navbar() {
                 </div>
               </div>
             )}
+            {/* Article */}
+            <Link
+              href="/article"
+              className={`hover:text-gray-200 transition-colors relative pb-1 ${
+                path?.startsWith("/article")
+                  ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
+                  : ""
+              }`}
+            >
+              Article
+            </Link>
+
+            {/* Career */}
+            <Link
+              href="/career"
+              className={`hover:text-gray-200 transition-colors relative pb-1 ${
+                path?.startsWith("/career")
+                  ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
+                  : ""
+              }`}
+            >
+              Career
+            </Link>
+
             <Link href="/contact">
               <Button label="Contact Us" />
             </Link>
@@ -395,7 +362,7 @@ export default function Navbar() {
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-between p-5 border-b border-gray-200">
             <Link href="/" onClick={closeSidebar}>
-              <Image src={Logo} alt="logo" width={120} height={40} />
+              <Image src="/logo.png" alt="logo" width={120} height={40} />
             </Link>
             <button
               onClick={closeSidebar}
@@ -412,7 +379,7 @@ export default function Navbar() {
               href="/"
               className={`block px-6 py-3 transition-colors ${
                 path === "/"
-                  ? "text-[#00AEEF] bg-blue-50 border-l-4 border-[#00AEEF] font-semibold"
+                  ? "text-primary-500 bg-blue-50 border-l-4 border-primary-500 font-semibold"
                   : "text-gray-800 hover:bg-gray-100"
               }`}
               onClick={closeSidebar}
@@ -423,7 +390,7 @@ export default function Navbar() {
               href="/about"
               className={`block px-6 py-3 transition-colors ${
                 path === "/about"
-                  ? "text-[#00AEEF] bg-blue-50 border-l-4 border-[#00AEEF] font-semibold"
+                  ? "text-primary-500 bg-blue-50 border-l-4 border-primary-500 font-semibold"
                   : "text-gray-800 hover:bg-gray-100"
               }`}
               onClick={closeSidebar}
@@ -436,7 +403,7 @@ export default function Navbar() {
               <button
                 className={`w-full flex items-center justify-between px-6 py-3 transition-colors ${
                   isServicePage
-                    ? "text-[#00AEEF] bg-blue-50 border-l-4 border-[#00AEEF] font-semibold"
+                    ? "text-primary-500 bg-blue-50 border-l-4 border-primary-500 font-semibold"
                     : "text-gray-800 hover:bg-gray-100"
                 }`}
                 onClick={() => setIsServiceOpen(!isServiceOpen)}
@@ -459,7 +426,7 @@ export default function Navbar() {
                   <Link
                     key={index}
                     href={`/service?type=${service.slug}`}
-                    className="block pl-12 pr-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-[#00AEEF] transition-colors"
+                    className="block pl-12 pr-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors"
                     onClick={closeSidebar}
                   >
                     {service.name}
@@ -472,7 +439,7 @@ export default function Navbar() {
               href="/product"
               className={`block px-6 py-3 transition-colors ${
                 path === "/product"
-                  ? "text-[#00AEEF] bg-blue-50 border-l-4 border-[#00AEEF] font-semibold"
+                  ? "text-primary-500 bg-blue-50 border-l-4 border-primary-500 font-semibold"
                   : "text-gray-800 hover:bg-gray-100"
               }`}
               onClick={closeSidebar}
@@ -483,12 +450,34 @@ export default function Navbar() {
               href="/schedule"
               className={`block px-6 py-3 transition-colors ${
                 path === "/schedule"
-                  ? "text-[#00AEEF] bg-blue-50 border-l-4 border-[#00AEEF] font-semibold"
+                  ? "text-primary-500 bg-blue-50 border-l-4 border-primary-500 font-semibold"
                   : "text-gray-800 hover:bg-gray-100"
               }`}
               onClick={closeSidebar}
             >
               Schedule
+            </Link>
+            <Link
+              href="/article"
+              className={`block px-6 py-3 transition-colors ${
+                path?.startsWith("/article")
+                  ? "text-primary-500 bg-blue-50 border-l-4 border-primary-500 font-semibold"
+                  : "text-gray-800 hover:bg-gray-100"
+              }`}
+              onClick={closeSidebar}
+            >
+              Article
+            </Link>
+            <Link
+              href="/career"
+              className={`block px-6 py-3 transition-colors ${
+                path?.startsWith("/career")
+                  ? "text-[#bf1f40] bg-blue-50 border-l-4 border-[#bf1f40] font-semibold"
+                  : "text-gray-800 hover:bg-gray-100"
+              }`}
+              onClick={closeSidebar}
+            >
+              Career
             </Link>
           </nav>
 

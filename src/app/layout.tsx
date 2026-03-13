@@ -18,11 +18,11 @@ const BASE_URL =
   process.env.NEXT_PUBLIC_BASE_URL || "https://compro.example.com";
 
 export const metadata: Metadata = {
-  title: "Excelearn",
+  title: "Excecutrain",
   description: "Company Profile",
   metadataBase: new URL(BASE_URL),
   icons: {
-    icon: "/logo-simple.png",
+    icon: "/logo-simple-red.png",
   },
   robots: {
     index: true,

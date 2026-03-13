@@ -5,7 +5,6 @@ import {
   ScheduleProps,
   ScheduleFilterParams,
   ScheduleListResponse,
-  ScheduleCalendarParams,
 } from "@/types/schedule";
 
 export async function ScheduleListService(): Promise<{
@@ -41,6 +40,16 @@ export async function ScheduleListFilteredService(
       params.search = filters.search;
     }
 
+    if (filters?.schedule_category) {
+      params.schedule_category = Array.isArray(filters.schedule_category)
+        ? filters.schedule_category.join(",")
+        : filters.schedule_category;
+    }
+
+    if (filters?.product_category) {
+      params.product_category = filters.product_category;
+    }
+
     if (filters?.page) {
       params.page = filters.page;
     }
@@ -69,22 +78,14 @@ export async function ScheduleListFilteredService(
   }
 }
 
-export async function ScheduleCalendarService(
-  params: ScheduleCalendarParams
-): Promise<{
+export async function ScheduleCategoriesService(): Promise<{
   status: number;
   message: string;
-  data: ScheduleProps[];
+  data: string[];
 }> {
   try {
     const { data: response } = await AxiosClient.get(
-      "/schedule/public/calendar",
-      {
-        params: {
-          year: params.year,
-          month: params.month,
-        },
-      }
+      "/schedule/public/categories"
     );
 
     const { status, message, data } = response;
@@ -110,6 +111,35 @@ export async function ScheduleDetailService(id?: string): Promise<{
   try {
     const { data: response } = await AxiosClient.get(
       `/schedule/public/detail/${id}`
+    );
+
+    const { status, message, data } = response;
+
+    if (status !== 200) throw new Error(message);
+
+    return {
+      status,
+      message,
+      data,
+    };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function ScheduleByProductService(params: {
+  product_id: string;
+  limit?: number;
+}): Promise<{
+  status: number;
+  message: string;
+  data: ScheduleProps[];
+}> {
+  try {
+    const { data: response } = await AxiosClient.get(
+      `/schedule/public/product/${params.product_id}`,
+      { params: { limit: params.limit || 3 } }
     );
 
     const { status, message, data } = response;

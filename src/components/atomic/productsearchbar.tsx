@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { ChevronDown, Search, SlidersHorizontal } from "lucide-react";
 import { useServices } from "@/services/service/hook";
 import { serviceToCategoryFormat } from "@/lib/utils";
+import { ServiceProps } from "@/types/service";
 
 interface SearchBarProps {
   onSearchChange: (value: string) => void;
@@ -23,7 +24,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   sortValue,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string | undefined>(
-    categoryValue
+    categoryValue,
   );
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
@@ -36,7 +37,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const { data: services = [] } = useServices();
 
   // Transform services to categories
-  const categories = services.map((service: any) => ({
+  const categories = services.map((service: ServiceProps) => ({
     label: service.service_name,
     value: serviceToCategoryFormat(service.service_name),
   }));
@@ -116,9 +117,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
               e.stopPropagation();
               setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
             }}
-            className="flex items-center gap-2 px-6 py-2 bg-white text-gray-600 rounded-full border border-gray-300 hover:border-[#00AEEF] hover:text-[#00AEEF] transition-colors duration-200 whitespace-nowrap"
+            className="flex items-center gap-2 px-6 py-2 bg-white text-gray-600 rounded-full border border-gray-300 hover:border-[#bf1f40] hover:text-[#bf1f40] transition-colors duration-200 whitespace-nowrap"
           >
-            <span className="text-sm font-medium">{getCategoryLabel(selectedCategory)}</span>
+            <span className="text-sm font-medium">
+              {getCategoryLabel(selectedCategory)}
+            </span>
             <ChevronDown
               className={`w-4 h-4 transition-transform duration-200 ${
                 isCategoryDropdownOpen ? "rotate-180" : ""
@@ -139,14 +142,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
                 }}
                 className={`w-full px-4 py-3 text-left text-sm transition-colors flex items-center justify-between cursor-pointer ${
                   !selectedCategory
-                    ? "text-[#00AEEF] font-medium bg-[#00AEEF]/10"
+                    ? "text-[#bf1f40] font-medium bg-[#bf1f40]/10"
                     : "text-gray-700 hover:bg-gray-50"
                 }`}
               >
                 <span>All Categories</span>
-                {!selectedCategory && (
-                  <span className="text-[#00AEEF]">✓</span>
-                )}
+                {!selectedCategory && <span className="text-[#bf1f40]">✓</span>}
               </button>
               {categories.map((category) => (
                 <button
@@ -160,13 +161,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
                   }}
                   className={`w-full px-4 py-3 text-left text-sm transition-colors flex items-center justify-between cursor-pointer ${
                     selectedCategory === category.value
-                      ? "text-[#00AEEF] font-medium bg-[#00AEEF]/10"
+                      ? "text-[#bf1f40] font-medium bg-[#bf1f40]/10"
                       : "text-gray-700 hover:bg-gray-50"
                   }`}
                 >
                   <span>{category.label}</span>
                   {selectedCategory === category.value && (
-                    <span className="text-[#00AEEF]">✓</span>
+                    <span className="text-[#bf1f40]">✓</span>
                   )}
                 </button>
               ))}
@@ -183,7 +184,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
               e.stopPropagation();
               setIsSortDropdownOpen(!isSortDropdownOpen);
             }}
-            className="flex items-center gap-2 px-6 py-2 bg-[#00AEEF] text-white rounded-full border border-[#00AEEF] hover:text-[#00AEEF] hover:bg-white transition-colors duration-200 whitespace-nowrap"
+            className="flex items-center gap-2 px-6 py-2 bg-[#bf1f40] text-white rounded-full border border-[#bf1f40] hover:text-[#bf1f40] hover:bg-white transition-colors duration-200 whitespace-nowrap"
           >
             <span className="text-sm font-medium">{getSortLabel()}</span>
             <ChevronDown
@@ -204,13 +205,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
                 }}
                 className={`w-full px-4 py-3 text-left text-sm transition-colors flex items-center justify-between cursor-pointer ${
                   sortValue === "desc"
-                    ? "text-[#00AEEF] font-medium bg-[#00AEEF]/10"
+                    ? "text-[#bf1f40] font-medium bg-[#bf1f40]/10"
                     : "text-gray-700 hover:bg-gray-50"
                 }`}
               >
                 <span>Newest First</span>
                 {sortValue === "desc" && (
-                  <span className="text-[#00AEEF]">✓</span>
+                  <span className="text-[#bf1f40]">✓</span>
                 )}
               </button>
               <button
@@ -222,13 +223,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
                 }}
                 className={`w-full px-4 py-3 text-left text-sm transition-colors flex items-center justify-between cursor-pointer ${
                   sortValue === "asc"
-                    ? "text-[#00AEEF] font-medium bg-[#00AEEF]/10"
+                    ? "text-[#bf1f40] font-medium bg-[#bf1f40]/10"
                     : "text-gray-700 hover:bg-gray-50"
                 }`}
               >
                 <span>Oldest First</span>
                 {sortValue === "asc" && (
-                  <span className="text-[#00AEEF]">✓</span>
+                  <span className="text-[#bf1f40]">✓</span>
                 )}
               </button>
             </div>
@@ -256,7 +257,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             <button
               type="button"
               onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className="flex items-center justify-center w-10 h-10 bg-[#00AEEF] text-white rounded-full shadow-md hover:bg-[#0096d1] transition-colors"
+              className="flex items-center justify-center w-10 h-10 bg-[#bf1f40] text-white rounded-full shadow-md hover:bg-[#0096d1] transition-colors"
               aria-label="Filter"
             >
               <SlidersHorizontal className="w-5 h-5" />
@@ -278,7 +279,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                       }}
                       className={`w-full px-4 py-2 text-left text-sm rounded-lg transition-colors ${
                         !selectedCategory
-                          ? "bg-[#00AEEF] text-white"
+                          ? "bg-[#bf1f40] text-white"
                           : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                       }`}
                     >
@@ -290,7 +291,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                         onClick={() => handleCategoryClick(category.value)}
                         className={`w-full px-4 py-2 text-left text-sm rounded-lg transition-colors ${
                           selectedCategory === category.value
-                            ? "bg-[#00AEEF] text-white"
+                            ? "bg-[#bf1f40] text-white"
                             : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                         }`}
                       >
@@ -313,7 +314,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                       }}
                       className={`w-full px-4 py-2 text-left text-sm rounded-lg transition-colors flex items-center justify-between ${
                         sortValue === "desc"
-                          ? "bg-[#00AEEF] text-white"
+                          ? "bg-[#bf1f40] text-white"
                           : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                       }`}
                     >
@@ -327,7 +328,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                       }}
                       className={`w-full px-4 py-2 text-left text-sm rounded-lg transition-colors flex items-center justify-between ${
                         sortValue === "asc"
-                          ? "bg-[#00AEEF] text-white"
+                          ? "bg-[#bf1f40] text-white"
                           : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                       }`}
                     >

@@ -25,7 +25,9 @@ export default function Service() {
       <HeroService />
       <ServiceDetail initialService={serviceType} />
       <Step />
-      <ProductList data={product} isLoading={productLoading} />
+      <div className="px-[5%] md:px-[7%] lg:px-[10%] w-full">
+        <ProductList data={product} isLoading={productLoading} />
+      </div>
       <CTA />
     </Container>
   );
