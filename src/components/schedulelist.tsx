@@ -9,6 +9,7 @@ import ScheduleCard from "./atomic/schedulecard";
 import TestimoniList from "./testimonilist";
 import { ScheduleCardSkeleton } from "@/components/skeleton";
 import { useAssetContext } from "@/components/AssetProvider";
+import { FadeInUp, StaggerContainer, StaggerItem } from "./atomic/motion";
 
 import { ArrowRightFromLine } from "lucide-react";
 
@@ -37,10 +38,16 @@ export default function ScheduleList({
         backgroundPosition: "center",
       }}
     >
-      <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px] mb-6 md:mb-10">
-        Running Schedule
-      </h2>
-      <div className="flex flex-col w-full px-0 md:px-[7%] lg:px-[10%] gap-4 md:gap-5 mb-6 md:mb-8">
+      <FadeInUp delay={0.1} duration={0.5}>
+        <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px] mb-6 md:mb-10">
+          Running Schedule
+        </h2>
+      </FadeInUp>
+      <StaggerContainer
+        className="flex flex-col w-full px-0 md:px-[7%] lg:px-[10%] gap-4 md:gap-5 mb-6 md:mb-8"
+        staggerDelay={0.12}
+        delayChildren={0.2}
+      >
         {isLoading ? (
           [1, 2, 3].map((i) => <ScheduleCardSkeleton key={i} />)
         ) : data?.length === 0 ? (
@@ -51,18 +58,22 @@ export default function ScheduleList({
           </div>
         ) : (
           data?.map((each: ScheduleProps, index: number) => (
-            <ScheduleCard key={index} data={each} />
+            <StaggerItem key={index} direction="up">
+              <ScheduleCard data={each} />
+            </StaggerItem>
           ))
         )}
-      </div>
+      </StaggerContainer>
       {!isLoading && data?.length > 0 && (
-        <Button
-          label="Load More"
-          rounded
-          type="primary"
-          icon={<ArrowRightFromLine size={18} />}
-          onClick={() => router.push("/schedule")}
-        />
+        <FadeInUp delay={0.4} duration={0.5}>
+          <Button
+            label="Load More"
+            rounded
+            type="primary"
+            icon={<ArrowRightFromLine size={18} />}
+            onClick={() => router.push("/schedule")}
+          />
+        </FadeInUp>
       )}
       <TestimoniList />
     </div>

@@ -5,6 +5,7 @@
 import CountUp from "./atomic/countup";
 import { StatisticCardSkeleton } from "@/components/skeleton";
 import { useAssetContext } from "@/components/AssetProvider";
+import { StaggerContainer, StaggerItem } from "./atomic/motion";
 
 import { useStats } from "@/services/statistic/hook";
 
@@ -59,66 +60,80 @@ export default function Statistic() {
         backgroundPosition: "40% 40%",
       }}
     >
-      <div className="flex flex-col items-center justify-center">
-        <span className="text-[28px] md:text-[40px] lg:text-[49px] font-[700]">
-          <CountUp
-            from={0}
-            to={stats?.year_experience || 0}
-            separator=","
-            direction="up"
-            duration={2}
-          />
-          +
-        </span>
-        <span className="text-[12px] md:text-[14px] lg:text-[16px]">
-          Years Experience
-        </span>
-      </div>
-      <div className="flex flex-col items-center justify-center">
-        <span className="text-[28px] md:text-[40px] lg:text-[49px] font-[700]">
-          <CountUp
-            from={0}
-            to={getShortValue(stats?.total_participant || 0) || 0}
-            separator=","
-            direction="up"
-            duration={2}
-          />
-          {getShortUnit(stats?.total_participant || 0)}+
-        </span>
-        <span className="text-[12px] md:text-[14px] lg:text-[16px]">
-          Participants
-        </span>
-      </div>
-      <div className="flex flex-col items-center justify-center">
-        <span className="text-[28px] md:text-[40px] lg:text-[49px] font-[700]">
-          <CountUp
-            from={0}
-            to={stats?.total_topic_class || 0}
-            separator=","
-            direction="up"
-            duration={2}
-          />
-          +
-        </span>
-        <span className="text-[12px] md:text-[14px] lg:text-[16px]">
-          Topics
-        </span>
-      </div>
-      <div className="flex flex-col items-center justify-center">
-        <span className="text-[28px] md:text-[40px] lg:text-[49px] font-[700]">
-          <CountUp
-            from={0}
-            to={getShortValue(stats?.total_training_completed || 0) || 0}
-            separator=","
-            direction="up"
-            duration={2}
-          />
-          {getShortUnit(stats?.total_training_completed || 0)}+
-        </span>
-        <span className="text-[12px] md:text-[14px] lg:text-[16px]">
-          Training Completed
-        </span>
-      </div>
+      <StaggerContainer
+        className="flex items-center justify-evenly gap-5 md:gap-0 w-full"
+        staggerDelay={0.15}
+        delayChildren={0.1}
+      >
+        <StaggerItem direction="up">
+          <div className="flex flex-col items-center justify-center">
+            <span className="text-[28px] md:text-[40px] lg:text-[49px] font-[700]">
+              <CountUp
+                from={0}
+                to={stats?.year_experience || 0}
+                separator=","
+                direction="up"
+                duration={2}
+              />
+              +
+            </span>
+            <span className="text-[12px] md:text-[14px] lg:text-[16px]">
+              Years Experience
+            </span>
+          </div>
+        </StaggerItem>
+        <StaggerItem direction="up">
+          <div className="flex flex-col items-center justify-center">
+            <span className="text-[28px] md:text-[40px] lg:text-[49px] font-[700]">
+              <CountUp
+                from={0}
+                to={getShortValue(stats?.total_participant || 0) || 0}
+                separator=","
+                direction="up"
+                duration={2}
+              />
+              {getShortUnit(stats?.total_participant || 0)}+
+            </span>
+            <span className="text-[12px] md:text-[14px] lg:text-[16px]">
+              Participants
+            </span>
+          </div>
+        </StaggerItem>
+        <StaggerItem direction="up">
+          <div className="flex flex-col items-center justify-center">
+            <span className="text-[28px] md:text-[40px] lg:text-[49px] font-[700]">
+              <CountUp
+                from={0}
+                to={stats?.total_topic_class || 0}
+                separator=","
+                direction="up"
+                duration={2}
+              />
+              +
+            </span>
+            <span className="text-[12px] md:text-[14px] lg:text-[16px]">
+              Topics
+            </span>
+          </div>
+        </StaggerItem>
+        <StaggerItem direction="up">
+          <div className="flex flex-col items-center justify-center">
+            <span className="text-[28px] md:text-[40px] lg:text-[49px] font-[700]">
+              <CountUp
+                from={0}
+                to={getShortValue(stats?.total_training_completed || 0) || 0}
+                separator=","
+                direction="up"
+                duration={2}
+              />
+              {getShortUnit(stats?.total_training_completed || 0)}+
+            </span>
+            <span className="text-[12px] md:text-[14px] lg:text-[16px]">
+              Training Completed
+            </span>
+          </div>
+        </StaggerItem>
+      </StaggerContainer>
     </div>
   );
 }
