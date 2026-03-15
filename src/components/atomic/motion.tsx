@@ -111,7 +111,7 @@ export function Animated({
   ...props
 }: AnimatedProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once, margin: `-${Math.round(threshold * 100)}px` });
+  const isInView = useInView(ref, { once, margin: "-100px" });
 
   const baseVariants = getVariants(direction);
 
@@ -267,7 +267,7 @@ export function StaggerContainer({
   threshold = 0.1,
 }: StaggerContainerProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once, margin: `-${Math.round(threshold * 100)}px` });
+  const isInView = useInView(ref, { once, margin: "-100px" });
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },

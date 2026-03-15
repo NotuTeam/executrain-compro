@@ -13,7 +13,7 @@ import { ScheduleProps } from "@/types/schedule";
 
 interface CompProps {
   data: ScheduleProps;
-  type: "plain" | "default";
+  type?: "plain" | "default";
 }
 
 export default function ScheduleCard({ data, type = "default" }: CompProps) {
