@@ -186,7 +186,7 @@ export default function CareerPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
               <div className="lg:col-span-4 bg-white border border-gray-200 rounded-xl h-fit">
                 {filteredJobs.length === 0 ? (
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-600 min-h-[200px] flex items-center justify-center">
                     Tidak ada lowongan yang sesuai
                   </p>
                 ) : (
@@ -381,7 +381,7 @@ export default function CareerPage() {
                     </section>
                   </>
                 ) : (
-                  <div className="text-sm text-gray-600">
+                  <div className="text-sm text-gray-600 flex items-center justify-center min-h-[200px]">
                     Pilih lowongan untuk melihat detail
                   </div>
                 )}

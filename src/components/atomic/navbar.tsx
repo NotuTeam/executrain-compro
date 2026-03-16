@@ -23,6 +23,7 @@ export default function Navbar() {
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isServiceOpen, setIsServiceOpen] = useState(false);
+  const [isExploreOpen, setIsExploreOpen] = useState(false);
   const [isOtherOpen, setIsOtherOpen] = useState(false);
   const [isScheduleOpen, setIsScheduleOpen] = useState(false);
   const [isProductOpen, setIsProductOpen] = useState(false);
@@ -113,6 +114,52 @@ export default function Navbar() {
             >
               Home
             </Link>
+            {/* Services Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsExploreOpen(true)}
+              onMouseLeave={() => setIsExploreOpen(false)}
+            >
+              <button
+                className={`flex items-center gap-1 hover:text-gray-200 transition-colors relative pb-1 ${
+                  isServicePage
+                    ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
+                    : ""
+                }`}
+              >
+                Explore
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-300 ${
+                    isExploreOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {/* Dropdown Menu */}
+              <div
+                className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 min-w-[200px] ${
+                  isExploreOpen
+                    ? "opacity-100 visible translate-y-0"
+                    : "opacity-0 invisible -translate-y-2"
+                }`}
+              >
+                {/* Article */}
+                <Link
+                  href="/blog"
+                  className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                >
+                  Blog
+                </Link>
+
+                {/* Career */}
+                <Link
+                  href="/career"
+                  className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                >
+                  Career
+                </Link>
+              </div>
+            </div>
 
             {/* Services Dropdown */}
             <div
@@ -300,29 +347,6 @@ export default function Navbar() {
                 </div>
               </div>
             )}
-            {/* Article */}
-            <Link
-              href="/article"
-              className={`hover:text-gray-200 transition-colors relative pb-1 ${
-                path?.startsWith("/article")
-                  ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
-                  : ""
-              }`}
-            >
-              Article
-            </Link>
-
-            {/* Career */}
-            <Link
-              href="/career"
-              className={`hover:text-gray-200 transition-colors relative pb-1 ${
-                path?.startsWith("/career")
-                  ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
-                  : ""
-              }`}
-            >
-              Career
-            </Link>
 
             <Link href="/contact">
               <Button label="Contact Us" />
@@ -386,17 +410,47 @@ export default function Navbar() {
             >
               Home
             </Link>
-            <Link
-              href="/about"
-              className={`block px-6 py-3 transition-colors ${
-                path === "/about"
-                  ? "text-primary-500 bg-blue-50 border-l-4 border-primary-500 font-semibold"
-                  : "text-gray-800 hover:bg-gray-100"
-              }`}
-              onClick={closeSidebar}
-            >
-              About Us
-            </Link>
+
+            {/* Explore Accordion */}
+            <div>
+              <button
+                className={`w-full flex items-center justify-between px-6 py-3 transition-colors ${
+                  isServicePage
+                    ? "text-primary-500 bg-blue-50 border-l-4 border-primary-500 font-semibold"
+                    : "text-gray-800 hover:bg-gray-100"
+                }`}
+                onClick={() => setIsExploreOpen(!isExploreOpen)}
+              >
+                <span>Explore</span>
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-300 ${
+                    isExploreOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {/* Explore Submenu */}
+              <div
+                className={`overflow-hidden transition-all duration-300 ${
+                  isExploreOpen ? "max-h-[500px]" : "max-h-0"
+                }`}
+              >
+                <Link
+                  href="/blog"
+                  className="block pl-12 pr-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors"
+                  onClick={closeSidebar}
+                >
+                  Blog
+                </Link>
+                <Link
+                  href="/career"
+                  className="block pl-12 pr-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors"
+                  onClick={closeSidebar}
+                >
+                  Career
+                </Link>
+              </div>
+            </div>
 
             {/* Services Accordion */}
             <div>
@@ -456,28 +510,6 @@ export default function Navbar() {
               onClick={closeSidebar}
             >
               Schedule
-            </Link>
-            <Link
-              href="/article"
-              className={`block px-6 py-3 transition-colors ${
-                path?.startsWith("/article")
-                  ? "text-primary-500 bg-blue-50 border-l-4 border-primary-500 font-semibold"
-                  : "text-gray-800 hover:bg-gray-100"
-              }`}
-              onClick={closeSidebar}
-            >
-              Article
-            </Link>
-            <Link
-              href="/career"
-              className={`block px-6 py-3 transition-colors ${
-                path?.startsWith("/career")
-                  ? "text-[#bf1f40] bg-blue-50 border-l-4 border-[#bf1f40] font-semibold"
-                  : "text-gray-800 hover:bg-gray-100"
-              }`}
-              onClick={closeSidebar}
-            >
-              Career
             </Link>
           </nav>
 

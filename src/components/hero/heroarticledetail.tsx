@@ -2,20 +2,11 @@
 
 "use client";
 
-import { useRouter } from "next/navigation";
-import Button from "../atomic/button";
-import Tag from "../atomic/tag";
-
-import {
-  CornerRightUp,
-  Users,
-  BookOpenCheck,
-  UserRound,
-  Clock,
-} from "lucide-react";
-
 import { ArticleProps } from "@/types/article";
 import Image from "next/image";
+
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 
 export default function HeroArticleDetail({
   data,
@@ -24,8 +15,6 @@ export default function HeroArticleDetail({
   data?: ArticleProps;
   isLoading?: boolean;
 }) {
-  const router = useRouter();
-
   if (!data && !isLoading) {
     return null;
   }
@@ -40,6 +29,13 @@ export default function HeroArticleDetail({
       }}
     >
       <div className="flex flex-col gap-5 md:gap-8 items-start bg-white/50 backdrop-blur-md border border-white/20 text-black rounded-lg w-full p-[5%] md:p-[5%] mt-[10%] md:mb-[-10%]">
+        <div className="font-[500] flex gap-3 text-black">
+          <Link href="/">Home</Link>
+          <ChevronRight />
+          <Link href="/about">Blog</Link>
+          <ChevronRight />
+          <span>{data?.title || ""}</span>
+        </div>
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full gap-3 md:gap-0">
           <h1 className="text-[28px] md:text-[40px] lg:text-[49px] font-semibold max-w-[75%]">
             {data?.title || "-"}
