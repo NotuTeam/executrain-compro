@@ -55,7 +55,7 @@ export default function WhyChoose({ type = "dark" }: { type?: string }) {
             <br />
             Choose
             <br />
-            <span className="text-primary-500">Excecutrain?</span>
+            <span className="text-primary-500">Executrain?</span>
           </h2>
         </div>
         <div className="block md:hidden w-full md:w-auto text-center md:text-left">
@@ -64,7 +64,7 @@ export default function WhyChoose({ type = "dark" }: { type?: string }) {
               type === "light" ? "text-white" : "text-black"
             }`}
           >
-            Why Choose <span className="text-primary-500">Excecutrain?</span>
+            Why Choose <span className="text-primary-500">Executrain?</span>
           </h2>
         </div>
       </FadeInLeft>

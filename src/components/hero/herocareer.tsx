@@ -27,7 +27,7 @@ export default function HeroCareer() {
           <ChevronRight />
           <Link href="/career">Career</Link>
         </div>
-        <h1 className="text-4xl font-semibold mb-3">
+        <h1 className="text-[32px] md:text-[45px] lg:text-[61px] font-semibold">
           Leading the Future, Together
         </h1>
         <p className="text-sm md:text-base">

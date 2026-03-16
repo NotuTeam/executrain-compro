@@ -55,7 +55,7 @@ export default function PartnerList({
             direction="up"
             duration={2}
           />{" "}
-          companies grow their teams with Excecutrain
+          companies grow their teams with Executrain
         </h3>
       </FadeInUp>
 

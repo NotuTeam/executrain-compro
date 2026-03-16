@@ -10,25 +10,35 @@ interface CompProps {
 
 export default function TestimoniCard({ data }: CompProps) {
   return (
-    <div className="bg-white flex flex-col items-end md:flex-row p-5">
-      <div
-        className="w-full md:w-[100px] md:min-w-[100px] lg:w-[150px] lg:min-w-[150px] aspect-square flex items-end rounded-t-xl rounded-br-xl flex-shrink-0"
-        style={{
-          backgroundImage: `url(${data?.photo?.url || ""})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="flex-col px-2 py-1 rounded-tr-full text-left text-[12px] bg-[#ffffff80] flex w-[80%]">
-          <span className="font-[400]">
-            <strong>{data?.person_name}</strong>
-          </span>
-          <span>{data?.person_title}</span>
-        </div>
-      </div>
+    <div className="flex flex-col">
+      {/* Quote Text */}
+      <p className="text-[15px] md:text-[16px] text-[#333] leading-relaxed mb-6">
+        <span className="text-[#bf1f40] text-2xl">"</span>
+        {data?.testimonial}
+        <span className="text-[#bf1f40] text-2xl">"</span>
+      </p>
 
-      <div className="space-y-3 p-3 md:p-5 bg-[#bf1f40]/30 backdrop-blur-md border border-[#bf1f40]/20 rounded-t-xl rounded-br-xl md:ml-[-5%] text-[14px] flex items-center">
-        <p className="text-justify">{data?.testimonial}</p>
+      {/* Profile Section */}
+      <div className="flex items-center gap-4">
+        {/* Avatar with red accent */}
+        <div className="relative w-[50px] h-[50px] flex-shrink-0">
+          <div
+            className="w-full h-full bg-gray-200"
+            style={{
+              backgroundImage: `url(${data?.photo?.url || ""})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+        </div>
+
+        {/* Info Text */}
+        <div className="flex flex-col items-start">
+          <span className="font-bold text-[#111] text-[14px]">
+            {data?.person_name}
+          </span>
+          <span className="text-[12px] text-[#888]">{data?.person_title}</span>
+        </div>
       </div>
     </div>
   );

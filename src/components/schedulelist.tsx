@@ -31,9 +31,9 @@ export default function ScheduleList({
 
   return (
     <div
-      className="w-full text-white flex flex-col items-center justify-center text-center py-[5%] space-y-5 px-[5%] md:px-0 border-white border-b-5 box-border"
+      className="w-full text-white flex flex-col items-center justify-center text-center pt-[5%] space-y-5 px-[5%] md:px-0 border-white border-b-5 box-border"
       style={{
-        backgroundImage: `url('https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233518/Subtract_hwkrrr.png'), url('${stepsBackground}')`,
+        backgroundImage: `linear-gradient(to bottom, transparent, white), url('https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233518/Subtract_hwkrrr.png'), url('${stepsBackground}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -75,7 +75,9 @@ export default function ScheduleList({
           />
         </FadeInUp>
       )}
-      <TestimoniList />
+      <section className="flex flex-col w-full px-0 md:px-[7%] lg:px-[10%] gap-4 md:gap-5">
+        <TestimoniList />
+      </section>
     </div>
   );
 }

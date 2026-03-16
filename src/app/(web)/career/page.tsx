@@ -118,10 +118,26 @@ export default function CareerPage() {
           What Sets Us Apart
         </h1>
         <p className="text-center font-semibold">
-          Lorem ipsum dolor sit amet consectetur. Feugiat massa in non mi eu.
+          {"We don't just offer jobs. We build careers that matter."}
         </p>
         <div className="flex gap-3">
-          {[1, 2, 3].map((each: number, index: number) => (
+          {[
+            {
+              title: "People-First Culture",
+              description:
+                "We believe great work starts with great people. At ExecuTrain, every team member is valued, heard, and empowered to do their best work.",
+            },
+            {
+              title: "Real Growth, Real Fast",
+              description:
+                "From day one, you'll take on meaningful challenges that sharpen your skills and accelerate your career — not someday, but right now.",
+            },
+            {
+              title: "Leaders Who Invest in You",
+              description:
+                "Our leadership team is hands-on and accessible. You'll get mentorship, feedback, and the support you need to reach your full potential.",
+            },
+          ].map((each: any, index: number) => (
             <div
               key={index + 1}
               className="border border-primary-600 rounded-lg p-5 flex flex-1 gap-3"
@@ -132,13 +148,8 @@ export default function CareerPage() {
                 </span>
               </div>
               <div>
-                <span className="font-semibold mb-2 block">
-                  Lorem ipsum dolor sit amet consectetur.
-                </span>
-                <p className="text-sm">
-                  Lorem ipsum dolor sit amet consectetur. Proin dolor ornare
-                  dolor euismod cras quis donec nunc eu. Amet amet tristique.
-                </p>
+                <span className="font-semibold mb-2 block">{each.title}</span>
+                <p className="text-sm">{each.description}</p>
               </div>
             </div>
           ))}

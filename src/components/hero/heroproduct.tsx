@@ -32,7 +32,7 @@ export default function HeroProduct({ children }: { children: ReactNode }) {
           Product
         </h1>
         <p className="text-sm md:text-base">
-          Excecutrain adalah penyedia layanan pelatihan bisnis dan IT terkemuka
+          Executrain adalah penyedia layanan pelatihan bisnis dan IT terkemuka
           di bawah naungan PT. Bina Kinerja Nusantara. Kami berkomitmen untuk
           menghasilkan profesional TI berkualitas tinggi. Sejak tahun 2017, kami
           berkomitmen membantu berbagai perusahaan meningkatkan keterampilan

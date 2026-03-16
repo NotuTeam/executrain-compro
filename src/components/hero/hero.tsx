@@ -69,16 +69,16 @@ export default function Hero() {
       <div className="relative z-10 flex flex-col gap-3 md:gap-5 items-start max-w-full md:max-w-[80%] lg:max-w-[50%]">
         <FadeInLeft delay={0.2} duration={0.6}>
           <h1 className="text-[32px] md:text-[45px] lg:text-[61px] font-semibold">
-            Excecutrain
+            Executrain
           </h1>
         </FadeInLeft>
         <FadeInLeft delay={0.4} duration={0.6}>
           <p className="text-sm md:text-base">
-            Excecutrain adalah penyedia layanan pelatihan bisnis dan IT terkemuka
+            Executrain adalah penyedia layanan pelatihan bisnis dan IT terkemuka
             di bawah naungan PT. Bina Kinerja Nusantara. Kami berkomitmen untuk
-            menghasilkan profesional TI berkualitas tinggi. Sejak tahun 2017, kami
-            berkomitmen membantu berbagai perusahaan meningkatkan keterampilan
-            teknis dan produktivitas karyawannya.
+            menghasilkan profesional TI berkualitas tinggi. Sejak tahun 2017,
+            kami berkomitmen membantu berbagai perusahaan meningkatkan
+            keterampilan teknis dan produktivitas karyawannya.
           </p>
         </FadeInLeft>
         <FadeInUp delay={0.6} duration={0.5}>

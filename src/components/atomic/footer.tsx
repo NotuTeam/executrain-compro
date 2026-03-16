@@ -163,7 +163,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10">
           <div className="md:col-span-2 space-y-2 md:space-y-3 text-sm md:text-base">
             <h5 className="font-[700] text-[20px] md:text-[25px]">
-              Excecutrain
+              Executrain
             </h5>
             <span className="block">PT. Bina Kinerja Nusantara</span>
             <span className="block">
@@ -187,7 +187,7 @@ export default function Footer() {
             </div>
             <div className="flex flex-col">
               <span className="font-[500]">Website :</span>
-              <Link href="https://excelearn.co.id">Excecutrain.co.id</Link>
+              <Link href="https://excelearn.co.id">Executrain.co.id</Link>
             </div>
           </div>
           <div className="space-y-2 md:space-y-3 text-sm md:text-base">
