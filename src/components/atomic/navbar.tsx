@@ -158,6 +158,12 @@ export default function Navbar() {
                 >
                   Career
                 </Link>
+                <Link
+                  href="/learning-path"
+                  className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                >
+                  Learning Path
+                </Link>
               </div>
             </div>
 
@@ -448,6 +454,13 @@ export default function Navbar() {
                   onClick={closeSidebar}
                 >
                   Career
+                </Link>
+                <Link
+                  href="/learning-path"
+                  className="block pl-12 pr-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors"
+                  onClick={closeSidebar}
+                >
+                  Learning Path
                 </Link>
               </div>
             </div>

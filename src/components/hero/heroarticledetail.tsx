@@ -32,7 +32,7 @@ export default function HeroArticleDetail({
         <div className="font-[500] flex gap-3 text-black">
           <Link href="/">Home</Link>
           <ChevronRight />
-          <Link href="/about">Blog</Link>
+          <Link href="/blog">Blog</Link>
           <ChevronRight />
           <span>{data?.title || ""}</span>
         </div>

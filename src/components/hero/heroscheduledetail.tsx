@@ -3,6 +3,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Button from "../atomic/button";
 import {
@@ -12,6 +13,7 @@ import {
   UserRound,
   Clock,
   ShieldCheck,
+  ChevronRight,
   CircleCheckBig,
   MapPin,
 } from "lucide-react";
@@ -43,6 +45,13 @@ export default function HeroScheduleDetail({
       }}
     >
       <div className="flex flex-col gap-5 md:gap-8 items-start bg-white/50 backdrop-blur-md border border-white/20 text-black rounded-lg w-full p-[5%] md:p-[5%] mt-[10%] md:mb-[-10%]">
+        <div className="font-[500] flex gap-3 text-black">
+          <Link href="/">Home</Link>
+          <ChevronRight />
+          <Link href="/schedule">Schedule</Link>
+          <ChevronRight />
+          <span>{data?.schedule_name || ""}</span>
+        </div>
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full gap-3 md:gap-0">
           <h1 className="text-[28px] md:text-[40px] lg:text-[49px] font-semibold max-w-[75%]">
             {data?.schedule_name}

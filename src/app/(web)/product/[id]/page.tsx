@@ -99,7 +99,7 @@ export default function ProductDetail() {
       {Array.isArray(data?.benefits) && data?.benefits[0] !== "-" ? (
         <Benefit data={data?.benefits || []} />
       ) : null}
-      {data?.learning_path_banner?.url && (
+      {/* {data?.learning_path_banner?.url && (
         <div className="flex flex-col items-center justify-center text-center pt-[8%] space-y-5 px-[5%] md:px-[7%] lg:px-[10%] w-full border-white border-b-5 box-border">
           <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px] mb-6 md:mb-10">
             Learning Path
@@ -126,7 +126,7 @@ export default function ProductDetail() {
             />
           )}
         </div>
-      )}
+      )} */}
       <RelatedScheduleList data={relatedSchedule} isLoading={scheduleLoading} />
       <div className="px-[5%] md:px-[7%] lg:px-[10%] w-full">
         <ProductList
