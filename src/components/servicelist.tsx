@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 
 import { useServices } from "@/services/service/hook";
 import { useProduct } from "@/services/product/hook";
+import { useDebounce } from "@/lib/useDebounce";
 import { ServiceCardSkeleton } from "@/components/skeleton";
 import ProductList from "./productlist";
 import { FadeInUp, StaggerContainer, StaggerItem } from "./atomic/motion";
@@ -14,12 +15,19 @@ import { FadeInUp, StaggerContainer, StaggerItem } from "./atomic/motion";
 import IT_TRAINING_ICON from "@/assets/icons/it_training.svg";
 import IT_TRAINING_DISABLE_ICON from "@/assets/icons/it_training_disable.svg";
 
-export default function ServiceList() {
+export default function ServiceList({
+  searchTerm = "",
+}: {
+  searchTerm?: string;
+}) {
   const [selected, setSelected] = useState<any>();
   const { data: services = [], isLoading } = useServices();
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const hasSearch = debouncedSearchTerm.trim().length > 0;
 
   const { data: product = [], isLoading: productLoading } = useProduct({
-    product_category: selected?.slug ? selected?.slug : undefined,
+    product_category: hasSearch ? undefined : selected?.slug || undefined,
+    product_name: debouncedSearchTerm || undefined,
   });
 
   useEffect(() => {
@@ -72,52 +80,53 @@ export default function ServiceList() {
           id="service-detail"
           className="pt-[5%] px-[5%] md:px-[7%] lg:px-[10%] w-full"
         >
-          {/* Tab container with wrap */}
-          <StaggerContainer
-            className="flex flex-wrap gap-3 md:gap-6 lg:gap-8 border-b-2 border-slate-300 pb-3"
-            staggerDelay={0.1}
-            delayChildren={0.3}
-          >
-            {services.map((each: any) => {
-              const isSelected = selected?._id === each._id;
+          {!hasSearch && (
+            <StaggerContainer
+              className="flex flex-wrap gap-3 md:gap-6 lg:gap-8 border-b-2 border-slate-300 pb-3"
+              staggerDelay={0.1}
+              delayChildren={0.3}
+            >
+              {services.map((each: any) => {
+                const isSelected = selected?._id === each._id;
 
-              return (
-                <StaggerItem key={each._id}>
-                  <div
-                    onClick={() => {
-                      setSelected(each);
-                    }}
-                    className={`font-semibold text-[16px] md:text-[20px] lg:text-[24px] cursor-pointer duration-150 flex gap-2 md:gap-3 items-center transition-colors ${
-                      isSelected ? "text-primary-500" : "text-slate-300"
-                    } hover:text-primary-500/70`}
-                  >
-                    {each.logo?.url ? (
-                      <Image
-                        src={each.logo.url}
-                        alt={each.service_name}
-                        height={20}
-                        width={20}
-                        className={`md:h-[18px] md:w-[18px] lg:h-[20px] lg:w-[20px] object-contain ${
-                          isSelected ? "opacity-100" : "opacity-50"
-                        }`}
-                      />
-                    ) : (
-                      <Image
-                        src={
-                          isSelected ? IT_TRAINING_ICON : IT_TRAINING_DISABLE_ICON
-                        }
-                        alt={each.service_name}
-                        height={16}
-                        width={16}
-                        className="md:h-[18px] md:w-[18px] lg:h-[20px] lg:w-[20px]"
-                      />
-                    )}
-                    {each.service_name}
-                  </div>
-                </StaggerItem>
-              );
-            })}
-          </StaggerContainer>
+                return (
+                  <StaggerItem key={each._id}>
+                    <div
+                      onClick={() => {
+                        setSelected(each);
+                      }}
+                      className={`font-semibold text-[16px] md:text-[20px] lg:text-[24px] cursor-pointer duration-150 flex gap-2 md:gap-3 items-center transition-colors ${
+                        isSelected ? "text-primary-500" : "text-slate-300"
+                      } hover:text-primary-500/70`}
+                    >
+                      {each.logo?.url ? (
+                        <Image
+                          src={each.logo.url}
+                          alt={each.service_name}
+                          height={20}
+                          width={20}
+                          className={`md:h-[18px] md:w-[18px] lg:h-[20px] lg:w-[20px] object-contain ${
+                            isSelected ? "opacity-100" : "opacity-50"
+                          }`}
+                        />
+                      ) : (
+                        <Image
+                          src={
+                            isSelected ? IT_TRAINING_ICON : IT_TRAINING_DISABLE_ICON
+                          }
+                          alt={each.service_name}
+                          height={16}
+                          width={16}
+                          className="md:h-[18px] md:w-[18px] lg:h-[20px] lg:w-[20px]"
+                        />
+                      )}
+                      {each.service_name}
+                    </div>
+                  </StaggerItem>
+                );
+              })}
+            </StaggerContainer>
+          )}
           <ProductList data={product} isLoading={productLoading} />
         </div>
       )}

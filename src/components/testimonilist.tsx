@@ -75,7 +75,7 @@ export default function TestimoniList() {
                 </div>
                 {/* Red Vertical Divider (not on last item) */}
                 {idx < 2 && (
-                  <div className="hidden md:block w-[1px] bg-[#bf1f40] self-stretch" />
+                  <div className="hidden md:block w-[1px] bg-[#BE0F34] self-stretch" />
                 )}
               </div>
             ))}
@@ -85,7 +85,7 @@ export default function TestimoniList() {
           <div className="flex items-center justify-center gap-2 mt-10">
             <button
               onClick={handlePrevious}
-              className="border border-primary-600 text-[#111] w-[40px] h-[40px] flex items-center justify-center rounded-full cursor-pointer bg-transparent hover:border-[#bf1f40] transition-colors"
+              className="border border-primary-600 text-[#111] w-[40px] h-[40px] flex items-center justify-center rounded-full cursor-pointer bg-transparent hover:border-[#BE0F34] transition-colors"
               aria-label="Previous testimonial"
             >
               <Image src={ARROW_LEFT} alt="arrow left" className="w-4 h-4" />

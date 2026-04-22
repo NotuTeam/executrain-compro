@@ -3,6 +3,7 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
+import dayjs from "dayjs";
 
 import Container from "@/components/atomic/container";
 import Button from "@/components/atomic/button";
@@ -10,14 +11,17 @@ import HeroScheduleDetail from "@/components/hero/heroscheduledetail";
 import { Skeleton, HeroScheduleDetailSkeleton } from "@/components/skeleton";
 import { useAssetContext } from "@/components/AssetProvider";
 import Benefit from "@/components/benefit";
+import ScheduleRegistrationModal from "@/components/scheduleregistrationmodal";
 
 import { useScheduleDetail } from "@/services/schedule/hook";
 import { Home } from "lucide-react";
+import { useState } from "react";
 
 export default function ScheduleDetail() {
   const params = useParams();
   const router = useRouter();
   const { id } = params;
+  const [openRegistration, setOpenRegistration] = useState(false);
   const { getAssetUrl, getStaticAsset } = useAssetContext();
 
   const { data, isLoading } = useScheduleDetail({ id: id as string });
@@ -95,7 +99,7 @@ export default function ScheduleDetail() {
 
   return (
     <Container>
-      <HeroScheduleDetail data={data} />
+      <HeroScheduleDetail data={data} onRegister={() => setOpenRegistration(true)} />
       <div
         className="px-[10%] py-[15%] space-y-5 min-h-[60dvh] w-full"
         style={{
@@ -126,23 +130,20 @@ export default function ScheduleDetail() {
           </div>
           <div>
             <Button
-              onClick={() => {
-                if (data?.link && data.link.trim() !== "") {
-                  window.open(data.link, "_blank", "noopener,noreferrer");
-                } else {
-                  router.push("https://wa.me/62895805254925");
-                }
-              }}
-              label={
-                data?.link && data.link.trim() !== ""
-                  ? "Register Now"
-                  : "Contact Us"
-              }
+              onClick={() => setOpenRegistration(true)}
+              label="Register Now"
               rounded
             />
           </div>
         </div>
       </div>
+      <ScheduleRegistrationModal
+        isOpen={openRegistration}
+        onClose={() => setOpenRegistration(false)}
+        productName={data?.product_name || data?.schedule_name || "-"}
+        scheduleDate={dayjs(data?.schedule_date).format("DD MMMM YYYY")}
+        scheduleType="REGULAR"
+      />
     </Container>
   );
 }

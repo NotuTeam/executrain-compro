@@ -8,12 +8,11 @@ import Button from "./atomic/button";
 import {
   Clock,
   Users,
-  Calendar,
   CalendarOff,
+  ChevronLeft,
   ChevronRight,
-  ArrowRightFromLine,
 } from "lucide-react";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 
 import { ScheduleProps } from "@/types/schedule";
 
@@ -24,6 +23,10 @@ interface CompProps {
   hasNext?: boolean;
   isFetching?: boolean;
   isLoading?: boolean;
+  currentPage?: number;
+  totalPages?: number;
+  totalSchedules?: number;
+  onPageChange?: (page: number) => void;
 }
 
 const borderColor = {
@@ -90,10 +93,11 @@ function ScheduleCard({ data }: { data: ScheduleProps }) {
 
 export default function SelectedSchedule({
   data = [],
-  fetchNext,
-  hasNext,
-  isFetching,
   isLoading = false,
+  currentPage = 1,
+  totalPages = 1,
+  totalSchedules = 0,
+  onPageChange,
 }: Readonly<CompProps>) {
   if (isLoading) {
     return (
@@ -125,15 +129,54 @@ export default function SelectedSchedule({
         )}
       </div>
 
-      {hasNext && (
-        <div className="flex justify-center mt-6">
-          <Button
-            label={isFetching ? "Loading..." : "Load More"}
-            rounded
-            type={isFetching ? "disable" : "primary"}
-            icon={<ArrowRightFromLine size={18} />}
-            onClick={() => fetchNext && fetchNext()}
-          />
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-3 mt-6">
+          <button
+            onClick={() => onPageChange && onPageChange(Math.max(1, currentPage - 1))}
+            disabled={currentPage === 1}
+            className="p-1 text-black disabled:opacity-40 disabled:cursor-not-allowed"
+            type="button"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          <div className="flex items-center gap-2">
+            {(totalPages <= 4
+              ? Array.from({ length: totalPages }, (_, i) => i + 1)
+              : currentPage <= 2
+                ? [1, 2, 3, "ellipsis"]
+                : currentPage >= totalPages - 1
+                  ? ["ellipsis", totalPages - 2, totalPages - 1, totalPages]
+                  : ["ellipsis", currentPage - 1, currentPage, currentPage + 1, "ellipsis"]
+            ).map((item, index) => (
+              <button
+                key={`${item}-${index}`}
+                onClick={() =>
+                  typeof item === "number" && onPageChange && onPageChange(item)
+                }
+                disabled={item === "ellipsis"}
+                className={`w-10 h-10 rounded-full border text-sm font-semibold transition-colors ${
+                  item === "ellipsis"
+                    ? "border-black bg-[#f5f5f5] text-black cursor-default"
+                    : item === currentPage
+                      ? "border-black bg-black text-white"
+                      : "border-black bg-white text-black"
+                }`}
+                type="button"
+              >
+                {item === "ellipsis" ? "..." : item}
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={() => onPageChange && onPageChange(Math.min(totalPages, currentPage + 1))}
+            disabled={currentPage === totalPages}
+            className="p-1 text-black disabled:opacity-40 disabled:cursor-not-allowed"
+            type="button"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
         </div>
       )}
     </div>

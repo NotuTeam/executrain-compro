@@ -86,22 +86,22 @@ export default function HeroProductDetail({
               <h5 className="font-[500] text-[18px] md:text-[24px]">
                 Course Feature
               </h5>
-              <div className="grid grid-cols-2 border-t border-[#bf1f40] pt-3 gap-4">
+              <div className="grid grid-cols-2 border-t border-[#BE0F34] pt-3 gap-4">
                 <div className="flex flex-col gap-4 font-[300] text-xs md:text-sm">
                   <span className="flex items-center gap-2">
-                    <CornerRightUp size={14} color="#bf1f40" />
+                    <CornerRightUp size={14} color="#BE0F34" />
                     Skill Level
                   </span>
                   <span className="flex items-center gap-2">
-                    <Users size={14} color="#bf1f40" />
+                    <Users size={14} color="#BE0F34" />
                     Students
                   </span>
                   <span className="flex items-center gap-2">
-                    <BookOpenCheck size={14} color="#bf1f40" />
+                    <BookOpenCheck size={14} color="#BE0F34" />
                     Language
                   </span>
                   <span className="flex items-center gap-2">
-                    <Clock size={14} color="#bf1f40" />
+                    <Clock size={14} color="#BE0F34" />
                     Duration
                   </span>
                 </div>
@@ -134,26 +134,26 @@ export default function HeroProductDetail({
               <h5 className="font-[500] text-[18px] md:text-[24px]">
                 Course Feature
               </h5>
-              <div className="grid grid-cols-2 border-t border-[#bf1f40] pt-3">
+              <div className="grid grid-cols-2 border-t border-[#BE0F34] pt-3">
                 <div className="flex flex-col gap-2 font-[300] text-xs md:text-sm">
                   <span className="flex items-center gap-2">
-                    <CornerRightUp size={14} color="#bf1f40" />
+                    <CornerRightUp size={14} color="#BE0F34" />
                     Skill Level
                   </span>
                   <span className="flex items-center gap-2">
-                    <Users size={14} color="#bf1f40" />
+                    <Users size={14} color="#BE0F34" />
                     Students
                   </span>
                   <span className="flex items-center gap-2">
-                    <UserRound size={14} color="#bf1f40" />
+                    <UserRound size={14} color="#BE0F34" />
                     Lecturers
                   </span>
                   <span className="flex items-center gap-2">
-                    <BookOpenCheck size={14} color="#bf1f40" />
+                    <BookOpenCheck size={14} color="#BE0F34" />
                     Language
                   </span>
                   <span className="flex items-center gap-2">
-                    <Clock size={14} color="#bf1f40" />
+                    <Clock size={14} color="#BE0F34" />
                     Duration
                   </span>
                 </div>

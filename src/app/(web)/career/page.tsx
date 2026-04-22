@@ -13,7 +13,7 @@ import SearchBar from "@/components/atomic/careersearchbar";
 import CareerGalleryCarousel from "@/components/careergallerycarousel";
 
 import { useCareers } from "@/services/career/hook";
-import { isExpired, salaryDisplay, toList } from "@/lib/utils";
+import { isExpired, toList } from "@/lib/utils";
 import { CareerProps } from "@/types/career";
 
 const jobTypeLabel: Record<string, string> = {
@@ -232,10 +232,6 @@ export default function CareerPage() {
                             </p>
                           </div>
 
-                          <p className="mt-3 px-2 bg-gray-200 text-gray-399 text-xs py-1 w-fit rounded">
-                            {salaryDisplay(job)}
-                          </p>
-
                           {expired && (
                             <span className="inline-block mt-2 text-xs px-2 py-1 rounded-full bg-primary-600 text-white">
                               Expired
@@ -303,10 +299,6 @@ export default function CareerPage() {
                             "-"}
                         </p>
                       </div>
-
-                      <p className="mt-5 font-bold">
-                        {salaryDisplay(selectedJob)}
-                      </p>
                     </section>
                     <section className="border-y p-5 md:p-6 space-y-2">
                       <span className="font-semibold block">Apply Now</span>

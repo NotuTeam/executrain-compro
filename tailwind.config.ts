@@ -3,7 +3,7 @@
 import type { Config } from "tailwindcss";
 
 // Primary brand color palette
-const PRIMARY_COLOR = "#bf1f40";
+const PRIMARY_COLOR = "#BE0F34";
 
 // Generate color shades from primary color
 const generateColorShades = (hex: string) => {

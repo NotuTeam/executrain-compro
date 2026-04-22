@@ -18,15 +18,16 @@ export default function ArticlePage() {
 
   const debouncedSearchName = useDebounce(searchName, 500);
 
-  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useArticles({
-      search: debouncedSearchName || undefined,
-      sort_order: sortOrder,
-    });
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data, isLoading } = useArticles({
+    search: debouncedSearchName || undefined,
+    sort_order: sortOrder,
+    page: currentPage,
+  });
   const { data: latestArticles = [] } = useLatestArticles();
 
-  const articles =
-    data?.pages?.flatMap((page: { data?: unknown[] }) => page.data || []) || [];
+  const articles = data?.data || [];
+  const pagination = data?.pagination;
 
   return (
     <Container>
@@ -41,9 +42,9 @@ export default function ArticlePage() {
       <ArticleList
         data={articles}
         recentPosts={latestArticles}
-        fetchNext={fetchNextPage}
-        hasNext={hasNextPage}
-        isFetching={isFetchingNextPage}
+        pagination={pagination}
+        onPageChange={setCurrentPage}
+        currentPage={currentPage}
         isLoading={isLoading}
       />
     </Container>

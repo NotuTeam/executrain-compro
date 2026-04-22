@@ -2,12 +2,7 @@
 
 "use client";
 
-import {
-  useQuery,
-  UseQueryResult,
-  useInfiniteQuery,
-  UseInfiniteQueryResult,
-} from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import {
   ProductProps,
   ProductListResponse,
@@ -34,26 +29,14 @@ export const useProduct = (
 };
 
 export const useProductFiltered = (
-  params?: ProductListParams
-): UseInfiniteQueryResult<{
-  pageParams: number[];
-  pages: ProductListResponse[];
-}> => {
-  return useInfiniteQuery({
+  params?: ProductListParams & { page?: number; limit?: number }
+): UseQueryResult<ProductListResponse> => {
+  return useQuery({
     queryKey: ["product-list-filtered", params],
-    queryFn: async ({ pageParam = 1 }) => {
-      const response = await ProductListFilteredService({
-        ...params,
-        page: pageParam,
-      });
+    queryFn: async () => {
+      const response = await ProductListFilteredService(params);
       return response;
     },
-    getNextPageParam: (lastPage) => {
-      return lastPage.pagination.has_next
-        ? lastPage.pagination.current_page + 1
-        : undefined;
-    },
-    initialPageParam: 1,
     refetchOnWindowFocus: false,
   });
 };

@@ -4,6 +4,7 @@ import AxiosClient from "@/lib/axios";
 
 interface ArticleListParams {
   page?: number;
+  limit?: number;
   category?: string;
   search?: string;
   tag?: string;
@@ -16,6 +17,10 @@ export async function ArticleListService(params: ArticleListParams = {}) {
 
     if (params.page) {
       queryParams.append("page", params.page.toString());
+    }
+
+    if (params.limit) {
+      queryParams.append("limit", params.limit.toString());
     }
 
     if (params.category) {

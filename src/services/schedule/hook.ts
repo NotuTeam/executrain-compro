@@ -1,12 +1,8 @@
-/** @format */
-
 "use client";
 
 import {
   useQuery,
   UseQueryResult,
-  useInfiniteQuery,
-  UseInfiniteQueryResult,
 } from "@tanstack/react-query";
 import {
   ScheduleProps,
@@ -35,25 +31,13 @@ export const useSchedule = (): UseQueryResult<ScheduleProps[]> => {
 
 export const useScheduleFiltered = (
   params?: ScheduleFilterParams
-): UseInfiniteQueryResult<{
-  pageParams: number[];
-  pages: ScheduleListResponse[];
-}> => {
-  return useInfiniteQuery({
+): UseQueryResult<ScheduleListResponse> => {
+  return useQuery({
     queryKey: ["schedule-list-filtered", params],
-    queryFn: async ({ pageParam = 1 }) => {
-      const response = await ScheduleListFilteredService({
-        ...params,
-        page: pageParam,
-      });
+    queryFn: async () => {
+      const response = await ScheduleListFilteredService(params);
       return response;
     },
-    getNextPageParam: (lastPage) => {
-      return lastPage.pagination.has_next
-        ? lastPage.pagination.current_page + 1
-        : undefined;
-    },
-    initialPageParam: 1,
     refetchOnWindowFocus: false,
   });
 };

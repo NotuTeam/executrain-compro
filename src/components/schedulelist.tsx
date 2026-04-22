@@ -51,8 +51,8 @@ export default function ScheduleList({
         {isLoading ? (
           [1, 2, 3].map((i) => <ScheduleCardSkeleton key={i} />)
         ) : data?.length === 0 ? (
-          <div className="bg-slate-50 flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
-            <span className="font-[400] text-slate-500 text-[16px] md:text-[18px]">
+          <div className="bg-white/20 backdrop-blur-md border border-white/20 shadow-xl flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
+            <span className="font-[400]text-[16px] md:text-[18px]">
               No Schedule Found
             </span>
           </div>

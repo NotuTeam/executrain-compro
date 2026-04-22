@@ -32,7 +32,7 @@ export default function RelatedScheduleList({
       <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px] mb-6 md:mb-10">
         Related Schedule
       </h2>
-      <div className="flex flex-col w-full px-0 md:px-[7%] lg:px-[10%] gap-4 md:gap-5 mb-6 md:mb-8">
+      <div className="flex w-full px-0 md:px-[7%] lg:px-[10%] gap-4 md:gap-5 mb-6 md:mb-8">
         {data?.length === 0 ? (
           <div className="bg-slate-50 flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
             <span className="font-[400] text-slate-500 text-[16px] md:text-[18px]">
@@ -41,7 +41,7 @@ export default function RelatedScheduleList({
           </div>
         ) : (
           data?.map((each: ScheduleProps, index: number) => (
-            <ScheduleCard key={index + 1} data={each} type="plain" />
+            <ScheduleCard key={index + 1} data={each} type="small" />
           ))
         )}
       </div>

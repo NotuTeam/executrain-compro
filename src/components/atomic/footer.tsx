@@ -100,7 +100,7 @@ export default function Footer() {
     });
   return (
     <footer
-      className="bg-[#bf1f40] min-w-[98dvw] max-w-[99dvw] text-white grid grid-cols-1 md:grid-cols-2 px-[7%] lg:px-[10%] py-[5%] gap-10"
+      className="bg-[#181818] min-w-[98dvw] max-w-[99dvw] text-white grid grid-cols-1 md:grid-cols-2 px-[7%] lg:px-[10%] py-[5%] gap-10"
       style={{
         backgroundImage: `url('${footerBackground}')`,
         backgroundSize: "contain",

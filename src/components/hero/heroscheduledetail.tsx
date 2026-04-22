@@ -4,7 +4,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import Button from "../atomic/button";
 import {
   CornerRightUp,
@@ -24,12 +23,12 @@ import { ScheduleProps } from "@/types/schedule";
 export default function HeroScheduleDetail({
   data,
   isLoading = false,
+  onRegister,
 }: {
   data?: ScheduleProps;
   isLoading?: boolean;
+  onRegister?: () => void;
 }) {
-  const router = useRouter();
-
   // Don't render if no data and not loading
   if (!data && !isLoading) {
     return null;
@@ -58,17 +57,16 @@ export default function HeroScheduleDetail({
           </h1>
           <Button
             onClick={() => {
+              if (onRegister) {
+                onRegister();
+                return;
+              }
+
               if (data?.link && data.link.trim() !== "") {
                 window.open(data.link, "_blank", "noopener,noreferrer");
-              } else {
-                router.push("https://wa.me/62895805254925");
               }
             }}
-            label={
-              data?.link && data.link.trim() !== ""
-                ? "Register Now →"
-                : "Contact Us"
-            }
+            label="Register Now →"
             rounded
             type="primary"
           />
@@ -87,26 +85,26 @@ export default function HeroScheduleDetail({
               <h5 className="font-[500] text-[18px] md:text-[24px]">
                 Course Feature
               </h5>
-              <div className="grid grid-cols-2 border-t border-[#bf1f40] pt-3">
+              <div className="grid grid-cols-2 border-t border-[#BE0F34] pt-3">
                 <div className="flex flex-col gap-2 font-[300] text-xs md:text-sm">
                   <span className="flex items-center gap-2">
-                    <CornerRightUp size={14} color="#bf1f40" />
+                    <CornerRightUp size={14} color="#BE0F34" />
                     Skill Level
                   </span>
                   <span className="flex items-center gap-2">
-                    <Users size={14} color="#bf1f40" />
+                    <Users size={14} color="#BE0F34" />
                     Students
                   </span>
                   <span className="flex items-center gap-2">
-                    <UserRound size={14} color="#bf1f40" />
+                    <UserRound size={14} color="#BE0F34" />
                     Lecturers
                   </span>
                   <span className="flex items-center gap-2">
-                    <BookOpenCheck size={14} color="#bf1f40" />
+                    <BookOpenCheck size={14} color="#BE0F34" />
                     Language
                   </span>
                   <span className="flex items-center gap-2">
-                    <ShieldCheck size={14} color="#bf1f40" />
+                    <ShieldCheck size={14} color="#BE0F34" />
                     Certification
                   </span>
                 </div>
@@ -140,26 +138,26 @@ export default function HeroScheduleDetail({
               <h5 className="font-[500] text-[18px] md:text-[24px]">
                 Course Feature
               </h5>
-              <div className="grid grid-cols-2 border-t border-[#bf1f40] pt-3">
+              <div className="grid grid-cols-2 border-t border-[#BE0F34] pt-3">
                 <div className="flex flex-col gap-2 font-[300] text-xs md:text-sm">
                   <span className="flex items-center gap-2">
-                    <CornerRightUp size={14} color="#bf1f40" />
+                    <CornerRightUp size={14} color="#BE0F34" />
                     Skill Level
                   </span>
                   <span className="flex items-center gap-2">
-                    <Users size={14} color="#bf1f40" />
+                    <Users size={14} color="#BE0F34" />
                     Students
                   </span>
                   <span className="flex items-center gap-2">
-                    <UserRound size={14} color="#bf1f40" />
+                    <UserRound size={14} color="#BE0F34" />
                     Lecturers
                   </span>
                   <span className="flex items-center gap-2">
-                    <BookOpenCheck size={14} color="#bf1f40" />
+                    <BookOpenCheck size={14} color="#BE0F34" />
                     Language
                   </span>
                   <span className="flex items-center gap-2">
-                    <ShieldCheck size={14} color="#bf1f40" />
+                    <ShieldCheck size={14} color="#BE0F34" />
                     Certification
                   </span>
                 </div>
@@ -181,7 +179,7 @@ export default function HeroScheduleDetail({
                     <Clock
                       size={28}
                       className="md:w-[34px] md:h-[34px]"
-                      color="#bf1f40"
+                      color="#BE0F34"
                     />
                     <div className="flex flex-col text-sm md:text-base gap-1">
                       <span className="font-semibold">Start</span>
@@ -197,7 +195,7 @@ export default function HeroScheduleDetail({
                     <CircleCheckBig
                       size={28}
                       className="md:w-[34px] md:h-[34px]"
-                      color="#bf1f40"
+                      color="#BE0F34"
                     />
                     <div className="flex flex-col text-sm md:text-base gap-1">
                       <span className="font-semibold">End</span>
@@ -213,7 +211,7 @@ export default function HeroScheduleDetail({
                     <MapPin
                       size={28}
                       className="md:w-[34px] md:h-[34px]"
-                      color="#bf1f40"
+                      color="#BE0F34"
                     />
                     <div className="flex flex-col text-sm md:text-base gap-1">
                       <span className="font-semibold">Location</span>
@@ -232,7 +230,7 @@ export default function HeroScheduleDetail({
             <Clock
               size={28}
               className="md:w-[34px] md:h-[34px]"
-              color="#bf1f40"
+              color="#BE0F34"
             />
             <div className="flex flex-col text-sm md:text-base">
               <span className="font-semibold">Start</span>
@@ -248,7 +246,7 @@ export default function HeroScheduleDetail({
             <CircleCheckBig
               size={28}
               className="md:w-[34px] md:h-[34px]"
-              color="#bf1f40"
+              color="#BE0F34"
             />
             <div className="flex flex-col text-sm md:text-base">
               <span className="font-semibold">End</span>
@@ -264,7 +262,7 @@ export default function HeroScheduleDetail({
             <MapPin
               size={28}
               className="md:w-[34px] md:h-[34px]"
-              color="#bf1f40"
+              color="#BE0F34"
             />
             <div className="flex flex-col text-sm md:text-base">
               <span className="font-semibold">Location</span>

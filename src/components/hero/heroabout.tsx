@@ -50,7 +50,7 @@ export default function HeroAbout() {
           </div>
           <div className="space-y-5 text-black flex flex-col items-center md:items-start justify-center">
             <h2 className="text-[32px] md:text-[40px] lg:text-[49px] font-semibold">
-              About <span className="text-[#bf1f40]">Executrain</span>
+              About <span className="text-[#BE0F34]">Executrain</span>
             </h2>
             <p className="text-sm md:text-base text-left">
               Executrain adalah pusat pengembangan SDM, teknologi, dan solusi

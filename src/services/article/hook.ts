@@ -3,8 +3,6 @@
 import {
   useQuery,
   UseQueryResult,
-  useInfiniteQuery,
-  UseInfiniteQueryResult,
 } from "@tanstack/react-query";
 import {
   ArticleListService,
@@ -17,19 +15,22 @@ interface UseArticlesParams {
   search?: string;
   tag?: string;
   sort_order?: string;
+  page?: number;
+  limit?: number;
 }
 
 export const useArticles = (
   params: UseArticlesParams = {}
-): UseInfiniteQueryResult<any> => {
-  const { category, search, tag, sort_order = "desc" } = params;
+): UseQueryResult<any> => {
+  const { category, search, tag, sort_order = "desc", page = 1, limit = 6 } = params;
 
-  return useInfiniteQuery({
-    queryKey: ["article_list", category, search, tag, sort_order],
-    queryFn: async ({ pageParam = 1 }) => {
+  return useQuery({
+    queryKey: ["article_list", category, search, tag, sort_order, page, limit],
+    queryFn: async () => {
       try {
         const response = await ArticleListService({
-          page: pageParam,
+          page,
+          limit,
           category,
           search,
           tag,
@@ -40,13 +41,6 @@ export const useArticles = (
         return { data: [], pagination: {} };
       }
     },
-    getNextPageParam: (lastPage) => {
-      if (lastPage?.pagination?.has_next) {
-        return lastPage.pagination.current_page + 1;
-      }
-      return undefined;
-    },
-    initialPageParam: 1,
     refetchOnWindowFocus: false,
   });
 };

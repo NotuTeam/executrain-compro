@@ -9,7 +9,7 @@ import ProductCard from "./atomic/productcard";
 import { ProductCardSkeleton } from "@/components/skeleton";
 import { FadeInUp, StaggerContainer, StaggerItem } from "./atomic/motion";
 
-import { ArrowRightFromLine } from "lucide-react";
+import { ArrowRightFromLine, ChevronLeft, ChevronRight } from "lucide-react";
 
 import { ProductProps } from "@/types/product";
 
@@ -21,6 +21,10 @@ interface CompProps {
   hasNext?: boolean;
   isFetching?: boolean;
   isLoading?: boolean;
+  currentPage?: number;
+  totalPages?: number;
+  totalProducts?: number;
+  onPageChange?: (page: number) => void;
 }
 
 export default function ProductList({
@@ -31,6 +35,10 @@ export default function ProductList({
   hasNext,
   isFetching,
   isLoading = false,
+  currentPage = 1,
+  totalPages = 1,
+  totalProducts = 0,
+  onPageChange,
 }: CompProps) {
   const router = useRouter();
 
@@ -107,16 +115,55 @@ export default function ProductList({
             ))
           )}
         </StaggerContainer>
-        {!isLoading && data.length > 0 && hasNext && (
-          <FadeInUp delay={0.3} duration={0.5}>
-            <Button
-              label={isFetching ? "Loading..." : "Load More"}
-              rounded
-              type={isFetching ? "disable" : "primary"}
-              icon={<ArrowRightFromLine size={18} />}
-              onClick={() => fetchNext && fetchNext()}
-            />
-          </FadeInUp>
+        {!isLoading && data.length > 0 && totalPages > 1 && (
+          <div className="flex items-center justify-center gap-3 w-full px-[5%] md:px-[7%] lg:px-[10%]">
+            <button
+              onClick={() => onPageChange && onPageChange(Math.max(1, currentPage - 1))}
+              disabled={currentPage === 1}
+              className="p-1 text-black disabled:opacity-40 disabled:cursor-not-allowed"
+              type="button"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            <div className="flex items-center gap-2">
+              {(totalPages <= 4
+                ? Array.from({ length: totalPages }, (_, i) => i + 1)
+                : currentPage <= 2
+                  ? [1, 2, 3, "ellipsis"]
+                  : currentPage >= totalPages - 1
+                    ? ["ellipsis", totalPages - 2, totalPages - 1, totalPages]
+                    : ["ellipsis", currentPage - 1, currentPage, currentPage + 1, "ellipsis"]
+              ).map((item, index) => (
+                <button
+                  key={`${item}-${index}`}
+                  onClick={() =>
+                    typeof item === "number" && onPageChange && onPageChange(item)
+                  }
+                  disabled={item === "ellipsis"}
+                  className={`w-10 h-10 rounded-full border text-sm font-semibold transition-colors ${
+                    item === "ellipsis"
+                      ? "border-black bg-[#f5f5f5] text-black cursor-default"
+                      : item === currentPage
+                        ? "border-black bg-black text-white"
+                        : "border-black bg-white text-black"
+                  }`}
+                  type="button"
+                >
+                  {item === "ellipsis" ? "..." : item}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => onPageChange && onPageChange(Math.min(totalPages, currentPage + 1))}
+              disabled={currentPage === totalPages}
+              className="p-1 text-black disabled:opacity-40 disabled:cursor-not-allowed"
+              type="button"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
         )}
       </div>
     );

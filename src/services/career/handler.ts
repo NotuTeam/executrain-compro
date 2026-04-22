@@ -4,6 +4,7 @@ import AxiosClient from "@/lib/axios";
 
 interface CareerListParams {
   page?: number;
+  limit?: number;
   department?: string;
   location?: string;
   job_type?: string;
@@ -18,6 +19,9 @@ export async function CareerListService(params: CareerListParams = {}) {
 
     if (params.page) {
       queryParams.append("page", params.page.toString());
+    }
+    if (params.limit) {
+      queryParams.append("limit", params.limit.toString());
     }
     if (params.department) {
       queryParams.append("department", params.department);

@@ -135,7 +135,7 @@ const SearchBar: React.FC<CompProps> = ({
               e.stopPropagation();
               setIsLevelDropdownOpen(!isLevelDropdownOpen);
             }}
-            className="flex items-center gap-2 px-6 py-2 bg-white text-gray-600 rounded-full border border-gray-300 hover:border-[#bf1f40] hover:text-[#bf1f40] transition-colors duration-200 whitespace-nowrap"
+            className="flex items-center gap-2 px-6 py-2 bg-white text-gray-600 rounded-full border border-gray-300 hover:border-[#BE0F34] hover:text-[#BE0F34] transition-colors duration-200 whitespace-nowrap"
           >
             <span className="text-sm font-medium">
               {getLevelLabel(levelValue)}
@@ -160,13 +160,13 @@ const SearchBar: React.FC<CompProps> = ({
                   }}
                   className={`w-full px-4 py-3 text-left text-sm transition-colors flex items-center justify-between cursor-pointer ${
                     levelValue === option.value
-                      ? "text-[#bf1f40] font-medium bg-[#bf1f40]/10"
+                      ? "text-[#BE0F34] font-medium bg-[#BE0F34]/10"
                       : "text-gray-700 hover:bg-gray-50"
                   }`}
                 >
                   <span>{option.label}</span>
                   {levelValue === option.value && (
-                    <span className="text-[#bf1f40]">✓</span>
+                    <span className="text-[#BE0F34]">✓</span>
                   )}
                 </button>
               ))}
@@ -183,7 +183,7 @@ const SearchBar: React.FC<CompProps> = ({
               e.stopPropagation();
               setIsDeptDropdownOpen(!isDeptDropdownOpen);
             }}
-            className="flex items-center gap-2 px-6 py-2 bg-[#bf1f40] text-white rounded-full border border-[#bf1f40] hover:text-[#bf1f40] hover:bg-white transition-colors duration-200 whitespace-nowrap"
+            className="flex items-center gap-2 px-6 py-2 bg-[#BE0F34] text-white rounded-full border border-[#BE0F34] hover:text-[#BE0F34] hover:bg-white transition-colors duration-200 whitespace-nowrap"
           >
             <span className="text-sm font-medium">
               {getDeptLabel(deptValue)}
@@ -206,13 +206,13 @@ const SearchBar: React.FC<CompProps> = ({
                 }}
                 className={`w-full px-4 py-3 text-left text-sm transition-colors flex items-center justify-between cursor-pointer ${
                   deptValue === "ALL"
-                    ? "text-[#bf1f40] font-medium bg-[#bf1f40]/10"
+                    ? "text-[#BE0F34] font-medium bg-[#BE0F34]/10"
                     : "text-gray-700 hover:bg-gray-50"
                 }`}
               >
                 <span>All Departments</span>
                 {deptValue === "ALL" && (
-                  <span className="text-[#bf1f40]">✓</span>
+                  <span className="text-[#BE0F34]">✓</span>
                 )}
               </button>
               {departmentOptions
@@ -229,13 +229,13 @@ const SearchBar: React.FC<CompProps> = ({
                     }}
                     className={`w-full px-4 py-3 text-left text-sm transition-colors flex items-center justify-between cursor-pointer ${
                       deptValue === dept
-                        ? "text-[#bf1f40] font-medium bg-[#bf1f40]/10"
+                        ? "text-[#BE0F34] font-medium bg-[#BE0F34]/10"
                         : "text-gray-700 hover:bg-gray-50"
                     }`}
                   >
                     <span>{dept}</span>
                     {deptValue === dept && (
-                      <span className="text-[#bf1f40]">✓</span>
+                      <span className="text-[#BE0F34]">✓</span>
                     )}
                   </button>
                 ))}
@@ -264,7 +264,7 @@ const SearchBar: React.FC<CompProps> = ({
             <button
               type="button"
               onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className="flex items-center justify-center w-10 h-10 bg-[#bf1f40] text-white rounded-full shadow-md hover:bg-[#a01a35] transition-colors"
+              className="flex items-center justify-center w-10 h-10 bg-[#BE0F34] text-white rounded-full shadow-md hover:bg-[#a01a35] transition-colors"
               aria-label="Filter"
             >
               <SlidersHorizontal className="w-5 h-5" />
@@ -287,7 +287,7 @@ const SearchBar: React.FC<CompProps> = ({
                         }}
                         className={`w-full px-4 py-2 text-left text-sm rounded-lg transition-colors ${
                           levelValue === option.value
-                            ? "bg-[#bf1f40] text-white"
+                            ? "bg-[#BE0F34] text-white"
                             : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                         }`}
                       >
@@ -309,7 +309,7 @@ const SearchBar: React.FC<CompProps> = ({
                       }}
                       className={`w-full px-4 py-2 text-left text-sm rounded-lg transition-colors ${
                         deptValue === "ALL"
-                          ? "bg-[#bf1f40] text-white"
+                          ? "bg-[#BE0F34] text-white"
                           : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                       }`}
                     >
@@ -325,7 +325,7 @@ const SearchBar: React.FC<CompProps> = ({
                           }}
                           className={`w-full px-4 py-2 text-left text-sm rounded-lg transition-colors ${
                             deptValue === dept
-                              ? "bg-[#bf1f40] text-white"
+                              ? "bg-[#BE0F34] text-white"
                               : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                           }`}
                         >

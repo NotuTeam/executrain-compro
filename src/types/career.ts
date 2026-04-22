@@ -10,8 +10,6 @@ export interface CareerProps {
   department?: string;
   job_type?: string;
   experience_level?: string;
-  salary_min?: number;
-  salary_max?: number;
   vacancies?: number;
   contact_email?: string;
   deadline?: string;

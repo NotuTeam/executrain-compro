@@ -1,7 +1,7 @@
 /** @format */
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 
 import Container from "@/components/atomic/container";
 import HeroSchedule from "@/components/hero/heroschedule";
@@ -20,20 +20,40 @@ export default function Schedule() {
   const [productCategory, setProductCategory] = useState<string | undefined>(
     undefined,
   );
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   const debouncedSearchValue = useDebounce(searchValue, 500);
 
-  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useScheduleFiltered({
-      search: debouncedSearchValue || undefined,
-      schedule_category:
-        scheduleCategories.length > 0 ? scheduleCategories : undefined,
-      product_category: productCategory,
-    });
+  const { data, isLoading } = useScheduleFiltered({
+    search: debouncedSearchValue || undefined,
+    schedule_category:
+      scheduleCategories.length > 0 ? scheduleCategories : undefined,
+    product_category: productCategory,
+    page: currentPage,
+    limit: itemsPerPage,
+  });
 
   const { data: categories = [] } = useScheduleCategories();
 
-  const allSchedules = data?.pages.flatMap((page) => page.data) || [];
+  const schedules = useMemo(() => data?.data || [], [data]);
+  const pagination = useMemo(
+    () =>
+      data?.pagination || {
+        current_page: 1,
+        total_pages: 1,
+        total_schedules: 0,
+        per_page: 6,
+        has_next: false,
+        has_prev: false,
+      },
+    [data],
+  );
+  const totalPages = pagination.total_pages;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [debouncedSearchValue, scheduleCategories, productCategory]);
 
   return (
     <Container>
@@ -76,11 +96,12 @@ export default function Schedule() {
           scheduleCategories.length > 0 ||
           productCategory !== undefined
         }
-        data={allSchedules}
-        fetchNext={fetchNextPage}
-        hasNext={hasNextPage}
-        isFetching={isFetchingNextPage}
+        data={schedules}
         isLoading={isLoading}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        totalSchedules={pagination.total_schedules || schedules.length}
+        onPageChange={setCurrentPage}
       />
     </Container>
   );

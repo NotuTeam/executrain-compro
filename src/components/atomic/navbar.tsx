@@ -24,8 +24,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isServiceOpen, setIsServiceOpen] = useState(false);
   const [isExploreOpen, setIsExploreOpen] = useState(false);
-  const [isOtherOpen, setIsOtherOpen] = useState(false);
-  const [isScheduleOpen, setIsScheduleOpen] = useState(false);
+  const [isFreeTrialOpen, setIsFreeTrialOpen] = useState(false);
   const [isProductOpen, setIsProductOpen] = useState(false);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -33,9 +32,6 @@ export default function Navbar() {
   // Transform services to nav format
   const servicesList = servicesToNavFormat(services);
 
-  // Group pages by type
-  const schedulePages = pages.filter((page: any) => page.type === "Schedule");
-  const productPages = pages.filter((page: any) => page.type === "Product");
   const otherPages = pages.filter((page: any) => page.type === "Other");
 
   // Check if current page is a service page
@@ -104,66 +100,49 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-3 md:space-x-6 lg:space-x-10 py-3 md:py-4 lg:py-5 items-center text-xs md:text-sm lg:text-base">
-            <Link
-              href="/"
-              className={`hover:text-gray-200 transition-colors relative pb-1 ${
-                path === "/"
-                  ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
-                  : ""
-              }`}
-            >
-              Home
-            </Link>
-            {/* Services Dropdown */}
+            {/* Free Trial Dropdown */}
             <div
               className="relative"
-              onMouseEnter={() => setIsExploreOpen(true)}
-              onMouseLeave={() => setIsExploreOpen(false)}
+              onMouseEnter={() => setIsFreeTrialOpen(true)}
+              onMouseLeave={() => setIsFreeTrialOpen(false)}
             >
               <button
                 className={`flex items-center gap-1 hover:text-gray-200 transition-colors relative pb-1 ${
-                  isServicePage
+                  isFreeTrialOpen
                     ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
                     : ""
                 }`}
               >
-                Explore
+                Free Trial
                 <ChevronDown
                   className={`w-4 h-4 transition-transform duration-300 ${
-                    isExploreOpen ? "rotate-180" : ""
+                    isFreeTrialOpen ? "rotate-180" : ""
                   }`}
                 />
               </button>
 
-              {/* Dropdown Menu */}
               <div
                 className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 min-w-[200px] ${
-                  isExploreOpen
+                  isFreeTrialOpen
                     ? "opacity-100 visible translate-y-0"
                     : "opacity-0 invisible -translate-y-2"
                 }`}
               >
-                {/* Article */}
-                <Link
-                  href="/blog"
-                  className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
-                >
-                  Blog
-                </Link>
-
-                {/* Career */}
-                <Link
-                  href="/career"
-                  className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
-                >
-                  Career
-                </Link>
-                <Link
-                  href="/learning-path"
-                  className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
-                >
-                  Learning Path
-                </Link>
+                {[
+                  "Data Analytics",
+                  "Automation",
+                  "Cybersecurity",
+                  "Project Management",
+                  "Emotional Intelligence",
+                ].map((each: string) => (
+                  <Link
+                    key={each}
+                    href={`/free-trial?category=${encodeURIComponent(each.toUpperCase().replaceAll(" ", "_"))}`}
+                    className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                  >
+                    {each}
+                  </Link>
+                ))}
               </div>
             </div>
 
@@ -209,150 +188,114 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Product - Dynamic */}
-            {productPages.length > 0 ? (
-              <div
-                className="relative"
-                onMouseEnter={() => setIsProductOpen(true)}
-                onMouseLeave={() => setIsProductOpen(false)}
-              >
-                <button
-                  className={`flex items-center gap-1 hover:text-gray-200 transition-colors relative pb-1 ${
-                    path === "/product"
-                      ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
-                      : ""
-                  }`}
-                >
-                  Product
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-300 ${
-                      isProductOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-                <div
-                  className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 min-w-[200px] ${
-                    isProductOpen
-                      ? "opacity-100 visible translate-y-0"
-                      : "opacity-0 invisible -translate-y-2"
-                  }`}
-                >
-                  {productPages.map((page: any) => (
-                    <Link
-                      key={page._id}
-                      href={`/${page.path}`}
-                      className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
-                      onClick={() => setIsProductOpen(false)}
-                    >
-                      {page.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <Link
-                href="/product"
-                className={`hover:text-gray-200 transition-colors relative pb-1 ${
+            {/* Product Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsProductOpen(true)}
+              onMouseLeave={() => setIsProductOpen(false)}
+            >
+              <button
+                className={`flex items-center gap-1 hover:text-gray-200 transition-colors relative pb-1 ${
                   path === "/product"
                     ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
                     : ""
                 }`}
               >
                 Product
-              </Link>
-            )}
-
-            {/* Schedule - Dynamic */}
-            {schedulePages.length > 0 ? (
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-300 ${
+                    isProductOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
               <div
-                className="relative"
-                onMouseEnter={() => setIsScheduleOpen(true)}
-                onMouseLeave={() => setIsScheduleOpen(false)}
+                className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 min-w-[200px] ${
+                  isProductOpen
+                    ? "opacity-100 visible translate-y-0"
+                    : "opacity-0 invisible -translate-y-2"
+                }`}
               >
-                <button
-                  className={`flex items-center gap-1 hover:text-gray-200 transition-colors relative pb-1 ${
-                    path === "/schedule"
-                      ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
-                      : ""
-                  }`}
+                <Link
+                  href="/product"
+                  className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
                 >
-                  Schedule
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-300 ${
-                      isScheduleOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-                <div
-                  className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 min-w-[200px] ${
-                    isScheduleOpen
-                      ? "opacity-100 visible translate-y-0"
-                      : "opacity-0 invisible -translate-y-2"
-                  }`}
+                  Product
+                </Link>
+                <Link
+                  href="/learning-path"
+                  className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
                 >
-                  {schedulePages.map((page: any) => (
-                    <Link
-                      key={page._id}
-                      href={`/${page.path}`}
-                      className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
-                      onClick={() => setIsScheduleOpen(false)}
-                    >
-                      {page.name}
-                    </Link>
-                  ))}
-                </div>
+                  Learning Path
+                </Link>
               </div>
-            ) : (
-              <Link
-                href="/schedule"
-                className={`hover:text-gray-200 transition-colors relative pb-1 ${
-                  path === "/schedule"
+            </div>
+
+            <Link
+              href="/schedule"
+              className={`hover:text-gray-200 transition-colors relative pb-1 ${
+                path === "/schedule"
+                  ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
+                  : ""
+              }`}
+            >
+              Schedule
+            </Link>
+
+            {/* Explore Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsExploreOpen(true)}
+              onMouseLeave={() => setIsExploreOpen(false)}
+            >
+              <button
+                className={`flex items-center gap-1 hover:text-gray-200 transition-colors relative pb-1 ${
+                  isExploreOpen
                     ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
                     : ""
                 }`}
               >
-                Schedule
-              </Link>
-            )}
-            {/* Other - Only show if otherPages exist */}
-            {otherPages.length > 0 && (
-              <div
-                className="relative"
-                onMouseEnter={() => setIsOtherOpen(true)}
-                onMouseLeave={() => setIsOtherOpen(false)}
-              >
-                <button
-                  className={`flex items-center gap-1 hover:text-gray-200 transition-colors relative pb-1`}
-                >
-                  Other
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-300 ${
-                      isOtherOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-
-                {/* Dropdown Dynamic Menu */}
-                <div
-                  className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 min-w-[200px] ${
-                    isOtherOpen
-                      ? "opacity-100 visible translate-y-0"
-                      : "opacity-0 invisible -translate-y-2"
+                Explore
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-300 ${
+                    isExploreOpen ? "rotate-180" : ""
                   }`}
+                />
+              </button>
+
+              {/* Dropdown Menu */}
+              <div
+                className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 min-w-[200px] ${
+                  isExploreOpen
+                    ? "opacity-100 visible translate-y-0"
+                    : "opacity-0 invisible -translate-y-2"
+                }`}
+              >
+                {/* Article */}
+                <Link
+                  href="/blog"
+                  className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
                 >
-                  {otherPages.map((page: any) => (
-                    <Link
-                      key={page._id}
-                      href={`/${page.path}`}
-                      className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
-                      onClick={() => setIsOtherOpen(false)}
-                    >
-                      {page.name}
-                    </Link>
-                  ))}
-                </div>
+                  Blog
+                </Link>
+
+                {/* Career */}
+                <Link
+                  href="/career"
+                  className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                >
+                  Career
+                </Link>
+                {otherPages.map((page: any) => (
+                  <Link
+                    key={page._id}
+                    href={`/${page.path}`}
+                    className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                  >
+                    {page.name}
+                  </Link>
+                ))}
               </div>
-            )}
+            </div>
 
             <Link href="/contact">
               <Button label="Contact Us" />
@@ -405,19 +348,7 @@ export default function Navbar() {
 
           {/* Sidebar Menu */}
           <nav className="flex-1 overflow-y-auto py-5">
-            <Link
-              href="/"
-              className={`block px-6 py-3 transition-colors ${
-                path === "/"
-                  ? "text-primary-500 bg-blue-50 border-l-4 border-primary-500 font-semibold"
-                  : "text-gray-800 hover:bg-gray-100"
-              }`}
-              onClick={closeSidebar}
-            >
-              Home
-            </Link>
-
-            {/* Explore Accordion */}
+            {/* Free Trial Accordion */}
             <div>
               <button
                 className={`w-full flex items-center justify-between px-6 py-3 transition-colors ${
@@ -425,43 +356,36 @@ export default function Navbar() {
                     ? "text-primary-500 bg-blue-50 border-l-4 border-primary-500 font-semibold"
                     : "text-gray-800 hover:bg-gray-100"
                 }`}
-                onClick={() => setIsExploreOpen(!isExploreOpen)}
+                onClick={() => setIsFreeTrialOpen(!isFreeTrialOpen)}
               >
-                <span>Explore</span>
+                <span>Free Trial</span>
                 <ChevronDown
                   className={`w-4 h-4 transition-transform duration-300 ${
-                    isExploreOpen ? "rotate-180" : ""
+                    isFreeTrialOpen ? "rotate-180" : ""
                   }`}
                 />
               </button>
-
-              {/* Explore Submenu */}
               <div
                 className={`overflow-hidden transition-all duration-300 ${
-                  isExploreOpen ? "max-h-[500px]" : "max-h-0"
+                  isFreeTrialOpen ? "max-h-[500px]" : "max-h-0"
                 }`}
               >
-                <Link
-                  href="/blog"
-                  className="block pl-12 pr-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors"
-                  onClick={closeSidebar}
-                >
-                  Blog
-                </Link>
-                <Link
-                  href="/career"
-                  className="block pl-12 pr-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors"
-                  onClick={closeSidebar}
-                >
-                  Career
-                </Link>
-                <Link
-                  href="/learning-path"
-                  className="block pl-12 pr-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors"
-                  onClick={closeSidebar}
-                >
-                  Learning Path
-                </Link>
+                {[
+                  "Data Analytics",
+                  "Automation",
+                  "Cybersecurity",
+                  "Project Management",
+                  "Emotional Intelligence",
+                ].map((each: string) => (
+                  <Link
+                    key={each}
+                    href={`/free-trial?category=${encodeURIComponent(each.toUpperCase().replaceAll(" ", "_"))}`}
+                    className="block pl-12 pr-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors"
+                    onClick={closeSidebar}
+                  >
+                    {each}
+                  </Link>
+                ))}
               </div>
             </div>
 
@@ -502,17 +426,44 @@ export default function Navbar() {
               </div>
             </div>
 
-            <Link
-              href="/product"
-              className={`block px-6 py-3 transition-colors ${
-                path === "/product"
-                  ? "text-primary-500 bg-blue-50 border-l-4 border-primary-500 font-semibold"
-                  : "text-gray-800 hover:bg-gray-100"
-              }`}
-              onClick={closeSidebar}
-            >
-              Product
-            </Link>
+            {/* Product Accordion */}
+            <div>
+              <button
+                className={`w-full flex items-center justify-between px-6 py-3 transition-colors ${
+                  isServicePage
+                    ? "text-primary-500 bg-blue-50 border-l-4 border-primary-500 font-semibold"
+                    : "text-gray-800 hover:bg-gray-100"
+                }`}
+                onClick={() => setIsProductOpen(!isProductOpen)}
+              >
+                <span>Product</span>
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-300 ${
+                    isProductOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-300 ${
+                  isProductOpen ? "max-h-[500px]" : "max-h-0"
+                }`}
+              >
+                <Link
+                  href={`/product`}
+                  className="block pl-12 pr-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors"
+                  onClick={closeSidebar}
+                >
+                  Product
+                </Link>
+                <Link
+                  href="/learning-path"
+                  className="block pl-12 pr-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors"
+                  onClick={closeSidebar}
+                >
+                  Learning Path
+                </Link>
+              </div>
+            </div>
             <Link
               href="/schedule"
               className={`block px-6 py-3 transition-colors ${
@@ -524,6 +475,47 @@ export default function Navbar() {
             >
               Schedule
             </Link>
+
+            {/* Explore Accordion */}
+            <div>
+              <button
+                className={`w-full flex items-center justify-between px-6 py-3 transition-colors ${
+                  isServicePage
+                    ? "text-primary-500 bg-blue-50 border-l-4 border-primary-500 font-semibold"
+                    : "text-gray-800 hover:bg-gray-100"
+                }`}
+                onClick={() => setIsExploreOpen(!isExploreOpen)}
+              >
+                <span>Explore</span>
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-300 ${
+                    isExploreOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {/* Explore Submenu */}
+              <div
+                className={`overflow-hidden transition-all duration-300 ${
+                  isExploreOpen ? "max-h-[500px]" : "max-h-0"
+                }`}
+              >
+                <Link
+                  href="/blog"
+                  className="block pl-12 pr-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors"
+                  onClick={closeSidebar}
+                >
+                  Blog
+                </Link>
+                <Link
+                  href="/career"
+                  className="block pl-12 pr-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors"
+                  onClick={closeSidebar}
+                >
+                  Career
+                </Link>
+              </div>
+            </div>
           </nav>
 
           {/* Sidebar Footer */}

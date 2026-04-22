@@ -149,7 +149,7 @@ export default function Calendar({
                   className={`
                   text-xs md:text-sm transition-all p-2 md:p-3 rounded-full aspect-square cursor-pointer
                   ${!isCurrentMonth ? "text-gray-300" : "text-gray-900"}
-                  ${isToday ? "font-bold bg-[#bf1f40] text-white" : ""}
+                  ${isToday ? "font-bold bg-[#BE0F34] text-white" : ""}
                   ${isSelected ? "bg-[#ade9ff]" : ""}
                   ${isCurrentMonth ? "hover:bg-gray-100" : ""}
                 `}

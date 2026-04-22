@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /** @format */
 
-import { CareerProps } from "@/types/career";
-
 
 export function serviceToSlug(serviceName: string): string {
   return serviceName.trim().replace(/\s+/g, "-").toLowerCase();
@@ -57,14 +55,6 @@ export const cleanExcerpt = (text?: string) => {
     .replace(/\s+/g, " ")
     .trim();
 };
-
-export const formatSalary = (n?: number) =>
-  typeof n === "number" ? `Rp. ${n.toLocaleString("id-ID")}` : "-";
-
-export const salaryDisplay = (job: CareerProps) =>
-  typeof job.salary_min === "number" && typeof job.salary_max === "number"
-    ? `${formatSalary(job.salary_min)} – ${formatSalary(job.salary_max)}`
-    : "Gaji: Negotiable";
 
 export const formatDeadline = (date?: string) =>
   date
