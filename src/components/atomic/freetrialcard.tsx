@@ -11,7 +11,7 @@ import Tag from "./tag";
 import Button from "./button";
 import { ArrowRightFromLine } from "lucide-react";
 
-import HeroBG from "@/assets/hero.webp";
+import HeroBG from "@/assets/banner.jpg";
 
 import { FreeTrialProductProps } from "@/types/free-trial";
 
@@ -42,12 +42,12 @@ export default function FreeTrialCard({ data, size = "md" }: CompProps) {
         <div className="p-[5%]">
           <div className="flex justify-between items-start pb-5 md:pb-8 border-b-2 border-[#BE0F34]">
             <Tooltip placement="top" title={data?.product_name || "-"}>
-              <h3 className="text-[16px] md:text-[20px] lg:text-[24px] font-semibold text-left max-w-[65%]">
+              <h3 className="text-[16px] md:text-[20px] lg:text-[24px] font-semibold text-left max-w-[65%] truncate">
                 {data?.product_name || "-"}
               </h3>
             </Tooltip>
 
-            <Tag label={data?.product_category?.replace("_", " ") || "UNSET"} />
+            <Tag label={data?.product_category || "UNSET"} />
           </div>
           <div className="flex justify-between pt-2 md:pt-3">
             <div className="flex gap-3 items-center">
@@ -73,7 +73,7 @@ export default function FreeTrialCard({ data, size = "md" }: CompProps) {
       <div
         className="h-48 md:h-auto"
         style={{
-          backgroundImage: `url(${data?.banner?.url || "https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp"})`,
+          backgroundImage: `url(${data?.banner?.url || "https://res.cloudinary.com/dgd3iusxa/image/upload/v1777208395/executrain/assets/ddxseg9njypotvqwkgdb.jpg"})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -81,9 +81,11 @@ export default function FreeTrialCard({ data, size = "md" }: CompProps) {
       <div className="md:col-span-3">
         <div className="flex flex-col justify-between items-start p-5 md:p-8 gap-2">
           <Tag label={data?.product_category?.replace("_", " ") || "UNSET"} />
-          <h3 className="text-[18px] md:text-[20px] lg:text-[24px] font-semibold">
-            {data?.product_name || "-"}
-          </h3>
+          <Tooltip placement="top" title={data?.product_name || "-"}>
+            <h3 className="text-[18px] md:text-[20px] lg:text-[24px] font-semibold w-full truncate text-left">
+              {data?.product_name || "-"}
+            </h3>
+          </Tooltip>
           <p className="text-left text-sm md:text-base line-clamp-3">
             {data?.product_description || "-"}
           </p>

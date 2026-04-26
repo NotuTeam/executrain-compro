@@ -73,7 +73,9 @@ export async function FreeTrialScheduleByProductService(params: {
   try {
     const { data: response } = await AxiosClient.get(
       `/free-trial/schedule/public/product/${params.product_id}`,
-      { params: { limit: params.limit || 3 } },
+      {
+        params: params.limit ? { limit: params.limit } : {},
+      },
     );
 
     const { status, message, data } = response;

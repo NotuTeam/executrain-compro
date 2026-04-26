@@ -11,7 +11,7 @@ export default function HeroSchedule({ children }: { children: ReactNode }) {
   const { getAssetUrl, getStaticAsset } = useAssetContext();
 
   const bannerPlain = getStaticAsset("banner_plain");
-  const heroBackground = getAssetUrl("hero_background");
+  const heroBackground = getAssetUrl("hero_schedule");
 
   return (
     <div
@@ -32,11 +32,12 @@ export default function HeroSchedule({ children }: { children: ReactNode }) {
           Schedule
         </h1>
         <p className="text-sm md:text-base">
-          Executrain adalah penyedia layanan pelatihan bisnis dan IT terkemuka
-          di bawah naungan PT. Bina Kinerja Nusantara. Kami berkomitmen untuk
-          menghasilkan profesional TI berkualitas tinggi. Sejak tahun 2017, kami
-          berkomitmen membantu berbagai perusahaan meningkatkan keterampilan
-          teknis dan produktivitas karyawannya.
+          Our training programs are delivered through flexible scheduling
+          options to suit your business operations. <br />
+          <br />
+          Choose from regular classes, corporate training schedules, or
+          customized sessions, available both onsite and online to ensure
+          minimal disruption and maximum impact.
         </p>
         {children}
       </div>

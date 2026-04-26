@@ -139,7 +139,9 @@ export async function ScheduleByProductService(params: {
   try {
     const { data: response } = await AxiosClient.get(
       `/schedule/public/product/${params.product_id}`,
-      { params: { limit: params.limit || 3 } }
+      {
+        params: params.limit ? { limit: params.limit } : {},
+      }
     );
 
     const { status, message, data } = response;

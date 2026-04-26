@@ -10,7 +10,7 @@ export default function HeroContact() {
   const { getAssetUrl, getStaticAsset } = useAssetContext();
 
   const bannerPlain = getStaticAsset("banner_plain");
-  const heroBackground = getAssetUrl("hero_background");
+  const heroBackground = getAssetUrl("hero_contact");
 
   return (
     <div
@@ -31,11 +31,7 @@ export default function HeroContact() {
           Contact Us
         </h1>
         <p className="text-sm md:text-base">
-          Executrain adalah penyedia layanan pelatihan bisnis dan IT terkemuka
-          di bawah naungan PT. Bina Kinerja Nusantara. Kami berkomitmen untuk
-          menghasilkan profesional TI berkualitas tinggi. Sejak tahun 2017, kami
-          berkomitmen membantu berbagai perusahaan meningkatkan keterampilan
-          teknis dan produktivitas karyawannya.
+          Let’s build the future of your workforce together.
         </p>
       </div>
     </div>

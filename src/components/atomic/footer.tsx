@@ -61,7 +61,9 @@ export default function Footer() {
     .filter(
       (item: SocmedDataProps) =>
         item.socmed_link &&
-        !["GMAIL", "WHATSAPP", "GMAPS"].includes(item.socmed_name),
+        !["GMAIL", "WHATSAPP", "GMAPS", "SALES_EMAIL"].includes(
+          item.socmed_name,
+        ),
     )
     .map((item: SocmedDataProps) => {
       const iconKey = item.socmed_name;

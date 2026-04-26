@@ -74,7 +74,7 @@ export default function Promo({ size = "md", data }: CompProps) {
 
   if (size === "sm" || size === "md") {
     return (
-      <div className="bg-white flex justify-between text-primary-500 items-center px-[5%] py-5 relative">
+      <div className="bg-white flex justify-between text-black items-center px-[5%] py-5 relative">
         <div className="flex gap-2 flex-col max-w-[65%]">
           <span className="text-[20px] md:text-[24px] font-semibold">
             {data?.promo_name} with{" "}

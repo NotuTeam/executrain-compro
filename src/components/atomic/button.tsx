@@ -21,12 +21,14 @@ export default function Button({
   rounded = false,
   type = "default",
   icon,
+  size = "md",
   onClick = () => {},
 }: {
   label: string;
   rounded?: boolean;
   type?: "primary" | "default" | "disable";
   icon?: ReactNode;
+  size?: "sm" | "md";
   onClick?: () => void;
 }) {
   return (
@@ -38,7 +40,7 @@ export default function Button({
         rounded ? "rounded-full" : "rounded-md"
       } flex items-center gap-2 ${
         type === "disable" ? "cursor-not-allowed" : "cursor-pointer"
-      }`}
+      } ${size === "sm" && "text-xs"}`}
       type="button"
       disabled={type === "disable"}
     >

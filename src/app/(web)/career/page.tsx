@@ -123,19 +123,19 @@ export default function CareerPage() {
         <div className="flex gap-3">
           {[
             {
-              title: "People-First Culture",
+              title: "Continuous Growth Culture",
               description:
-                "We believe great work starts with great people. At ExecuTrain, every team member is valued, heard, and empowered to do their best work.",
+                "We invest in ongoing learning and development to help our people stay ahead in a fast-changing industry.",
             },
             {
-              title: "Real Growth, Real Fast",
+              title: "Collaborative Environment",
               description:
-                "From day one, you'll take on meaningful challenges that sharpen your skills and accelerate your career — not someday, but right now.",
+                "We believe in teamwork, synergy, and open communication to achieve shared success.",
             },
             {
-              title: "Leaders Who Invest in You",
+              title: "Purpose-Driven Work",
               description:
-                "Our leadership team is hands-on and accessible. You'll get mentorship, feedback, and the support you need to reach your full potential.",
+                "Every program we deliver creates real impact—empowering professionals and transforming organizations.",
             },
           ].map((each: any, index: number) => (
             <div

@@ -11,7 +11,7 @@ export default function HeroProduct({ children }: { children: ReactNode }) {
   const { getAssetUrl, getStaticAsset } = useAssetContext();
 
   const bannerPlain = getStaticAsset("banner_plain");
-  const heroBackground = getAssetUrl("hero_background");
+  const heroBackground = getAssetUrl("hero_product");
 
   return (
     <div
@@ -22,21 +22,18 @@ export default function HeroProduct({ children }: { children: ReactNode }) {
         backgroundPosition: "center",
       }}
     >
-      <div className="flex flex-col gap-5 md:gap-8 items-start max-w-full pt-[10%]">
+      <div className="flex flex-col gap-5 md:gap-8 items-start w-full pt-[10%]">
         <div className="font-[500] flex gap-3">
           <Link href="/">Home</Link>
           <ChevronRight />
-          <Link href="/product">Our Products</Link>
+          <Link href="/product">Product</Link>
         </div>
         <h1 className="text-[32px] md:text-[45px] lg:text-[61px] font-semibold">
-          Product
+          Our Product
         </h1>
         <p className="text-sm md:text-base">
-          Executrain adalah penyedia layanan pelatihan bisnis dan IT terkemuka
-          di bawah naungan PT. Bina Kinerja Nusantara. Kami berkomitmen untuk
-          menghasilkan profesional TI berkualitas tinggi. Sejak tahun 2017, kami
-          berkomitmen membantu berbagai perusahaan meningkatkan keterampilan
-          teknis dan produktivitas karyawannya.
+          We offer a comprehensive range of learning and development solutions
+          designed to meet modern business needs
         </p>
         {children}
       </div>

@@ -15,10 +15,17 @@ export interface AssetProps {
 export interface AssetMap {
   hero_background?: { url: string; fallback_url: string; type: string };
   hero_video?: { url: string; fallback_url: string; type: string };
-  about_image?: { url: string; fallback_url: string; type: string };
-  statistic_background?: { url: string; fallback_url: string; type: string };
   steps_background?: { url: string; fallback_url: string; type: string };
   services_image?: { url: string; fallback_url: string; type: string };
   cta_schedule_image?: { url: string; fallback_url: string; type: string };
   contact_image?: { url: string; fallback_url: string; type: string };
+
+  //BARU
+  hero_contact?: { url: string; fallback_url: string; type: string };
+  framework_banner?:{ url: string; fallback_url: string; type: string };
+  hero_free_trial?:{ url: string; fallback_url: string; type: string };
+  hero_service?:{ url: string; fallback_url: string; type: string };
+  hero_product?:{ url: string; fallback_url: string; type: string };
+  hero_schedule?:{ url: string; fallback_url: string; type: string };
+  hero_blog?:{ url: string; fallback_url: string; type: string };
 }

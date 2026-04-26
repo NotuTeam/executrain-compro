@@ -65,7 +65,7 @@ export const useScheduleByProduct = (params?: {
     queryFn: async () => {
       const { data } = await ScheduleByProductService({
         product_id: params?.product_id || "",
-        limit: params?.limit || 3,
+        limit: params?.limit,
       });
       return data;
     },

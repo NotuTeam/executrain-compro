@@ -32,7 +32,10 @@ export default function ScheduleCard({ data, type = "default" }: CompProps) {
           </div>
         </div>
         <div className="max-w-full md:max-w-[60%] lg:max-w-[40%] text-left">
-          <h3 className="text-[18px] md:text-[20px] lg:text-[24px] font-semibold leading-6 md:leading-7">
+          <h3
+            className="text-[18px] md:text-[20px] lg:text-[24px] font-semibold leading-6 md:leading-7 truncate"
+            title={data.schedule_name}
+          >
             {data.schedule_name}
           </h3>
         </div>
@@ -58,8 +61,8 @@ export default function ScheduleCard({ data, type = "default" }: CompProps) {
 
   if (type === "small") {
     return (
-      <div className="w-full space-y-2 p-[3%] md:p-[2%] rounded-2xl border border-primary-600">
-        <div className="flex gap-3 items-center justify-between flex-wrap md:flex-nowrap">
+      <div className="w-full space-y-2 p-2 md:p-3 rounded-2xl border border-primary-600">
+        <div className="flex gap-3 items-center justify-between flex-wrap md:flex-nowrap mb-3">
           <div className="flex gap-3 items-center">
             <Tag label={data?.status?.replace("_", " ") || "UNSET"} />
             <span className="text-[10px] md:text-[12px]"></span>
@@ -72,14 +75,16 @@ export default function ScheduleCard({ data, type = "default" }: CompProps) {
           </h3>
         </div>
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-3 md:gap-0">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-[10px] md:text-[12px]">
-              {data.schedule_name}
-            </span>
-          </div>
+          <span
+            className="text-[10px] md:text-[12px] font-semibold max-w-full truncate"
+            title={data.schedule_name}
+          >
+            {data.schedule_name}
+          </span>
           <Button
             label="Join Class"
             rounded
+            size="sm"
             type="primary"
             onClick={() => router.push(`/schedule/${data._id}`)}
           />
@@ -99,7 +104,10 @@ export default function ScheduleCard({ data, type = "default" }: CompProps) {
         </div>
       </div>
       <div className="max-w-full md:max-w-[60%] lg:max-w-[40%] text-left">
-        <h3 className="text-[18px] md:text-[20px] lg:text-[24px] font-semibold leading-6 md:leading-7">
+        <h3
+          className="text-[18px] md:text-[20px] lg:text-[24px] font-semibold leading-6 md:leading-7 truncate"
+          title={data.schedule_name}
+        >
           {data.schedule_name}
         </h3>
       </div>

@@ -11,7 +11,7 @@ export default function HeroArticle({ children }: { children?: ReactNode }) {
   const { getAssetUrl, getStaticAsset } = useAssetContext();
 
   const bannerPlain = getStaticAsset("banner_plain");
-  const heroBackground = getAssetUrl("hero_background");
+  const heroBackground = getAssetUrl("hero_blog");
 
   return (
     <div
@@ -26,10 +26,10 @@ export default function HeroArticle({ children }: { children?: ReactNode }) {
         <div className="font-[500] flex gap-3">
           <Link href="/">Home</Link>
           <ChevronRight />
-          <Link href="/blog">Our Blog</Link>
+          <Link href="/blog">Blog</Link>
         </div>
         <h1 className="text-[32px] md:text-[45px] lg:text-[61px] font-semibold">
-          Blog
+          Our Blog
         </h1>
         <p className="text-sm md:text-base">
           Executrain adalah penyedia layanan pelatihan bisnis dan IT terkemuka

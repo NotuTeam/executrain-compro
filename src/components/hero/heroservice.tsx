@@ -11,7 +11,7 @@ export default function HeroService() {
   const { getAssetUrl, getStaticAsset } = useAssetContext();
 
   const bannerPlain = getStaticAsset("banner_plain");
-  const heroBackground = getAssetUrl("hero_background");
+  const heroBackground = getAssetUrl("hero_service");
 
   return (
     <div
@@ -22,7 +22,7 @@ export default function HeroService() {
         backgroundPosition: "center",
       }}
     >
-      <div className="flex flex-col gap-5 md:gap-8 items-start max-w-full pt-[10%]">
+      <div className="flex flex-col gap-5 md:gap-8 items-start w-full pt-[10%]">
         <div className="font-[500] flex gap-3">
           <Link href="/">Home</Link>
           <ChevronRight />
@@ -32,11 +32,12 @@ export default function HeroService() {
           Our Service
         </h1>
         <p className="text-sm md:text-base">
-          Executrain adalah penyedia layanan pelatihan bisnis dan IT terkemuka
-          di bawah naungan PT. Bina Kinerja Nusantara. Kami berkomitmen untuk
-          menghasilkan profesional TI berkualitas tinggi. Sejak tahun 2017, kami
-          berkomitmen membantu berbagai perusahaan meningkatkan keterampilan
-          teknis dan produktivitas karyawannya.
+          Our training programs are delivered through flexible scheduling
+          options to suit your business operations. <br />
+          <br />
+          Choose from regular classes, corporate training schedules, or
+          customized sessions, available both onsite and online to ensure
+          minimal disruption and maximum impact.
         </p>
         <div className="w-full text-white flex items-center justify-around gap-5 md:gap-0">
           <div className="flex flex-col items-center justify-center">

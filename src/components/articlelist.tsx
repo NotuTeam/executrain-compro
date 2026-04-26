@@ -2,14 +2,13 @@
 
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useMemo } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import Button from "./atomic/button";
 import { Skeleton } from "@/components/skeleton";
 
-import { ArrowRightFromLine, Clock, User, ChevronLeft, ChevronRight } from "lucide-react";
+import { Clock, User, ChevronLeft, ChevronRight } from "lucide-react";
 import { ArticleProps } from "@/types/article";
 
 import { formatDate, cleanExcerpt } from "@/lib/utils";
@@ -74,7 +73,9 @@ export default function ArticleList({
     <div className="w-full py-[5%] px-[5%] md:px-[7%] lg:px-[10%] bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10">
         <div className="lg:col-span-3 space-y-6">
-          <p className="text-gray-700 font-medium">{pagination?.total_articles || data.length} Posts</p>
+          <p className="text-gray-700 font-medium">
+            {pagination?.total_articles || data.length} Posts
+          </p>
 
           {data.length === 0 ? (
             <div className="bg-slate-50 flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
@@ -98,7 +99,10 @@ export default function ArticleList({
                     </span>
                   </div>
 
-                  <h3 className="font-bold text-xl text-gray-900 line-clamp-2 mb-2 group-hover:text-primary-600 transition-colors duration-200">
+                  <h3
+                    className="font-bold text-xl text-gray-900 truncate mb-2 group-hover:text-primary-600 transition-colors duration-200"
+                    title={blog?.title || "-"}
+                  >
                     {blog?.title || "-"}
                   </h3>
 
@@ -141,38 +145,45 @@ export default function ArticleList({
                   <ChevronLeft className="w-4 h-4" />
                   Previous
                 </button>
-                
+
                 <div className="flex items-center gap-1">
-                  {Array.from({ length: Math.min(5, pagination.total_pages) }, (_, i) => {
-                    let pageNum;
-                    if (pagination.total_pages <= 5) {
-                      pageNum = i + 1;
-                    } else if (currentPage <= 3) {
-                      pageNum = i + 1;
-                    } else if (currentPage >= pagination.total_pages - 2) {
-                      pageNum = pagination.total_pages - 4 + i;
-                    } else {
-                      pageNum = currentPage - 2 + i;
-                    }
-                    
-                    return (
-                      <button
-                        key={pageNum}
-                        onClick={() => onPageChange(pageNum)}
-                        className={`w-8 h-8 rounded-lg font-medium text-sm transition-colors ${
-                          currentPage === pageNum
-                            ? "bg-primary-600 text-white"
-                            : "border border-gray-300 hover:bg-gray-50 text-gray-700"
-                        }`}
-                      >
-                        {pageNum}
-                      </button>
-                    );
-                  })}
+                  {Array.from(
+                    { length: Math.min(5, pagination.total_pages) },
+                    (_, i) => {
+                      let pageNum;
+                      if (pagination.total_pages <= 5) {
+                        pageNum = i + 1;
+                      } else if (currentPage <= 3) {
+                        pageNum = i + 1;
+                      } else if (currentPage >= pagination.total_pages - 2) {
+                        pageNum = pagination.total_pages - 4 + i;
+                      } else {
+                        pageNum = currentPage - 2 + i;
+                      }
+
+                      return (
+                        <button
+                          key={pageNum}
+                          onClick={() => onPageChange(pageNum)}
+                          className={`w-8 h-8 rounded-lg font-medium text-sm transition-colors ${
+                            currentPage === pageNum
+                              ? "bg-primary-600 text-white"
+                              : "border border-gray-300 hover:bg-gray-50 text-gray-700"
+                          }`}
+                        >
+                          {pageNum}
+                        </button>
+                      );
+                    },
+                  )}
                 </div>
-                
+
                 <button
-                  onClick={() => onPageChange(Math.min(pagination.total_pages, currentPage + 1))}
+                  onClick={() =>
+                    onPageChange(
+                      Math.min(pagination.total_pages, currentPage + 1),
+                    )
+                  }
                   disabled={currentPage === pagination.total_pages}
                   className="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1 text-sm"
                 >
@@ -185,7 +196,7 @@ export default function ArticleList({
         </div>
 
         <aside className="lg:col-span-2">
-          <div className="bg-[#f5f5f0] rounded-2xl p-6 space-y-5">
+          <div className="bg-[#C103020D] rounded-2xl p-6 space-y-5">
             <h4 className="font-bold text-xl text-gray-900">Recent Posts</h4>
 
             {latestPosts.length === 0 ? (
@@ -204,8 +215,11 @@ export default function ArticleList({
                       {formatDate(blog?.published_at || blog?.created_at)}
                     </span>
                   </div>
-                  <p className="font-bold text-gray-900 line-clamp-2 group-hover:text-primary-600 transition-colors duration-200">
-                    {blog?.title}
+                  <p
+                    className="font-bold text-gray-900 truncate group-hover:text-primary-600 transition-colors duration-200"
+                    title={blog?.title || "-"}
+                  >
+                    {blog?.title || "-"}
                   </p>
                 </button>
               ))

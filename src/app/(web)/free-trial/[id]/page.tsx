@@ -36,7 +36,6 @@ export default function FreeTrialDetailPage() {
   const { data: relatedSchedule = [], isLoading: scheduleLoading } =
     useFreeTrialScheduleByProduct({
       product_id: id as string,
-      limit: 3,
     });
 
   const relatedProducts = useMemo(() => {
@@ -64,7 +63,7 @@ export default function FreeTrialDetailPage() {
         <div
           className="min-w-[99dvw] min-h-[80dvh] flex items-center justify-center px-[5%] md:px-[7%] lg:px-[10%]"
           style={{
-            backgroundImage: `url('https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233518/Subtract_hwkrrr.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp')`,
+            backgroundImage: `url('https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233518/Subtract_hwkrrr.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1777208395/executrain/assets/ddxseg9njypotvqwkgdb.jpg')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

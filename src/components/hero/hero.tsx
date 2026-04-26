@@ -72,9 +72,14 @@ export default function Hero({ searchValue, onSearchChange }: HeroProps) {
       <div className="w-full relative z-10 max-w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-5">
         <FadeInUp delay={0.2} duration={0.6}>
           <div className="space-y-5 md:space-y-6">
-            <h1 className="text-[32px] md:text-[45px] lg:text-[61px] font-semibold">
-              Executrain
+            <h1 className="text-[32px] md:text-[45px] lg:text-[55px] font-semibold leading-14">
+              Performance is the Bottom Line
             </h1>
+            <p className="">
+              Delivering world-class IT training, business skills, and
+              technology solutions to help your organization stay ahead in a
+              rapidly evolving digital landscape.
+            </p>
             <div className="w-full max-w-[680px] bg-white rounded-full border border-[#BE0F34] p-1.5 md:p-2 flex items-center">
               <input
                 type="text"

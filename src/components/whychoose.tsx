@@ -8,19 +8,19 @@ import { FadeInLeft, StaggerContainer, StaggerItem } from "./atomic/motion";
 
 const whyChooseData = [
   {
-    title: "Layanan Lengkap & Terintegrasi",
+    title: "25+ years of experience in corporate training",
     description:
-      "Pelatihan, IT managed service, hingga solusi teknologi dalam satu atap untuk mendukung pertumbuhan bisnis Anda.",
+      "With over 25 years of proven experience, we deliver high-impact corporate training, complemented by IT managed services and integrated technology solutions to support your business growth.",
   },
   {
-    title: "Kustom Sesuai Kebutuhan",
+    title: "Trusted by leading companies across industries",
     description:
-      "Setiap program dan layanan kami dirancang sesuai karakteristik dan tujuan organisasi Anda.",
+      "Trusted by leading companies across diverse industries, our programs and services are tailored to meet the unique needs and strategic goals of every organization.",
   },
   {
-    title: "Profesional & Berpengalaman",
+    title: "Practical, results-oriented learning approach",
     description:
-      "Tim ahli kami mengedepankan integritas, kualitas, dan inovasi untuk memastikan hasil terbaik bagi klien.",
+      "Our learning approach emphasizes real-world application and measurable outcomes, driven by a team of experts committed to integrity, quality, and continuous innovation.",
   },
 ];
 
@@ -94,11 +94,11 @@ export default function WhyChoose({ type = "dark" }: { type?: string }) {
                 </div>
               </div>
               <div className="flex-1 flex justify-center flex-col">
-                <span className="text-[16px] md:text-[20px] lg:text-[24px] font-semibold block">
+                <span className="text-[14px] md:text-[16px] lg:text-[18px] font-semibold block">
                   {each.title}
                 </span>
                 <p
-                  className={`max-h-[200px] opacity-100 md:opacity-0 md:max-h-[0] text-[12px] md:text-[14px] lg:text-[16px] font-[400] text-gray-700 overflow-hidden transition-all duration-300 ${
+                  className={`max-h-[200px] opacity-100 md:opacity-0 md:max-h-[0] text-[11px] md:text-[12px] lg:text-[14px] font-[400] text-gray-700 overflow-hidden transition-all duration-300 ${
                     hoveredIndex === index
                       ? "!max-h-[200px] !opacity-100 mt-2"
                       : "max-h-0 opacity-0"

@@ -51,7 +51,7 @@ export const useFreeTrialScheduleByProduct = (params?: {
     queryFn: async () => {
       const { data } = await FreeTrialScheduleByProductService({
         product_id: params?.product_id || "",
-        limit: params?.limit || 3,
+        limit: params?.limit,
       });
       return data;
     },

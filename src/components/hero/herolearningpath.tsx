@@ -31,8 +31,11 @@ export default function HeroLearningPath() {
           Learning Path
         </h1>
         <p className="text-sm md:text-base">
-          A professional environment built on collaboration, expertise, and
-          long-term growth.
+          Our structured learning paths are designed to guide professionals from
+          foundational skills to advanced expertise. We ensure every participant
+          gains the right competencies through a progressive and practical
+          approach—helping individuals and teams continuously grow and adapt to
+          changing business demands.
         </p>
       </div>
     </div>

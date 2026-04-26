@@ -8,24 +8,14 @@ import { AssetsService } from "./handler";
 
 const DEFAULT_ASSETS: AssetMap = {
   hero_background: {
-    url: "https://res.cloudinary.com/dgd3iusxa/image/upload/v1764557996/hero_ygtlgs.webp",
+    url: "https://res.cloudinary.com/dgd3iusxa/image/upload/v1777208395/executrain/assets/ddxseg9njypotvqwkgdb.jpg",
     fallback_url: "/hero4.webp",
     type: "image",
   },
   hero_video: {
-    url: "https://res.cloudinary.com/dgd3iusxa/video/upload/v1764557991/hero-vid_d2rydq.mp4",
+    url: "",
     fallback_url: "",
     type: "video",
-  },
-  about_image: {
-    url: "/about.png",
-    fallback_url: "/about.png",
-    type: "image",
-  },
-  statistic_background: {
-    url: "/hero4.webp",
-    fallback_url: "/hero4.webp",
-    type: "image",
   },
   steps_background: {
     url: "/hero4.webp",

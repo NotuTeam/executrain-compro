@@ -91,7 +91,7 @@ export default function ArticleDetailPage({
         </div>
       )}
       <div className="px-[10%] py-[10%] space-y-5 w-full">
-        <h2>Recent Posts</h2>
+        <h2 className="text-2xl font-semibold">Recent Posts</h2>
         <div className="pt-5">
           {latestArticles.map((blog) => (
             <button
@@ -108,7 +108,7 @@ export default function ArticleDetailPage({
                   </span>
                 </div>
 
-                <h3 className="font-bold text-xl text-gray-900 line-clamp-2 mb-2 group-hover:text-primary-600 transition-colors duration-200">
+                <h3 className="font-bold text-xl text-gray-900 line-clamp-2 mb-2 group-hover:text-primary-600 transition-colors duration-200 truncate">
                   {blog?.title || "-"}
                 </h3>
 

@@ -10,7 +10,7 @@ interface CompProps {
 
 export default function TestimoniCard({ data }: CompProps) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col justify-between h-full">
       {/* Quote Text */}
       <p className="text-[15px] md:text-[16px] text-[#333] leading-relaxed mb-6">
         &quot;{data?.testimonial}&quot;

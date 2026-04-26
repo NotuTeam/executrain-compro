@@ -138,7 +138,7 @@ export default function Navbar() {
                   <Link
                     key={each}
                     href={`/free-trial?category=${encodeURIComponent(each.toUpperCase().replaceAll(" ", "_"))}`}
-                    className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                    className="block px-6 py-3 text-gray-800 hover:bg-primary-200 hover:font-semibold transition-colors border-b border-gray-100 last:border-b-0"
                   >
                     {each}
                   </Link>
@@ -179,7 +179,7 @@ export default function Navbar() {
                   <Link
                     key={index}
                     href={`/service?type=${service.slug}`}
-                    className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                    className="block px-6 py-3 text-gray-800 hover:bg-primary-200 hover:font-semibold transition-colors border-b border-gray-100 last:border-b-0"
                     onClick={() => setIsServiceOpen(false)}
                   >
                     {service.name}
@@ -217,13 +217,13 @@ export default function Navbar() {
               >
                 <Link
                   href="/product"
-                  className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                  className="block px-6 py-3 text-gray-800 hover:bg-primary-200 hover:font-semibold transition-colors border-b border-gray-100 last:border-b-0"
                 >
                   Product
                 </Link>
                 <Link
                   href="/learning-path"
-                  className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                  className="block px-6 py-3 text-gray-800 hover:bg-primary-200 hover:font-semibold transition-colors border-b border-gray-100 last:border-b-0"
                 >
                   Learning Path
                 </Link>
@@ -273,7 +273,7 @@ export default function Navbar() {
                 {/* Article */}
                 <Link
                   href="/blog"
-                  className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                  className="block px-6 py-3 text-gray-800 hover:bg-primary-200 hover:font-semibold transition-colors border-b border-gray-100 last:border-b-0"
                 >
                   Blog
                 </Link>
@@ -281,7 +281,7 @@ export default function Navbar() {
                 {/* Career */}
                 <Link
                   href="/career"
-                  className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                  className="block px-6 py-3 text-gray-800 hover:bg-primary-200 hover:font-semibold transition-colors border-b border-gray-100 last:border-b-0"
                 >
                   Career
                 </Link>
@@ -289,7 +289,7 @@ export default function Navbar() {
                   <Link
                     key={page._id}
                     href={`/${page.path}`}
-                    className="block px-6 py-3 text-gray-800 hover:bg-primary-500 hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                    className="block px-6 py-3 text-gray-800 hover:bg-primary-200 hover:font-semibold transition-colors border-b border-gray-100 last:border-b-0"
                   >
                     {page.name}
                   </Link>
