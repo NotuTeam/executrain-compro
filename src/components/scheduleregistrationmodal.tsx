@@ -43,7 +43,23 @@ export default function ScheduleRegistrationModal({
       !form.emailAddress ||
       !form.phoneNumber
     ) {
-      setError("Mohon lengkapi semua field wajib.");
+      setError("Please Fill All Fields.");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.emailAddress)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if (!/^\d+$/.test(form.phoneNumber)) {
+      setError("Phone number must contain only digits.");
+      return;
+    }
+
+    if (form.phoneNumber.length > 14) {
+      setError("Phone number must not exceed 14 digits.");
       return;
     }
 
@@ -70,7 +86,7 @@ export default function ScheduleRegistrationModal({
           onClose();
         },
         onError: () => {
-          setError("Gagal mengirim pendaftaran. Silakan coba lagi.");
+          setError("Failed to Submit, Please Try Again");
         },
       },
     );
@@ -149,11 +165,13 @@ export default function ScheduleRegistrationModal({
               <input
                 type="text"
                 value={form.phoneNumber}
-                onChange={(e) =>
-                  setForm((prev) => ({ ...prev, phoneNumber: e.target.value }))
-                }
+                onChange={(e) => {
+                  const val = e.target.value.replace(/\D/g, "").slice(0, 14);
+                  setForm((prev) => ({ ...prev, phoneNumber: val }));
+                }}
                 className="w-full rounded-lg border border-gray-300 px-3 py-2"
                 placeholder="Enter phone number"
+                maxLength={14}
               />
             </div>
           </div>

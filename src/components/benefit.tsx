@@ -21,7 +21,7 @@ export default function Benefit({ data }: BenefitProps) {
         style={{
           backgroundImage: `url('${bannerPlain}'), url('${stepsBackground}')`,
           backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundPosition: "bottom",
         }}
       >
         <div className="p-[4%] flex justify-between items-center">

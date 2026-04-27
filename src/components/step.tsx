@@ -31,7 +31,7 @@ export default function Step() {
         style={{
           backgroundImage: `url('${bannerPlain}'), url('${stepsBackground}')`,
           backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundPosition: "0 200%",
         }}
       >
         <div className="px-[4%] py-[5%] flex flex-col md:flex-row justify-between items-center">

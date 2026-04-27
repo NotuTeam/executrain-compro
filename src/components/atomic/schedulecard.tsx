@@ -76,7 +76,7 @@ export default function ScheduleCard({ data, type = "default" }: CompProps) {
         </div>
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-3 md:gap-0">
           <span
-            className="text-[10px] md:text-[12px] font-semibold max-w-full truncate"
+            className="text-[10px] md:text-[12px] font-semibold max-w-[50%] truncate"
             title={data.schedule_name}
           >
             {data.schedule_name}

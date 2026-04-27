@@ -129,7 +129,7 @@ export default function ScheduleDetail() {
           <div className="text-white text-[20px] md:text-[32px] lg:text-[49px] font-[500]">
             <h2>Join & Learn - Public Class</h2>
             <p className="text-[16px] md:text-[24px] lg:text-[35px] font-[400]">
-              Register here
+              Register Class
             </p>
           </div>
           <div>

@@ -2,17 +2,24 @@
 
 "use client";
 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { Tooltip } from "antd";
+
+import Tag from "./atomic/tag";
 import Button from "./atomic/button";
 
 import {
-  Clock,
+  CornerRightUp,
   Users,
+  Calendar,
   CalendarOff,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
 import dayjs from "dayjs";
+
+import HeroBG from "@/assets/banner.jpg";
 
 import { ScheduleProps } from "@/types/schedule";
 
@@ -28,14 +35,6 @@ interface CompProps {
   totalSchedules?: number;
   onPageChange?: (page: number) => void;
 }
-
-const borderColor = {
-  FULL_BOOKED: "border-red-500",
-  CLOSE_REGISTRATION: "border-red-500",
-  OPEN_SEAT: "border-yellow-300",
-  ON_GOING: "border-green-500",
-  ENDED: "border-gray-500",
-};
 
 function ScheduleCard({ data }: { data: ScheduleProps }) {
   const router = useRouter();
@@ -55,37 +54,64 @@ function ScheduleCard({ data }: { data: ScheduleProps }) {
 
   return (
     <div
-      className={`bg-white p-4 md:p-6 border-l-4 flex items-start md:items-center justify-between gap-3 md:gap-0 ${borderColor[status]}`}
+      onClick={() => router.push(`/schedule/${data?._id}`)}
+      className="rounded-xl overflow-hidden shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] grid grid-cols-1 md:grid-cols-4 w-full cursor-pointer"
     >
-      <div className="flex-1">
-        <span className="text-[12px] mb-3 block">
-          {dayjs(data.schedule_date).format("dddd, DD MMMM YYYY")}
-        </span>
-        <h4 className="text-lg md:text-xl font-semibold mb-2 md:mb-3">
-          {data?.schedule_name || "-"}
-        </h4>
-        <div className="flex items-center gap-2 text-xs md:text-sm text-gray-600">
-          <Users className="w-4 h-4 md:w-4 md:h-4 text-primary-500" />
-          <span>{data?.quota || "-"}</span>
-        </div>
+      <div className="h-48 md:h-auto bg-slate-100 overflow-hidden">
+        <Image
+          src={data?.product_banner?.url || HeroBG}
+          alt={data?.product_banner?.public_id || ""}
+          className="w-full h-full object-cover"
+          width={1000}
+          height={0}
+        />
       </div>
-      <div className="flex flex-col md:items-end gap-2 md:gap-3 w-auto">
-        <div className="flex items-center gap-2 text-xs md:text-sm text-gray-600">
-          <Clock className="w-4 h-4 md:w-4 md:h-4 text-primary-500" />
-          <span>
-            {data?.schedule_start} - {data?.schedule_end} WIB
-          </span>
+      <div className="md:col-span-3">
+        <div className="flex flex-col justify-between items-start p-5 md:p-8 gap-2">
+          <div className="flex gap-3 items-center">
+            <Tag label={status?.replace("_", " ") || "UNSET"} />
+          </div>
+          <Tooltip placement="top" title={data?.schedule_name || "-"}>
+            <h3 className="text-[18px] md:text-[20px] lg:text-[24px] font-semibold w-full truncate text-left">
+              {data?.schedule_name || "-"}
+            </h3>
+          </Tooltip>
+          <p className="text-left text-sm md:text-base line-clamp-3">
+            {data?.schedule_description || "-"}
+          </p>
+          <div className="flex justify-between w-full mt-5 md:mt-8 items-end md:items-center gap-3 md:gap-0">
+            <div className="flex flex-wrap gap-2 md:gap-5 md:items-center">
+              <div className="flex items-center gap-1">
+                <CornerRightUp size={12} color="#BE0F34" />
+                <span className="text-[12px] capitalize">
+                  {data?.skill_level?.replace("_", " ").toLowerCase() || "-"}
+                </span>
+              </div>
+              <div className="flex items-center gap-1">
+                <Users size={12} color="#BE0F34" />
+                <span className="text-[12px]">{data?.quota || "-"}</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <Calendar size={12} color="#BE0F34" />
+                <span className="text-[12px]">
+                  {dayjs(data?.schedule_date).format("D MMMM YYYY")}
+                </span>
+              </div>
+            </div>
+            {status === "OPEN_SEAT" ? (
+              <Button
+                onClick={() => {
+                  router.push(`/schedule/${data?._id}`);
+                }}
+                label="Register Now"
+                rounded
+                type="primary"
+              />
+            ) : (
+              <Button label="Register Now" rounded type="disable" />
+            )}
+          </div>
         </div>
-        {status === "OPEN_SEAT" ? (
-          <Button
-            onClick={() => router.push(`/schedule/${data?._id}`)}
-            label="Register Now"
-            rounded
-            type="primary"
-          />
-        ) : (
-          <Button label="Register Now" rounded type="disable" />
-        )}
       </div>
     </div>
   );
@@ -132,7 +158,9 @@ export default function SelectedSchedule({
       {totalPages > 1 && (
         <div className="flex items-center justify-center gap-3 mt-6">
           <button
-            onClick={() => onPageChange && onPageChange(Math.max(1, currentPage - 1))}
+            onClick={() =>
+              onPageChange && onPageChange(Math.max(1, currentPage - 1))
+            }
             disabled={currentPage === 1}
             className="p-1 text-black disabled:opacity-40 disabled:cursor-not-allowed"
             type="button"
@@ -147,7 +175,13 @@ export default function SelectedSchedule({
                 ? [1, 2, 3, "ellipsis"]
                 : currentPage >= totalPages - 1
                   ? ["ellipsis", totalPages - 2, totalPages - 1, totalPages]
-                  : ["ellipsis", currentPage - 1, currentPage, currentPage + 1, "ellipsis"]
+                  : [
+                      "ellipsis",
+                      currentPage - 1,
+                      currentPage,
+                      currentPage + 1,
+                      "ellipsis",
+                    ]
             ).map((item, index) => (
               <button
                 key={`${item}-${index}`}
@@ -170,7 +204,10 @@ export default function SelectedSchedule({
           </div>
 
           <button
-            onClick={() => onPageChange && onPageChange(Math.min(totalPages, currentPage + 1))}
+            onClick={() =>
+              onPageChange &&
+              onPageChange(Math.min(totalPages, currentPage + 1))
+            }
             disabled={currentPage === totalPages}
             className="p-1 text-black disabled:opacity-40 disabled:cursor-not-allowed"
             type="button"

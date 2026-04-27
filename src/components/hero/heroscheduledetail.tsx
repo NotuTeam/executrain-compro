@@ -75,7 +75,7 @@ export default function HeroScheduleDetail({
                 window.open(data.link, "_blank", "noopener,noreferrer");
               }
             }}
-            label="Register Now →"
+            label="Register Now"
             rounded
             type="primary"
           />

@@ -28,4 +28,5 @@ export interface AssetMap {
   hero_product?:{ url: string; fallback_url: string; type: string };
   hero_schedule?:{ url: string; fallback_url: string; type: string };
   hero_blog?:{ url: string; fallback_url: string; type: string };
+  hero_career?:{ url: string; fallback_url: string; type: string };
 }

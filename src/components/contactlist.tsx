@@ -129,12 +129,11 @@ export default function ContactList() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0">
         <FadeInLeft delay={0.1} duration={0.6}>
           <div>
-            <h3 className="text-[32px] text-center md:text-left  md:text-[40px] lg:text-[49px] font-semibold">
-              Lets Talk!
+            <h3 className="text-[18px] text-center md:text-left  md:text-[24px] lg:text-[32px] font-semibold">
+              Ready to elevate your team’s performance?{" "}
             </h3>
             <p className="max-w-full text-center md:text-left lg:max-w-[70%] text-sm md:text-base">
-              Get In Touch with us using the enquiry form of contact details
-              below
+              Contact us today to discuss your training and business needs.
             </p>
             <StaggerContainer
               className="flex flex-col items-start gap-3 mt-5 md:mt-8"
@@ -146,9 +145,15 @@ export default function ContactList() {
                   <button
                     type="button"
                     onClick={() => router.push(each.url)}
-                    className="cursor-pointer bg-linear-to-r from-primary-600 h-[100px] to-primary-400 text-white p-4 md:p-5 rounded-full w-full md:w-[60%] flex flex-1 items-center gap-3 text-sm md:text-base"
+                    className="flex items-center gap-3 cursor-pointer bg-linear-to-r from-[#991A1A] py-3 to-[#ff6363] text-white px-4 md:px-5 rounded-full w-full md:max-w-[60%] flex items-center gap-3 text-sm md:text-base"
                   >
-                    <Image src={each.icon} alt={`socmed ${index}`} />
+                    <Image
+                      src={each.icon}
+                      alt={`socmed ${index}`}
+                      height={35}
+                      width={35}
+                      className="aspect-square"
+                    />
                     {each.name}
                   </button>
                 </StaggerItem>
@@ -159,7 +164,7 @@ export default function ContactList() {
         <FadeInRight delay={0.2} duration={0.6}>
           <div className="flex items-center justify-center md:justify-end">
             <div
-              className="h-[350px] w-[350px] rounded-3xl"
+              className="h-[400px] w-[400px] rounded-3xl"
               style={{
                 backgroundImage: `url('${contactImage}')`,
                 backgroundSize: "cover",

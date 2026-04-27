@@ -11,7 +11,7 @@ export default function Tag({ label }: { label: string }) {
       UNSET: "bg-gray-400 text-white",
 
       FULL_BOOKED: "bg-[#EF4444] text-white",
-      OPEN_SEAT: "bg-[#10B981] text-white",
+      OPEN_SEAT: "bg-[#00AB17] text-white",
       ON_GOING: "bg-[#D0229F] text-white",
       ENDED: "bg-gray-500 text-white",
 

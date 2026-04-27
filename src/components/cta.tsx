@@ -18,7 +18,7 @@ export default function CTA() {
   return (
     <div className="w-full px-[5%] md:px-[7%] lg:px-[10%] text-center py-[10%] md:py-0 md:pb-[5%] space-y-5 md:space-y-8 flex flex-col items-center">
       <h2 className="text-[32px] md:text-[40px] lg:text-[49px] font-semibold leading-10 md:leading-15">
-        Ready to Elevate Your Team’s Performance?
+        Ready to Train Your Team?
       </h2>
       <p className="text-[14px] md:text-[16px]">
         Get the full proposal and training details by clicking the button below.
