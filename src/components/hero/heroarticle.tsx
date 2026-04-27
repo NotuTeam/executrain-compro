@@ -22,7 +22,7 @@ export default function HeroArticle({ children }: { children?: ReactNode }) {
         backgroundPosition: "center",
       }}
     >
-      <div className="flex flex-col gap-5 md:gap-8 items-start max-w-full pt-[10%]">
+      <div className="flex flex-col gap-5 md:gap-8 items-start max-w-full pt-[10%] w-full">
         <div className="font-[500] flex gap-3">
           <Link href="/">Home</Link>
           <ChevronRight />
@@ -31,7 +31,7 @@ export default function HeroArticle({ children }: { children?: ReactNode }) {
         <h1 className="text-[32px] md:text-[45px] lg:text-[61px] font-semibold">
           Our Blog
         </h1>
-        <p className="text-sm md:text-base">
+        <p className="text-sm md:text-base w-full inline-block">
           Insights, tips, and practical knowledge to help you stay ahead in
           technology, business skills, and workplace productivity.
         </p>

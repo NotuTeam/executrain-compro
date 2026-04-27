@@ -4,7 +4,13 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
-import { Building2, MapPin, Briefcase } from "lucide-react";
+import {
+  Building2,
+  MapPin,
+  Briefcase,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 import Container from "@/components/atomic/container";
 import HeroCareer from "@/components/hero/herocareer";
@@ -44,17 +50,29 @@ export default function CareerPage() {
   const [filterLevel, setFilterLevel] = useState("ALL");
   const [filterDept, setFilterDept] = useState("ALL");
   const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
-  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useCareers({ sort_order: "desc" });
+  const { data, isLoading } = useCareers({
+    sort_order: "desc",
+    search: search || undefined,
+    experience_level: filterLevel !== "ALL" ? filterLevel : undefined,
+    department: filterDept !== "ALL" ? filterDept : undefined,
+    page: currentPage,
+    limit: itemsPerPage,
+  });
 
-  const careers = useMemo<CareerProps[]>(() => {
-    return (
-      data?.pages?.flatMap(
-        (page: { data?: CareerProps[] }) => page.data || [],
-      ) || []
-    );
-  }, [data]);
+  const careers = useMemo<CareerProps[]>(() => data?.data || [], [data]);
+  const pagination = useMemo(
+    () =>
+      data?.pagination || {
+        current_page: 1,
+        total_pages: 1,
+        total_careers: 0,
+      },
+    [data],
+  );
+  const totalPages = pagination.total_pages || 1;
 
   const departmentOptions = useMemo(() => {
     const uniqueDepartments = Array.from(
@@ -68,47 +86,28 @@ export default function CareerPage() {
     return ["ALL", ...uniqueDepartments];
   }, [careers]);
 
-  const filteredJobs = useMemo(() => {
-    return careers.filter((job) => {
-      const searchLower = search.toLowerCase();
-      const matchSearch =
-        (job.title || "").toLowerCase().includes(searchLower) ||
-        (job.location || "").toLowerCase().includes(searchLower) ||
-        (job.department || "").toLowerCase().includes(searchLower);
-
-      const matchLevel =
-        filterLevel === "ALL" || job.experience_level === filterLevel;
-      const matchDept = filterDept === "ALL" || job.department === filterDept;
-
-      return (
-        matchSearch && matchLevel && matchDept && job.status === "PUBLISHED"
-      );
-    });
-  }, [careers, search, filterLevel, filterDept]);
+  const publishedJobs = useMemo(
+    () => careers.filter((job) => job.status === "PUBLISHED"),
+    [careers],
+  );
 
   const selectedJob = useMemo(
     () =>
-      filteredJobs.find((job) => job._id === selectedJobId) ||
-      filteredJobs?.[0] ||
+      publishedJobs.find((job) => job._id === selectedJobId) ||
+      publishedJobs?.[0] ||
       null,
-    [filteredJobs, selectedJobId],
+    [publishedJobs, selectedJobId],
   );
 
   const effectiveSelectedJobId = useMemo(() => {
-    if (filteredJobs.length === 0) return null;
+    if (publishedJobs.length === 0) return null;
 
-    const selectedStillExists = filteredJobs.some(
+    const selectedStillExists = publishedJobs.some(
       (job) => job._id === selectedJobId,
     );
 
-    return selectedStillExists ? selectedJobId : filteredJobs[0]._id;
-  }, [filteredJobs, selectedJobId]);
-
-  const handleLoadMore = () => {
-    if (hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  };
+    return selectedStillExists ? selectedJobId : publishedJobs[0]._id;
+  }, [publishedJobs, selectedJobId]);
 
   return (
     <Container>
@@ -120,7 +119,7 @@ export default function CareerPage() {
         <p className="text-center font-semibold">
           {"We don't just offer jobs. We build careers that matter."}
         </p>
-        <div className="flex gap-3">
+        <div className="flex gap-3 flex-col md:flex-row">
           {[
             {
               title: "Continuous Growth Culture",
@@ -137,22 +136,24 @@ export default function CareerPage() {
               description:
                 "Every program we deliver creates real impact—empowering professionals and transforming organizations.",
             },
-          ].map((each: any, index: number) => (
-            <div
-              key={index + 1}
-              className="border border-primary-600 rounded-lg p-5 flex flex-1 gap-3"
-            >
-              <div>
-                <span className="text-primary-600 font-bold border border-primary-600 rounded-full aspect-square w-8 flex items-center justify-center">
-                  {index + 1}
-                </span>
+          ].map(
+            (each: { title: string; description: string }, index: number) => (
+              <div
+                key={index + 1}
+                className="border border-primary-600 rounded-lg p-5 flex flex-1 gap-3"
+              >
+                <div>
+                  <span className="text-primary-600 font-bold border border-primary-600 rounded-full aspect-square w-8 flex items-center justify-center">
+                    {index + 1}
+                  </span>
+                </div>
+                <div>
+                  <span className="font-semibold mb-2 block">{each.title}</span>
+                  <p className="text-sm">{each.description}</p>
+                </div>
               </div>
-              <div>
-                <span className="font-semibold mb-2 block">{each.title}</span>
-                <p className="text-sm">{each.description}</p>
-              </div>
-            </div>
-          ))}
+            ),
+          )}
         </div>
       </section>
       <div className="w-full px-[5%] md:px-[7%] lg:px-[10%] pt-[5%]">
@@ -164,11 +165,20 @@ export default function CareerPage() {
       <div className="w-full px-[5%] md:px-[7%] lg:px-[10%] pb-[5%]">
         <SearchBar
           searchValue={search}
-          onSearchChange={setSearch}
+          onSearchChange={(value) => {
+            setSearch(value);
+            setCurrentPage(1);
+          }}
           levelValue={filterLevel}
-          onLevelChange={setFilterLevel}
+          onLevelChange={(value) => {
+            setFilterLevel(value);
+            setCurrentPage(1);
+          }}
           deptValue={filterDept}
-          onDeptChange={setFilterDept}
+          onDeptChange={(value) => {
+            setFilterDept(value);
+            setCurrentPage(1);
+          }}
           departmentOptions={departmentOptions}
         />
       </div>
@@ -181,17 +191,17 @@ export default function CareerPage() {
         ) : (
           <div>
             <h3 className="font-semibold text-gray-900 mb-4">
-              {filteredJobs.length} Vacancy
+              {pagination.total_careers || publishedJobs.length} Vacancy
             </h3>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-              <div className="lg:col-span-4 bg-white border border-gray-200 rounded-xl h-fit">
-                {filteredJobs.length === 0 ? (
+              <div className="lg:col-span-4 bg-white rounded-xl h-fit">
+                {publishedJobs.length === 0 ? (
                   <p className="text-sm text-gray-600 min-h-[200px] flex items-center justify-center">
                     Tidak ada lowongan yang sesuai
                   </p>
                 ) : (
                   <div className="space-y-3">
-                    {filteredJobs.map((job) => {
+                    {publishedJobs.map((job) => {
                       const isSelected = effectiveSelectedJobId === job._id;
                       const expired = isExpired(job.deadline);
 
@@ -243,14 +253,69 @@ export default function CareerPage() {
                   </div>
                 )}
 
-                {hasNextPage && (
-                  <div className="mt-4 flex justify-center">
-                    <Button
-                      label={isFetchingNextPage ? "Loading..." : "Load More"}
-                      rounded
-                      type={isFetchingNextPage ? "disable" : "primary"}
-                      onClick={handleLoadMore}
-                    />
+                {totalPages > 1 && (
+                  <div className="mt-4 flex items-center justify-center gap-3">
+                    <button
+                      onClick={() =>
+                        setCurrentPage(Math.max(1, currentPage - 1))
+                      }
+                      disabled={currentPage === 1}
+                      className="p-1 text-black disabled:opacity-40 disabled:cursor-not-allowed"
+                      type="button"
+                    >
+                      <ChevronLeft className="w-6 h-6" />
+                    </button>
+
+                    <div className="flex items-center gap-2">
+                      {(totalPages <= 4
+                        ? Array.from({ length: totalPages }, (_, i) => i + 1)
+                        : currentPage <= 2
+                          ? [1, 2, 3, "ellipsis"]
+                          : currentPage >= totalPages - 1
+                            ? [
+                                "ellipsis",
+                                totalPages - 2,
+                                totalPages - 1,
+                                totalPages,
+                              ]
+                            : [
+                                "ellipsis",
+                                currentPage - 1,
+                                currentPage,
+                                currentPage + 1,
+                                "ellipsis",
+                              ]
+                      ).map((item, index) => (
+                        <button
+                          key={`${item}-${index}`}
+                          onClick={() =>
+                            typeof item === "number" && setCurrentPage(item)
+                          }
+                          disabled={item === "ellipsis"}
+                          className={`w-10 h-10 rounded-full border text-sm font-semibold transition-colors ${
+                            item === "ellipsis"
+                              ? "border-black bg-[#f5f5f5] text-black cursor-default"
+                              : item === currentPage
+                                ? "border-black bg-black text-white"
+                                : "border-black bg-white text-black"
+                          }`}
+                          type="button"
+                        >
+                          {item === "ellipsis" ? "..." : item}
+                        </button>
+                      ))}
+                    </div>
+
+                    <button
+                      onClick={() =>
+                        setCurrentPage(Math.min(totalPages, currentPage + 1))
+                      }
+                      disabled={currentPage === totalPages}
+                      className="p-1 text-black disabled:opacity-40 disabled:cursor-not-allowed"
+                      type="button"
+                    >
+                      <ChevronRight className="w-6 h-6" />
+                    </button>
                   </div>
                 )}
               </div>
