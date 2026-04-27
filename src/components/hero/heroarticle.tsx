@@ -32,9 +32,8 @@ export default function HeroArticle({ children }: { children?: ReactNode }) {
           Our Blog
         </h1>
         <p className="text-sm md:text-base">
-          Stay informed with the latest insights, industry trends, and practical
-          knowledge designed to help you navigate challenges, enhance your
-          skills, and stay competitive in a rapidly evolving digital landscape.
+          Insights, tips, and practical knowledge to help you stay ahead in
+          technology, business skills, and workplace productivity.
         </p>
         {children}
       </div>

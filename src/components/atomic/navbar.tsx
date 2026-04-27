@@ -13,6 +13,7 @@ import Button from "./button";
 import { usePromo } from "@/services/promo/hook";
 import { usePages } from "@/services/pages/hook";
 import { useServices } from "@/services/service/hook";
+import { useScheduleCategories } from "@/services/schedule/hook";
 import { servicesToNavFormat } from "@/lib/utils";
 
 export default function Navbar() {
@@ -20,12 +21,14 @@ export default function Navbar() {
   const { data: promo, isLoading: promoLoading } = usePromo();
   const { data: pages = [], isLoading: pagesLoading } = usePages();
   const { data: services = [], isLoading: servicesLoading } = useServices();
+  const { data: scheduleCategories = [] } = useScheduleCategories();
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isServiceOpen, setIsServiceOpen] = useState(false);
   const [isExploreOpen, setIsExploreOpen] = useState(false);
   const [isFreeTrialOpen, setIsFreeTrialOpen] = useState(false);
   const [isProductOpen, setIsProductOpen] = useState(false);
+  const [isScheduleOpen, setIsScheduleOpen] = useState(false);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -230,16 +233,53 @@ export default function Navbar() {
               </div>
             </div>
 
-            <Link
-              href="/schedule"
-              className={`hover:text-gray-200 transition-colors relative pb-1 ${
-                path === "/schedule"
-                  ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
-                  : ""
-              }`}
+            {/* Schedule Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsScheduleOpen(true)}
+              onMouseLeave={() => setIsScheduleOpen(false)}
             >
-              Schedule
-            </Link>
+              <button
+                className={`flex items-center gap-1 hover:text-gray-200 transition-colors relative pb-1 ${
+                  path === "/schedule"
+                    ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-white after:rounded-full"
+                    : ""
+                }`}
+              >
+                Schedule
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-300 ${
+                    isScheduleOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              <div
+                className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 min-w-[200px] ${
+                  isScheduleOpen
+                    ? "opacity-100 visible translate-y-0"
+                    : "opacity-0 invisible -translate-y-2"
+                }`}
+              >
+                <Link
+                  href="/schedule"
+                  className="block px-6 py-3 text-gray-800 hover:bg-primary-200 hover:font-semibold transition-colors border-b border-gray-100"
+                  onClick={() => setIsScheduleOpen(false)}
+                >
+                  All Schedules
+                </Link>
+                {scheduleCategories.map((category: string) => (
+                  <Link
+                    key={category}
+                    href={`/schedule?category=${encodeURIComponent(category)}`}
+                    className="block px-6 py-3 text-gray-800 hover:bg-primary-200 hover:font-semibold transition-colors border-b border-gray-100 last:border-b-0"
+                    onClick={() => setIsScheduleOpen(false)}
+                  >
+                    {category}
+                  </Link>
+                ))}
+              </div>
+            </div>
 
             {/* Explore Dropdown */}
             <div
@@ -464,17 +504,47 @@ export default function Navbar() {
                 </Link>
               </div>
             </div>
-            <Link
-              href="/schedule"
-              className={`block px-6 py-3 transition-colors ${
-                path === "/schedule"
-                  ? "text-primary-500 bg-blue-50 border-l-4 border-primary-500 font-semibold"
-                  : "text-gray-800 hover:bg-gray-100"
-              }`}
-              onClick={closeSidebar}
-            >
-              Schedule
-            </Link>
+            {/* Schedule Accordion */}
+            <div>
+              <button
+                className={`w-full flex items-center justify-between px-6 py-3 transition-colors ${
+                  path === "/schedule"
+                    ? "text-primary-500 bg-blue-50 border-l-4 border-primary-500 font-semibold"
+                    : "text-gray-800 hover:bg-gray-100"
+                }`}
+                onClick={() => setIsScheduleOpen(!isScheduleOpen)}
+              >
+                <span>Schedule</span>
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-300 ${
+                    isScheduleOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-300 ${
+                  isScheduleOpen ? "max-h-[500px]" : "max-h-0"
+                }`}
+              >
+                <Link
+                  href="/schedule"
+                  className="block pl-12 pr-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors"
+                  onClick={closeSidebar}
+                >
+                  All Schedules
+                </Link>
+                {scheduleCategories.map((category: string) => (
+                  <Link
+                    key={category}
+                    href={`/schedule?category=${encodeURIComponent(category)}`}
+                    className="block pl-12 pr-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors"
+                    onClick={closeSidebar}
+                  >
+                    {category}
+                  </Link>
+                ))}
+              </div>
+            </div>
 
             {/* Explore Accordion */}
             <div>

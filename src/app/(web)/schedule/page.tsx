@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 import Container from "@/components/atomic/container";
 import HeroSchedule from "@/components/hero/heroschedule";
@@ -15,8 +16,13 @@ import {
 import { useDebounce } from "@/lib/useDebounce";
 
 export default function Schedule() {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+
   const [searchValue, setSearchValue] = useState("");
-  const [scheduleCategories, setScheduleCategories] = useState<string[]>([]);
+  const [scheduleCategories, setScheduleCategories] = useState<string[]>(
+    categoryParam ? [categoryParam] : [],
+  );
   const [productCategory, setProductCategory] = useState<string | undefined>(
     undefined,
   );
