@@ -28,7 +28,7 @@ export default function HeroFreeTrial({ children }: { children: ReactNode }) {
           <ChevronRight />
           <Link href="/free-trial">Free Trial</Link>
         </div>
-        <h1 className="text-[32px] md:text-[45px] lg:text-[55px] font-semibold leading-14">
+        <h1 className="text-[32px] md:text-[45px] lg:text-[55px] font-semibold leading-10 md:leading-15">
           Free Trial{" "}
           <span className="font-light">(Professional Skill Accelerator)</span>
         </h1>

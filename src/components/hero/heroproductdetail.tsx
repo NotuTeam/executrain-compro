@@ -35,14 +35,14 @@ export default function HeroProductDetail({
 
   return (
     <div
-      className="min-w-[99dvw] min-h-[80dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
+      className="min-w-[100dvw] min-h-[80dvh] text-white flex items-center justify-start md:px-[7%] lg:px-[10%]"
       style={{
         backgroundImage: `url('https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233518/Subtract_hwkrrr.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1777208395/executrain/assets/ddxseg9njypotvqwkgdb.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="flex flex-col gap-5 md:gap-8 items-start bg-white/50 backdrop-blur-md border border-white/20 text-black rounded-lg w-full max-w-[85dvw] p-[5%] md:p-[5%] mt-[10%] md:mb-[-10%]">
+      <div className="flex flex-col gap-5 md:gap-8 items-start bg-white/50 backdrop-blur-md border border-white/20 text-black md:rounded-lg w-full max-w-[100dvw] md:max-w-[90dvw] p-[5%] md:p-[5%] mt-[15%] mt-[7%] md:mb-[-10%]">
         <div className="font-[500] flex items-center gap-3 text-black w-full max-w-full min-w-0 overflow-hidden whitespace-nowrap">
           <Link href="/" className="shrink-0">
             Home

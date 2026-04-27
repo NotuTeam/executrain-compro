@@ -92,7 +92,9 @@ export default function ProductDetail() {
     <Container>
       <HeroProductDetail data={data} />
       <div className="px-[10%] py-[15%] space-y-5 w-full">
-        <h3 className="text-[49px] font-semibold">Product Overview</h3>
+        <h3 className="text-[49px] font-semibold leading-12 md:leading-15">
+          Product Overview
+        </h3>
         <p>{data?.product_description}</p>
       </div>
       {Array.isArray(data?.benefits) && data?.benefits[0] !== "-" ? (

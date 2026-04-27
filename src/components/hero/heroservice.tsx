@@ -6,6 +6,7 @@ import CountUp from "../atomic/countup";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { useAssetContext } from "@/components/AssetProvider";
+import { FadeInUp } from "../atomic/motion";
 
 export default function HeroService() {
   const { getAssetUrl, getStaticAsset } = useAssetContext();
@@ -39,66 +40,68 @@ export default function HeroService() {
           customized sessions, available both onsite and online to ensure
           minimal disruption and maximum impact.
         </p>
-        <div className="w-full text-white flex items-center justify-around gap-5 md:gap-0">
-          <div className="flex flex-col items-center justify-center">
-            <span className="text-[32px] md:text-[40px] lg:text-[49px] font-[700]">
-              <CountUp
-                from={0}
-                to={10}
-                separator=","
-                direction="up"
-                duration={2}
-              />
-              +
-            </span>
-            <span className="text-[12px] md:text-[14px] lg:text-[16px]">
-              Years Experience
-            </span>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <span className="text-[32px] md:text-[40px] lg:text-[49px] font-[700]">
-              <CountUp
-                from={0}
-                to={50}
-                separator=","
-                direction="up"
-                duration={2}
-              />
-              K+
-            </span>
-            <span className="text-[12px] md:text-[14px] lg:text-[16px]">
-              Participants
-            </span>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <span className="text-[32px] md:text-[40px] lg:text-[49px] font-[700]">
-              <CountUp
-                from={0}
-                to={500}
-                separator=","
-                direction="up"
-                duration={2}
-              />
-              +
-            </span>
-            <span className="text-[12px] md:text-[14px] lg:text-[16px]">
-              Topics
-            </span>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <span className="text-[32px] md:text-[40px] lg:text-[49px] font-[700]">
-              <CountUp
-                from={0}
-                to={4}
-                separator=","
-                direction="up"
-                duration={2}
-              />
-              K+
-            </span>
-            <span className="text-[12px] md:text-[14px] lg:text-[16px]">
-              Training Completed
-            </span>
+        <div className="h-full flex items-end w-full">
+          <div className="w-full text-white grid grid-cols-4 gap-5">
+            <div className="flex flex-col items-center justify-start">
+              <span className="text-[24px] md:text-[40px] lg:text-[49px] font-[700]">
+                <CountUp
+                  from={0}
+                  to={10}
+                  separator=","
+                  direction="up"
+                  duration={2}
+                />
+                +
+              </span>
+              <span className="text-[12px] md:text-[14px] lg:text-[14px] text-center">
+                Years Experience
+              </span>
+            </div>
+            <div className="flex flex-col items-center justify-start">
+              <span className="text-[24px] md:text-[40px] lg:text-[49px] font-[700]">
+                <CountUp
+                  from={0}
+                  to={50}
+                  separator=","
+                  direction="up"
+                  duration={2}
+                />
+                K+
+              </span>
+              <span className="text-[12px] md:text-[14px] lg:text-[14px] text-center">
+                Participants
+              </span>
+            </div>
+            <div className="flex flex-col items-center justify-start">
+              <span className="text-[24px] md:text-[40px] lg:text-[49px] font-[700]">
+                <CountUp
+                  from={0}
+                  to={500}
+                  separator=","
+                  direction="up"
+                  duration={2}
+                />
+                +
+              </span>
+              <span className="text-[12px] md:text-[14px] lg:text-[14px] text-center">
+                Topics
+              </span>
+            </div>
+            <div className="flex flex-col items-center justify-start">
+              <span className="text-[24px] md:text-[40px] lg:text-[49px] font-[700]">
+                <CountUp
+                  from={0}
+                  to={4}
+                  separator=","
+                  direction="up"
+                  duration={2}
+                />
+                K+
+              </span>
+              <span className="text-[12px] md:text-[14px] lg:text-[14px] text-center">
+                Training Completed
+              </span>
+            </div>
           </div>
         </div>
       </div>

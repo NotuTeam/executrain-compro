@@ -108,16 +108,18 @@ export default function FreeTrialScheduleDetailPage() {
 
       <div className="min-h-[100px] w-full px-[10dvw] py-[10dvh]">
         <div
-          className="bg-blue-200 w-full min-h-[200px] rounded-2xl flex items-center justify-between px-[5%]"
+          className=" w-full md:min-h-[200px] rounded-2xl flex flex-col md:flex-row md:items-center justify-between p-[5%] gap-2"
           style={{
             backgroundImage: `url('${bannerPlain}'), url('${ctaScheduleImage}')`,
             backgroundSize: "cover",
             backgroundPosition: "0 25%",
           }}
         >
-          <div className="text-white text-[49px] font-[500]">
-            <h2>Join & Learn - Free Trial Class</h2>
-            <p className="text-[35px] font-[400]">Register here</p>
+          <div className="text-white text-[20px] md:text-[32px] lg:text-[49px] font-[500]">
+            <h2>Join & Learn - Public Class</h2>
+            <p className="text-[16px] md:text-[24px] lg:text-[35px] font-[400]">
+              Register here
+            </p>
           </div>
           <div>
             <Button

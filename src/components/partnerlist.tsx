@@ -41,7 +41,7 @@ export default function PartnerList({
   return (
     <div className="w-full text-center py-[5%] px-[5%] md:px-0 overflow-hidden">
       <FadeInUp delay={0.1} duration={0.5}>
-        <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px]">
+        <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px] mb-3 md:mb-0">
           Partners
         </h2>
       </FadeInUp>

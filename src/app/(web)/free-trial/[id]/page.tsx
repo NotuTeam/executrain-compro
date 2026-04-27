@@ -2,12 +2,10 @@
 
 "use client";
 
-import { useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 import Container from "@/components/atomic/container";
 import HeroFreeTrialDetail from "@/components/hero/herofreetrialdetail";
-import FreeTrialList from "@/components/freetriallist";
 import Button from "@/components/atomic/button";
 import { Skeleton, HeroProductDetailSkeleton } from "@/components/skeleton";
 import CTA from "@/components/cta";
@@ -16,7 +14,6 @@ import FreeTrialRelatedSchedule from "@/components/freetrialrelatedschedule";
 
 import {
   useFreeTrialDetail,
-  useFreeTrialFiltered,
   useFreeTrialScheduleByProduct,
 } from "@/services/free-trial/hook";
 import { Home } from "lucide-react";
@@ -27,21 +24,11 @@ export default function FreeTrialDetailPage() {
   const { id } = params;
 
   const { data, isLoading } = useFreeTrialDetail({ id: id as string });
-  const { data: relatedProductsData, isLoading: relatedProductsLoading } =
-    useFreeTrialFiltered({
-      product_category: data?.product_category,
-      sort_order: "desc",
-    });
 
   const { data: relatedSchedule = [], isLoading: scheduleLoading } =
     useFreeTrialScheduleByProduct({
       product_id: id as string,
     });
-
-  const relatedProducts = useMemo(() => {
-    const all = relatedProductsData?.data || [];
-    return all.filter((item) => item._id !== id).slice(0, 6);
-  }, [relatedProductsData, id]);
 
   if (isLoading) {
     return (
@@ -93,7 +80,9 @@ export default function FreeTrialDetailPage() {
     <Container>
       <HeroFreeTrialDetail data={data} />
       <div className="px-[10%] py-[15%] space-y-5 w-full">
-        <h3 className="text-[49px] font-semibold">Free Trial Overview</h3>
+        <h3 className="text-[49px] font-semibold leading-12 md:leading-15">
+          Free Trial Overview
+        </h3>
         <p>{data?.product_description}</p>
       </div>
       {Array.isArray(data?.benefits) && data?.benefits[0] !== "-" ? (

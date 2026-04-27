@@ -90,7 +90,7 @@ export default function FreeTrialCard({ data, size = "md" }: CompProps) {
             {data?.product_description || "-"}
           </p>
           <div className="flex justify-between w-full mt-5 md:mt-8 items-end md:items-center gap-3 md:gap-0">
-            <div className="flex gap-5 items-center">
+            <div className="flex gap-1 md:gap-5 items-center w-[40%] md:w-full flex-wrap">
               <div className="flex items-center gap-1">
                 <CornerRightUp size={12} color="#BE0F34" />
                 <span className="text-[12px] capitalize">

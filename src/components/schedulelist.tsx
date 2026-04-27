@@ -31,7 +31,7 @@ export default function ScheduleList({
 
   return (
     <div
-      className="w-full text-white flex flex-col items-center justify-center text-center pt-[5%] space-y-5 px-[5%] md:px-0 border-white border-b-5 box-border"
+      className="w-full text-white flex flex-col items-center justify-center text-center pt-[15%] md:pt-[5%] space-y-5 px-[5%] md:px-0 border-white border-b-5 box-border"
       style={{
         backgroundImage: `linear-gradient(to bottom, transparent, white), url('https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233518/Subtract_hwkrrr.png'), url('${stepsBackground}')`,
         backgroundSize: "cover",
@@ -39,7 +39,7 @@ export default function ScheduleList({
       }}
     >
       <FadeInUp delay={0.1} duration={0.5}>
-        <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px] mb-6 md:mb-10">
+        <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px] mb-6 md:mb-10 md:leading-15 leading-10">
           Running Schedule
         </h2>
       </FadeInUp>

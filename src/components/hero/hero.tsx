@@ -72,7 +72,7 @@ export default function Hero({ searchValue, onSearchChange }: HeroProps) {
       <div className="w-full relative z-10 max-w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-5">
         <FadeInUp delay={0.2} duration={0.6}>
           <div className="space-y-5 md:space-y-6">
-            <h1 className="text-[32px] md:text-[45px] lg:text-[55px] font-semibold leading-14">
+            <h1 className="text-[32px] md:text-[45px] lg:text-[55px] font-semibold leading-10 md:leading-15">
               Performance is the Bottom Line
             </h1>
             <p className="">

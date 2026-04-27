@@ -34,12 +34,12 @@ export default function Step() {
           backgroundPosition: "center",
         }}
       >
-        <div className="px-[4%] py-[2.5%] flex justify-between items-center">
+        <div className="px-[4%] py-[5%] flex flex-col md:flex-row justify-between items-center">
           <div>
             <h2 className="text-[28px] md:text-[40px] lg:text-[49px] font-semibold">
               Join in 4 Easy Steps
             </h2>
-            <p className="text-sm md:text-base">
+            <p className="text-sm md:text-base hidden md:block">
               We’ve simplified the process so you can focus on what matters:
               learning.
             </p>
@@ -47,13 +47,15 @@ export default function Step() {
           {socmedLoading ? (
             <Button label="Loading..." rounded type="disable" />
           ) : (
-            <Button
-              onClick={() => router.push(`https://wa.me/${contactList}`)}
-              label="Join Now"
-              rounded
-              icon={<ArrowRightFromLine size={18} />}
-              type="primary"
-            />
+            <div className="hidden md:block">
+              <Button
+                onClick={() => router.push(`https://wa.me/${contactList}`)}
+                label="Join Now"
+                rounded
+                icon={<ArrowRightFromLine size={18} />}
+                type="primary"
+              />
+            </div>
           )}
         </div>
         <div className="bg-white text-black border-x border-b border-primary-500 rounded-b-4xl flex flex-col md:flex-row justify-between py-[5%] gap-5 md:gap-0">
@@ -81,7 +83,7 @@ export default function Step() {
           ].map(
             (each: { title: string; description: string }, index: number) => (
               <div
-                className={`flex md:flex-col items-start gap-5 px-[5%] ${
+                className={`flex flex-col items-start gap-1 md:gap-5 px-[5%] ${
                   index > 0 ? "md:border-l border-t md:border-t-0" : ""
                 } border-primary-500 pt-5 md:pt-0`}
                 key={index + 1}
@@ -89,8 +91,10 @@ export default function Step() {
                 <span className="min-w-fit text-[28px] md:text-[35px] font-semibold text-primary-500 border rounded-full w-[40px] h-[40px] md:w-[50px] md:h-[50px] flex items-center justify-center">
                   {index + 1}
                 </span>
-                <div className="space-y-3">
-                  <h4 className="text-[18px] md:text-[24px]">{each.title}</h4>
+                <div className="space-y-1 md:space-y-3">
+                  <h4 className="text-[18px] md:font-normal font-semibold md:text-[24px]">
+                    {each.title}
+                  </h4>
                   <p className="text-sm md:text-base">{each.description}</p>
                 </div>
               </div>

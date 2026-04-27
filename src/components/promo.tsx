@@ -75,8 +75,8 @@ export default function Promo({ size = "md", data }: CompProps) {
   if (size === "sm" || size === "md") {
     return (
       <div className="bg-white flex justify-between text-black items-center px-[5%] py-5 relative">
-        <div className="flex gap-2 flex-col max-w-[65%]">
-          <span className="text-[20px] md:text-[24px] font-semibold">
+        <div className="flex gap-2 flex-col max-w-[55%]">
+          <span className="text-[16px] md:text-[20px] font-semibold">
             {data?.promo_name} with{" "}
             <span className="font-[700]">{data?.percentage}% OFF!</span>
           </span>
@@ -150,8 +150,8 @@ export default function Promo({ size = "md", data }: CompProps) {
 
   return (
     <div className="bg-primary-500 flex justify-between text-white items-center z-100 rounded-2xl text-left gap-3 py-[3%] px-[5%] md:py-[2%] md:px-[3%]">
-      <div className="space-y-2 max-w-[65%]">
-        <h1 className="text-[20px] md:text-[24px] font-semibold">
+      <div className="space-y-2 max-w-[55%]">
+        <h1 className="text-[16px] md:text-[20px] font-semibold">
           {data?.promo_name}{" "}
           <span className="font-[700]">{data?.percentage}% OFF!</span>
         </h1>

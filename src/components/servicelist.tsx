@@ -42,7 +42,7 @@ export default function ServiceList({
   if (isLoading) {
     return (
       <div className="px-[5%] md:px-[7%] lg:px-[10%] py-[5%] text-center w-full space-y-6 md:space-y-6 min-h-[30dvh] md:min-h-[50dvh]">
-        <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px]">
+        <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px] leading-10 md:leading-15">
           Our Business Solutions
         </h2>
         <h3 className="text-[14px] md:text-[18px] lg:text-[20px] font-semibold">
@@ -60,7 +60,7 @@ export default function ServiceList({
   return (
     <div className="py-[5%] text-center w-full space-y-6 md:space-y-6 min-h-[30dvh] md:min-h-[50dvh]">
       <FadeInUp delay={0.1} duration={0.5}>
-        <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px]">
+        <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px] leading-10 md:leading-15">
           Our Business Solutions
         </h2>
       </FadeInUp>
@@ -112,7 +112,9 @@ export default function ServiceList({
                       ) : (
                         <Image
                           src={
-                            isSelected ? IT_TRAINING_ICON : IT_TRAINING_DISABLE_ICON
+                            isSelected
+                              ? IT_TRAINING_ICON
+                              : IT_TRAINING_DISABLE_ICON
                           }
                           alt={each.service_name}
                           height={16}

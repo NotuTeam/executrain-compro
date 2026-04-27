@@ -36,7 +36,7 @@ export default function Button({
       onClick={() => onClick()}
       className={`${textColor[type]} ${
         bgColor[type]
-      } px-5 py-2 font-semibold  ${
+      } px-3 md:px-5 py-2 font-semibold text-[12px] md:text-base ${
         rounded ? "rounded-full" : "rounded-md"
       } flex items-center gap-2 ${
         type === "disable" ? "cursor-not-allowed" : "cursor-pointer"

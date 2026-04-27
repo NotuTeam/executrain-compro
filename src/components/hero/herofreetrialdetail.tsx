@@ -33,14 +33,14 @@ export default function HeroFreeTrialDetail({
 
   return (
     <div
-      className="min-w-[99dvw] min-h-[80dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
+      className="min-w-[100dvw] min-h-[80dvh] text-white flex items-center justify-start md:px-[7%] lg:px-[10%]"
       style={{
         backgroundImage: `url('https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233518/Subtract_hwkrrr.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1777208395/executrain/assets/ddxseg9njypotvqwkgdb.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="flex flex-col gap-5 md:gap-8 items-start bg-white/50 backdrop-blur-md border border-white/20 text-black rounded-lg max-w-[85dvw] w-full p-[5%] md:p-[5%] mt-[10%] md:mb-[-10%] ">
+      <div className="flex flex-col gap-5 md:gap-8 items-start bg-white/50 backdrop-blur-md border border-white/20 text-black md:rounded-lg max-w-[100dvw] md:max-w-[90dvw] w-full p-[5%] md:p-[5%] md:mt-[15%] mt-[7%] md:mb-[-10%]">
         <div className="font-[500] flex items-center gap-3 text-black w-full max-w-full min-w-0 overflow-hidden">
           <Link href="/" className="shrink-0">
             Home
@@ -59,7 +59,7 @@ export default function HeroFreeTrialDetail({
         </div>
         <Tag label={data?.product_category.replace("_", " ") || "UNSET"} />
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full gap-3 md:gap-0">
-          <h1 className="text-[28px] md:text-[40px] lg:text-[49px] font-semibold w-full max-w-full md:max-w-[60%] lg:max-w-[75%] min-w-0 leading-[1.15] md:leading-[1.1] wrap-break-words ">
+          <h1 className="text-[28px] md:text-[40px] lg:text-[49px] font-semibold w-full max-w-full md:max-w-[75%] lg:max-w-[75%] min-w-0 leading-[1.15] md:leading-[1.1] wrap-break-words">
             {data?.product_name || "-"}
           </h1>
           <Button

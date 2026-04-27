@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import ScheduleCard from "./atomic/schedulecard";
@@ -22,6 +22,26 @@ export default function RelatedScheduleList({
   const sliderRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<Array<HTMLDivElement | null>>([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(1);
+
+  useEffect(() => {
+    const updateVisibleCount = () => {
+      if (window.innerWidth >= 1024) {
+        setVisibleCount(3);
+      } else if (window.innerWidth >= 768) {
+        setVisibleCount(2);
+      } else {
+        setVisibleCount(1);
+      }
+    };
+
+    updateVisibleCount();
+    window.addEventListener("resize", updateVisibleCount);
+
+    return () => window.removeEventListener("resize", updateVisibleCount);
+  }, []);
+
+  const maxIndex = Math.max(0, data.length - visibleCount);
 
   const scrollToIndex = (index: number) => {
     const container = sliderRef.current;
@@ -40,7 +60,6 @@ export default function RelatedScheduleList({
 
   const handleSlide = (direction: "prev" | "next") => {
     setActiveIndex((prev) => {
-      const maxIndex = Math.max(0, data.length - 1);
       const safePrev = Math.min(prev, maxIndex);
       const nextIndex =
         direction === "next"
@@ -50,6 +69,26 @@ export default function RelatedScheduleList({
       scrollToIndex(nextIndex);
       return nextIndex;
     });
+  };
+
+  const handleScroll = () => {
+    const container = sliderRef.current;
+    if (!container || itemRefs.current.length === 0) return;
+
+    const currentLeft = container.scrollLeft;
+    let closestIndex = 0;
+    let smallestDiff = Number.POSITIVE_INFINITY;
+
+    itemRefs.current.forEach((item, index) => {
+      if (!item) return;
+      const diff = Math.abs(item.offsetLeft - currentLeft);
+      if (diff < smallestDiff) {
+        smallestDiff = diff;
+        closestIndex = index;
+      }
+    });
+
+    setActiveIndex(Math.min(closestIndex, maxIndex));
   };
 
   if (isLoading) {
@@ -64,7 +103,7 @@ export default function RelatedScheduleList({
 
       {data?.length === 0 ? (
         <div className="bg-slate-50 flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
-          <span className="font-[400] text-slate-500 text-[16px] md:text-[18px]">
+          <span className="font-normal text-slate-500 text-[16px] md:text-[18px]">
             No Schedule Found
           </span>
         </div>
@@ -85,7 +124,8 @@ export default function RelatedScheduleList({
 
             <div
               ref={sliderRef}
-              className="flex-1 flex gap-4 md:gap-5 overflow-x-hidden scroll-smooth py-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+              onScroll={handleScroll}
+              className="flex-1 flex gap-4 md:gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory py-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
             >
               {data?.map((each: ScheduleProps, index: number) => (
                 <div
@@ -93,7 +133,7 @@ export default function RelatedScheduleList({
                   ref={(el) => {
                     itemRefs.current[index] = el;
                   }}
-                  className="shrink-0 basis-[88%] md:basis-[62%] lg:basis-[38%]"
+                  className="shrink-0 snap-start basis-full md:basis-[calc((100%-1.25rem)/2)] lg:basis-[calc((100%-2.5rem)/3)]"
                 >
                   <ScheduleCard data={each} type="small" />
                 </div>
@@ -105,7 +145,7 @@ export default function RelatedScheduleList({
                 type="button"
                 onClick={() => handleSlide("next")}
                 aria-label="Next schedule"
-                disabled={activeIndex >= data.length - 1}
+                disabled={activeIndex >= maxIndex}
                 className="hidden md:flex shrink-0 border-primary-500 text-primary-500 bg-white border-2 w-[42px] h-[42px] items-center justify-center rounded-full shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 <ChevronRight size={20} />

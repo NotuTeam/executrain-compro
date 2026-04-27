@@ -118,7 +118,7 @@ export default function ArticleList({
                   </div>
                 </div>
 
-                <div className="w-[120px] h-[120px] rounded-lg overflow-hidden bg-gray-100 shrink-0 self-start sm:self-auto">
+                <div className="w-[120px] h-[120px] hidden md:block rounded-lg overflow-hidden bg-gray-100 shrink-0 self-start sm:self-auto">
                   {blog?.featured_image?.url ? (
                     <Image
                       src={blog.featured_image.url}
@@ -195,7 +195,7 @@ export default function ArticleList({
           )}
         </div>
 
-        <aside className="lg:col-span-2">
+        <aside className="lg:col-span-2 hidden lg:block">
           <div className="bg-[#C103020D] rounded-2xl p-6 space-y-5">
             <h4 className="font-bold text-xl text-gray-900">Recent Posts</h4>
 

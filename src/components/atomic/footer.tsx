@@ -110,11 +110,11 @@ export default function Footer() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="flex flex-col gap-5 items-center md:items-start">
+      <div className="flex flex-col gap-5 items-start md:items-start">
         <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px]">
           Need Help Deciding?
         </h2>
-        <p className="text-[20px] text-center md:text-left">
+        <p className="text-[20px]">
           Chat with us and make decisions with confidence.
         </p>
         <Button
@@ -132,11 +132,11 @@ export default function Footer() {
         </div>
       </div>
       <div className="flex flex-col gap-5 md:gap-8 items-center md:items-start w-full">
-        <h5 className="font-[700] text-[20px] md:text-[25px] mt-5 md:mt-0">
+        <h5 className="font-[700] text-[20px] md:text-[25px] mt-5 md:mt-0 w-full">
           Follow Us
         </h5>
         {socmedLoading ? (
-          <div className="flex items-center justify-between flex-wrap mb-5 md:mb-0 w-[90%]">
+          <div className="flex items-center justify-between flex-wrap mb-5 md:mb-0 w-[90%] ">
             {[1, 2, 3, 4, 5].map((i) => (
               <div
                 key={i}
@@ -145,7 +145,7 @@ export default function Footer() {
             ))}
           </div>
         ) : (
-          <div className="flex items-center justify-start gap-7 flex-wrap mb-5 md:mb-0 w-[90%]">
+          <div className="flex items-center justify-start gap-7 flex-wrap mb-5 md:mb-0 w-full w-[90%]">
             {socmedList.length > 0 ? (
               socmedList.map((each: any, index: number) => (
                 <Link
