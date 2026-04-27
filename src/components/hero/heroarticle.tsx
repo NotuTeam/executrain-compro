@@ -32,11 +32,9 @@ export default function HeroArticle({ children }: { children?: ReactNode }) {
           Our Blog
         </h1>
         <p className="text-sm md:text-base">
-          Executrain adalah penyedia layanan pelatihan bisnis dan IT terkemuka
-          di bawah naungan PT. Bina Kinerja Nusantara. Kami berkomitmen untuk
-          menghasilkan profesional TI berkualitas tinggi. Sejak tahun 2017, kami
-          berkomitmen membantu berbagai perusahaan meningkatkan keterampilan
-          teknis dan produktivitas karyawannya.
+          Stay informed with the latest insights, industry trends, and practical
+          knowledge designed to help you navigate challenges, enhance your
+          skills, and stay competitive in a rapidly evolving digital landscape.
         </p>
         {children}
       </div>

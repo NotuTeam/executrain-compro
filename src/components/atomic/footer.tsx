@@ -167,7 +167,7 @@ export default function Footer() {
             <h5 className="font-[700] text-[20px] md:text-[25px]">
               Executrain
             </h5>
-            <span className="block">PT. Bina Kinerja Nusantara</span>
+            <span className="block">PT. Executrain Nusantarajaya</span>
             <span className="block">
               Equity Tower, 26th Floor, Unit H<br />
               Jl. Jenderal Sudirman Kav. 52 Senayan,
