@@ -97,7 +97,7 @@ export default function WhyChoose({ type = "dark" }: { type?: string }) {
                 <span className="text-[14px] md:text-[16px] lg:text-[18px] font-semibold block">
                   {each.title}
                 </span>
-                <p
+                {/* <p
                   className={`max-h-[200px] opacity-100 md:opacity-0 md:max-h-[0] text-[11px] md:text-[12px] lg:text-[14px] font-[400] text-gray-700 overflow-hidden transition-all duration-300 ${
                     hoveredIndex === index
                       ? "!max-h-[200px] !opacity-100 mt-2"
@@ -105,7 +105,7 @@ export default function WhyChoose({ type = "dark" }: { type?: string }) {
                   }`}
                 >
                   {each.description}
-                </p>
+                </p> */}
               </div>
             </div>
           </StaggerItem>
